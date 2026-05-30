@@ -1,0 +1,1672 @@
+Edad,País / Procedencia,Idioma,Presupuesto,Días de viaje,Tipo de viaje,Problemas respiratorios,Movilidad reducida,Alergias,Comida,Naturaleza,Historia,Fotografía,Altura máxima tolerada,Recomendación médica,Destino
+27,Estados Unidos,Inglés,Alto,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación constante,Machu Picchu
+34,España,Español,Medio,5,Aventura,No,No,No,Sí,Sí,Sí,Sí,4200,Consumir mate de coca,Machu Picchu
+52,Canadá,Inglés,Alto,8,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3000,Llevar medicación personal,Machu Picchu
+23,Brasil,Portugués,Económico,6,Mochilero,No,No,No,No,Sí,No,Sí,4200,Aclimatación previa,Machu Picchu
+41,Francia,Francés,Alto,9,Cultural,No,No,Sí,Sí,No,Sí,Sí,3400,Descansar correctamente,Machu Picchu
+30,México,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Evitar esfuerzo excesivo,Machu Picchu
+45,Alemania,Alemán,Alto,10,Aventura,No,No,No,No,Sí,Sí,Sí,4300,Hidratación continua,Machu Picchu
+38,Argentina,Español,Medio,7,Relajación,No,No,No,Sí,Sí,Sí,Sí,3200,Descanso moderado,Machu Picchu
+24,Chile,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,4100,Consultar médico,Machu Picchu
+56,Italia,Italiano,Alto,12,Cultural,Sí,No,No,Sí,No,Sí,Sí,3400,Llevar snacks energéticos,Machu Picchu
+21,Perú,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4000,Usar bloqueador solar,Machu Picchu
+33,Australia,Inglés,Alto,9,Aventura,No,No,Sí,Sí,Sí,No,Sí,4300,Hidratación constante,Machu Picchu
+47,Reino Unido,Inglés,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Aclimatación recomendada,Machu Picchu
+28,Colombia,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,5000,Consumir agua frecuentemente,Machu Picchu
+60,Estados Unidos,Inglés,Alto,11,Relajación,Sí,Sí,Sí,Sí,No,Sí,No,3000,Llevar ropa térmica,Machu Picchu
+36,Portugal,Portugués,Medio,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Hidratación permanente,Machu Picchu
+25,Japón,Japonés,Alto,10,Fotografía,No,No,No,Sí,Sí,No,Sí,4800,Descansar adecuadamente,Machu Picchu
+42,Suiza,Alemán,Alto,8,Naturaleza,No,No,No,No,Sí,Sí,Sí,3700,Aclimatación previa,Machu Picchu
+31,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar comidas pesadas,Machu Picchu
+22,Bolivia,Español,Económico,6,Aventura,No,No,No,No,Sí,No,Sí,4200,Hidratación y descanso,Machu Picchu
+49,Francia,Francés,Alto,9,Relajación,Sí,No,No,Sí,Sí,Sí,No,3200,Consumir mate de coca,Machu Picchu
+26,Corea del Sur,Coreano,Alto,8,Fotografía,No,No,No,Sí,Sí,No,Sí,5000,Control médico,Machu Picchu
+37,Perú,Español,Medio,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Llevar medicamentos,Machu Picchu
+54,Austria,Alemán,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3000,Usar ropa ligera,Machu Picchu
+20,Argentina,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4500,Hidratación adecuada,Machu Picchu
+39,China,Chino,Alto,9,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación obligatoria,Machu Picchu
+43,Irlanda,Inglés,Medio,6,Naturaleza,No,No,No,No,Sí,Sí,Sí,3800,Evitar alcohol,Machu Picchu
+29,Marruecos,Árabe,Económico,7,Aventura,No,No,No,Sí,Sí,No,Sí,4300,Descanso previo,Machu Picchu
+58,Chile,Español,Medio,8,Relajación,Sí,No,No,Sí,Sí,Sí,No,3200,Consumir líquidos,Machu Picchu
+35,Noruega,Inglés,Alto,11,Fotografía,No,No,No,No,Sí,Sí,Sí,4500,Hidratación constante,Machu Picchu
+24,Venezuela,Español,Económico,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Machu Picchu
+46,Países Bajos,Inglés,Alto,10,Aventura,No,No,No,No,Sí,Sí,Sí,4200,Medicamentos básicos,Machu Picchu
+32,Bélgica,Francés,Medio,7,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3600,Descanso adecuado,Machu Picchu
+51,Perú,Español,Medio,6,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3000,Aclimatación y descanso,Machu Picchu
+23,Sudáfrica,Inglés,Económico,8,Aventura,No,No,No,No,Sí,No,Sí,4600,Hidratación continua,Machu Picchu
+40,Canadá,Inglés,Alto,9,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Preparación física,Machu Picchu
+27,Turquía,Turco,Medio,7,Fotografía,No,No,No,Sí,Sí,No,Sí,4800,Consumir agua,Machu Picchu
+48,México,Español,Alto,8,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Consulta médica,Machu Picchu
+33,India,Inglés,Medio,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación permanente,Machu Picchu
+22,Filipinas,Inglés,Económico,6,Aventura,No,No,No,No,Sí,No,Sí,4300,Ropa térmica,Machu Picchu
+57,Suecia,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3000,Descanso moderado,Machu Picchu
+30,Costa Rica,Español,Medio,7,Naturaleza,No,No,No,No,Sí,Sí,Sí,3700,Aclimatación previa,Machu Picchu
+44,Rusia,Ruso,Alto,12,Aventura,No,No,No,No,Sí,Sí,Sí,4200,Consumir mate de coca,Machu Picchu
+25,Paraguay,Español,Económico,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación continua,Machu Picchu
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,No,Sí,4500,Descansar correctamente,Machu Picchu
+53,Italia,Italiano,Alto,11,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3000,Control de presión,Machu Picchu
+21,Uruguay,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4600,Hidratación y descanso,Machu Picchu
+41,Israel,Hebreo,Medio,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Preparación física,Machu Picchu
+29,Indonesia,Indonesio,Medio,7,Naturaleza,No,No,No,No,Sí,Sí,Sí,4200,Consumir líquidos,Machu Picchu
+36,Nueva Zelanda,Inglés,Alto,13,Aventura,No,No,No,No,Sí,No,Sí,4500,Aclimatación previa,Machu Picchu
+50,Perú,Español,Medio,6,Cultural,Sí,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Machu Picchu
+29,Noruega,Noruego,Alto,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Ropa adecuada,Sacsayhuamán
+44,Marruecos,Árabe,Medio,6,Cultural,No,No,Sí,Sí,No,Sí,Sí,3400,Hidratación constante,Sacsayhuamán
+26,Tailandia,Tailandés,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,3600,Llevar medicación personal,Sacsayhuamán
+51,Finlandia,Inglés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Descanso moderado,Sacsayhuamán
+33,India,Inglés,Medio,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Aclimatación previa,Sacsayhuamán
+24,Indonesia,Indonesio,Económico,6,Aventura,No,No,No,Sí,Sí,No,Sí,3700,Consumir agua,Sacsayhuamán
+47,Turquía,Turco,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Usar bloqueador solar,Sacsayhuamán
+38,Israel,Hebreo,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Hidratación continua,Sacsayhuamán
+22,Egipto,Árabe,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,3600,Descansar adecuadamente,Sacsayhuamán
+56,Bélgica,Francés,Alto,10,Relajación,Sí,Sí,Sí,Sí,No,Sí,No,3200,Llevar snacks energéticos,Sacsayhuamán
+31,China,Chino,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Aclimatación recomendada,Sacsayhuamán
+28,Filipinas,Inglés,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,3700,Consumir mate de coca,Sacsayhuamán
+42,Rusia,Ruso,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Hidratación permanente,Sacsayhuamán
+35,Sudáfrica,Inglés,Medio,7,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar comidas pesadas,Sacsayhuamán
+20,Nepal,Nepalí,Económico,6,Mochilero,No,No,No,No,Sí,No,Sí,3600,Llevar ropa ligera,Sacsayhuamán
+53,Irlanda,Inglés,Alto,11,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Hidratación frecuente,Sacsayhuamán
+27,Malasia,Malayo,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Descanso adecuado,Sacsayhuamán
+40,Hungría,Húngaro,Alto,8,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación previa,Sacsayhuamán
+23,Pakistán,Urdu,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3700,Evitar alcohol,Sacsayhuamán
+60,Dinamarca,Inglés,Alto,10,Relajación,Sí,Sí,Sí,Sí,No,Sí,No,3200,Hidratación y descanso,Sacsayhuamán
+34,Singapur,Inglés,Alto,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Consumir mate de coca,Sacsayhuamán
+25,Croacia,Croata,Económico,6,Mochilero,No,No,No,No,Sí,No,Sí,3600,Control médico,Sacsayhuamán
+46,Polonia,Polaco,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Llevar medicamentos,Sacsayhuamán
+37,Grecia,Griego,Medio,7,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Usar ropa ligera,Sacsayhuamán
+21,Vietnam,Vietnamita,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3700,Hidratación adecuada,Sacsayhuamán
+49,República Checa,Checo,Alto,9,Relajación,Sí,No,No,Sí,Sí,Sí,No,3200,Aclimatación obligatoria,Sacsayhuamán
+32,Emiratos Árabes,Árabe,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Evitar alcohol,Sacsayhuamán
+28,Rumanía,Rumano,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Descanso previo,Sacsayhuamán
+55,Islandia,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Consumir líquidos,Sacsayhuamán
+24,Kenia,Inglés,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,3600,Hidratación constante,Sacsayhuamán
+30,Perú,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Usar bloqueador,Qorikancha
+41,Estados Unidos,Inglés,Alto,8,Histórico,No,No,Sí,Sí,No,Sí,Sí,3400,Medicamentos básicos,Qorikancha
+22,Argentina,Español,Económico,5,Mochilero,No,No,No,Sí,Sí,No,Sí,3400,Descanso adecuado,Qorikancha
+56,Canadá,Inglés,Alto,9,Relajación,Sí,Sí,No,Sí,No,Sí,No,3200,Aclimatación y descanso,Qorikancha
+35,Francia,Francés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación continua,Qorikancha
+27,Brasil,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Preparación física,Qorikancha
+48,Alemania,Alemán,Alto,10,Relajación,Sí,No,Sí,Sí,No,Sí,No,3200,Consumir agua,Qorikancha
+24,Chile,Español,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,3500,Consulta médica,Qorikancha
+39,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3400,Hidratación permanente,Qorikancha
+52,Italia,Italiano,Medio,9,Cultural,Sí,No,No,Sí,No,Sí,Sí,3300,Ropa térmica,Qorikancha
+29,México,Español,Medio,6,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Descanso moderado,Qorikancha
+43,Australia,Inglés,Alto,11,Relajación,No,Sí,No,Sí,Sí,Sí,No,3200,Aclimatación previa,Qorikancha
+21,Bolivia,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir mate de coca,Qorikancha
+37,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3400,Hidratación continua,Qorikancha
+58,Reino Unido,Inglés,Alto,10,Cultural,Sí,Sí,No,Sí,No,Sí,No,3200,Descansar correctamente,Qorikancha
+25,Ecuador,Español,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,3500,Control de presión,Qorikancha
+34,Suecia,Inglés,Medio,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación y descanso,Qorikancha
+46,Suiza,Alemán,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Preparación física,Qorikancha
+23,Paraguay,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Qorikancha
+40,China,Chino,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3400,Aclimatación previa,Qorikancha
+31,Portugal,Portugués,Medio,7,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Qorikancha
+54,Noruega,Noruego,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Ropa adecuada,Qorikancha
+26,Colombia,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3500,Usar protector solar,Qorikancha
+45,Bélgica,Francés,Alto,8,Histórico,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Qorikancha
+20,Uruguay,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3400,Aclimatación recomendada,Qorikancha
+49,Dinamarca,Inglés,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Hidratación constante,Qorikancha
+33,India,Inglés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3400,Descansar antes del trekking,Qorikancha
+28,Turquía,Turco,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Llevar medicación personal,Qorikancha
+57,Irlanda,Inglés,Alto,11,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Aclimatación previa,Qorikancha
+24,Nueva Zelanda,Inglés,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3500,Consumir mate de coca,Qorikancha
+27,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Evitar esfuerzo excesivo,Qenqo
+42,Estados Unidos,Inglés,Alto,8,Aventura,No,No,Sí,Sí,Sí,No,Sí,3700,Hidratación continua,Qenqo
+23,Argentina,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3600,Descanso moderado,Qenqo
+55,Canadá,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,No,Sí,No,3200,Consultar médico,Qenqo
+36,Francia,Francés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Llevar snacks energéticos,Qenqo
+29,Brasil,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Usar bloqueador solar,Qenqo
+48,Alemania,Alemán,Alto,9,Relajación,Sí,No,Sí,Sí,No,Sí,No,3200,Hidratación constante,Qenqo
+21,Chile,Español,Económico,3,Aventura,No,No,No,Sí,Sí,No,Sí,3700,Aclimatación recomendada,Qenqo
+39,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3600,Consumir agua frecuentemente,Qenqo
+52,Italia,Italiano,Medio,9,Cultural,Sí,No,No,Sí,No,Sí,Sí,3400,Llevar ropa térmica,Qenqo
+31,México,Español,Medio,6,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Hidratación permanente,Qenqo
+44,Australia,Inglés,Alto,11,Relajación,No,Sí,No,Sí,Sí,Sí,No,3200,Descansar adecuadamente,Qenqo
+20,Bolivia,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3600,Aclimatación previa,Qenqo
+38,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3600,Evitar comidas pesadas,Qenqo
+60,Reino Unido,Inglés,Alto,10,Cultural,Sí,Sí,No,Sí,No,Sí,No,3200,Hidratación y descanso,Qenqo
+24,Ecuador,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3600,Consumir mate de coca,Qenqo
+35,Suecia,Inglés,Medio,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Control médico,Qenqo
+47,Suiza,Alemán,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Llevar medicamentos,Qenqo
+22,Paraguay,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3600,Usar ropa ligera,Qenqo
+41,China,Chino,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3600,Hidratación adecuada,Qenqo
+32,Portugal,Portugués,Medio,7,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación obligatoria,Qenqo
+56,Noruega,Noruego,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Evitar alcohol,Qenqo
+25,Colombia,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3600,Descanso previo,Qenqo
+45,Bélgica,Francés,Alto,8,Histórico,No,No,No,Sí,No,Sí,Sí,3400,Consumir líquidos,Qenqo
+19,Uruguay,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3600,Hidratación constante,Qenqo
+50,Dinamarca,Inglés,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Usar bloqueador,Qenqo
+34,India,Inglés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Medicamentos básicos,Qenqo
+28,Turquía,Turco,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Descanso adecuado,Qenqo
+58,Irlanda,Inglés,Alto,11,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Aclimatación y descanso,Qenqo
+23,Nueva Zelanda,Inglés,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3700,Hidratación continua,Qenqo
+28,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3700,Preparación física,Tambomachay
+43,Estados Unidos,Inglés,Alto,9,Aventura,No,No,Sí,Sí,Sí,No,Sí,3800,Consumir agua,Tambomachay
+24,Argentina,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3700,Consulta médica,Tambomachay
+57,Canadá,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,No,Sí,No,3200,Hidratación permanente,Tambomachay
+35,Francia,Francés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Ropa térmica,Tambomachay
+30,Brasil,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Descanso moderado,Tambomachay
+49,Alemania,Alemán,Alto,9,Relajación,Sí,No,Sí,Sí,No,Sí,No,3200,Aclimatación previa,Tambomachay
+22,Chile,Español,Económico,3,Aventura,No,No,No,Sí,Sí,No,Sí,3800,Consumir mate de coca,Tambomachay
+40,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3700,Hidratación continua,Tambomachay
+53,Italia,Italiano,Medio,9,Cultural,Sí,No,No,Sí,No,Sí,Sí,3400,Descansar correctamente,Tambomachay
+32,México,Español,Medio,6,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Control de presión,Tambomachay
+45,Australia,Inglés,Alto,11,Relajación,No,Sí,No,Sí,Sí,Sí,No,3200,Hidratación y descanso,Tambomachay
+21,Bolivia,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3700,Preparación física,Tambomachay
+39,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3700,Consumir líquidos,Tambomachay
+61,Reino Unido,Inglés,Alto,10,Cultural,Sí,Sí,No,Sí,No,Sí,No,3200,Aclimatación previa,Tambomachay
+25,Ecuador,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3800,Hidratación adecuada,Tambomachay
+36,Suecia,Inglés,Medio,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Ropa adecuada,Tambomachay
+48,Suiza,Alemán,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Hidratación constante,Tambomachay
+23,Paraguay,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3700,Descansar adecuadamente,Tambomachay
+42,China,Chino,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3700,Llevar medicamentos,Tambomachay
+33,Portugal,Portugués,Medio,7,Cultural,No,No,No,Sí,No,Sí,Sí,3600,Aclimatación previa,Tambomachay
+55,Noruega,Noruego,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Consumir agua,Tambomachay
+26,Colombia,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3800,Usar bloqueador solar,Tambomachay
+46,Bélgica,Francés,Alto,8,Histórico,No,No,No,Sí,No,Sí,Sí,3400,Hidratación frecuente,Tambomachay
+20,Uruguay,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3700,Descanso moderado,Tambomachay
+51,Dinamarca,Inglés,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Consultar médico,Tambomachay
+34,India,Inglés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Llevar snacks,Tambomachay
+29,Turquía,Turco,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3600,Usar sombrero,Tambomachay
+59,Irlanda,Inglés,Alto,11,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Hidratación constante,Tambomachay
+24,Nueva Zelanda,Inglés,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3800,Aclimatación recomendada,Tambomachay
+29,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3800,Consumir líquidos,Puca Pucara
+44,Estados Unidos,Inglés,Alto,9,Aventura,No,No,Sí,Sí,Sí,No,Sí,3900,Ropa cómoda,Puca Pucara
+25,Argentina,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3800,Hidratación permanente,Puca Pucara
+58,Canadá,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,No,Sí,No,3200,Descanso adecuado,Puca Pucara
+36,Francia,Francés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Aclimatación previa,Puca Pucara
+31,Brasil,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Evitar comidas pesadas,Puca Pucara
+50,Alemania,Alemán,Alto,9,Relajación,Sí,No,Sí,Sí,No,Sí,No,3200,Hidratación y descanso,Puca Pucara
+23,Chile,Español,Económico,3,Aventura,No,No,No,Sí,Sí,No,Sí,3900,Consumir mate de coca,Puca Pucara
+41,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3800,Control médico,Puca Pucara
+54,Italia,Italiano,Medio,9,Cultural,Sí,No,No,Sí,No,Sí,Sí,3400,Llevar medicamentos,Puca Pucara
+33,México,Español,Medio,6,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Usar ropa ligera,Puca Pucara
+46,Australia,Inglés,Alto,11,Relajación,No,Sí,No,Sí,Sí,Sí,No,3200,Hidratación adecuada,Puca Pucara
+22,Bolivia,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3800,Aclimatación obligatoria,Puca Pucara
+40,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3800,Evitar alcohol,Puca Pucara
+62,Reino Unido,Inglés,Alto,10,Cultural,Sí,Sí,No,Sí,No,Sí,No,3200,Descanso previo,Puca Pucara
+26,Ecuador,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3900,Consumir líquidos,Puca Pucara
+37,Suecia,Inglés,Medio,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Hidratación constante,Puca Pucara
+49,Suiza,Alemán,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Usar bloqueador,Puca Pucara
+24,Paraguay,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3800,Aclimatación previa,Puca Pucara
+43,China,Chino,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3800,Hidratación constante,Puca Pucara
+34,Portugal,Portugués,Medio,7,Cultural,No,No,No,Sí,No,Sí,Sí,3600,Llevar medicamentos,Puca Pucara
+56,Noruega,Noruego,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Preparación física,Puca Pucara
+27,Colombia,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3900,Consumir agua,Puca Pucara
+47,Bélgica,Francés,Alto,8,Histórico,No,No,No,Sí,No,Sí,Sí,3400,Aclimatación obligatoria,Puca Pucara
+21,Uruguay,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3800,Hidratación frecuente,Puca Pucara
+52,Dinamarca,Inglés,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Descansar correctamente,Puca Pucara
+35,India,Inglés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Consultar médico,Puca Pucara
+30,Turquía,Turco,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3600,Llevar snacks energéticos,Puca Pucara
+60,Irlanda,Inglés,Alto,11,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Usar bloqueador solar,Puca Pucara
+25,Nueva Zelanda,Inglés,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3900,Hidratación adecuada,Puca Pucara
+31,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Aclimatación previa,Ollantaytambo
+45,Estados Unidos,Inglés,Alto,8,Aventura,No,No,Sí,Sí,Sí,No,Sí,4200,Consumir líquidos,Ollantaytambo
+24,Argentina,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3500,Ropa cómoda,Ollantaytambo
+57,Canadá,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,No,Sí,No,3200,Hidratación permanente,Ollantaytambo
+36,Francia,Francés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Descansar adecuadamente,Ollantaytambo
+30,Brasil,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Aclimatación recomendada,Ollantaytambo
+49,Alemania,Alemán,Alto,9,Relajación,Sí,No,Sí,Sí,No,Sí,No,3200,Evitar comidas pesadas,Ollantaytambo
+22,Chile,Español,Económico,3,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Hidratación y descanso,Ollantaytambo
+41,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3600,Consumir mate de coca,Ollantaytambo
+54,Italia,Italiano,Medio,9,Cultural,Sí,No,No,Sí,No,Sí,Sí,3400,Control médico,Ollantaytambo
+33,México,Español,Medio,6,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Llevar medicamentos,Ollantaytambo
+46,Australia,Inglés,Alto,11,Relajación,No,Sí,No,Sí,Sí,Sí,No,3200,Usar ropa ligera,Ollantaytambo
+21,Bolivia,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3500,Hidratación adecuada,Ollantaytambo
+40,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3600,Aclimatación obligatoria,Ollantaytambo
+62,Reino Unido,Inglés,Alto,10,Cultural,Sí,Sí,No,Sí,No,Sí,No,3200,Evitar alcohol,Ollantaytambo
+26,Ecuador,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Descanso previo,Ollantaytambo
+37,Suecia,Inglés,Medio,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Consumir líquidos,Ollantaytambo
+48,Suiza,Alemán,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Hidratación constante,Ollantaytambo
+23,Paraguay,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3500,Usar bloqueador,Ollantaytambo
+43,China,Chino,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3600,Medicamentos básicos,Ollantaytambo
+34,Portugal,Portugués,Medio,7,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Descanso adecuado,Ollantaytambo
+56,Noruega,Noruego,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Aclimatación y descanso,Ollantaytambo
+27,Colombia,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Hidratación continua,Ollantaytambo
+47,Bélgica,Francés,Alto,8,Histórico,No,No,No,Sí,No,Sí,Sí,3400,Preparación física,Ollantaytambo
+20,Uruguay,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir agua,Ollantaytambo
+52,Dinamarca,Inglés,Alto,9,Relajación,Sí,No,Sí,Sí,Sí,Sí,No,3200,Consulta médica,Ollantaytambo
+35,India,Inglés,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Hidratación permanente,Ollantaytambo
+30,Turquía,Turco,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Ropa térmica,Ollantaytambo
+60,Irlanda,Inglés,Alto,11,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Descanso moderado,Ollantaytambo
+25,Nueva Zelanda,Inglés,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Aclimatación previa,Ollantaytambo
+29,Finlandia,Inglés,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Consumir mate de coca,Ollantaytambo
+44,Marruecos,Árabe,Medio,7,Histórico,No,No,Sí,Sí,No,Sí,Sí,3400,Hidratación continua,Ollantaytambo
+28,Tailandia,Tailandés,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,3500,Descansar correctamente,Ollantaytambo
+51,Finlandia,Inglés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Control de presión,Ollantaytambo
+32,India,Inglés,Medio,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Hidratación y descanso,Ollantaytambo
+24,Indonesia,Indonesio,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Preparación física,Ollantaytambo
+48,Turquía,Turco,Alto,10,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Consumir líquidos,Ollantaytambo
+39,Israel,Hebreo,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3600,Aclimatación previa,Ollantaytambo
+22,Egipto,Árabe,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,3500,Hidratación adecuada,Ollantaytambo
+55,Bélgica,Francés,Alto,10,Relajación,Sí,Sí,Sí,Sí,No,Sí,No,3200,Ropa adecuada,Ollantaytambo
+31,China,Chino,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Descanso previo,Ollantaytambo
+27,Filipinas,Inglés,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Consumir líquidos,Ollantaytambo
+43,Rusia,Ruso,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Hidratación constante,Ollantaytambo
+36,Sudáfrica,Inglés,Medio,7,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Ollantaytambo
+20,Nepal,Nepalí,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,3500,Medicamentos básicos,Ollantaytambo
+53,Irlanda,Inglés,Alto,11,Relajación,Sí,Sí,No,Sí,Sí,Sí,No,3200,Descanso adecuado,Ollantaytambo
+28,Malasia,Malayo,Medio,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Aclimatación y descanso,Ollantaytambo
+40,Hungría,Húngaro,Alto,8,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Hidratación continua,Ollantaytambo
+23,Pakistán,Urdu,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Preparación física,Ollantaytambo
+61,Dinamarca,Inglés,Alto,10,Relajación,Sí,Sí,Sí,Sí,No,Sí,No,3200,Consumir agua,Ollantaytambo
+34,Singapur,Inglés,Alto,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Consulta médica,Ollantaytambo
+25,Croacia,Croata,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,3500,Hidratación permanente,Ollantaytambo
+27,Australia,Inglés,Alto,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3200,Ropa térmica,Moray
+34,Perú,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3000,Descanso moderado,Moray
+25,Estados Unidos,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3300,Aclimatación previa,Moray
+41,Canadá,Inglés,Alto,10,Cultural,No,No,No,Sí,Sí,Sí,Sí,3200,Consumir mate de coca,Moray
+22,Argentina,Español,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2900,Hidratación continua,Moray
+38,Alemania,Alemán,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3300,Descansar correctamente,Moray
+30,Francia,Francés,Medio,7,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3100,Control de presión,Moray
+24,Brasil,Portugués,Medio,6,Naturaleza,No,No,No,Sí,Sí,No,Sí,3000,Hidratación y descanso,Moray
+45,Chile,Español,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2600,Hidratación constante,Moray
+28,Japón,Japonés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3200,Descansar adecuadamente,Moray
+36,Italia,Italiano,Medio,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3000,Llevar medicamentos,Moray
+31,México,Español,Medio,8,Cultural,No,No,No,Sí,Sí,No,Sí,2900,Aclimatación previa,Moray
+40,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3300,Consumir agua,Moray
+26,España,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Usar bloqueador solar,Moray
+33,China,Chino,Alto,9,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación frecuente,Moray
+37,Corea del Sur,Coreano,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3100,Descanso moderado,Moray
+23,Colombia,Español,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2700,Consultar médico,Moray
+44,Suiza,Alemán,Alto,11,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Llevar snacks,Moray
+27,Ecuador,Español,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,2900,Usar sombrero,Moray
+39,Países Bajos,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3300,Hidratación constante,Moray
+25,Perú,Español,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2700,Aclimatación recomendada,Moray
+42,Bélgica,Francés,Alto,9,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2500,Consumir líquidos,Moray
+30,Turquía,Turco,Medio,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3000,Ropa cómoda,Moray
+35,India,Inglés,Alto,8,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación permanente,Moray
+21,Bolivia,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Descanso adecuado,Moray
+46,Noruega,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3400,Aclimatación previa,Moray
+28,Portugal,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Evitar comidas pesadas,Moray
+32,Israel,Hebreo,Alto,9,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación y descanso,Moray
+24,Perú,Español,Económico,5,Cultural,No,No,Sí,Sí,Sí,No,Sí,2700,Consumir mate de coca,Moray
+41,Irlanda,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3300,Control médico,Moray
+26,Sudáfrica,Inglés,Medio,7,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3000,Llevar medicamentos,Moray
+34,Filipinas,Inglés,Medio,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,2900,Usar ropa ligera,Moray
+29,Marruecos,Árabe,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Hidratación adecuada,Moray
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3400,Aclimatación obligatoria,Moray
+27,Indonesia,Indonesio,Medio,8,Naturaleza,No,No,Sí,Sí,Sí,Sí,Sí,3100,Evitar alcohol,Moray
+38,Dinamarca,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Descanso previo,Moray
+23,Uruguay,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2500,Consumir líquidos,Moray
+45,Austria,Alemán,Alto,10,Cultural,Sí,No,Sí,Sí,Sí,Sí,Sí,2400,Hidratación constante,Moray
+31,Costa Rica,Español,Medio,7,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3000,Usar bloqueador,Moray
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3200,Medicamentos básicos,Moray
+36,Paraguay,Español,Económico,5,Cultural,No,No,Sí,Sí,Sí,No,Sí,2700,Descanso adecuado,Moray
+40,Rusia,Ruso,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3400,Aclimatación y descanso,Moray
+28,Perú,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Hidratación continua,Moray
+33,Finlandia,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3200,Preparación física,Moray
+22,Venezuela,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Consumir agua,Moray
+47,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2500,Consulta médica,Moray
+30,Tailandia,Tailandés,Medio,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3000,Hidratación permanente,Moray
+35,Estados Unidos,Inglés,Alto,10,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3400,Ropa térmica,Moray
+24,Perú,Español,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Descanso moderado,Moray
+39,Canadá,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3300,Aclimatación previa,Moray
+27,España,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,2900,Consumir mate de coca,Moray
+42,Brasil,Portugués,Alto,9,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3300,Hidratación continua,Moray
+24,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,2900,Descansar correctamente,Pisac
+31,Estados Unidos,Inglés,Alto,7,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3000,Control de presión,Pisac
+28,Argentina,Español,Económico,4,Relajación,No,No,No,Sí,Sí,No,Sí,2800,Hidratación y descanso,Pisac
+45,Canadá,Inglés,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2900,Preparación física,Pisac
+22,Brasil,Portugués,Medio,5,Relajación,No,No,No,Sí,Sí,No,Sí,2700,Consumir líquidos,Pisac
+36,Alemania,Alemán,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3000,Aclimatación previa,Pisac
+27,Francia,Francés,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,2900,Hidratación adecuada,Pisac
+33,Chile,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Ropa adecuada,Pisac
+29,Japón,Japonés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3000,Aclimatación previa,Pisac
+41,Italia,Italiano,Alto,10,Naturaleza,No,No,Sí,Sí,Sí,Sí,Sí,3100,Hidratación constante,Pisac
+23,México,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2700,Consumir mate de coca,Pisac
+38,Reino Unido,Inglés,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,3000,Aclimatación obligatoria,Pisac
+26,España,Español,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,2800,Hidratación permanente,Pisac
+34,China,Chino,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3000,Descansar previamente,Pisac
+30,Corea del Sur,Coreano,Alto,7,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,2900,Usar bloqueador solar,Pisac
+25,Colombia,Español,Económico,4,Relajación,No,No,No,Sí,Sí,No,Sí,2700,Aclimatación en Cusco,Pisac
+44,Suiza,Alemán,Alto,10,Cultural,No,No,No,Sí,Sí,Sí,Sí,3100,Consumir líquidos,Pisac
+27,Ecuador,Español,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,2800,Preparación física,Pisac
+39,Países Bajos,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3000,Descansar correctamente,Pisac
+24,Perú,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2700,Llevar snacks energéticos,Pisac
+42,Bélgica,Francés,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2900,Hidratación constante,Pisac
+30,Turquía,Turco,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3000,Ropa térmica,Pisac
+35,India,Inglés,Alto,8,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3000,Consumir mate de coca,Pisac
+21,Bolivia,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Aclimatación previa,Pisac
+46,Noruega,Inglés,Alto,11,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3100,Hidratación adecuada,Pisac
+28,Portugal,Portugués,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Consumir agua,Pisac
+32,Israel,Hebreo,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3000,Preparación física,Pisac
+24,Perú,Español,Económico,4,Cultural,No,No,Sí,Sí,Sí,No,Sí,2700,Evitar comidas pesadas,Pisac
+41,Irlanda,Inglés,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,3000,Hidratación y descanso,Pisac
+26,Sudáfrica,Inglés,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,2900,Descansar bien,Pisac
+34,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,2800,Aclimatación obligatoria,Pisac
+29,Marruecos,Árabe,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Evitar alcohol,Pisac
+43,Suecia,Inglés,Alto,10,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3100,Descanso previo,Pisac
+27,Indonesia,Indonesio,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,2900,Hidratación básica,Pisac
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3000,Consumir agua constantemente,Pisac
+23,Uruguay,Español,Económico,4,Relajación,No,No,No,Sí,Sí,No,Sí,2600,Usar protector solar,Pisac
+45,Austria,Alemán,Alto,10,Cultural,Sí,No,Sí,Sí,Sí,Sí,Sí,2800,Medicamentos básicos,Pisac
+31,Costa Rica,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,2900,Descanso moderado,Pisac
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3000,Aclimatación y descanso,Pisac
+36,Paraguay,Español,Económico,5,Cultural,No,No,Sí,Sí,Sí,No,Sí,2700,Hidratación continua,Pisac
+40,Rusia,Ruso,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,3100,Preparación física,Pisac
+28,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Consumir líquidos,Pisac
+33,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3000,Consulta médica,Pisac
+22,Venezuela,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Hidratación permanente,Pisac
+47,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2900,Ropa térmica,Pisac
+30,Tailandia,Tailandés,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,2900,Aclimatación previa,Pisac
+35,Estados Unidos,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3100,Consumir mate de coca,Pisac
+24,Perú,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Hidratación continua,Pisac
+39,Canadá,Inglés,Alto,8,Naturaleza,No,No,Sí,Sí,Sí,Sí,Sí,3000,Descanso correcto,Pisac
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Control médico,Pisac
+42,Brasil,Portugués,Alto,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3000,Hidratación y descanso,Pisac
+29,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3000,Preparación física,Pisac
+26,Perú,Español,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,2800,Consumir líquidos,Pisac
+37,Alemania,Alemán,Alto,9,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3100,Aclimatación previa,Pisac
+29,Australia,Inglés,Alto,10,Aventura,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación adecuada,Choquequirao
+34,Perú,Español,Medio,8,Trekking,No,No,No,Sí,Sí,Sí,Sí,3400,Ropa adecuada,Choquequirao
+27,Estados Unidos,Inglés,Alto,9,Aventura,No,No,Sí,Sí,Sí,No,Sí,3000,Llevar medicamentos,Choquequirao
+41,Canadá,Inglés,Alto,11,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3300,Usar ropa ligera,Choquequirao
+24,Argentina,Español,Económico,7,Aventura,No,No,No,Sí,Sí,No,Sí,2800,Hidratación adecuada,Choquequirao
+38,Alemania,Alemán,Alto,12,Trekking,No,No,No,Sí,Sí,Sí,Sí,3400,Control médico,Choquequirao
+30,Francia,Francés,Medio,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3100,Llevar snacks energéticos,Choquequirao
+22,Brasil,Portugués,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,2900,Descanso moderado,Choquequirao
+45,Chile,Español,Alto,10,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2500,Consultar médico,Choquequirao
+28,Japón,Japonés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3300,Llevar snacks energéticos,Choquequirao
+36,Italia,Italiano,Medio,7,Aventura,No,No,No,Sí,Sí,Sí,Sí,3000,Usar bloqueador solar,Choquequirao
+31,México,Español,Medio,8,Cultural,No,No,No,Sí,Sí,No,Sí,2800,Hidratación constante,Choquequirao
+40,Reino Unido,Inglés,Alto,13,Trekking,No,No,Sí,Sí,Sí,Sí,Sí,3400,Aclimatación recomendada,Choquequirao
+26,España,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,2700,Consumir agua frecuentemente,Choquequirao
+33,China,Chino,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3200,Llevar ropa térmica,Choquequirao
+37,Corea del Sur,Coreano,Alto,9,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3100,Hidratación permanente,Choquequirao
+23,Colombia,Español,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Descansar adecuadamente,Choquequirao
+44,Suiza,Alemán,Alto,12,Trekking,No,No,No,Sí,Sí,Sí,Sí,3400,Aclimatación previa,Choquequirao
+27,Ecuador,Español,Medio,7,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,2900,Evitar comidas pesadas,Choquequirao
+39,Países Bajos,Inglés,Alto,11,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3300,Hidratación y descanso,Choquequirao
+25,Perú,Español,Económico,6,Cultural,No,No,No,Sí,Sí,No,Sí,2700,Consumir mate de coca,Choquequirao
+42,Bélgica,Francés,Alto,10,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2500,Control médico,Choquequirao
+30,Turquía,Turco,Medio,8,Trekking,No,No,Sí,Sí,Sí,Sí,Sí,3000,Llevar medicamentos,Choquequirao
+35,India,Inglés,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,3200,Usar ropa ligera,Choquequirao
+21,Bolivia,Español,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Hidratación adecuada,Choquequirao
+46,Noruega,Inglés,Alto,12,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3400,Aclimatación obligatoria,Choquequirao
+28,Portugal,Portugués,Medio,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Evitar alcohol,Choquequirao
+32,Israel,Hebreo,Alto,10,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3200,Descanso previo,Choquequirao
+24,Perú,Español,Económico,6,Cultural,No,No,Sí,Sí,Sí,No,Sí,2700,Consumir líquidos,Choquequirao
+41,Irlanda,Inglés,Alto,11,Trekking,No,No,No,Sí,Sí,Sí,Sí,3300,Hidratación constante,Choquequirao
+26,Sudáfrica,Inglés,Medio,8,Aventura,No,No,No,Sí,Sí,Sí,Sí,3000,Usar bloqueador,Choquequirao
+34,Filipinas,Inglés,Medio,7,Trekking,No,No,Sí,Sí,Sí,Sí,Sí,2900,Medicamentos básicos,Choquequirao
+29,Marruecos,Árabe,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Descanso adecuado,Choquequirao
+43,Suecia,Inglés,Alto,13,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3400,Aclimatación y descanso,Choquequirao
+27,Indonesia,Indonesio,Medio,9,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3100,Hidratación continua,Choquequirao
+38,Dinamarca,Inglés,Alto,10,Trekking,No,No,No,Sí,Sí,Sí,Sí,3300,Preparación física,Choquequirao
+23,Uruguay,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2500,Consumir agua,Choquequirao
+45,Austria,Alemán,Alto,12,Cultural,Sí,No,Sí,Sí,Sí,Sí,Sí,2400,Consulta médica,Choquequirao
+31,Costa Rica,Español,Medio,8,Aventura,No,No,No,Sí,Sí,Sí,Sí,3000,Hidratación permanente,Choquequirao
+25,Nueva Zelanda,Inglés,Alto,9,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3200,Ropa térmica,Choquequirao
+36,Paraguay,Español,Económico,6,Cultural,No,No,Sí,Sí,Sí,No,Sí,2700,Descanso moderado,Choquequirao
+40,Rusia,Ruso,Alto,11,Trekking,No,No,No,Sí,Sí,Sí,Sí,3400,Aclimatación previa,Choquequirao
+28,Perú,Español,Medio,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Consumir mate de coca,Choquequirao
+33,Finlandia,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3200,Hidratación continua,Choquequirao
+22,Venezuela,Español,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Descansar correctamente,Choquequirao
+47,Hungría,Húngaro,Alto,13,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2500,Control de presión,Choquequirao
+30,Tailandia,Tailandés,Medio,8,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3000,Hidratación y descanso,Choquequirao
+35,Estados Unidos,Inglés,Alto,12,Trekking,No,No,No,Sí,Sí,Sí,Sí,3400,Preparación física,Choquequirao
+24,Perú,Español,Económico,6,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Consumir líquidos,Choquequirao
+39,Canadá,Inglés,Alto,11,Naturaleza,No,No,Sí,Sí,Sí,Sí,Sí,3300,Aclimatación previa,Choquequirao
+27,España,Español,Medio,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,2900,Hidratación adecuada,Choquequirao
+42,Brasil,Portugués,Alto,10,Aventura,No,No,No,Sí,Sí,Sí,Sí,3300,Ropa adecuada,Choquequirao
+29,Australia,Inglés,Alto,8,Mochilero,No,No,No,Sí,Sí,Sí,Sí,3100,Hidratación constante,Tipón
+34,Perú,Español,Medio,5,Relajación,No,No,No,Sí,Sí,Sí,No,2900,Descansar adecuadamente,Tipón
+27,Estados Unidos,Inglés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3000,Llevar medicamentos,Tipón
+41,Canadá,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3200,Aclimatación previa,Tipón
+24,Argentina,Español,Económico,4,Relajación,No,No,No,Sí,Sí,No,Sí,2800,Consumir agua,Tipón
+38,Alemania,Alemán,Alto,10,Aventura,No,No,No,Sí,Sí,Sí,Sí,3200,Usar bloqueador solar,Tipón
+30,Francia,Francés,Medio,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3000,Hidratación frecuente,Tipón
+22,Brasil,Portugués,Medio,5,Cultural,No,No,No,Sí,Sí,No,Sí,2800,Descanso moderado,Tipón
+45,Chile,Español,Alto,8,Gastronómico,Sí,No,No,Sí,Sí,Sí,Sí,2600,Consultar médico,Tipón
+28,Japón,Japonés,Alto,7,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3100,Llevar snacks,Tipón
+36,Italia,Italiano,Medio,6,Mochilero,No,No,No,Sí,Sí,Sí,Sí,3000,Usar sombrero,Tipón
+31,México,Español,Medio,5,Fotografía,No,No,No,Sí,Sí,No,Sí,2800,Hidratación constante,Tipón
+40,Reino Unido,Inglés,Alto,9,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3200,Aclimatación recomendada,Tipón
+26,España,Español,Medio,5,Aventura,No,No,No,Sí,Sí,Sí,Sí,2800,Consumir líquidos,Tipón
+33,China,Chino,Alto,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3100,Ropa cómoda,Tipón
+37,Corea del Sur,Coreano,Alto,7,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3000,Hidratación permanente,Tipón
+23,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,2700,Descanso adecuado,Tipón
+44,Suiza,Alemán,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3200,Aclimatación previa,Tipón
+27,Ecuador,Español,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,2900,Evitar comidas pesadas,Tipón
+39,Países Bajos,Inglés,Alto,8,Relajación,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación y descanso,Tipón
+25,Perú,Español,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,2700,Consumir mate de coca,Tipón
+42,Bélgica,Francés,Alto,9,Histórico,Sí,No,No,Sí,Sí,Sí,Sí,2600,Control médico,Tipón
+30,Turquía,Turco,Medio,6,Mochilero,No,No,Sí,Sí,Sí,Sí,Sí,3000,Llevar medicamentos,Tipón
+35,India,Inglés,Alto,8,Relajación,No,No,No,Sí,Sí,Sí,Sí,3100,Usar ropa ligera,Tipón
+21,Bolivia,Español,Económico,3,Fotografía,No,No,No,Sí,Sí,No,Sí,2600,Hidratación adecuada,Tipón
+46,Noruega,Inglés,Alto,10,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3200,Aclimatación obligatoria,Tipón
+28,Portugal,Portugués,Medio,5,Relajación,No,No,No,Sí,Sí,Sí,Sí,2900,Evitar alcohol,Tipón
+32,Israel,Hebreo,Alto,7,Aventura,No,No,No,Sí,Sí,Sí,Sí,3100,Descanso previo,Tipón
+24,Perú,Español,Económico,4,Cultural,No,No,Sí,Sí,Sí,No,Sí,2700,Consumir líquidos,Tipón
+41,Irlanda,Inglés,Alto,8,Aventura,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación constante,Tipón
+26,Sudáfrica,Inglés,Medio,6,Mochilero,No,No,No,Sí,Sí,Sí,Sí,3000,Usar bloqueador,Tipón
+24,Estados Unidos,Inglés,Alto,7,Relajación,No,No,No,Sí,Sí,Sí,Sí,3400,Aclimatación previa,Huayna Picchu
+31,Perú,Español,Medio,5,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación constante,Huayna Picchu
+27,Canadá,Inglés,Alto,8,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3400,Llevar medicamentos,Huayna Picchu
+35,Australia,Inglés,Alto,9,Relajación,No,No,No,Sí,Sí,Sí,Sí,3500,Preparación física,Huayna Picchu
+22,Argentina,Español,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,3000,Consumir agua,Huayna Picchu
+38,Alemania,Alemán,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Aclimatación obligatoria,Huayna Picchu
+29,Francia,Francés,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3200,Hidratación frecuente,Huayna Picchu
+26,Brasil,Portugués,Medio,5,Gastronómico,No,No,No,Sí,Sí,Sí,Sí,3100,Descansar correctamente,Huayna Picchu
+41,Chile,Español,Alto,8,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,3000,Consultar médico,Huayna Picchu
+23,Japón,Japonés,Alto,7,Mochilero,No,No,Sí,Sí,Sí,Sí,Sí,3400,Llevar snacks energéticos,Huayna Picchu
+34,Italia,Italiano,Medio,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3100,Usar bloqueador solar,Huayna Picchu
+28,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,No,Sí,3000,Hidratación adecuada,Huayna Picchu
+40,Reino Unido,Inglés,Alto,9,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3500,Aclimatación previa,Huayna Picchu
+25,España,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3000,Consumir líquidos,Huayna Picchu
+32,China,Chino,Alto,8,Relajación,No,No,No,Sí,Sí,Sí,Sí,3400,Ropa cómoda,Huayna Picchu
+37,Corea del Sur,Coreano,Alto,7,Mochilero,No,No,Sí,Sí,Sí,Sí,Sí,3500,Hidratación permanente,Huayna Picchu
+21,Colombia,Español,Económico,4,Fotografía,No,No,No,Sí,Sí,No,Sí,2900,Descansar adecuadamente,Huayna Picchu
+44,Suiza,Alemán,Alto,10,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Aclimatación recomendada,Huayna Picchu
+27,Ecuador,Español,Medio,5,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3100,Evitar comidas pesadas,Huayna Picchu
+39,Países Bajos,Inglés,Alto,8,Aventura,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación y descanso,Huayna Picchu
+24,Perú,Español,Económico,4,Histórico,No,No,No,Sí,Sí,No,Sí,2900,Consumir mate de coca,Huayna Picchu
+42,Bélgica,Francés,Alto,9,Mochilero,Sí,No,No,Sí,Sí,Sí,Sí,3000,Control médico,Huayna Picchu
+30,Turquía,Turco,Medio,6,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3200,Llevar medicamentos,Huayna Picchu
+35,India,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3400,Usar ropa ligera,Huayna Picchu
+22,Bolivia,Español,Económico,3,Cultural,No,No,No,Sí,Sí,No,Sí,2800,Hidratación adecuada,Huayna Picchu
+46,Noruega,Inglés,Alto,10,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3600,Aclimatación obligatoria,Huayna Picchu
+28,Portugal,Portugués,Medio,5,Aventura,No,No,No,Sí,Sí,Sí,Sí,3200,Evitar alcohol,Huayna Picchu
+32,Israel,Hebreo,Alto,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Descanso previo,Huayna Picchu
+24,Perú,Español,Económico,4,Aventura,No,No,Sí,Sí,Sí,No,Sí,3000,Consumir líquidos,Huayna Picchu
+41,Irlanda,Inglés,Alto,8,Mochilero,No,No,No,Sí,Sí,Sí,Sí,3500,Hidratación constante,Huayna Picchu
+26,Sudáfrica,Inglés,Medio,6,Relajación,No,No,No,Sí,Sí,Sí,Sí,3200,Usar bloqueador,Huayna Picchu
+33,Filipinas,Inglés,Medio,5,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3100,Medicamentos básicos,Huayna Picchu
+29,Marruecos,Árabe,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2800,Descanso adecuado,Huayna Picchu
+43,Suecia,Inglés,Alto,10,Relajación,No,No,No,Sí,Sí,Sí,Sí,3600,Aclimatación y descanso,Huayna Picchu
+27,Indonesia,Indonesio,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3200,Hidratación continua,Huayna Picchu
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Preparación física,Huayna Picchu
+23,Uruguay,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2900,Consumir agua,Huayna Picchu
+45,Austria,Alemán,Alto,10,Gastronómico,Sí,No,Sí,Sí,Sí,Sí,Sí,3000,Consulta médica,Huayna Picchu
+31,Costa Rica,Español,Medio,6,Relajación,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación permanente,Huayna Picchu
+25,Nueva Zelanda,Inglés,Alto,8,Mochilero,No,No,No,Sí,Sí,Sí,Sí,3500,Ropa térmica,Huayna Picchu
+36,Paraguay,Español,Económico,5,Fotografía,No,No,Sí,Sí,Sí,No,Sí,3000,Descanso moderado,Huayna Picchu
+40,Rusia,Ruso,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Aclimatación previa,Huayna Picchu
+28,Perú,Español,Medio,5,Aventura,No,No,No,Sí,Sí,Sí,Sí,3100,Consumir mate de coca,Huayna Picchu
+33,Finlandia,Inglés,Alto,8,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3400,Hidratación continua,Huayna Picchu
+22,Venezuela,Español,Económico,4,Relajación,No,No,No,Sí,Sí,No,Sí,2900,Descansar correctamente,Huayna Picchu
+47,Hungría,Húngaro,Alto,10,Mochilero,Sí,No,No,Sí,Sí,Sí,Sí,3000,Control de presión,Huayna Picchu
+30,Tailandia,Tailandés,Medio,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3200,Hidratación y descanso,Huayna Picchu
+35,Estados Unidos,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Preparación física,Huayna Picchu
+24,Perú,Español,Económico,4,Relajación,No,No,No,Sí,Sí,No,Sí,2900,Consumir líquidos,Huayna Picchu
+39,Canadá,Inglés,Alto,8,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3400,Aclimatación previa,Huayna Picchu
+27,España,Español,Medio,5,Histórico,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación adecuada,Huayna Picchu
+42,Brasil,Portugués,Alto,9,Mochilero,No,No,No,Sí,Sí,Sí,Sí,3500,Ropa adecuada,Huayna Picchu
+32,Israel,Hebreo,Alto,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3100,Descanso previo,Pikillacta
+24,Perú,Español,Económico,4,Mochilero,No,No,Sí,Sí,Sí,No,Sí,2700,Consumir líquidos,Pikillacta
+41,Irlanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación constante,Pikillacta
+26,Sudáfrica,Inglés,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,3000,Usar bloqueador,Pikillacta
+34,Filipinas,Inglés,Medio,7,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,2900,Medicamentos básicos,Pikillacta
+29,Marruecos,Árabe,Económico,5,Relajación,No,No,No,Sí,Sí,No,Sí,2600,Descanso adecuado,Pikillacta
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3300,Aclimatación y descanso,Pikillacta
+27,Indonesia,Indonesio,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3000,Hidratación continua,Pikillacta
+38,Dinamarca,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3200,Preparación física,Pikillacta
+23,Uruguay,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,2500,Consumir agua,Pikillacta
+45,Austria,Alemán,Alto,10,Relajación,Sí,No,Sí,Sí,Sí,Sí,Sí,2400,Consulta médica,Pikillacta
+31,Costa Rica,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3000,Hidratación permanente,Pikillacta
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3200,Ropa térmica,Pikillacta
+36,Paraguay,Español,Económico,5,Aventura,No,No,Sí,Sí,Sí,No,Sí,2700,Descanso moderado,Pikillacta
+40,Rusia,Ruso,Alto,10,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Aclimatación previa,Pikillacta
+28,Perú,Español,Medio,5,Relajación,No,No,No,Sí,Sí,Sí,Sí,2800,Consumir mate de coca,Pikillacta
+33,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3200,Hidratación continua,Pikillacta
+22,Venezuela,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,2600,Descansar correctamente,Pikillacta
+47,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2500,Control de presión,Pikillacta
+30,Tailandia,Tailandés,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3000,Hidratación y descanso,Pikillacta
+29,Australia,Inglés,Alto,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación constante,Raqchi
+34,Perú,Español,Medio,5,Relajación,No,No,No,Sí,Sí,Sí,No,3000,Descansar adecuadamente,Raqchi
+27,Estados Unidos,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3300,Llevar medicamentos,Raqchi
+41,Canadá,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Aclimatación previa,Raqchi
+24,Argentina,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,2900,Consumir agua,Raqchi
+38,Alemania,Alemán,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3300,Usar bloqueador solar,Raqchi
+30,Francia,Francés,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3200,Hidratación frecuente,Raqchi
+22,Brasil,Portugués,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,2900,Descanso moderado,Raqchi
+45,Chile,Español,Alto,7,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,2800,Consultar médico,Raqchi
+28,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3300,Llevar snacks,Raqchi
+36,Italia,Italiano,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3100,Usar sombrero,Raqchi
+31,México,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,2800,Hidratación constante,Raqchi
+40,Reino Unido,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3300,Aclimatación recomendada,Raqchi
+26,España,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,2800,Consumir líquidos,Raqchi
+33,China,Chino,Alto,8,Relajación,No,No,No,Sí,Sí,Sí,Sí,3200,Ropa cómoda,Raqchi
+37,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3100,Hidratación permanente,Raqchi
+23,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,2700,Descanso adecuado,Raqchi
+44,Suiza,Alemán,Alto,10,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Aclimatación previa,Raqchi
+27,Ecuador,Español,Medio,5,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,2900,Evitar comidas pesadas,Raqchi
+39,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3200,Hidratación y descanso,Raqchi
+25,Perú,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2700,Consumir mate de coca,Raqchi
+42,Bélgica,Francés,Alto,9,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,2600,Control médico,Raqchi
+30,Turquía,Turco,Medio,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3000,Llevar medicamentos,Raqchi
+35,India,Inglés,Alto,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3200,Usar ropa ligera,Raqchi
+21,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,2600,Hidratación adecuada,Raqchi
+46,Noruega,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3300,Aclimatación obligatoria,Raqchi
+28,Portugal,Portugués,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,2900,Evitar alcohol,Raqchi
+32,Israel,Hebreo,Alto,7,Aventura,No,No,No,Sí,Sí,Sí,Sí,3200,Descanso previo,Raqchi
+24,Perú,Español,Económico,4,Mochilero,No,No,Sí,Sí,Sí,No,Sí,2700,Consumir líquidos,Raqchi
+41,Irlanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3300,Hidratación constante,Raqchi
+26,Sudáfrica,Inglés,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3000,Usar bloqueador,Raqchi
+34,Filipinas,Inglés,Medio,7,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3000,Medicamentos básicos,Raqchi
+29,Marruecos,Árabe,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Descanso adecuado,Raqchi
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3300,Aclimatación y descanso,Raqchi
+27,Indonesia,Indonesio,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3000,Hidratación continua,Raqchi
+38,Dinamarca,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Preparación física,Raqchi
+23,Uruguay,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,2500,Consumir agua,Raqchi
+45,Austria,Alemán,Alto,10,Relajación,Sí,No,Sí,Sí,Sí,Sí,Sí,2400,Consulta médica,Raqchi
+31,Costa Rica,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3000,Hidratación permanente,Raqchi
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3200,Ropa térmica,Raqchi
+36,Paraguay,Español,Económico,5,Aventura,No,No,Sí,Sí,Sí,No,Sí,2700,Descanso moderado,Raqchi
+40,Rusia,Ruso,Alto,10,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Aclimatación previa,Raqchi
+28,Perú,Español,Medio,5,Relajación,No,No,No,Sí,Sí,Sí,Sí,2900,Consumir mate de coca,Raqchi
+33,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3200,Hidratación continua,Raqchi
+22,Venezuela,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,2600,Descansar correctamente,Raqchi
+47,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,2500,Control de presión,Raqchi
+30,Tailandia,Tailandés,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3000,Hidratación y descanso,Raqchi
+35,Estados Unidos,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3300,Preparación física,Raqchi
+24,Perú,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,2600,Consumir líquidos,Raqchi
+39,Canadá,Inglés,Alto,9,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3200,Aclimatación previa,Raqchi
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3000,Hidratación adecuada,Raqchi
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3200,Ropa adecuada,Raqchi
+24,Perú,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Aclimatación previa,Montaña de 7 Colores
+31,Estados Unidos,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Hidratación constante,Montaña de 7 Colores
+27,Argentina,Español,Económico,6,Mochilero,No,No,No,Sí,Sí,No,Sí,4000,Consumir mate de coca,Montaña de 7 Colores
+36,Canadá,Inglés,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,4350,Aclimatación obligatoria,Montaña de 7 Colores
+29,Brasil,Portugués,Medio,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4200,Hidratación permanente,Montaña de 7 Colores
+42,Alemania,Alemán,Alto,10,Cultural,No,No,No,Sí,Sí,Sí,Sí,4100,Descansar previamente,Montaña de 7 Colores
+23,Chile,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,4000,Usar bloqueador solar,Montaña de 7 Colores
+34,Francia,Francés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Aclimatación en Cusco,Montaña de 7 Colores
+26,México,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3900,Consumir líquidos,Montaña de 7 Colores
+39,Reino Unido,Inglés,Alto,11,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4350,Preparación física,Montaña de 7 Colores
+22,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3800,Descansar correctamente,Montaña de 7 Colores
+45,Japón,Japonés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Llevar snacks energéticos,Montaña de 7 Colores
+28,España,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,4000,Hidratación constante,Montaña de 7 Colores
+37,China,Chino,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Ropa térmica,Montaña de 7 Colores
+25,Perú,Español,Económico,5,Aventura,No,No,No,Sí,Sí,No,Sí,3900,Consumir mate de coca,Montaña de 7 Colores
+41,Italia,Italiano,Alto,9,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4200,Aclimatación previa,Montaña de 7 Colores
+30,Corea del Sur,Coreano,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Hidratación adecuada,Montaña de 7 Colores
+21,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3700,Consumir agua,Montaña de 7 Colores
+43,Suiza,Alemán,Alto,12,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4350,Preparación física,Montaña de 7 Colores
+27,Ecuador,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3900,Evitar comidas pesadas,Montaña de 7 Colores
+35,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4200,Hidratación y descanso,Montaña de 7 Colores
+24,Venezuela,Español,Económico,5,Aventura,No,No,Sí,Sí,Sí,No,Sí,3900,Descansar bien,Montaña de 7 Colores
+46,Noruega,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4350,Aclimatación obligatoria,Montaña de 7 Colores
+29,Portugal,Portugués,Medio,7,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Evitar alcohol,Montaña de 7 Colores
+32,Israel,Hebreo,Alto,9,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4250,Descanso previo,Montaña de 7 Colores
+23,Uruguay,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3800,Hidratación básica,Montaña de 7 Colores
+40,Irlanda,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Consumir agua constantemente,Montaña de 7 Colores
+26,Sudáfrica,Inglés,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,4100,Usar protector solar,Montaña de 7 Colores
+34,Filipinas,Inglés,Medio,7,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3950,Medicamentos básicos,Montaña de 7 Colores
+28,Marruecos,Árabe,Económico,5,Mochilero,No,No,No,Sí,Sí,No,Sí,3800,Descanso moderado,Montaña de 7 Colores
+44,Suecia,Inglés,Alto,12,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4350,Aclimatación y descanso,Montaña de 7 Colores
+27,Indonesia,Indonesio,Medio,8,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4200,Hidratación continua,Montaña de 7 Colores
+38,Dinamarca,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Preparación física,Montaña de 7 Colores
+22,Paraguay,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,3700,Consumir líquidos,Montaña de 7 Colores
+45,Austria,Alemán,Alto,11,Fotografía,Sí,No,Sí,Sí,Sí,Sí,Sí,3900,Consulta médica,Montaña de 7 Colores
+31,Costa Rica,Español,Medio,7,Aventura,No,No,No,Sí,Sí,Sí,Sí,4100,Hidratación permanente,Montaña de 7 Colores
+25,Nueva Zelanda,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Ropa térmica,Montaña de 7 Colores
+36,Rusia,Ruso,Alto,10,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4300,Aclimatación previa,Montaña de 7 Colores
+29,Perú,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3950,Consumir mate de coca,Montaña de 7 Colores
+33,Finlandia,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4200,Hidratación continua,Montaña de 7 Colores
+21,Perú,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3700,Descanso correcto,Montaña de 7 Colores
+47,Hungría,Húngaro,Alto,12,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3900,Control médico,Montaña de 7 Colores
+30,Tailandia,Tailandés,Medio,7,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4150,Hidratación y descanso,Montaña de 7 Colores
+35,Estados Unidos,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4350,Preparación física,Montaña de 7 Colores
+24,Perú,Español,Económico,5,Cultural,No,No,No,Sí,Sí,No,Sí,3800,Consumir líquidos,Montaña de 7 Colores
+39,Canadá,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Aclimatación previa,Montaña de 7 Colores
+27,España,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,4000,Hidratación adecuada,Montaña de 7 Colores
+42,Brasil,Portugués,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Ropa adecuada,Montaña de 7 Colores
+26,Turquía,Turco,Medio,7,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3950,Llevar medicamentos,Montaña de 7 Colores
+38,India,Inglés,Alto,10,Aventura,No,No,No,Sí,Sí,Sí,Sí,4250,Usar ropa ligera,Montaña de 7 Colores
+22,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3700,Hidratación adecuada,Montaña de 7 Colores
+41,Bélgica,Francés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4000,Control médico,Montaña de 7 Colores
+28,China,Chino,Alto,8,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4200,Llevar snacks energéticos,Montaña de 7 Colores
+24,Perú,Español,Económico,3,Naturaleza,No,No,No,Sí,Sí,No,Sí,4200,Hidratación constante,Laguna Humantay
+31,Argentina,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Consumir mate de coca,Laguna Humantay
+28,Chile,Español,Medio,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,4300,Llevar medicación personal,Laguna Humantay
+35,Brasil,Portugués,Alto,7,Fotografía,No,No,No,Sí,Sí,No,Sí,4200,Aclimatación previa,Laguna Humantay
+22,México,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,4100,Descansar correctamente,Laguna Humantay
+40,Estados Unidos,Inglés,Alto,6,Naturaleza,Sí,No,No,Sí,Sí,No,Sí,4000,Evitar esfuerzo excesivo,Laguna Humantay
+26,Colombia,Español,Medio,4,Aventura,No,No,No,Sí,Sí,No,Sí,4300,Hidratación continua,Laguna Humantay
+29,Canadá,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Descanso moderado,Laguna Humantay
+33,España,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Consultar médico,Laguna Humantay
+27,Francia,Francés,Alto,7,Naturaleza,No,No,Sí,Sí,Sí,No,Sí,4200,Llevar snacks energéticos,Laguna Humantay
+45,Japón,Japonés,Alto,9,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,3600,Usar bloqueador solar,Laguna Humantay
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,4000,Hidratación constante,Laguna Humantay
+37,Italia,Italiano,Medio,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4200,Aclimatación recomendada,Laguna Humantay
+30,Alemania,Alemán,Alto,8,Aventura,No,No,No,Sí,Sí,No,Sí,4300,Consumir agua frecuentemente,Laguna Humantay
+21,Perú,Español,Económico,2,Aventura,No,No,No,No,Sí,No,Sí,4000,Llevar ropa térmica,Laguna Humantay
+39,Reino Unido,Inglés,Alto,10,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,4300,Hidratación permanente,Laguna Humantay
+25,Uruguay,Español,Medio,4,Fotografía,No,No,No,Sí,Sí,No,Sí,4200,Descansar adecuadamente,Laguna Humantay
+32,Australia,Inglés,Alto,7,Aventura,No,No,No,Sí,Sí,No,Sí,4300,Aclimatación previa,Laguna Humantay
+28,Ecuador,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,4000,Evitar comidas pesadas,Laguna Humantay
+41,Corea del Sur,Coreano,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Hidratación y descanso,Laguna Humantay
+26,Paraguay,Español,Medio,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,4200,Consumir mate de coca,Laguna Humantay
+34,Portugal,Portugués,Alto,6,Aventura,No,No,No,Sí,Sí,No,Sí,4300,Control médico,Laguna Humantay
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,4000,Llevar medicamentos,Laguna Humantay
+38,China,Chino,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4200,Usar ropa ligera,Laguna Humantay
+29,Costa Rica,Español,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,4200,Hidratación adecuada,Laguna Humantay
+27,Suiza,Alemán,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Aclimatación obligatoria,Laguna Humantay
+36,Perú,Español,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,4100,Evitar alcohol,Laguna Humantay
+43,Estados Unidos,Inglés,Alto,8,Fotografía,Sí,No,No,Sí,Sí,Sí,Sí,4000,Descanso previo,Laguna Humantay
+20,Chile,Español,Económico,2,Aventura,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Laguna Humantay
+47,Francia,Francés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3500,Hidratación constante,Laguna Humantay
+33,México,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Usar bloqueador,Laguna Humantay
+26,Perú,Español,Medio,4,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Hidratación constante,Valle Rojo
+34,Estados Unidos,Inglés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Aclimatación previa,Valle Rojo
+22,Argentina,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,4000,Consumir mate de coca,Valle Rojo
+41,Canadá,Inglés,Alto,8,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,4350,Aclimatación obligatoria,Valle Rojo
+29,Brasil,Portugués,Medio,5,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4200,Hidratación adecuada,Valle Rojo
+38,Alemania,Alemán,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,4300,Preparación física,Valle Rojo
+24,Chile,Español,Económico,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,3900,Consumir líquidos,Valle Rojo
+33,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Usar ropa térmica,Valle Rojo
+27,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Descanso adecuado,Valle Rojo
+45,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4350,Aclimatación previa,Valle Rojo
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3800,Hidratación básica,Valle Rojo
+39,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Llevar snacks energéticos,Valle Rojo
+28,España,Español,Medio,6,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,4050,Hidratación constante,Valle Rojo
+36,China,Chino,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Aclimatación previa,Valle Rojo
+25,Perú,Español,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,3950,Consumir mate de coca,Valle Rojo
+42,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4200,Descansar antes del viaje,Valle Rojo
+30,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Hidratación continua,Valle Rojo
+22,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3800,Descansar correctamente,Valle Rojo
+44,Suiza,Alemán,Alto,11,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4350,Preparación física,Valle Rojo
+27,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Evitar comidas pesadas,Valle Rojo
+35,Países Bajos,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Hidratación y descanso,Valle Rojo
+23,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,Sí,No,Sí,3900,Consumir líquidos,Valle Rojo
+46,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4350,Aclimatación obligatoria,Valle Rojo
+28,Portugal,Portugués,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Evitar alcohol,Valle Rojo
+32,Israel,Hebreo,Alto,8,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4250,Descanso previo,Valle Rojo
+24,Uruguay,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3800,Hidratación básica,Valle Rojo
+40,Irlanda,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Consumir agua frecuentemente,Valle Rojo
+26,Sudáfrica,Inglés,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,4100,Usar bloqueador solar,Valle Rojo
+33,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4000,Medicamentos básicos,Valle Rojo
+29,Marruecos,Árabe,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3800,Descanso moderado,Valle Rojo
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4350,Aclimatación y descanso,Valle Rojo
+27,Indonesia,Indonesio,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4200,Hidratación permanente,Valle Rojo
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Preparación física,Valle Rojo
+22,Paraguay,Español,Económico,3,Cultural,No,No,No,Sí,Sí,No,Sí,3800,Consumir agua,Valle Rojo
+45,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,Sí,Sí,Sí,3900,Consulta médica,Valle Rojo
+31,Costa Rica,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,4100,Hidratación adecuada,Valle Rojo
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Ropa térmica,Valle Rojo
+36,Rusia,Ruso,Alto,9,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4300,Aclimatación previa,Valle Rojo
+28,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Consumir mate de coca,Valle Rojo
+34,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Hidratación continua,Valle Rojo
+21,Perú,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3800,Descanso adecuado,Valle Rojo
+47,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3900,Control médico,Valle Rojo
+30,Tailandia,Tailandés,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4200,Hidratación y descanso,Valle Rojo
+35,Estados Unidos,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4350,Preparación física,Valle Rojo
+24,Perú,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,3800,Consumir líquidos,Valle Rojo
+39,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Aclimatación previa,Valle Rojo
+27,España,Español,Medio,5,Aventura,No,No,No,Sí,Sí,Sí,Sí,4050,Hidratación constante,Valle Rojo
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Ropa adecuada,Valle Rojo
+26,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4000,Llevar medicamentos,Valle Rojo
+38,India,Inglés,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,4250,Usar ropa ligera,Valle Rojo
+22,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3800,Hidratación adecuada,Valle Rojo
+41,Bélgica,Francés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4000,Control médico,Valle Rojo
+26,Perú,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Aclimatación previa,Nevado Salkantay
+34,Argentina,Español,Alto,7,Naturaleza,No,No,No,Sí,Sí,No,Sí,4600,Hidratación adecuada,Nevado Salkantay
+22,Chile,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4500,Consumir líquidos,Nevado Salkantay
+41,Estados Unidos,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Descanso previo,Nevado Salkantay
+29,Brasil,Portugués,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Evitar alcohol,Nevado Salkantay
+37,Canadá,Inglés,Alto,9,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4200,Consulta médica,Nevado Salkantay
+24,México,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,4500,Hidratación constante,Nevado Salkantay
+32,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4600,Aclimatación obligatoria,Nevado Salkantay
+28,Colombia,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4500,Consumir mate de coca,Nevado Salkantay
+45,Japón,Japonés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3500,Descanso constante,Nevado Salkantay
+23,Bolivia,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4500,Consumir líquidos,Nevado Salkantay
+39,Italia,Italiano,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Usar bloqueador,Nevado Salkantay
+31,Alemania,Alemán,Alto,7,Naturaleza,No,No,No,Sí,Sí,No,Sí,4600,Hidratación adecuada,Nevado Salkantay
+21,Perú,Español,Económico,3,Aventura,No,No,No,No,Sí,No,Sí,4500,Aclimatación previa,Nevado Salkantay
+43,Reino Unido,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Descanso previo,Nevado Salkantay
+27,Uruguay,Español,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,4500,Consumir líquidos,Nevado Salkantay
+35,Australia,Inglés,Alto,8,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Evitar alcohol,Nevado Salkantay
+25,Ecuador,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4500,Consumir mate de coca,Nevado Salkantay
+42,Corea del Sur,Coreano,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Aclimatación obligatoria,Nevado Salkantay
+30,Paraguay,Español,Medio,6,Naturaleza,No,No,No,Sí,Sí,No,Sí,4500,Hidratación adecuada,Nevado Salkantay
+38,Portugal,Portugués,Alto,7,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Descanso previo,Nevado Salkantay
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,4500,Hidratación constante,Nevado Salkantay
+40,China,Chino,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Usar protector solar,Nevado Salkantay
+29,Costa Rica,Español,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,4500,Consumir líquidos,Nevado Salkantay
+27,Suiza,Alemán,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Aclimatación obligatoria,Nevado Salkantay
+36,Perú,Español,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,4500,Evitar alcohol,Nevado Salkantay
+43,Estados Unidos,Inglés,Alto,8,Fotografía,Sí,No,No,Sí,Sí,Sí,Sí,4200,Consulta médica,Nevado Salkantay
+20,Chile,Español,Económico,2,Aventura,No,No,No,No,Sí,No,Sí,4500,Consumir líquidos,Nevado Salkantay
+47,Francia,Francés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3500,Descanso constante,Nevado Salkantay
+33,México,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Usar bloqueador,Nevado Salkantay
+28,Perú,Español,Medio,4,Aventura,No,No,No,Sí,Sí,No,Sí,4500,Hidratación adecuada,Nevado Salkantay
+31,Argentina,Español,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Descanso previo,Nevado Salkantay
+24,Brasil,Portugués,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,4500,Consumir mate de coca,Nevado Salkantay
+35,Canadá,Inglés,Alto,8,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4200,Consulta médica,Nevado Salkantay
+29,Italia,Italiano,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4500,Evitar alcohol,Nevado Salkantay
+26,Colombia,Español,Medio,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,4500,Hidratación constante,Nevado Salkantay
+32,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Aclimatación obligatoria,Nevado Salkantay
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,4500,Consumir líquidos,Nevado Salkantay
+44,Japón,Japonés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3500,Descanso constante,Nevado Salkantay
+25,Chile,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4500,Consumir mate de coca,Nevado Salkantay
+30,Francia,Francés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4600,Usar protector solar,Nevado Salkantay
+27,España,Español,Medio,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,4500,Hidratación adecuada,Nevado Salkantay
+34,Estados Unidos,Inglés,Alto,7,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Descanso previo,Nevado Salkantay
+21,Perú,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,4500,Consumir líquidos,Nevado Salkantay
+39,Alemania,Alemán,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Aclimatación obligatoria,Nevado Salkantay
+28,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Usar bloqueador,Nevado Salkantay
+42,Reino Unido,Inglés,Alto,9,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4200,Consulta médica,Nevado Salkantay
+24,Ecuador,Español,Económico,3,Aventura,No,No,No,No,Sí,No,Sí,4500,Consumir mate de coca,Nevado Salkantay
+31,Portugal,Portugués,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4600,Hidratación adecuada,Nevado Salkantay
+28,Perú,Español,Medio,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,3600,Hidratación adecuada,Bosque de Piedras de Huasao
+35,Estados Unidos,Inglés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3700,Aclimatación previa,Bosque de Piedras de Huasao
+24,Argentina,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3500,Consumir líquidos,Bosque de Piedras de Huasao
+42,Canadá,Inglés,Alto,8,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3800,Descanso previo,Bosque de Piedras de Huasao
+31,Brasil,Portugués,Medio,5,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3650,Hidratación constante,Bosque de Piedras de Huasao
+38,Alemania,Alemán,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,3900,Preparación física,Bosque de Piedras de Huasao
+22,Chile,Español,Económico,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,3500,Consumir mate de coca,Bosque de Piedras de Huasao
+33,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3750,Usar ropa térmica,Bosque de Piedras de Huasao
+27,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Descanso moderado,Bosque de Piedras de Huasao
+46,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3800,Aclimatación recomendada,Bosque de Piedras de Huasao
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3400,Hidratación básica,Bosque de Piedras de Huasao
+39,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3750,Llevar snacks energéticos,Bosque de Piedras de Huasao
+29,España,Español,Medio,6,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3600,Hidratación constante,Bosque de Piedras de Huasao
+37,China,Chino,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Aclimatación previa,Bosque de Piedras de Huasao
+25,Perú,Español,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,3500,Consumir agua,Bosque de Piedras de Huasao
+43,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3700,Descansar antes del viaje,Bosque de Piedras de Huasao
+30,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3650,Hidratación continua,Bosque de Piedras de Huasao
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3400,Descansar correctamente,Bosque de Piedras de Huasao
+45,Suiza,Alemán,Alto,11,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3900,Preparación física,Bosque de Piedras de Huasao
+28,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3550,Evitar comidas pesadas,Bosque de Piedras de Huasao
+34,Países Bajos,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Hidratación y descanso,Bosque de Piedras de Huasao
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,Sí,No,Sí,3500,Consumir líquidos,Bosque de Piedras de Huasao
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3850,Aclimatación obligatoria,Bosque de Piedras de Huasao
+29,Portugal,Portugués,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Evitar alcohol,Bosque de Piedras de Huasao
+32,Israel,Hebreo,Alto,8,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3750,Descanso previo,Bosque de Piedras de Huasao
+25,Uruguay,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3400,Hidratación básica,Bosque de Piedras de Huasao
+41,Irlanda,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Consumir agua frecuentemente,Bosque de Piedras de Huasao
+27,Sudáfrica,Inglés,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,3650,Usar bloqueador solar,Bosque de Piedras de Huasao
+33,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3600,Medicamentos básicos,Bosque de Piedras de Huasao
+30,Marruecos,Árabe,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3450,Descanso moderado,Bosque de Piedras de Huasao
+44,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3900,Aclimatación y descanso,Bosque de Piedras de Huasao
+28,Indonesia,Indonesio,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3700,Hidratación permanente,Bosque de Piedras de Huasao
+39,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Preparación física,Bosque de Piedras de Huasao
+22,Paraguay,Español,Económico,3,Cultural,No,No,No,Sí,Sí,No,Sí,3400,Consumir agua,Bosque de Piedras de Huasao
+46,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,Sí,Sí,Sí,3600,Consulta médica,Bosque de Piedras de Huasao
+31,Costa Rica,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,3650,Hidratación adecuada,Bosque de Piedras de Huasao
+26,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3750,Ropa térmica,Bosque de Piedras de Huasao
+37,Rusia,Ruso,Alto,9,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3800,Aclimatación previa,Bosque de Piedras de Huasao
+29,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3550,Consumir mate de coca,Bosque de Piedras de Huasao
+35,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3700,Hidratación continua,Bosque de Piedras de Huasao
+21,Perú,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3400,Descanso adecuado,Bosque de Piedras de Huasao
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3600,Control médico,Bosque de Piedras de Huasao
+30,Tailandia,Tailandés,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3700,Hidratación y descanso,Bosque de Piedras de Huasao
+36,Estados Unidos,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3850,Preparación física,Bosque de Piedras de Huasao
+25,Perú,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,3450,Consumir líquidos,Bosque de Piedras de Huasao
+40,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3750,Aclimatación previa,Bosque de Piedras de Huasao
+28,España,Español,Medio,5,Aventura,No,No,No,Sí,Sí,Sí,Sí,3600,Hidratación constante,Bosque de Piedras de Huasao
+43,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Ropa adecuada,Bosque de Piedras de Huasao
+27,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3550,Llevar medicamentos,Bosque de Piedras de Huasao
+39,India,Inglés,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,3750,Usar ropa ligera,Bosque de Piedras de Huasao
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3400,Hidratación adecuada,Bosque de Piedras de Huasao
+42,Bélgica,Francés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3650,Control médico,Bosque de Piedras de Huasao
+27,Perú,Español,Medio,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,3500,Hidratación adecuada,Laguna Piuray
+35,Estados Unidos,Inglés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3600,Aclimatación previa,Laguna Piuray
+24,Argentina,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3400,Consumir líquidos,Laguna Piuray
+41,Canadá,Inglés,Alto,8,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3700,Descanso previo,Laguna Piuray
+30,Brasil,Portugués,Medio,5,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3550,Hidratación constante,Laguna Piuray
+38,Alemania,Alemán,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,3900,Preparación física,Laguna Piuray
+22,Chile,Español,Económico,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,3400,Consumir mate de coca,Laguna Piuray
+33,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3650,Usar ropa térmica,Laguna Piuray
+28,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Descanso moderado,Laguna Piuray
+46,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3800,Aclimatación recomendada,Laguna Piuray
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3300,Hidratación básica,Laguna Piuray
+39,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3700,Llevar snacks energéticos,Laguna Piuray
+29,España,Español,Medio,6,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,3500,Hidratación constante,Laguna Piuray
+37,China,Chino,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Aclimatación previa,Laguna Piuray
+25,Perú,Español,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,3400,Consumir agua,Laguna Piuray
+43,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3600,Descansar antes del viaje,Laguna Piuray
+31,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3550,Hidratación continua,Laguna Piuray
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3300,Descansar correctamente,Laguna Piuray
+45,Suiza,Alemán,Alto,11,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3900,Preparación física,Laguna Piuray
+28,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3450,Evitar comidas pesadas,Laguna Piuray
+34,Países Bajos,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3650,Hidratación y descanso,Laguna Piuray
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,Sí,No,Sí,3400,Consumir líquidos,Laguna Piuray
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Aclimatación obligatoria,Laguna Piuray
+29,Portugal,Portugués,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Evitar alcohol,Laguna Piuray
+32,Israel,Hebreo,Alto,8,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3700,Descanso previo,Laguna Piuray
+25,Uruguay,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3300,Hidratación básica,Laguna Piuray
+41,Irlanda,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Consumir agua frecuentemente,Laguna Piuray
+27,Sudáfrica,Inglés,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,3550,Usar bloqueador solar,Laguna Piuray
+33,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3500,Medicamentos básicos,Laguna Piuray
+30,Marruecos,Árabe,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3350,Descanso moderado,Laguna Piuray
+44,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3900,Aclimatación y descanso,Laguna Piuray
+28,Indonesia,Indonesio,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3600,Hidratación permanente,Laguna Piuray
+39,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Preparación física,Laguna Piuray
+22,Paraguay,Español,Económico,3,Cultural,No,No,No,Sí,Sí,No,Sí,3300,Consumir agua,Laguna Piuray
+46,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,Sí,Sí,Sí,3500,Consulta médica,Laguna Piuray
+31,Costa Rica,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,3550,Hidratación adecuada,Laguna Piuray
+26,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Ropa térmica,Laguna Piuray
+37,Rusia,Ruso,Alto,9,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3800,Aclimatación previa,Laguna Piuray
+29,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3450,Consumir mate de coca,Laguna Piuray
+35,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3600,Hidratación continua,Laguna Piuray
+21,Perú,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3300,Descanso adecuado,Laguna Piuray
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3500,Control médico,Laguna Piuray
+30,Tailandia,Tailandés,Medio,6,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,3600,Hidratación y descanso,Laguna Piuray
+36,Estados Unidos,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Preparación física,Laguna Piuray
+25,Perú,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,3350,Consumir líquidos,Laguna Piuray
+40,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3700,Aclimatación previa,Laguna Piuray
+28,España,Español,Medio,5,Aventura,No,No,No,Sí,Sí,Sí,Sí,3500,Hidratación constante,Laguna Piuray
+43,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3800,Ropa adecuada,Laguna Piuray
+27,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3450,Llevar medicamentos,Laguna Piuray
+39,India,Inglés,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,3700,Usar ropa ligera,Laguna Piuray
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,Sí,No,Sí,3300,Hidratación adecuada,Laguna Piuray
+42,Bélgica,Francés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3550,Control médico,Laguna Piuray
+26,Perú,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Centro Histórico de Cusco
+34,Estados Unidos,Inglés,Alto,7,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación ligera,Centro Histórico de Cusco
+22,Argentina,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Centro Histórico de Cusco
+41,Canadá,Inglés,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Descanso previo,Centro Histórico de Cusco
+29,Brasil,Portugués,Medio,5,Gastronómico,No,No,Sí,Sí,No,No,Sí,3400,Hidratación constante,Centro Histórico de Cusco
+37,Alemania,Alemán,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Usar protector solar,Centro Histórico de Cusco
+24,Chile,Español,Económico,4,Cultural,No,No,No,Sí,No,Sí,No,3300,Consumir mate de coca,Centro Histórico de Cusco
+33,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Aclimatación previa,Centro Histórico de Cusco
+28,México,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Descanso moderado,Centro Histórico de Cusco
+45,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación recomendada,Centro Histórico de Cusco
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación básica,Centro Histórico de Cusco
+39,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Llevar snacks energéticos,Centro Histórico de Cusco
+30,España,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Centro Histórico de Cusco
+36,China,Chino,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación previa,Centro Histórico de Cusco
+25,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Consumir agua,Centro Histórico de Cusco
+42,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Descansar antes del tour,Centro Histórico de Cusco
+31,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3450,Hidratación continua,Centro Histórico de Cusco
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Descansar correctamente,Centro Histórico de Cusco
+46,Suiza,Alemán,Alto,10,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Preparación ligera,Centro Histórico de Cusco
+27,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar comidas pesadas,Centro Histórico de Cusco
+35,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Hidratación y descanso,Centro Histórico de Cusco
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,No,No,Sí,3300,Consumir líquidos,Centro Histórico de Cusco
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación obligatoria,Centro Histórico de Cusco
+28,Portugal,Portugués,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Centro Histórico de Cusco
+32,Israel,Hebreo,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Descanso previo,Centro Histórico de Cusco
+26,Uruguay,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación básica,Centro Histórico de Cusco
+40,Irlanda,Inglés,Alto,9,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Consumir agua frecuentemente,Centro Histórico de Cusco
+29,Sudáfrica,Inglés,Medio,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3450,Usar bloqueador solar,Centro Histórico de Cusco
+34,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,No,Sí,Sí,3400,Medicamentos básicos,Centro Histórico de Cusco
+31,Marruecos,Árabe,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Descanso moderado,Centro Histórico de Cusco
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación y descanso,Centro Histórico de Cusco
+27,Indonesia,Indonesio,Medio,6,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación permanente,Centro Histórico de Cusco
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Preparación ligera,Centro Histórico de Cusco
+22,Paraguay,Español,Económico,3,Cultural,No,No,No,Sí,No,No,Sí,3300,Consumir agua,Centro Histórico de Cusco
+45,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,No,Sí,Sí,3450,Consulta médica,Centro Histórico de Cusco
+30,Costa Rica,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Centro Histórico de Cusco
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Ropa cómoda,Centro Histórico de Cusco
+37,Rusia,Ruso,Alto,9,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación previa,Centro Histórico de Cusco
+28,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,No,No,Sí,3350,Consumir mate de coca,Centro Histórico de Cusco
+36,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación continua,Centro Histórico de Cusco
+23,Perú,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Descanso adecuado,Centro Histórico de Cusco
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,No,Sí,Sí,3450,Control médico,Centro Histórico de Cusco
+31,Tailandia,Tailandés,Medio,6,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación y descanso,Centro Histórico de Cusco
+35,Estados Unidos,Inglés,Alto,10,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Preparación ligera,Centro Histórico de Cusco
+24,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Consumir líquidos,Centro Histórico de Cusco
+41,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación previa,Centro Histórico de Cusco
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Centro Histórico de Cusco
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Ropa adecuada,Centro Histórico de Cusco
+29,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Llevar medicamentos,Centro Histórico de Cusco
+38,India,Inglés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Usar ropa ligera,Centro Histórico de Cusco
+22,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación adecuada,Centro Histórico de Cusco
+44,Bélgica,Francés,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3450,Control médico,Centro Histórico de Cusco
+25,Perú,Español,Medio,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,3600,Hidratación adecuada,Laguna Huaypo
+31,Argentina,Español,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Usar bloqueador,Laguna Huaypo
+22,Chile,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir líquidos,Laguna Huaypo
+40,Estados Unidos,Inglés,Alto,8,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,3400,Descanso previo,Laguna Huaypo
+28,Brasil,Portugués,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3600,Hidratación constante,Laguna Huaypo
+35,Canadá,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Usar protector solar,Laguna Huaypo
+26,México,Español,Medio,4,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Evitar alcohol,Laguna Huaypo
+29,Francia,Francés,Alto,6,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3500,Hidratación adecuada,Laguna Huaypo
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir mate de coca,Laguna Huaypo
+47,Japón,Japonés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3300,Consulta médica,Laguna Huaypo
+25,Bolivia,Español,Medio,4,Naturaleza,No,No,No,Sí,Sí,No,Sí,3500,Hidratación adecuada,Laguna Huaypo
+38,Italia,Italiano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Usar bloqueador,Laguna Huaypo
+33,Alemania,Alemán,Alto,6,Naturaleza,No,No,No,Sí,Sí,No,Sí,3600,Hidratación constante,Laguna Huaypo
+20,Perú,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir líquidos,Laguna Huaypo
+42,Reino Unido,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Descanso previo,Laguna Huaypo
+27,Uruguay,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Evitar alcohol,Laguna Huaypo
+36,Australia,Inglés,Alto,7,Naturaleza,No,No,No,Sí,Sí,No,Sí,3600,Hidratación adecuada,Laguna Huaypo
+23,Ecuador,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir mate de coca,Laguna Huaypo
+44,Corea del Sur,Coreano,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Usar protector solar,Laguna Huaypo
+30,Paraguay,Español,Medio,5,Relajación,No,No,No,Sí,Sí,No,Sí,3500,Hidratación constante,Laguna Huaypo
+37,Portugal,Portugués,Alto,6,Naturaleza,No,No,No,Sí,Sí,No,Sí,3600,Evitar alcohol,Laguna Huaypo
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir líquidos,Laguna Huaypo
+39,China,Chino,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Usar bloqueador,Laguna Huaypo
+28,Costa Rica,Español,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3500,Hidratación adecuada,Laguna Huaypo
+26,Suiza,Alemán,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Descanso previo,Laguna Huaypo
+35,Perú,Español,Medio,4,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Evitar alcohol,Laguna Huaypo
+41,Estados Unidos,Inglés,Alto,8,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,3400,Consulta médica,Laguna Huaypo
+21,Chile,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir líquidos,Laguna Huaypo
+46,Francia,Francés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3300,Descanso constante,Laguna Huaypo
+32,México,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Usar protector solar,Laguna Huaypo
+29,Perú,Español,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3600,Hidratación adecuada,Laguna Huaypo
+34,Argentina,Español,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Usar bloqueador,Laguna Huaypo
+23,Brasil,Portugués,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir líquidos,Laguna Huaypo
+38,Canadá,Inglés,Alto,8,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,3400,Consulta médica,Laguna Huaypo
+27,Italia,Italiano,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3500,Hidratación constante,Laguna Huaypo
+25,Colombia,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir mate de coca,Laguna Huaypo
+43,Japón,Japonés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Descanso previo,Laguna Huaypo
+31,Alemania,Alemán,Alto,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Evitar alcohol,Laguna Huaypo
+20,Bolivia,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir líquidos,Laguna Huaypo
+45,Reino Unido,Inglés,Alto,8,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3300,Consulta médica,Laguna Huaypo
+28,Uruguay,Español,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3500,Hidratación adecuada,Laguna Huaypo
+36,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Usar protector solar,Laguna Huaypo
+24,Ecuador,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir líquidos,Laguna Huaypo
+42,Corea del Sur,Coreano,Alto,9,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,3400,Descanso previo,Laguna Huaypo
+30,Paraguay,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Evitar alcohol,Laguna Huaypo
+37,Portugal,Portugués,Alto,6,Naturaleza,No,No,No,Sí,Sí,No,Sí,3600,Hidratación constante,Laguna Huaypo
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3500,Consumir mate de coca,Laguna Huaypo
+39,China,Chino,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3600,Usar bloqueador,Laguna Huaypo
+29,Costa Rica,Español,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3500,Hidratación adecuada,Laguna Huaypo
+25,Perú,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Barrio de San Blas
+33,Estados Unidos,Inglés,Alto,7,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación ligera,Barrio de San Blas
+22,Argentina,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Consumir líquidos,Barrio de San Blas
+41,Canadá,Inglés,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Descanso previo,Barrio de San Blas
+29,Brasil,Portugués,Medio,5,Gastronómico,No,No,Sí,Sí,No,No,Sí,3400,Hidratación constante,Barrio de San Blas
+37,Alemania,Alemán,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Usar protector solar,Barrio de San Blas
+24,Chile,Español,Económico,4,Cultural,No,No,No,Sí,No,Sí,No,3300,Consumir mate de coca,Barrio de San Blas
+34,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Aclimatación previa,Barrio de San Blas
+28,México,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Descanso moderado,Barrio de San Blas
+45,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación recomendada,Barrio de San Blas
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación básica,Barrio de San Blas
+39,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Llevar snacks energéticos,Barrio de San Blas
+30,España,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Barrio de San Blas
+36,China,Chino,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación previa,Barrio de San Blas
+25,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Consumir agua,Barrio de San Blas
+42,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Descansar antes del tour,Barrio de San Blas
+31,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3450,Hidratación continua,Barrio de San Blas
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Descansar correctamente,Barrio de San Blas
+46,Suiza,Alemán,Alto,10,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Preparación ligera,Barrio de San Blas
+27,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar comidas pesadas,Barrio de San Blas
+35,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Hidratación y descanso,Barrio de San Blas
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,No,No,Sí,3300,Consumir líquidos,Barrio de San Blas
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación obligatoria,Barrio de San Blas
+28,Portugal,Portugués,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Barrio de San Blas
+32,Israel,Hebreo,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Descanso previo,Barrio de San Blas
+26,Uruguay,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación básica,Barrio de San Blas
+40,Irlanda,Inglés,Alto,9,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Consumir agua frecuentemente,Barrio de San Blas
+29,Sudáfrica,Inglés,Medio,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3450,Usar bloqueador solar,Barrio de San Blas
+34,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,No,Sí,Sí,3400,Medicamentos básicos,Barrio de San Blas
+31,Marruecos,Árabe,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Descanso moderado,Barrio de San Blas
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación y descanso,Barrio de San Blas
+27,Indonesia,Indonesio,Medio,6,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación permanente,Barrio de San Blas
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Preparación ligera,Barrio de San Blas
+22,Paraguay,Español,Económico,3,Cultural,No,No,No,Sí,No,No,Sí,3300,Consumir agua,Barrio de San Blas
+45,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,No,Sí,Sí,3450,Consulta médica,Barrio de San Blas
+30,Costa Rica,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Barrio de San Blas
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Ropa cómoda,Barrio de San Blas
+37,Rusia,Ruso,Alto,9,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación previa,Barrio de San Blas
+28,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,No,No,Sí,3350,Consumir mate de coca,Barrio de San Blas
+36,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación continua,Barrio de San Blas
+23,Perú,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Descanso adecuado,Barrio de San Blas
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,No,Sí,Sí,3450,Control médico,Barrio de San Blas
+31,Tailandia,Tailandés,Medio,6,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación y descanso,Barrio de San Blas
+35,Estados Unidos,Inglés,Alto,10,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Preparación ligera,Barrio de San Blas
+24,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Consumir líquidos,Barrio de San Blas
+41,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación previa,Barrio de San Blas
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Barrio de San Blas
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Ropa adecuada,Barrio de San Blas
+29,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Llevar medicamentos,Barrio de San Blas
+38,India,Inglés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Usar ropa ligera,Barrio de San Blas
+22,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación adecuada,Barrio de San Blas
+44,Bélgica,Francés,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3450,Control médico,Barrio de San Blas
+26,Perú,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Plaza de Armas del Cusco
+31,Argentina,Español,Alto,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Plaza de Armas del Cusco
+22,Chile,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Plaza de Armas del Cusco
+45,Estados Unidos,Inglés,Alto,8,Cultural,Sí,No,No,Sí,No,Sí,Sí,3300,Descanso previo,Plaza de Armas del Cusco
+29,Brasil,Portugués,Medio,5,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Plaza de Armas del Cusco
+37,Canadá,Inglés,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Plaza de Armas del Cusco
+25,México,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Plaza de Armas del Cusco
+33,Francia,Francés,Alto,6,Relajación,No,No,Sí,Sí,No,Sí,Sí,3300,Hidratación adecuada,Plaza de Armas del Cusco
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir mate de coca,Plaza de Armas del Cusco
+48,Japón,Japonés,Alto,9,Relajación,Sí,Sí,No,Sí,No,Sí,Sí,3200,Consulta médica,Plaza de Armas del Cusco
+24,Bolivia,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Plaza de Armas del Cusco
+39,Italia,Italiano,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Plaza de Armas del Cusco
+35,Alemania,Alemán,Alto,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Plaza de Armas del Cusco
+20,Perú,Español,Económico,2,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Plaza de Armas del Cusco
+43,Reino Unido,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Descanso previo,Plaza de Armas del Cusco
+27,Uruguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Plaza de Armas del Cusco
+36,Australia,Inglés,Alto,7,Relajación,No,No,No,Sí,No,Sí,Sí,3300,Hidratación adecuada,Plaza de Armas del Cusco
+23,Ecuador,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Plaza de Armas del Cusco
+44,Corea del Sur,Coreano,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Plaza de Armas del Cusco
+30,Paraguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Plaza de Armas del Cusco
+38,Portugal,Portugués,Alto,6,Relajación,No,No,No,Sí,No,Sí,Sí,3300,Evitar alcohol,Plaza de Armas del Cusco
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Plaza de Armas del Cusco
+40,China,Chino,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Plaza de Armas del Cusco
+28,Costa Rica,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Plaza de Armas del Cusco
+27,Suiza,Alemán,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Descanso previo,Plaza de Armas del Cusco
+34,Perú,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Plaza de Armas del Cusco
+42,Estados Unidos,Inglés,Alto,8,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Consulta médica,Plaza de Armas del Cusco
+21,Chile,Español,Económico,2,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Plaza de Armas del Cusco
+46,Francia,Francés,Alto,9,Relajación,Sí,Sí,No,Sí,No,Sí,Sí,3200,Descanso constante,Plaza de Armas del Cusco
+32,México,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Plaza de Armas del Cusco
+29,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Plaza de Armas del Cusco
+35,Argentina,Español,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Plaza de Armas del Cusco
+24,Brasil,Portugués,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Plaza de Armas del Cusco
+39,Canadá,Inglés,Alto,8,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Consulta médica,Plaza de Armas del Cusco
+28,Italia,Italiano,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Plaza de Armas del Cusco
+26,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir mate de coca,Plaza de Armas del Cusco
+44,Japón,Japonés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Descanso previo,Plaza de Armas del Cusco
+31,Alemania,Alemán,Alto,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Plaza de Armas del Cusco
+20,Bolivia,Español,Económico,2,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Plaza de Armas del Cusco
+45,Reino Unido,Inglés,Alto,8,Relajación,Sí,Sí,No,Sí,No,Sí,Sí,3200,Consulta médica,Plaza de Armas del Cusco
+29,Uruguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Plaza de Armas del Cusco
+37,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Plaza de Armas del Cusco
+23,Ecuador,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Plaza de Armas del Cusco
+41,Corea del Sur,Coreano,Alto,9,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Descanso previo,Plaza de Armas del Cusco
+30,Paraguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Plaza de Armas del Cusco
+38,Portugal,Portugués,Alto,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Plaza de Armas del Cusco
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Plaza de Armas del Cusco
+40,China,Chino,Alto,8,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Consulta médica,Plaza de Armas del Cusco
+28,Costa Rica,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Plaza de Armas del Cusco
+26,Perú,Español,Medio,4,Gastronómico,No,No,No,Sí,No,No,Sí,3400,Hidratación adecuada,Mercado de San Pedro
+34,Estados Unidos,Inglés,Alto,7,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación ligera,Mercado de San Pedro
+22,Argentina,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Consumir líquidos,Mercado de San Pedro
+41,Canadá,Inglés,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Descanso previo,Mercado de San Pedro
+29,Brasil,Portugués,Medio,5,Gastronómico,No,No,Sí,Sí,No,No,Sí,3400,Hidratación constante,Mercado de San Pedro
+37,Alemania,Alemán,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Usar protector solar,Mercado de San Pedro
+24,Chile,Español,Económico,4,Cultural,No,No,No,Sí,No,Sí,No,3300,Consumir mate de coca,Mercado de San Pedro
+33,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Aclimatación previa,Mercado de San Pedro
+28,México,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Descanso moderado,Mercado de San Pedro
+45,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación recomendada,Mercado de San Pedro
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación básica,Mercado de San Pedro
+39,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Llevar snacks energéticos,Mercado de San Pedro
+30,España,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Mercado de San Pedro
+36,China,Chino,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación previa,Mercado de San Pedro
+25,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Consumir agua,Mercado de San Pedro
+42,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Descansar antes del tour,Mercado de San Pedro
+31,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3450,Hidratación continua,Mercado de San Pedro
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Descansar correctamente,Mercado de San Pedro
+46,Suiza,Alemán,Alto,10,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Preparación ligera,Mercado de San Pedro
+27,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar comidas pesadas,Mercado de San Pedro
+35,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Hidratación y descanso,Mercado de San Pedro
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,No,No,Sí,3300,Consumir líquidos,Mercado de San Pedro
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación obligatoria,Mercado de San Pedro
+28,Portugal,Portugués,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Mercado de San Pedro
+32,Israel,Hebreo,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Descanso previo,Mercado de San Pedro
+26,Uruguay,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación básica,Mercado de San Pedro
+40,Irlanda,Inglés,Alto,9,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Consumir agua frecuentemente,Mercado de San Pedro
+29,Sudáfrica,Inglés,Medio,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3450,Usar bloqueador solar,Mercado de San Pedro
+34,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,No,Sí,Sí,3400,Medicamentos básicos,Mercado de San Pedro
+31,Marruecos,Árabe,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Descanso moderado,Mercado de San Pedro
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación y descanso,Mercado de San Pedro
+27,Indonesia,Indonesio,Medio,6,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación permanente,Mercado de San Pedro
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Preparación ligera,Mercado de San Pedro
+22,Paraguay,Español,Económico,3,Cultural,No,No,No,Sí,No,No,Sí,3300,Consumir agua,Mercado de San Pedro
+45,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,No,Sí,Sí,3450,Consulta médica,Mercado de San Pedro
+30,Costa Rica,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Mercado de San Pedro
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Ropa cómoda,Mercado de San Pedro
+37,Rusia,Ruso,Alto,9,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación previa,Mercado de San Pedro
+28,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,No,No,Sí,3350,Consumir mate de coca,Mercado de San Pedro
+36,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación continua,Mercado de San Pedro
+23,Perú,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Descanso adecuado,Mercado de San Pedro
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,No,Sí,Sí,3450,Control médico,Mercado de San Pedro
+31,Tailandia,Tailandés,Medio,6,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación y descanso,Mercado de San Pedro
+35,Estados Unidos,Inglés,Alto,10,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Preparación ligera,Mercado de San Pedro
+24,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Consumir líquidos,Mercado de San Pedro
+41,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación previa,Mercado de San Pedro
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Mercado de San Pedro
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Ropa adecuada,Mercado de San Pedro
+29,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Llevar medicamentos,Mercado de San Pedro
+38,India,Inglés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Usar ropa ligera,Mercado de San Pedro
+22,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación adecuada,Mercado de San Pedro
+44,Bélgica,Francés,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3450,Control médico,Mercado de San Pedro
+27,Perú,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Catedral del Cusco
+34,Argentina,Español,Alto,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Catedral del Cusco
+22,Chile,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Catedral del Cusco
+46,Estados Unidos,Inglés,Alto,8,Cultural,Sí,No,No,Sí,No,Sí,Sí,3300,Descanso previo,Catedral del Cusco
+29,Brasil,Portugués,Medio,5,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Catedral del Cusco
+38,Canadá,Inglés,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Catedral del Cusco
+25,México,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Catedral del Cusco
+33,Francia,Francés,Alto,6,Relajación,No,No,Sí,Sí,No,Sí,Sí,3300,Hidratación adecuada,Catedral del Cusco
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir mate de coca,Catedral del Cusco
+49,Japón,Japonés,Alto,9,Relajación,Sí,Sí,No,Sí,No,Sí,Sí,3200,Consulta médica,Catedral del Cusco
+24,Bolivia,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Catedral del Cusco
+40,Italia,Italiano,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Catedral del Cusco
+35,Alemania,Alemán,Alto,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Catedral del Cusco
+20,Perú,Español,Económico,2,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Catedral del Cusco
+44,Reino Unido,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Descanso previo,Catedral del Cusco
+28,Uruguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Catedral del Cusco
+37,Australia,Inglés,Alto,7,Relajación,No,No,No,Sí,No,Sí,Sí,3300,Hidratación adecuada,Catedral del Cusco
+23,Ecuador,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Catedral del Cusco
+45,Corea del Sur,Coreano,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Catedral del Cusco
+30,Paraguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Catedral del Cusco
+39,Portugal,Portugués,Alto,6,Relajación,No,No,No,Sí,No,Sí,Sí,3300,Evitar alcohol,Catedral del Cusco
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Catedral del Cusco
+41,China,Chino,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Catedral del Cusco
+29,Costa Rica,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Catedral del Cusco
+27,Suiza,Alemán,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Descanso previo,Catedral del Cusco
+34,Perú,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Catedral del Cusco
+43,Estados Unidos,Inglés,Alto,8,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Consulta médica,Catedral del Cusco
+21,Chile,Español,Económico,2,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Catedral del Cusco
+47,Francia,Francés,Alto,9,Relajación,Sí,Sí,No,Sí,No,Sí,Sí,3200,Descanso constante,Catedral del Cusco
+32,México,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Catedral del Cusco
+29,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Catedral del Cusco
+36,Argentina,Español,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Catedral del Cusco
+24,Brasil,Portugués,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Catedral del Cusco
+40,Canadá,Inglés,Alto,8,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Consulta médica,Catedral del Cusco
+28,Italia,Italiano,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Catedral del Cusco
+26,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir mate de coca,Catedral del Cusco
+45,Japón,Japonés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Descanso previo,Catedral del Cusco
+31,Alemania,Alemán,Alto,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Catedral del Cusco
+20,Bolivia,Español,Económico,2,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Catedral del Cusco
+46,Reino Unido,Inglés,Alto,8,Relajación,Sí,Sí,No,Sí,No,Sí,Sí,3200,Consulta médica,Catedral del Cusco
+30,Uruguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Catedral del Cusco
+38,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Catedral del Cusco
+23,Ecuador,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Catedral del Cusco
+42,Corea del Sur,Coreano,Alto,9,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Descanso previo,Catedral del Cusco
+29,Paraguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Catedral del Cusco
+39,Portugal,Portugués,Alto,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Catedral del Cusco
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Catedral del Cusco
+41,China,Chino,Alto,8,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Consulta médica,Catedral del Cusco
+28,Costa Rica,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Catedral del Cusco
+27,Perú,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Piedra de los 12 Ángulos
+35,Estados Unidos,Inglés,Alto,7,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación ligera,Piedra de los 12 Ángulos
+22,Argentina,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Consumir líquidos,Piedra de los 12 Ángulos
+41,Canadá,Inglés,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Descanso previo,Piedra de los 12 Ángulos
+29,Brasil,Portugués,Medio,5,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3400,Hidratación constante,Piedra de los 12 Ángulos
+38,Alemania,Alemán,Alto,9,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Usar protector solar,Piedra de los 12 Ángulos
+24,Chile,Español,Económico,4,Cultural,No,No,No,Sí,No,Sí,No,3300,Consumir mate de coca,Piedra de los 12 Ángulos
+33,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Aclimatación previa,Piedra de los 12 Ángulos
+28,México,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Descanso moderado,Piedra de los 12 Ángulos
+45,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación recomendada,Piedra de los 12 Ángulos
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación básica,Piedra de los 12 Ángulos
+39,Japón,Japonés,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Llevar snacks energéticos,Piedra de los 12 Ángulos
+30,España,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Piedra de los 12 Ángulos
+36,China,Chino,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación previa,Piedra de los 12 Ángulos
+25,Perú,Español,Económico,4,Cultural,No,No,No,Sí,No,No,Sí,3300,Consumir agua,Piedra de los 12 Ángulos
+42,Italia,Italiano,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Descansar antes del tour,Piedra de los 12 Ángulos
+31,Corea del Sur,Coreano,Alto,7,Cultural,No,No,No,Sí,No,Sí,Sí,3450,Hidratación continua,Piedra de los 12 Ángulos
+23,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Descansar correctamente,Piedra de los 12 Ángulos
+46,Suiza,Alemán,Alto,10,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Preparación ligera,Piedra de los 12 Ángulos
+27,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar comidas pesadas,Piedra de los 12 Ángulos
+35,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Hidratación y descanso,Piedra de los 12 Ángulos
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,No,No,Sí,3300,Consumir líquidos,Piedra de los 12 Ángulos
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación obligatoria,Piedra de los 12 Ángulos
+28,Portugal,Portugués,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Piedra de los 12 Ángulos
+32,Israel,Hebreo,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Descanso previo,Piedra de los 12 Ángulos
+26,Uruguay,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación básica,Piedra de los 12 Ángulos
+40,Irlanda,Inglés,Alto,9,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Consumir agua frecuentemente,Piedra de los 12 Ángulos
+29,Sudáfrica,Inglés,Medio,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3450,Usar bloqueador solar,Piedra de los 12 Ángulos
+34,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,No,Sí,Sí,3400,Medicamentos básicos,Piedra de los 12 Ángulos
+31,Marruecos,Árabe,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Descanso moderado,Piedra de los 12 Ángulos
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Aclimatación y descanso,Piedra de los 12 Ángulos
+27,Indonesia,Indonesio,Medio,6,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación permanente,Piedra de los 12 Ángulos
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Preparación ligera,Piedra de los 12 Ángulos
+22,Paraguay,Español,Económico,3,Cultural,No,No,No,Sí,No,No,Sí,3300,Consumir agua,Piedra de los 12 Ángulos
+45,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,No,Sí,Sí,3450,Consulta médica,Piedra de los 12 Ángulos
+30,Costa Rica,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Piedra de los 12 Ángulos
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Ropa cómoda,Piedra de los 12 Ángulos
+37,Rusia,Ruso,Alto,9,Cultural,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación previa,Piedra de los 12 Ángulos
+28,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,No,No,Sí,3350,Consumir mate de coca,Piedra de los 12 Ángulos
+36,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación continua,Piedra de los 12 Ángulos
+23,Perú,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Descanso adecuado,Piedra de los 12 Ángulos
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,No,Sí,Sí,3450,Control médico,Piedra de los 12 Ángulos
+31,Tailandia,Tailandés,Medio,6,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3450,Hidratación y descanso,Piedra de los 12 Ángulos
+35,Estados Unidos,Inglés,Alto,10,Cultural,No,No,No,Sí,No,Sí,Sí,3500,Preparación ligera,Piedra de los 12 Ángulos
+24,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,No,No,Sí,3300,Consumir líquidos,Piedra de los 12 Ángulos
+41,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,No,Sí,Sí,3500,Aclimatación previa,Piedra de los 12 Ángulos
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Piedra de los 12 Ángulos
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Ropa adecuada,Piedra de los 12 Ángulos
+29,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,No,Sí,Sí,3450,Llevar medicamentos,Piedra de los 12 Ángulos
+38,India,Inglés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3500,Usar ropa ligera,Piedra de los 12 Ángulos
+22,Bolivia,Español,Económico,3,Mochilero,No,No,No,Sí,No,No,Sí,3300,Hidratación adecuada,Piedra de los 12 Ángulos
+44,Bélgica,Francés,Alto,8,Cultural,No,No,No,Sí,No,Sí,Sí,3450,Control médico,Piedra de los 12 Ángulos
+26,Perú,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Museo Inka
+33,Argentina,Español,Alto,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Museo Inka
+22,Chile,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Museo Inka
+45,Estados Unidos,Inglés,Alto,8,Cultural,Sí,No,No,Sí,No,Sí,Sí,3300,Descanso previo,Museo Inka
+28,Brasil,Portugués,Medio,5,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Museo Inka
+37,Canadá,Inglés,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Museo Inka
+25,México,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Museo Inka
+34,Francia,Francés,Alto,6,Relajación,No,No,Sí,Sí,No,Sí,Sí,3300,Hidratación adecuada,Museo Inka
+21,Colombia,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir mate de coca,Museo Inka
+48,Japón,Japonés,Alto,9,Relajación,Sí,Sí,No,Sí,No,Sí,Sí,3200,Consulta médica,Museo Inka
+24,Bolivia,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Museo Inka
+39,Italia,Italiano,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Museo Inka
+35,Alemania,Alemán,Alto,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Museo Inka
+20,Perú,Español,Económico,2,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Museo Inka
+44,Reino Unido,Inglés,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Descanso previo,Museo Inka
+27,Uruguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Museo Inka
+36,Australia,Inglés,Alto,7,Relajación,No,No,No,Sí,No,Sí,Sí,3300,Hidratación adecuada,Museo Inka
+23,Ecuador,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Museo Inka
+45,Corea del Sur,Coreano,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Museo Inka
+30,Paraguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Museo Inka
+38,Portugal,Portugués,Alto,6,Relajación,No,No,No,Sí,No,Sí,Sí,3300,Evitar alcohol,Museo Inka
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Museo Inka
+40,China,Chino,Alto,8,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Museo Inka
+29,Costa Rica,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Museo Inka
+27,Suiza,Alemán,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Descanso previo,Museo Inka
+34,Perú,Español,Medio,4,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Museo Inka
+43,Estados Unidos,Inglés,Alto,8,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Consulta médica,Museo Inka
+21,Chile,Español,Económico,2,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Museo Inka
+47,Francia,Francés,Alto,9,Relajación,Sí,Sí,No,Sí,No,Sí,Sí,3200,Descanso constante,Museo Inka
+32,México,Español,Medio,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Museo Inka
+29,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Museo Inka
+36,Argentina,Español,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar bloqueador,Museo Inka
+24,Brasil,Portugués,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Museo Inka
+40,Canadá,Inglés,Alto,8,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Consulta médica,Museo Inka
+28,Italia,Italiano,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Museo Inka
+26,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir mate de coca,Museo Inka
+45,Japón,Japonés,Alto,9,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Descanso previo,Museo Inka
+31,Alemania,Alemán,Alto,6,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Museo Inka
+20,Bolivia,Español,Económico,2,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Museo Inka
+46,Reino Unido,Inglés,Alto,8,Relajación,Sí,Sí,No,Sí,No,Sí,Sí,3200,Consulta médica,Museo Inka
+30,Uruguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Museo Inka
+38,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Usar protector solar,Museo Inka
+23,Ecuador,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Museo Inka
+42,Corea del Sur,Coreano,Alto,9,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Descanso previo,Museo Inka
+29,Paraguay,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Evitar alcohol,Museo Inka
+39,Portugal,Portugués,Alto,6,Fotografía,No,No,No,Sí,No,Sí,Sí,3400,Hidratación constante,Museo Inka
+22,Venezuela,Español,Económico,3,Mochilero,No,No,No,Sí,No,Sí,Sí,3300,Consumir líquidos,Museo Inka
+41,China,Chino,Alto,8,Relajación,Sí,No,No,Sí,No,Sí,Sí,3200,Consulta médica,Museo Inka
+28,Costa Rica,Español,Medio,5,Cultural,No,No,No,Sí,No,Sí,Sí,3400,Hidratación adecuada,Museo Inka
+28,Perú,Español,Medio,4,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación adecuada,Maras
+35,Argentina,Español,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar bloqueador,Maras
+22,Chile,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+46,Estados Unidos,Inglés,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3300,Descanso previo,Maras
+31,Brasil,Portugués,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,3500,Hidratación constante,Maras
+39,Francia,Francés,Alto,7,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3300,Evitar alcohol,Maras
+24,México,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir mate de coca,Maras
+50,Canadá,Inglés,Alto,9,Cultural,Sí,Sí,No,Sí,Sí,Sí,Sí,3200,Consulta médica,Maras
+27,Colombia,Español,Medio,5,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar protector solar,Maras
+33,Italia,Italiano,Alto,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación adecuada,Maras
+21,Bolivia,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+44,Reino Unido,Inglés,Alto,8,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,3200,Descanso constante,Maras
+29,Uruguay,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación constante,Maras
+37,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar bloqueador,Maras
+23,Ecuador,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+48,Japón,Japonés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3200,Consulta médica,Maras
+30,Paraguay,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Evitar alcohol,Maras
+42,Portugal,Portugués,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar protector solar,Maras
+20,Venezuela,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+45,China,Chino,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3200,Descanso previo,Maras
+26,Costa Rica,Español,Medio,4,Aventura,No,No,No,Sí,Sí,No,Sí,3500,Hidratación adecuada,Maras
+34,Suiza,Alemán,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar bloqueador,Maras
+25,Perú,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+47,Estados Unidos,Inglés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3200,Consulta médica,Maras
+32,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación constante,Maras
+38,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Usar protector solar,Maras
+22,Chile,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+49,Canadá,Inglés,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3200,Descanso previo,Maras
+28,Argentina,Español,Medio,5,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Hidratación adecuada,Maras
+36,Italia,Italiano,Alto,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Evitar alcohol,Maras
+24,Brasil,Portugués,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir mate de coca,Maras
+43,Alemania,Alemán,Alto,8,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3200,Consulta médica,Maras
+29,Colombia,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación constante,Maras
+40,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar bloqueador,Maras
+21,Ecuador,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+46,Japón,Japonés,Alto,9,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3200,Descanso previo,Maras
+31,Paraguay,Español,Medio,5,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Hidratación adecuada,Maras
+39,Portugal,Portugués,Alto,7,Relajación,No,No,No,Sí,Sí,Sí,Sí,3300,Evitar alcohol,Maras
+23,Venezuela,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+44,China,Chino,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3200,Consulta médica,Maras
+27,Costa Rica,Español,Medio,4,Aventura,No,No,No,Sí,Sí,No,Sí,3500,Hidratación adecuada,Maras
+35,Suiza,Alemán,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar protector solar,Maras
+26,Perú,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+48,Estados Unidos,Inglés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3200,Consulta médica,Maras
+33,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación constante,Maras
+37,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Usar bloqueador,Maras
+22,Chile,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+50,Canadá,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3200,Consulta médica,Maras
+30,Argentina,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación adecuada,Maras
+41,Italia,Italiano,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar protector solar,Maras
+25,Brasil,Portugués,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3400,Consumir líquidos,Maras
+29,Perú,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación adecuada,Valle Sagrado de los Incas
+34,Estados Unidos,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Aclimatación ligera,Valle Sagrado de los Incas
+22,Argentina,Español,Económico,5,Mochilero,No,No,No,Sí,Sí,No,Sí,3300,Consumir líquidos,Valle Sagrado de los Incas
+41,Canadá,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Descanso previo,Valle Sagrado de los Incas
+28,Brasil,Portugués,Medio,6,Naturaleza,No,No,Sí,Sí,Sí,No,Sí,3400,Hidratación constante,Valle Sagrado de los Incas
+37,Alemania,Alemán,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar protector solar,Valle Sagrado de los Incas
+24,Chile,Español,Económico,4,Cultural,No,No,No,Sí,Sí,Sí,No,3200,Consumir mate de coca,Valle Sagrado de los Incas
+33,Francia,Francés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3450,Aclimatación previa,Valle Sagrado de los Incas
+27,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Descanso moderado,Valle Sagrado de los Incas
+45,Reino Unido,Inglés,Alto,11,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Aclimatación recomendada,Valle Sagrado de los Incas
+21,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Hidratación básica,Valle Sagrado de los Incas
+39,Japón,Japonés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Llevar snacks energéticos,Valle Sagrado de los Incas
+30,España,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación constante,Valle Sagrado de los Incas
+36,China,Chino,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Aclimatación previa,Valle Sagrado de los Incas
+25,Perú,Español,Económico,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3200,Consumir agua,Valle Sagrado de los Incas
+42,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3450,Descansar antes del tour,Valle Sagrado de los Incas
+31,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3450,Hidratación continua,Valle Sagrado de los Incas
+23,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Descansar correctamente,Valle Sagrado de los Incas
+46,Suiza,Alemán,Alto,11,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3500,Preparación ligera,Valle Sagrado de los Incas
+27,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Evitar comidas pesadas,Valle Sagrado de los Incas
+35,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Hidratación y descanso,Valle Sagrado de los Incas
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,Sí,No,Sí,3300,Consumir líquidos,Valle Sagrado de los Incas
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Aclimatación obligatoria,Valle Sagrado de los Incas
+28,Portugal,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Evitar alcohol,Valle Sagrado de los Incas
+32,Israel,Hebreo,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3450,Descanso previo,Valle Sagrado de los Incas
+26,Uruguay,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Hidratación básica,Valle Sagrado de los Incas
+40,Irlanda,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Consumir agua frecuentemente,Valle Sagrado de los Incas
+29,Sudáfrica,Inglés,Medio,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3450,Usar bloqueador solar,Valle Sagrado de los Incas
+34,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3300,Medicamentos básicos,Valle Sagrado de los Incas
+31,Marruecos,Árabe,Económico,4,Gastronómico,No,No,No,Sí,Sí,No,Sí,3200,Descanso moderado,Valle Sagrado de los Incas
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Aclimatación y descanso,Valle Sagrado de los Incas
+27,Indonesia,Indonesio,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3400,Hidratación permanente,Valle Sagrado de los Incas
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Preparación ligera,Valle Sagrado de los Incas
+22,Paraguay,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,3200,Consumir agua,Valle Sagrado de los Incas
+45,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,Sí,Sí,Sí,3300,Consulta médica,Valle Sagrado de los Incas
+30,Costa Rica,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación adecuada,Valle Sagrado de los Incas
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Ropa cómoda,Valle Sagrado de los Incas
+37,Rusia,Ruso,Alto,9,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3500,Aclimatación previa,Valle Sagrado de los Incas
+28,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,Sí,No,Sí,3300,Consumir mate de coca,Valle Sagrado de los Incas
+36,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3450,Hidratación continua,Valle Sagrado de los Incas
+23,Perú,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Descanso adecuado,Valle Sagrado de los Incas
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3300,Control médico,Valle Sagrado de los Incas
+31,Tailandia,Tailandés,Medio,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3450,Hidratación y descanso,Valle Sagrado de los Incas
+35,Estados Unidos,Inglés,Alto,10,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Preparación ligera,Valle Sagrado de los Incas
+24,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,Sí,No,Sí,3200,Consumir líquidos,Valle Sagrado de los Incas
+41,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Aclimatación previa,Valle Sagrado de los Incas
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Hidratación constante,Valle Sagrado de los Incas
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Ropa adecuada,Valle Sagrado de los Incas
+29,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3450,Llevar medicamentos,Valle Sagrado de los Incas
+38,India,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar ropa ligera,Valle Sagrado de los Incas
+22,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Hidratación adecuada,Valle Sagrado de los Incas
+44,Bélgica,Francés,Alto,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3450,Control médico,Valle Sagrado de los Incas
+28,Perú,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación adecuada,Salineras de Maras
+34,Estados Unidos,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Aclimatación ligera,Salineras de Maras
+22,Argentina,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3300,Consumir líquidos,Salineras de Maras
+41,Canadá,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Descanso previo,Salineras de Maras
+27,Brasil,Portugués,Medio,6,Naturaleza,No,No,Sí,Sí,Sí,No,Sí,3400,Hidratación constante,Salineras de Maras
+36,Alemania,Alemán,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar protector solar,Salineras de Maras
+24,Chile,Español,Económico,4,Cultural,No,No,No,Sí,Sí,Sí,No,3200,Consumir mate de coca,Salineras de Maras
+33,Francia,Francés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3450,Aclimatación previa,Salineras de Maras
+29,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Descanso moderado,Salineras de Maras
+45,Reino Unido,Inglés,Alto,11,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Aclimatación recomendada,Salineras de Maras
+21,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Hidratación básica,Salineras de Maras
+39,Japón,Japonés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Llevar snacks energéticos,Salineras de Maras
+30,España,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación constante,Salineras de Maras
+35,China,Chino,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Aclimatación previa,Salineras de Maras
+25,Perú,Español,Económico,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3200,Consumir agua,Salineras de Maras
+42,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3450,Descansar antes del tour,Salineras de Maras
+31,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3450,Hidratación continua,Salineras de Maras
+23,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Descansar correctamente,Salineras de Maras
+46,Suiza,Alemán,Alto,11,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3500,Preparación ligera,Salineras de Maras
+27,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Evitar comidas pesadas,Salineras de Maras
+35,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Hidratación y descanso,Salineras de Maras
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,Sí,No,Sí,3300,Consumir líquidos,Salineras de Maras
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Aclimatación obligatoria,Salineras de Maras
+28,Portugal,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Evitar alcohol,Salineras de Maras
+32,Israel,Hebreo,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3450,Descanso previo,Salineras de Maras
+26,Uruguay,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Hidratación básica,Salineras de Maras
+40,Irlanda,Inglés,Alto,9,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Consumir agua frecuentemente,Salineras de Maras
+29,Sudáfrica,Inglés,Medio,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3450,Usar bloqueador solar,Salineras de Maras
+34,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3300,Medicamentos básicos,Salineras de Maras
+31,Marruecos,Árabe,Económico,4,Gastronómico,No,No,No,Sí,Sí,No,Sí,3200,Descanso moderado,Salineras de Maras
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Aclimatación y descanso,Salineras de Maras
+27,Indonesia,Indonesio,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3400,Hidratación permanente,Salineras de Maras
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Preparación ligera,Salineras de Maras
+22,Paraguay,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,3200,Consumir agua,Salineras de Maras
+45,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,Sí,Sí,Sí,3300,Consulta médica,Salineras de Maras
+30,Costa Rica,Español,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3400,Hidratación adecuada,Salineras de Maras
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Ropa cómoda,Salineras de Maras
+37,Rusia,Ruso,Alto,9,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3500,Aclimatación previa,Salineras de Maras
+28,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,Sí,No,Sí,3300,Consumir mate de coca,Salineras de Maras
+36,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3450,Hidratación continua,Salineras de Maras
+23,Perú,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Descanso adecuado,Salineras de Maras
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3300,Control médico,Salineras de Maras
+31,Tailandia,Tailandés,Medio,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3450,Hidratación y descanso,Salineras de Maras
+35,Estados Unidos,Inglés,Alto,10,Cultural,No,No,No,Sí,Sí,Sí,Sí,3500,Preparación ligera,Salineras de Maras
+24,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,Sí,No,Sí,3200,Consumir líquidos,Salineras de Maras
+41,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3500,Aclimatación previa,Salineras de Maras
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3300,Hidratación constante,Salineras de Maras
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Ropa adecuada,Salineras de Maras
+29,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,3450,Llevar medicamentos,Salineras de Maras
+38,India,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3500,Usar ropa ligera,Salineras de Maras
+22,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3200,Hidratación adecuada,Salineras de Maras
+44,Bélgica,Francés,Alto,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,3450,Control médico,Salineras de Maras
+27,Perú,Español,Medio,4,Cultural,No,No,No,Sí,Sí,Sí,Sí,3700,Hidratación adecuada,Chinchero
+35,Argentina,Español,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Usar bloqueador,Chinchero
+22,Chile,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+46,Estados Unidos,Inglés,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3500,Descanso previo,Chinchero
+31,Brasil,Portugués,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,3800,Hidratación constante,Chinchero
+39,Francia,Francés,Alto,7,Relajación,No,No,Sí,Sí,Sí,Sí,Sí,3500,Evitar alcohol,Chinchero
+24,México,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir mate de coca,Chinchero
+50,Canadá,Inglés,Alto,9,Cultural,Sí,Sí,No,Sí,Sí,Sí,Sí,3400,Consulta médica,Chinchero
+28,Colombia,Español,Medio,5,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Usar protector solar,Chinchero
+33,Italia,Italiano,Alto,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Hidratación adecuada,Chinchero
+21,Bolivia,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+44,Reino Unido,Inglés,Alto,8,Relajación,Sí,No,No,Sí,Sí,Sí,Sí,3400,Descanso constante,Chinchero
+29,Uruguay,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3700,Hidratación constante,Chinchero
+37,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Usar bloqueador,Chinchero
+23,Ecuador,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+48,Japón,Japonés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3400,Consulta médica,Chinchero
+30,Paraguay,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3700,Evitar alcohol,Chinchero
+42,Portugal,Portugués,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Usar protector solar,Chinchero
+20,Venezuela,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+45,China,Chino,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3400,Descanso previo,Chinchero
+26,Costa Rica,Español,Medio,4,Aventura,No,No,No,Sí,Sí,No,Sí,3800,Hidratación adecuada,Chinchero
+34,Suiza,Alemán,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Usar bloqueador,Chinchero
+25,Perú,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+47,Estados Unidos,Inglés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3400,Consulta médica,Chinchero
+32,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3700,Hidratación constante,Chinchero
+38,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3700,Usar protector solar,Chinchero
+22,Chile,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+49,Canadá,Inglés,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3400,Descanso previo,Chinchero
+28,Argentina,Español,Medio,5,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Hidratación adecuada,Chinchero
+36,Italia,Italiano,Alto,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,3600,Evitar alcohol,Chinchero
+24,Brasil,Portugués,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir mate de coca,Chinchero
+43,Alemania,Alemán,Alto,8,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3400,Consulta médica,Chinchero
+29,Colombia,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3700,Hidratación constante,Chinchero
+40,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Usar bloqueador,Chinchero
+21,Ecuador,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+46,Japón,Japonés,Alto,9,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3400,Descanso previo,Chinchero
+31,Paraguay,Español,Medio,5,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Hidratación adecuada,Chinchero
+39,Portugal,Portugués,Alto,7,Relajación,No,No,No,Sí,Sí,Sí,Sí,3500,Evitar alcohol,Chinchero
+23,Venezuela,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+44,China,Chino,Alto,8,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,3400,Consulta médica,Chinchero
+27,Costa Rica,Español,Medio,4,Aventura,No,No,No,Sí,Sí,No,Sí,3800,Hidratación adecuada,Chinchero
+35,Suiza,Alemán,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Usar protector solar,Chinchero
+26,Perú,Español,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+48,Estados Unidos,Inglés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3400,Consulta médica,Chinchero
+33,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3700,Hidratación constante,Chinchero
+37,Francia,Francés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,3700,Usar bloqueador,Chinchero
+22,Chile,Español,Económico,2,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+50,Canadá,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3400,Consulta médica,Chinchero
+30,Argentina,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,3700,Hidratación adecuada,Chinchero
+41,Italia,Italiano,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,3700,Usar protector solar,Chinchero
+25,Brasil,Portugués,Económico,3,Mochilero,No,No,No,No,Sí,No,Sí,3600,Consumir líquidos,Chinchero
+26,Perú,Español,Medio,4,Aventura,No,No,No,Sí,Sí,Sí,Sí,4200,Aclimatación previa,Camino Inca
+34,Estados Unidos,Inglés,Alto,7,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Hidratación constante,Camino Inca
+22,Argentina,Español,Económico,5,Mochilero,No,No,No,Sí,Sí,No,Sí,4100,Consumir líquidos,Camino Inca
+41,Canadá,Inglés,Alto,8,Aventura,No,No,No,Sí,Sí,Sí,Sí,4300,Descanso adecuado,Camino Inca
+28,Brasil,Portugués,Medio,6,Naturaleza,No,No,Sí,Sí,Sí,No,Sí,4200,Hidratación continua,Camino Inca
+37,Alemania,Alemán,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar protector solar,Camino Inca
+24,Chile,Español,Económico,4,Aventura,No,No,No,Sí,Sí,Sí,No,3900,Consumir mate de coca,Camino Inca
+33,Francia,Francés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Aclimatación obligatoria,Camino Inca
+29,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Descanso moderado,Camino Inca
+45,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Preparación física,Camino Inca
+21,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Hidratación básica,Camino Inca
+39,Japón,Japonés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Llevar snacks energéticos,Camino Inca
+30,España,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,4200,Hidratación constante,Camino Inca
+35,China,Chino,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Aclimatación previa,Camino Inca
+25,Perú,Español,Económico,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3900,Consumir agua,Camino Inca
+42,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4250,Descansar antes del trekking,Camino Inca
+31,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Hidratación continua,Camino Inca
+23,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Descansar correctamente,Camino Inca
+46,Suiza,Alemán,Alto,11,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4300,Preparación física,Camino Inca
+27,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Evitar comidas pesadas,Camino Inca
+35,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Hidratación y descanso,Camino Inca
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,Sí,No,Sí,3900,Consumir líquidos,Camino Inca
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Aclimatación obligatoria,Camino Inca
+28,Portugal,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Evitar alcohol,Camino Inca
+32,Israel,Hebreo,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Descanso previo,Camino Inca
+26,Uruguay,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Hidratación básica,Camino Inca
+40,Irlanda,Inglés,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,4250,Consumir agua frecuentemente,Camino Inca
+29,Sudáfrica,Inglés,Medio,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Usar bloqueador solar,Camino Inca
+34,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4000,Medicamentos básicos,Camino Inca
+31,Marruecos,Árabe,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,3900,Descanso moderado,Camino Inca
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Aclimatación y descanso,Camino Inca
+27,Indonesia,Indonesio,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4050,Hidratación permanente,Camino Inca
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Preparación ligera,Camino Inca
+22,Paraguay,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,3900,Consumir agua,Camino Inca
+45,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,Sí,Sí,Sí,4000,Consulta médica,Camino Inca
+30,Costa Rica,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,4200,Hidratación adecuada,Camino Inca
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Ropa cómoda,Camino Inca
+37,Rusia,Ruso,Alto,9,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4300,Aclimatación previa,Camino Inca
+28,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,Sí,No,Sí,3950,Consumir mate de coca,Camino Inca
+36,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Hidratación continua,Camino Inca
+23,Perú,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Descanso adecuado,Camino Inca
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,4000,Control médico,Camino Inca
+31,Tailandia,Tailandés,Medio,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Hidratación y descanso,Camino Inca
+35,Estados Unidos,Inglés,Alto,10,Aventura,No,No,No,Sí,Sí,Sí,Sí,4300,Preparación ligera,Camino Inca
+24,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,Sí,No,Sí,3900,Consumir líquidos,Camino Inca
+41,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Aclimatación previa,Camino Inca
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Hidratación constante,Camino Inca
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Ropa adecuada,Camino Inca
+29,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4050,Llevar medicamentos,Camino Inca
+38,India,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar ropa ligera,Camino Inca
+22,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Hidratación adecuada,Camino Inca
+44,Bélgica,Francés,Alto,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,4250,Control médico,Camino Inca
+24,Perú,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Aclimatación previa,Salkantay Trek
+31,Argentina,Español,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Hidratación constante,Salkantay Trek
+22,Chile,Español,Económico,6,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+45,Estados Unidos,Inglés,Alto,8,Aventura,Sí,No,No,Sí,Sí,No,Sí,4300,Consulta médica,Salkantay Trek
+28,Brasil,Portugués,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,4500,Usar bloqueador,Salkantay Trek
+39,Francia,Francés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4700,Hidratación adecuada,Salkantay Trek
+21,México,Español,Económico,6,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir mate de coca,Salkantay Trek
+50,Canadá,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,4200,Descanso constante,Salkantay Trek
+27,Colombia,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Hidratación adecuada,Salkantay Trek
+33,Italia,Italiano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Usar protector solar,Salkantay Trek
+20,Bolivia,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+44,Reino Unido,Inglés,Alto,8,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4300,Consulta médica,Salkantay Trek
+29,Uruguay,Español,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Evitar alcohol,Salkantay Trek
+37,Australia,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Hidratación constante,Salkantay Trek
+23,Ecuador,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+48,Japón,Japonés,Alto,10,Naturaleza,Sí,Sí,No,Sí,Sí,Sí,Sí,4200,Descanso constante,Salkantay Trek
+30,Paraguay,Español,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Hidratación adecuada,Salkantay Trek
+42,Portugal,Portugués,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Usar bloqueador,Salkantay Trek
+20,Venezuela,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+45,China,Chino,Alto,9,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4300,Consulta médica,Salkantay Trek
+26,Costa Rica,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Aclimatación previa,Salkantay Trek
+34,Suiza,Alemán,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Hidratación adecuada,Salkantay Trek
+25,Perú,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+47,Estados Unidos,Inglés,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,4200,Consulta médica,Salkantay Trek
+32,México,Español,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Hidratación constante,Salkantay Trek
+38,Francia,Francés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4700,Usar protector solar,Salkantay Trek
+22,Chile,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+49,Canadá,Inglés,Alto,10,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4300,Consulta médica,Salkantay Trek
+28,Argentina,Español,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Hidratación adecuada,Salkantay Trek
+36,Italia,Italiano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Usar bloqueador,Salkantay Trek
+24,Brasil,Portugués,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir mate de coca,Salkantay Trek
+43,Alemania,Alemán,Alto,9,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,4200,Consulta médica,Salkantay Trek
+29,Colombia,Español,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Evitar alcohol,Salkantay Trek
+40,Australia,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Hidratación constante,Salkantay Trek
+21,Ecuador,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+46,Japón,Japonés,Alto,9,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4300,Consulta médica,Salkantay Trek
+31,Paraguay,Español,Medio,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Usar protector solar,Salkantay Trek
+39,Portugal,Portugués,Alto,8,Relajación,No,No,No,Sí,Sí,Sí,Sí,4200,Descanso constante,Salkantay Trek
+23,Venezuela,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+44,China,Chino,Alto,9,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4300,Consulta médica,Salkantay Trek
+27,Costa Rica,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Hidratación adecuada,Salkantay Trek
+35,Suiza,Alemán,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Usar bloqueador,Salkantay Trek
+26,Perú,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+48,Estados Unidos,Inglés,Alto,10,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,4200,Consulta médica,Salkantay Trek
+33,México,Español,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Hidratación constante,Salkantay Trek
+37,Francia,Francés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4700,Usar protector solar,Salkantay Trek
+22,Chile,Español,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+50,Canadá,Inglés,Alto,10,Naturaleza,Sí,Sí,No,Sí,Sí,Sí,Sí,4300,Consulta médica,Salkantay Trek
+30,Argentina,Español,Medio,6,Aventura,No,No,No,Sí,Sí,No,Sí,4600,Aclimatación previa,Salkantay Trek
+41,Italia,Italiano,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4700,Usar protector solar,Salkantay Trek
+25,Brasil,Portugués,Económico,5,Mochilero,No,No,No,No,Sí,No,Sí,4800,Consumir líquidos,Salkantay Trek
+23,Perú,Español,Medio,4,Aventura,No,No,No,Sí,Sí,No,Sí,4300,Hidratación constante,Inca Jungle
+31,Argentina,Español,Alto,5,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4200,Usar bloqueador,Inca Jungle
+26,Chile,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+42,Estados Unidos,Inglés,Alto,6,Aventura,Sí,No,No,Sí,Sí,No,Sí,4000,Consulta médica,Inca Jungle
+29,Brasil,Portugués,Medio,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,4200,Aclimatación previa,Inca Jungle
+35,Francia,Francés,Alto,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Hidratación adecuada,Inca Jungle
+21,México,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir mate de coca,Inca Jungle
+48,Canadá,Inglés,Alto,7,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3900,Descanso constante,Inca Jungle
+27,Colombia,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Hidratación adecuada,Inca Jungle
+33,Italia,Italiano,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar protector solar,Inca Jungle
+20,Bolivia,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+44,Reino Unido,Inglés,Alto,6,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4000,Consulta médica,Inca Jungle
+28,Uruguay,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Evitar alcohol,Inca Jungle
+37,Australia,Inglés,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Hidratación constante,Inca Jungle
+24,Ecuador,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+46,Japón,Japonés,Alto,7,Naturaleza,Sí,Sí,No,Sí,Sí,Sí,Sí,3900,Descanso constante,Inca Jungle
+30,Paraguay,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Hidratación adecuada,Inca Jungle
+39,Portugal,Portugués,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar bloqueador,Inca Jungle
+22,Venezuela,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+45,China,Chino,Alto,7,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4000,Consulta médica,Inca Jungle
+26,Costa Rica,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Aclimatación previa,Inca Jungle
+34,Suiza,Alemán,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Hidratación adecuada,Inca Jungle
+25,Perú,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+47,Estados Unidos,Inglés,Alto,7,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3900,Consulta médica,Inca Jungle
+32,México,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Hidratación constante,Inca Jungle
+38,Francia,Francés,Alto,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Usar protector solar,Inca Jungle
+21,Chile,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+49,Canadá,Inglés,Alto,7,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4000,Consulta médica,Inca Jungle
+29,Argentina,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Hidratación adecuada,Inca Jungle
+36,Italia,Italiano,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar bloqueador,Inca Jungle
+24,Brasil,Portugués,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir mate de coca,Inca Jungle
+43,Alemania,Alemán,Alto,7,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3900,Consulta médica,Inca Jungle
+28,Colombia,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Evitar alcohol,Inca Jungle
+40,Australia,Inglés,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Hidratación constante,Inca Jungle
+22,Ecuador,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+46,Japón,Japonés,Alto,7,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4000,Consulta médica,Inca Jungle
+31,Paraguay,Español,Medio,5,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar protector solar,Inca Jungle
+39,Portugal,Portugués,Alto,6,Relajación,No,No,No,Sí,Sí,Sí,Sí,3900,Descanso constante,Inca Jungle
+23,Venezuela,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+44,China,Chino,Alto,7,Naturaleza,Sí,No,No,Sí,Sí,Sí,Sí,4000,Consulta médica,Inca Jungle
+27,Costa Rica,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Hidratación adecuada,Inca Jungle
+35,Suiza,Alemán,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar bloqueador,Inca Jungle
+26,Perú,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+48,Estados Unidos,Inglés,Alto,7,Relajación,Sí,Sí,No,Sí,Sí,Sí,Sí,3900,Consulta médica,Inca Jungle
+33,México,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Hidratación constante,Inca Jungle
+37,Francia,Francés,Alto,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Usar protector solar,Inca Jungle
+22,Chile,Español,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+50,Canadá,Inglés,Alto,7,Naturaleza,Sí,Sí,No,Sí,Sí,Sí,Sí,4000,Consulta médica,Inca Jungle
+30,Argentina,Español,Medio,5,Aventura,No,No,No,Sí,Sí,No,Sí,4200,Aclimatación previa,Inca Jungle
+41,Italia,Italiano,Alto,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar protector solar,Inca Jungle
+25,Brasil,Portugués,Económico,4,Mochilero,No,No,No,No,Sí,No,Sí,4300,Consumir líquidos,Inca Jungle
+27,Perú,Español,Medio,5,Aventura,No,No,No,Sí,Sí,Sí,Sí,4200,Aclimatación previa,Lares Trek
+35,Estados Unidos,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Hidratación constante,Lares Trek
+22,Argentina,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,4000,Consumir líquidos,Lares Trek
+41,Canadá,Inglés,Alto,9,Naturaleza,No,No,No,Sí,Sí,Sí,Sí,4300,Descanso adecuado,Lares Trek
+29,Brasil,Portugués,Medio,6,Aventura,No,No,Sí,Sí,Sí,No,Sí,4200,Hidratación continua,Lares Trek
+38,Alemania,Alemán,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar protector solar,Lares Trek
+24,Chile,Español,Económico,4,Cultural,No,No,No,Sí,Sí,Sí,No,3900,Consumir mate de coca,Lares Trek
+33,Francia,Francés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Aclimatación obligatoria,Lares Trek
+30,México,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Descanso moderado,Lares Trek
+45,Reino Unido,Inglés,Alto,10,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Preparación física,Lares Trek
+21,Colombia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Hidratación básica,Lares Trek
+39,Japón,Japonés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Llevar snacks energéticos,Lares Trek
+31,España,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,4200,Hidratación constante,Lares Trek
+36,China,Chino,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Aclimatación previa,Lares Trek
+25,Perú,Español,Económico,5,Naturaleza,No,No,No,Sí,Sí,No,Sí,3900,Consumir agua,Lares Trek
+42,Italia,Italiano,Alto,8,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4250,Descansar antes del trekking,Lares Trek
+32,Corea del Sur,Coreano,Alto,7,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Hidratación continua,Lares Trek
+23,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Descansar correctamente,Lares Trek
+46,Suiza,Alemán,Alto,11,Aventura,No,No,Sí,Sí,Sí,Sí,Sí,4300,Preparación física,Lares Trek
+28,Ecuador,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Evitar comidas pesadas,Lares Trek
+35,Países Bajos,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Hidratación y descanso,Lares Trek
+24,Venezuela,Español,Económico,4,Aventura,No,No,Sí,Sí,Sí,No,Sí,3900,Consumir líquidos,Lares Trek
+47,Noruega,Inglés,Alto,10,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Aclimatación obligatoria,Lares Trek
+28,Portugal,Portugués,Medio,6,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Evitar alcohol,Lares Trek
+32,Israel,Hebreo,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4300,Descanso previo,Lares Trek
+26,Uruguay,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Hidratación básica,Lares Trek
+40,Irlanda,Inglés,Alto,9,Aventura,No,No,No,Sí,Sí,Sí,Sí,4250,Consumir agua frecuentemente,Lares Trek
+29,Sudáfrica,Inglés,Medio,6,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Usar bloqueador solar,Lares Trek
+34,Filipinas,Inglés,Medio,5,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4000,Medicamentos básicos,Lares Trek
+31,Marruecos,Árabe,Económico,4,Aventura,No,No,No,Sí,Sí,No,Sí,3900,Descanso moderado,Lares Trek
+43,Suecia,Inglés,Alto,11,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Aclimatación y descanso,Lares Trek
+27,Indonesia,Indonesio,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4050,Hidratación permanente,Lares Trek
+38,Dinamarca,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Preparación ligera,Lares Trek
+22,Paraguay,Español,Económico,4,Cultural,No,No,No,Sí,Sí,No,Sí,3900,Consumir agua,Lares Trek
+45,Austria,Alemán,Alto,10,Fotografía,Sí,No,Sí,Sí,Sí,Sí,Sí,4000,Consulta médica,Lares Trek
+30,Costa Rica,Español,Medio,6,Aventura,No,No,No,Sí,Sí,Sí,Sí,4200,Hidratación adecuada,Lares Trek
+25,Nueva Zelanda,Inglés,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4250,Ropa cómoda,Lares Trek
+37,Rusia,Ruso,Alto,9,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4300,Aclimatación previa,Lares Trek
+28,Perú,Español,Medio,5,Gastronómico,No,No,No,Sí,Sí,No,Sí,3950,Consumir mate de coca,Lares Trek
+36,Finlandia,Inglés,Alto,8,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Hidratación continua,Lares Trek
+23,Perú,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Descanso adecuado,Lares Trek
+48,Hungría,Húngaro,Alto,11,Cultural,Sí,No,No,Sí,Sí,Sí,Sí,4000,Control médico,Lares Trek
+31,Tailandia,Tailandés,Medio,6,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Hidratación y descanso,Lares Trek
+35,Estados Unidos,Inglés,Alto,10,Aventura,No,No,No,Sí,Sí,Sí,Sí,4300,Preparación ligera,Lares Trek
+24,Perú,Español,Económico,4,Gastronómico,No,No,No,Sí,Sí,No,Sí,3900,Consumir líquidos,Lares Trek
+41,Canadá,Inglés,Alto,9,Fotografía,No,No,Sí,Sí,Sí,Sí,Sí,4250,Aclimatación previa,Lares Trek
+27,España,Español,Medio,5,Cultural,No,No,No,Sí,Sí,Sí,Sí,4000,Hidratación constante,Lares Trek
+42,Brasil,Portugués,Alto,8,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Ropa adecuada,Lares Trek
+29,Turquía,Turco,Medio,6,Cultural,No,No,Sí,Sí,Sí,Sí,Sí,4050,Llevar medicamentos,Lares Trek
+38,India,Inglés,Alto,9,Fotografía,No,No,No,Sí,Sí,Sí,Sí,4300,Usar ropa ligera,Lares Trek
+22,Bolivia,Español,Económico,4,Mochilero,No,No,No,Sí,Sí,No,Sí,3900,Hidratación adecuada,Lares Trek
+44,Bélgica,Francés,Alto,8,Cultural,No,No,No,Sí,Sí,Sí,Sí,4250,Control médico,Lares Trek

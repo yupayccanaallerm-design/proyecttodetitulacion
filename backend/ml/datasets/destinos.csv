@@ -1,0 +1,96 @@
+Destino,Categoría,Subcategoría,Altitud_msnm,Dificultad,Requiere_caminata,Riesgo_altura,Apto_niños,Apto_adulto_mayor
+Machu Picchu,Arqueológico,Fotografía / Cultural,2430,Medio,Sí,Bajo,Sí,Sí
+Sacsayhuamán,Arqueológico,Cultural / Fotografía,3700,Bajo,Sí,Medio,Sí,Sí
+Qorikancha,Cultural,Cultural / Religioso,3399,Bajo,No,Bajo,Sí,Sí
+Qenqo,Arqueológico,Cultural / Místico,3580,Bajo,Sí,Medio,Sí,Sí
+Tambomachay,Arqueológico,Cultural / Naturaleza,3700,Bajo,Sí,Medio,Sí,Sí
+Puca Pucara,Arqueológico,Cultural,3700,Bajo,Sí,Medio,Sí,Sí
+Ollantaytambo,Arqueológico,Cultural / Fotografía,2792,Medio,Sí,Bajo,Sí,Sí
+Pisac,Arqueológico,Cultural / Mercado,2972,Medio,Sí,Bajo,Sí,Sí
+Moray,Arqueológico,Fotografía / Agrícola,3500,Medio,Sí,Medio,Sí,Sí
+Choquequirao,Arqueológico,Aventura / Trekking,3030,Alto,Sí,Alto,No,No
+Tipón,Arqueológico,Ingeniería hidráulica / Cultural,3560,Bajo,Sí,Bajo,Sí,Sí
+Pikillacta,Arqueológico,Mochilero,3250,Medio,Sí,Bajo,Sí,Sí
+Raqchi,Arqueológico,Cultural / Religioso,3450,Bajo,Sí,Bajo,Sí,Sí
+Montaña 7 Colores (Vinicunca),Natural,Fotografía / Aventura,5200,Alto,Sí,Alto,No,No
+Laguna Humantay,Natural,Fotografía / Naturaleza,4200,Medio,Sí,Alto,No,No
+Valle Rojo,Natural,Fotografía / Aventura,5000,Alto,Sí,Alto,No,No
+Nevado Salkantay,Natural,Trekking / Aventura,6271,Alto,Sí,Alto,No,No
+Abra Málaga,Natural,Paisajístico / Fotografía,4300,Medio,Sí,Medio,Sí,No
+Bosque de Huasao,Natural/Turístico,Fotografía / Temático,3400,Bajo,No,Bajo,Sí,Sí
+Laguna Huaypo,Natural,Fotografía / Relajación,3700,Bajo,No,Medio,Sí,Sí
+Laguna Piuray,Natural,Relajación / Paisaje,3700,Bajo,No,Medio,Sí,Sí
+Cusco Centro Histórico,Cultural,Fotografía / Urbano,3399,Bajo,No,Bajo,Sí,Sí
+Plaza de Armas Cusco,Cultural,Fotografía / Urbano,3399,Bajo,No,Bajo,Sí,Sí
+San Blas,Cultural,Fotografía / Artístico,3399,Bajo,Sí,Bajo,Sí,Sí
+Mercado San Pedro,Cultural,Gastronómico / Cultural,3399,Bajo,No,Bajo,Sí,Sí
+Catedral Cusco,Cultural,Religioso / Fotografía,3399,Bajo,No,Bajo,Sí,Sí
+12 Ángulos,Cultural,Fotografía / Histórico,3399,Bajo,Sí,Bajo,Sí,Sí
+Museo Inka,Cultural,Histórico,3399,Bajo,No,Bajo,Sí,Sí
+Valle Sagrado,Cultural,Cultural / Paisajístico,2800,Medio,Sí,Bajo,Sí,Sí
+Maras,Cultural,Fotografía / Cultural,3380,Bajo,Sí,Bajo,Sí,Sí
+Salineras de Maras,Natural,Fotografía / Cultural,3380,Bajo,Sí,Bajo,Sí,Sí
+Chinchero,Cultural,Textil / Fotografía,3762,Bajo,Sí,Bajo,Sí,Sí
+Urubamba,Pueblo,Relajación / Cultural,2871,Bajo,No,Bajo,Sí,Sí
+Yucay,Pueblo,Relajación,2850,Bajo,No,Bajo,Sí,Sí
+Camino Inca,Trekking,Aventura / Histórico,4200,Alto,Sí,Alto,No,No
+Salkantay Trek,Trekking,Aventura extrema,6271,Alto,Sí,Alto,No,No
+Lares Trek,Trekking,Cultural / Aventura,4600,Alto,Sí,Alto,No,No
+Inca Jungle,Trekking,Aventura / Deportes,4350,Medio,Sí,Medio,Sí,No
+Waqrapukara,Arqueológico,Aventura / Fotografía,4300,Alto,Sí,Alto,No,No
+Ausangate Trek,Trekking,Aventura extrema,6384,Alto,Sí,Alto,No,No
+Cristo Blanco,Cultural,Fotografía / Mirador,3600,Bajo,Sí,Bajo,Sí,Sí
+Huchuy Qosqo,Arqueológico,Trekking / Cultural,3600,Medio,Sí,Medio,Sí,Sí
+Qoricocha,Natural,Aventura / Fotografía,4300,Medio,Sí,Medio,Sí,No
+Perolniyoc,Natural,Fotografía / Trekking,3600,Medio,Sí,Medio,Sí,Sí
+Poc Poc,Natural,Relajación / Naturaleza,3200,Bajo,Sí,Bajo,Sí,Sí
+Sirenaqcha,Natural,Fotografía / Aventura,3800,Medio,Sí,Medio,Sí,Sí
+Sayhuite,Arqueológico,Cultural / Ingeniería,2500,Bajo,Sí,Bajo,Sí,Sí
+Tarawasi,Arqueológico,Cultural,2700,Bajo,Sí,Bajo,Sí,Sí
+Killarumiyoc,Arqueológico,Cultural / Místico,3500,Bajo,Sí,Bajo,Sí,Sí
+Ancasmarca,Arqueológico,Fotografía / Cultural,3700,Medio,Sí,Medio,Sí,Sí
+Barrio de San Blas,Cultural,Artístico / Fotografía,3399,Bajo,Sí,Bajo,Sí,Sí
+Museo de Arte Precolombino,Cultural,Histórico,3399,Bajo,No,Bajo,Sí,Sí
+Museo Machu Picchu Casa Concha,Cultural,Histórico,3399,Bajo,No,Bajo,Sí,Sí
+Museo Histórico Regional,Cultural,Histórico,3399,Bajo,No,Bajo,Sí,Sí
+Museo de Arte Contemporáneo,Cultural,Artístico,3399,Bajo,No,Bajo,Sí,Sí
+Museo del Chocolate Cusco,Cultural,Gastronómico,3399,Bajo,No,Bajo,Sí,Sí
+Museo Qorikancha,Cultural,Religioso / Histórico,3399,Bajo,No,Bajo,Sí,Sí
+Museo de Sitio Qenqo,Cultural,Arqueológico,3580,Bajo,Sí,Bajo,Sí,Sí
+Museo de Sitio Sacsayhuamán,Cultural,Arqueológico,3700,Bajo,Sí,Bajo,Sí,Sí
+Centro de Textiles Tradicionales,Cultural,Textil / Cultural,3399,Bajo,No,Bajo,Sí,Sí
+Museo de Plantas Sagradas,Cultural,Místico / Cultural,3399,Bajo,No,Bajo,Sí,Sí
+Museo del Pisco,Cultural,Gastronómico,3399,Bajo,No,Bajo,Sí,Sí
+Museo de Arte Popular,Cultural,Artístico,3399,Bajo,No,Bajo,Sí,Sí
+Museo Arqueológico UNSAAC,Cultural,Histórico,3399,Bajo,No,Bajo,Sí,Sí
+Museo de Historia Natural,Cultural,Educativo,3399,Bajo,No,Bajo,Sí,Sí
+Palcoyo,Natural,Fotografía / Aventura,4900,Medio,Sí,Medio,Sí,No
+Puente Q’eswachaka,Cultural,Aventura / Fotografía,3700,Medio,Sí,Medio,Sí,Sí
+Nevado Ausangate,Natural,Trekking / Aventura extrema,6384,Alto,Sí,Alto,No,No
+Laguna Sibinacocha,Natural,Aventura / Fotografía,4860,Alto,Sí,Alto,No,No
+Inti Punku,Cultural,Trekking / Fotografía,2730,Medio,Sí,Medio,Sí,Sí
+Andahuaylillas,Cultural,Religioso / Arte,3120,Bajo,No,Bajo,Sí,Sí
+Checacupe,Cultural,Fotografía,3450,Bajo,Sí,Bajo,Sí,Sí
+Calca,Pueblo,Relajación,2920,Bajo,No,Bajo,Sí,Sí
+Lamay,Pueblo,Relajación,2940,Bajo,No,Bajo,Sí,Sí
+Coya,Pueblo,Relajación,2950,Bajo,No,Bajo,Sí,Sí
+Aguas Calientes,Pueblo,Relajación,2040,Bajo,Sí,Bajo,Sí,Sí
+Hidroeléctrica,Natural,Trekking,1800,Medio,Sí,Bajo,Sí,Sí
+Soraypampa,Natural,Trekking,3900,Medio,Sí,Alto,No,Sí
+Nevado Verónica,Natural,Aventura extrema,5682,Alto,Sí,Alto,No,No
+Laguna Pomacanchi,Natural,Relajación,3660,Bajo,No,Bajo,Sí,Sí
+Laguna Urcos,Natural,Relajación,3150,Bajo,No,Bajo,Sí,Sí
+Laguna Ausangatecocha,Natural,Trekking / Aventura,4650,Alto,Sí,Alto,No,No
+Cordillera de Vilcanota,Natural,Trekking,6000,Alto,Sí,Alto,No,No
+Inkilltambo,Arqueológico,Cultural / Fotografía,3600,Medio,Sí,Medio,Sí,Sí
+Puma Marka,Arqueológico,Cultural,3500,Medio,Sí,Medio,Sí,Sí
+Rumiwasi,Arqueológico,Cultural,3400,Medio,Sí,Medio,Sí,Sí
+Mauk’allaqta,Arqueológico,Cultural / Fotografía,3800,Medio,Sí,Medio,Sí,Sí
+San Sebastián,Urbano,Cultural,3400,Bajo,No,Bajo,Sí,Sí
+San Jerónimo,Urbano,Cultural,3300,Bajo,No,Bajo,Sí,Sí
+Saylla,Gastronómico,Comida,3200,Bajo,No,Bajo,Sí,Sí
+Oropesa,Gastronómico,Comida / Tradición,3200,Bajo,No,Bajo,Sí,Sí
+Misminay,Vivencial,Turismo rural,3700,Medio,Sí,Medio,Sí,Sí
+Patacancha,Vivencial,Cultura viva,3800,Medio,Sí,Alto,Sí,Sí
+Huilloc,Vivencial,Cultura viva,3750,Medio,Sí,Alto,Sí,Sí
+Observatorio Astronómico Cusco,Científico,Fotografía / Ciencia,3400,Bajo,No,Bajo,Sí,Sí
