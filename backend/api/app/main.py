@@ -1,0 +1,60 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from .routes.recomendacion import router as recomendacion_router
+from .routes.chatbot import router as chatbot_router
+from .routes.vision import router as vision_router
+import os
+
+# ===== CONFIGURACIÓN DE ENTORNO (ANTES DE IMPORTS DE MODELOS) =====
+# Suprimir warnings de TensorFlow
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # 0=all, 1=no INFO, 2=no WARNING, 3=no ERROR
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
+# Deshabilitar telemetría de ChromaDB
+os.environ['ANONYMIZED_TELEMETRY'] = 'False'
+
+# Opcional: Suprimir warnings de oneDNN
+os.environ['TF_CPP_MIN_VLOG_LEVEL'] = '3'
+
+# ===== CONFIGURACIÓN DE PATHS =====
+BASE_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "..")
+)
+
+# ===== INICIALIZACIÓN DE FASTAPI =====
+app = FastAPI(
+    title="Travel Assistant API",
+    description="API para asistente de viajes con recomendaciones, chatbot y visión",
+    version="1.0.0"
+)
+
+# ===== MIDDLEWARE CORS =====
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        # Si tienes frontend en otro puerto o dominio, agrégalo aquí
+    ],
+    allow_credentials=False,  # Si necesitas cookies/tokens, cámbialo a True
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ===== ROUTERS =====
+app.include_router(recomendacion_router)
+app.include_router(chatbot_router)
+app.include_router(vision_router)
+
+# ===== ENDPOINT DE PRUEBA =====
+@app.get("/")
+async def root():
+    return {
+        "message": "Travel Assistant API",
+        "version": "1.0.0",
+        "status": "running"
+    }
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
