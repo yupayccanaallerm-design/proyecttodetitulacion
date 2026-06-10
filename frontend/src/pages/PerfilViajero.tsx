@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import {
   Camera, Sparkles, Image, MapPin, Clock, Sun, Star,
   AlertCircle, Compass, Navigation, ShieldCheck, Heart,
-  Mountain, Landmark, Trees, Award, ChevronRight
+  Mountain, Landmark, Trees, Award, ChevronRight, MessageSquare
 } from "lucide-react";
 
 // ------------------ Base de conocimiento turistico ------------------
@@ -178,13 +178,22 @@ const PLACES: Record<string, PlaceInfo> = {
   }
 };
 
-// ------------------ API ------------------
+// ------------------ API (usando el endpoint integrado del chatbot) ------------------
 const API = {
   vision: {
+    // Endpoint integrado: chatbot/recognize (RAG + Visión combinados)
     predict: (file: File) => {
       const form = new FormData();
       form.append("file", file);
-      return fetch("/vision/predict", { method: "POST", body: form }).then(r => r.json());
+      // Intentar primero el endpoint integrado del chatbot
+      return fetch("/chatbot/recognize", { method: "POST", body: form })
+        .then(r => r.json())
+        .catch(() => {
+          // Fallback al endpoint directo de visión
+          const form2 = new FormData();
+          form2.append("file", file);
+          return fetch("/vision/predict", { method: "POST", body: form2 }).then(r => r.json());
+        });
     },
   },
 };
@@ -196,10 +205,12 @@ interface IVisionResult {
   confidence: number;
   top_predictions: { clase: string; score: number }[];
   error?: string;
+  identified?: boolean;
+  suggestions?: string[];
 }
 
 // ------------------ Componente Principal ------------------
-export default function PerfilViajero() {
+export default function PerfilViajero({ onPlaceDetected }: { onPlaceDetected?: (place: string) => void }) {
   return (
     <div className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 selection:bg-indigo-100">
       <div className="max-w-6xl mx-auto px-4 py-12">
@@ -219,7 +230,7 @@ export default function PerfilViajero() {
           </p>
         </section>
 
-        <VisionTab />
+        <VisionTab onPlaceDetected={onPlaceDetected} />
       </div>
     </div>
   );
@@ -228,7 +239,7 @@ export default function PerfilViajero() {
 // ================================================================
 // VISOR TURISTICO
 // ================================================================
-function VisionTab() {
+function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => void }) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [result, setResult] = useState<IVisionResult | null>(null);
@@ -322,7 +333,9 @@ function VisionTab() {
     setLoading(true); setError(null); setResult(null);
     try {
       const data = await API.vision.predict(selectedFile);
-      if (data.success) setResult(data);
+      if (data.success) {
+        setResult(data);
+      }
       else setError(data.error || "Error al procesar la imagen");
     } catch {
       setError("No se pudo conectar con el servicio.");
@@ -543,6 +556,16 @@ function VisionTab() {
                         </div>
                       </div>
                     </div>
+
+                    {/* Botón para preguntar al chatbot */}
+                    {onPlaceDetected && (
+                      <button 
+                        onClick={() => onPlaceDetected(placeInfo.nombre)}
+                        className="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 mb-3"
+                      >
+                        <MessageSquare size={14} /> Preguntar al Chatbot sobre {placeInfo.nombre}
+                      </button>
+                    )}
 
                     {/* Tour recomendado */}
                     {!showTour ? (

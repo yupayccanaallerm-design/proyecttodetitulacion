@@ -17,6 +17,7 @@ function App() {
   const [visible, setVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openChat, setOpenChat] = useState(false);
+  const [chatContext, setChatContext] = useState<string>("");
 
   const { i18n, t } = useTranslation();
 
@@ -76,7 +77,10 @@ function App() {
 
               {/* Botón Chat IA */}
               <button
-                onClick={() => setOpenChat(!openChat)}
+                onClick={() => {
+                  setOpenChat(!openChat);
+                  if (!openChat) setChatContext(""); // Limpiar contexto al abrir manualmente
+                }}
                 className={`p-2 rounded-xl transition-all duration-300 cursor-pointer border ${openChat ? "bg-slate-900 text-white border-slate-900" : "bg-white text-indigo-600 border-slate-200 hover:bg-slate-50"}`}
               >
                 <MessageSquare size={18} />
@@ -109,7 +113,7 @@ function App() {
               <button onClick={() => setOpenChat(false)} className="text-slate-400 hover:text-white cursor-pointer text-xs">✕</button>
             </div>
             <div className="flex-1 overflow-auto bg-slate-50/50">
-              <ChatBot />
+              <ChatBot initialContext={openChat && chatContext ? chatContext : ""} />
             </div>
           </div>
         )}
@@ -120,8 +124,8 @@ function App() {
             <Route path="/" element={<Home visible={visible} />} />
             <Route path="/tours" element={<Tours />} />
             <Route path="/reservas" element={<Reservas />} />
-            <Route path="/planificador" element={<Planificador />} />
-            <Route path="/perfilviajero" element={<PerfilViajero />} />
+            <Route path="/planificador" element={<Planificador onConsultarChat={(destino) => { setChatContext(destino); setOpenChat(true); }} />} />
+            <Route path="/perfilviajero" element={<PerfilViajero onPlaceDetected={(place) => { setChatContext(place); setOpenChat(true); }} />} />
           </Routes>
         </main>
 

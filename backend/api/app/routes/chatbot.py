@@ -24,9 +24,10 @@ BASE_DIR = os.path.dirname(
         os.path.dirname(os.path.abspath(__file__))
     )
 )
+PROJECT_ROOT = os.path.dirname(BASE_DIR)
 
-KB_PATH = os.path.join(BASE_DIR, "kb_store")
-DOCS_PATH = os.path.join(BASE_DIR, "docs")
+KB_PATH = os.path.join(PROJECT_ROOT, "chatbot", "kb_store")
+DOCS_PATH = os.path.join(PROJECT_ROOT, "chatbot", "docs")
 DATA_PATH = os.path.join(BASE_DIR, "data")
 DB_PATH = os.path.join(DATA_PATH, "memory.sqlite")
 
@@ -37,7 +38,7 @@ OLLAMA_URL = os.environ.get(
 
 OLLAMA_MODEL = os.environ.get(
     "OLLAMA_MODEL",
-    "llama3.2"  # Cambiado a llama3.2 que tienes instalado
+    "llama3"  # Modelo instalado localmente (ollama list -> llama3:latest)
 )
 
 TOP_K_DEFAULT = int(
@@ -55,7 +56,7 @@ LLM_TEMP = float(
 client = chromadb.PersistentClient(path=KB_PATH)
 
 kb = client.get_or_create_collection(
-    "travel_assistant_kb",
+    "turismo_cusco_kb",
     metadata={"hnsw:space": "cosine"}
 )
 
@@ -249,10 +250,11 @@ def call_ollama(prompt: str) -> Optional[str]:
                 "prompt": prompt,
                 "stream": False,
                 "options": {
-                    "temperature": LLM_TEMP
+                    "temperature": LLM_TEMP,
+                    "num_predict": 220,
                 }
             },
-            timeout=90
+            timeout=240
         )
 
         if response.status_code != 200:
@@ -287,19 +289,20 @@ def query_kb(query: str, top_k: int):
 # PROMPT
 # ==================================================
 
-def build_prompt(query, docs, metas):
+def build_prompt(query, docs, metas, user_facts: list = None):
 
     context = []
-
     for d, m in zip(docs, metas):
         source = m.get("source", "?")
         page = m.get("page", "?")
-
-        context.append(
-            f"{d}\nFuente: {source} Página: {page}"
-        )
+        context.append(f"{d}\nFuente: {source} Página: {page}")
 
     ctx = "\n\n".join(context)
+
+    memory_section = ""
+    if user_facts:
+        facts_text = "\n".join(f"- {f}" for f in user_facts)
+        memory_section = f"\nDatos recordados del usuario:\n{facts_text}\n"
 
     return f"""Eres Travel Assistant, un experto en turismo de Cusco, Perú.
 
@@ -317,7 +320,8 @@ Instrucciones importantes:
 2. Si no encuentras la información en el contexto, indica que no está disponible
 3. Responde en español de manera amigable y útil
 4. Sé conciso pero informativo
-
+5. Si hay datos recordados del usuario, personaliza tu respuesta considerándolos
+{memory_section}
 Pregunta del usuario: {query}
 
 Contexto de la base de conocimiento:
@@ -365,7 +369,7 @@ def ask(body: AskReq):
 
     # Para consultas normales, usar RAG
     docs, metas = query_kb(body.query, body.top_k)
-    
+
     # Si no hay documentos en la KB, usar respuesta genérica
     if not docs or len(docs) == 0:
         return {
@@ -374,7 +378,8 @@ def ask(body: AskReq):
             "sources": []
         }
 
-    prompt = build_prompt(body.query, docs, metas)
+    user_facts = get_recent_facts(body.user_id, limit=5)
+    prompt = build_prompt(body.query, docs, metas, user_facts=user_facts)
     answer = call_ollama(prompt)
 
     if not answer:
@@ -399,6 +404,35 @@ def save_episode(data: MemEpisode):
     """Guarda un episodio en la memoria del usuario"""
     add_episode(data.user_id, data.title, data.details, data.timestamp)
     return {"ok": True, "message": "Episodio guardado en memoria"}
+
+
+@router.post("/recognize")
+async def recognize(file: UploadFile = File(...)):
+    """Identifica un lugar turístico en una imagen y retorna información del lugar."""
+    try:
+        from PIL import Image as PILImage
+        from .vision import model as vision_model, clases, preprocess_image
+
+        if vision_model is None:
+            return {"success": False, "error": "Modelo de visión no disponible"}
+
+        image = PILImage.open(file.file)
+        img = preprocess_image(image)
+        prediction = vision_model.predict(img, verbose=0)[0]
+        idx = int(np.argmax(prediction))
+        confidence = float(prediction[idx])
+
+        return {
+            "success": True,
+            "clase": clases[idx] if idx < len(clases) else "desconocido",
+            "confidence": round(confidence * 100, 2),
+            "top_predictions": [
+                {"clase": clases[i] if i < len(clases) else "unknown", "score": float(prediction[i])}
+                for i in np.argsort(prediction)[::-1][:5]
+            ],
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
 
 
 @router.post("/upload")

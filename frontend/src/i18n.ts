@@ -20,6 +20,7 @@ i18n.use(initReactI18next).init({
         tour: "Tour",
         personas: "Personas",
         precio: "Precio",
+        total: "Total",
         reserva_exitosa: "Reserva realizada correctamente",
         tour_default: "Tour Personalizado"
       }
@@ -41,6 +42,7 @@ i18n.use(initReactI18next).init({
         tour: "Tour",
         personas: "People",
         precio: "Price",
+        total: "Total",
         reserva_exitosa: "Booking completed",
         tour_default: "Custom Tour"
       }

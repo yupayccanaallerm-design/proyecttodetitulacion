@@ -1,0 +1,36 @@
+# ============================================================
+# Travel Assistant — Backend (API + Chatbot + ML + Visión)
+# Python 3.10 recomendado
+# ============================================================
+
+# --- API y servidor ---
+fastapi==0.110.0
+uvicorn==0.29.0
+pydantic==2.6.4
+
+# --- Vector store (RAG) ---
+chromadb==0.5.5
+
+# --- Embeddings multilingüe ---
+sentence-transformers==2.7.0
+
+# --- Modelo de lenguaje local (llamadas a Ollama) ---
+requests==2.32.3
+
+# --- PDFs (carga y extracción de texto) ---
+pypdf==4.3.1
+
+# --- Machine Learning (recomendador de destinos) ---
+scikit-learn==1.4.2
+pandas==2.2.2
+joblib==1.4.2
+
+# --- Visión IA (reconocedor de imágenes) ---
+tensorflow==2.15.1
+pillow==10.3.0
+
+# --- Utilitarios numéricos ---
+numpy==1.26.4
+
+# --- Generación de PDFs (itinerarios) ---
+reportlab==4.1.0

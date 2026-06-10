@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, MapPin, Star, ShieldCheck, Sparkles } from "lucide-react";
+import { Search, MapPin, Star, ShieldCheck, Sparkles, Clock, Users as UsersIcon } from "lucide-react";
 
 export default function Tours() {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ export default function Tours() {
   const [selectedProvince, setSelectedProvince] = useState("Todas");
   const [difficulty, setDifficulty] = useState("Todas");
 
-  const provinces = ["Todas", "Cusco", "Urubamba", "Canchis", "Anta", "Calca"];
+  const provinces = ["Todas", "Cusco", "Urubamba", "Canchis", "Anta", "Calca", "La Convención"];
   const difficulties = ["Todas", "Fácil", "Moderada", "Alta"];
 
   const [tours] = useState([
@@ -18,36 +18,72 @@ export default function Tours() {
       province: "Urubamba",
       desc: "Experiencia completa con guía certificado, traslados en tren y tickets de ingreso incluidos.",
       price: 120,
+      duration: "1 día",
+      groupSize: "Hasta 12",
       difficulty: "Moderada",
       img: "https://images.unsplash.com/photo-1587595431973-160d0d94add1",
-      rating: 4.9
+      rating: 4.9,
+      tags: ["Patrimonio Mundial", "Tren incluido", "Guía certificado"]
     },
     {
       name: "Valle Sagrado",
       province: "Urubamba",
       desc: "Descubre la magia ancestral de Pisac, Ollantaytambo y sumérgete en la cultura viva local.",
       price: 80,
+      duration: "1 día",
+      groupSize: "Hasta 16",
       difficulty: "Fácil",
       img: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2",
-      rating: 4.8
+      rating: 4.8,
+      tags: ["Cultura viva", "Mercados locales", "Almuerzo incluido"]
     },
     {
       name: "Montaña de 7 Colores",
       province: "Canchis",
       desc: "Un fascinante reto físico a través de paisajes altoandinos situados a más de 5,000 msnm.",
       price: 60,
+      duration: "1 día",
+      groupSize: "Hasta 14",
       difficulty: "Alta",
       img: "https://images.unsplash.com/photo-1614918236617-6d1e09d6efb0",
-      rating: 4.7
+      rating: 4.7,
+      tags: ["Trekking", "Paisaje andino", "Alta montaña"]
     },
     {
       name: "Salineras de Maras",
       province: "Urubamba",
       desc: "Camina junto a cientos de pozas de sal ancestrales y terrazas agrícolas únicas en el mundo.",
       price: 45,
+      duration: "Medio día",
+      groupSize: "Hasta 16",
       difficulty: "Fácil",
       img: "https://images.unsplash.com/photo-1590050751117-238cb0ffaa28",
-      rating: 4.6
+      rating: 4.6,
+      tags: ["Fotografía", "Agricultura ancestral", "Corta duración"]
+    },
+    {
+      name: "City Tour Cusco",
+      province: "Cusco",
+      desc: "Recorre Sacsayhuamán, Qorikancha y el Centro Histórico con un guía especializado en historia inca y colonial.",
+      price: 35,
+      duration: "Medio día",
+      groupSize: "Hasta 20",
+      difficulty: "Fácil",
+      img: "https://images.unsplash.com/photo-1531065208531-4036c0dba3ca",
+      rating: 4.7,
+      tags: ["Historia", "Centro histórico", "Ideal primer día"]
+    },
+    {
+      name: "Laguna Humantay",
+      province: "La Convención",
+      desc: "Una caminata exigente hacia una laguna glaciar de aguas turquesas a más de 4,200 msnm.",
+      price: 55,
+      duration: "1 día",
+      groupSize: "Hasta 10",
+      difficulty: "Alta",
+      img: "https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c",
+      rating: 4.8,
+      tags: ["Trekking", "Naturaleza", "Alta exigencia física"]
     }
   ]);
 
@@ -63,7 +99,7 @@ export default function Tours() {
   // 🤖 RECOMENDACIÓN INTELIGENTE (IA BASE)
   const recommended = tours
     .filter(t => t.difficulty === "Fácil")
-    .slice(0, 2);
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800 pb-20 p-4 md:p-12">
@@ -129,15 +165,23 @@ export default function Tours() {
       {/* 🤖 SECCIÓN RECOMENDADOS POR IA */}
       {searchTerm === "" && selectedProvince === "Todas" && (
         <div className="max-w-6xl mx-auto mb-14 bg-gradient-to-r from-indigo-50/40 via-purple-50/20 to-transparent p-6 rounded-2xl border border-indigo-100/60">
-          <div className="flex items-center gap-2 text-indigo-700 font-medium text-sm mb-4">
-            <Sparkles size={16} className="text-indigo-600 animate-pulse" />
-            <span>Recomendados para ti según tu perfil</span>
+          <div className="flex items-center justify-between gap-2 mb-4">
+            <div className="flex items-center gap-2 text-indigo-700 font-medium text-sm">
+              <Sparkles size={16} className="text-indigo-600 animate-pulse" />
+              <span>Recomendados para empezar</span>
+            </div>
+            <button
+              onClick={() => navigate("/planificador")}
+              className="text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 transition-colors underline-offset-2 hover:underline cursor-pointer"
+            >
+              Personalizar con el Planificador IA →
+            </button>
           </div>
 
           <div className="flex flex-wrap gap-3">
             {recommended.map((r, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 onClick={() => navigate(`/reservas?tour=${r.name}&price=${r.price}`)}
                 className="bg-white hover:border-indigo-300 border border-slate-200/80 px-4 py-2.5 rounded-xl text-xs font-medium text-slate-700 shadow-xs cursor-pointer flex items-center gap-3 transition-all"
               >
@@ -186,9 +230,28 @@ export default function Tours() {
                   </h3>
 
                   {/* Descripción corta */}
-                  <p className="text-xs text-slate-400 font-light leading-relaxed mb-6">
+                  <p className="text-xs text-slate-400 font-light leading-relaxed mb-4">
                     {tour.desc}
                   </p>
+
+                  {/* Duración y tamaño de grupo */}
+                  <div className="flex items-center gap-4 text-[11px] text-slate-500 font-medium mb-4">
+                    <span className="flex items-center gap-1">
+                      <Clock size={12} className="text-indigo-500" /> {tour.duration}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <UsersIcon size={12} className="text-indigo-500" /> {tour.groupSize}
+                    </span>
+                  </div>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-2">
+                    {tour.tags.map((tag, ti) => (
+                      <span key={ti} className="text-[10px] font-medium text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Footer de Tarjeta: Precios e Interacción */}

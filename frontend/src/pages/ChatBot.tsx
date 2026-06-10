@@ -4,19 +4,25 @@ import { Send, Sparkles, X, AlertCircle, Database, Brain } from "lucide-react";
 interface Message {
   from: "user" | "bot";
   text: string;
-  sources?: Array<{ source: string; page: string }>;
+  sources?: Array<{ source: string; page?: string; chunk?: string }>;
+  moduleData?: {
+    type: string;
+    top?: Array<{ destino: string; score: number }>;
+  };
 }
 
 interface ChatBotProps {
   isFloating?: boolean;
   onClose?: () => void;
   userId?: string;
+  initialContext?: string;  // Contexto de lugar detectado desde PerfilViajero
 }
 
 export default function ChatBot({ 
   isFloating = false, 
   onClose,
-  userId = "usuario" 
+  userId = "usuario",
+  initialContext 
 }: ChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([
     { 
@@ -30,6 +36,48 @@ export default function ChatBot({
   const [currentIntent, setCurrentIntent] = useState<string>("");
   const [modelInfo, setModelInfo] = useState<string>("Cargando...");
   const chatEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll al último mensaje
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
+
+  // Cuando se recibe un contexto (lugar detectado desde PerfilViajero), enviar automáticamente
+  useEffect(() => {
+    if (initialContext) {
+      const question = `Cuéntame sobre ${initialContext}`;
+      setInput(question);
+      // Pequeño delay para que el input se actualice antes de enviar
+      setTimeout(() => {
+        setInput("");
+        setIsTyping(true);
+        setError(null);
+        const userMsg = { from: "user" as const, text: question };
+        setMessages(prev => [...prev, userMsg]);
+
+        fetch("/chatbot/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ user_id: userId, query: question, top_k: 2 }),
+        })
+          .then(r => r.json())
+          .then(data => {
+            setMessages(prev => [...prev, {
+              from: "bot",
+              text: data.answer,
+              sources: data.sources?.length > 0 ? data.sources : undefined,
+            }]);
+          })
+          .catch(() => {
+            setMessages(prev => [...prev, {
+              from: "bot",
+              text: "🔌 No pude conectarme al servidor para consultar sobre este lugar.",
+            }]);
+          })
+          .finally(() => setIsTyping(false));
+      }, 100);
+    }
+  }, [initialContext]);
 
   // Obtener configuración del backend al iniciar
   useEffect(() => {
@@ -72,7 +120,7 @@ export default function ChatBot({
         body: JSON.stringify({
           user_id: userId,
           query: userText,
-          top_k: 3
+          top_k: 2
         }),
       });
 
@@ -87,13 +135,19 @@ export default function ChatBot({
       const botMsg: Message = { 
         from: "bot", 
         text: data.answer,
-        sources: data.sources && data.sources.length > 0 ? data.sources : undefined
+        sources: data.sources && data.sources.length > 0 ? data.sources : undefined,
+        moduleData: data.module_data || undefined
       };
       
       setMessages(prev => [...prev, botMsg]);
 
       if (data.intent === "memorizar") {
         await saveToMemory(userText);
+      }
+
+      // Si hay datos de recomendaciones, navegar al planificador
+      if (data.module_data?.type === "recomendacion" && data.module_data?.top) {
+        // Mostrar recomendaciones destacadas
       }
 
     } catch (err) {
@@ -167,6 +221,8 @@ export default function ChatBot({
               {currentIntent === "saludo" && "👋 Saludo"}
               {currentIntent === "consulta" && "🔍 Consulta"}
               {currentIntent === "memorizar" && "🧠 Aprendiendo"}
+              {currentIntent === "recomendar" && "🎯 Recomendar"}
+              {currentIntent === "imagen" && "📸 Visión"}
             </span>
           )}
           {isFloating && onClose && (
@@ -203,12 +259,28 @@ export default function ChatBot({
                   <Database size={10} className="inline mr-1" />
                   Fuentes: {msg.sources.map((s, idx) => (
                     <span key={idx} className="ml-1">
-                      {s.source}{s.page !== "?" && ` (p.${s.page})`}
+                      {s.source}{s.chunk !== "?" && ` (chunk ${s.chunk})`}
                       {idx < msg.sources!.length - 1 && ","}
                     </span>
                   ))}
                 </div>
               )}
+
+              {msg.moduleData?.top && (
+                <div className="mt-2 pt-2 border-t border-slate-100">
+                  <p className="text-[10px] font-bold text-indigo-600 mb-1">🎯 Recomendaciones:</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {msg.moduleData.top.map((rec, idx) => (
+                      <span key={idx} className="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full font-medium">
+                        {idx+1}. {rec.destino}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-[10px] text-slate-400 mt-1">
+                    💡 Usa el Planificador de Viajes para más detalles.
+                  </p>
+                </div>
+                )}
             </div>
           </div>
         ))}
@@ -219,7 +291,7 @@ export default function ChatBot({
               <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
               <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
               <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-              <span className="text-xs text-slate-400 ml-1">Consultando base de conocimiento...</span>
+              <span className="text-xs text-slate-400 ml-1">Consultando base de conocimiento... (puede tardar 1-2 min)</span>
             </div>
           </div>
         )}
@@ -261,7 +333,7 @@ export default function ChatBot({
         </div>
         
         <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
-          {["Machu Picchu", "Valle Sagrado", "Montaña 7 Colores", "Precios", "Clima", "Hoteles"].map(sug => (
+          {["Machu Picchu", "Recomiéndame", "Valle Sagrado", "Montaña 7 Colores", "Identifica una foto", "Hoteles"].map(sug => (
             <button
               key={sug}
               onClick={() => setInput(sug)}

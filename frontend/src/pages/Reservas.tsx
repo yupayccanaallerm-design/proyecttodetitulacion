@@ -10,7 +10,9 @@ import {
   CreditCard,
   Activity,
   ShieldCheck,
-  ChevronLeft
+  ChevronLeft,
+  CheckCircle2,
+  Home
 } from "lucide-react";
 
 export default function Reservas() {
@@ -32,6 +34,9 @@ export default function Reservas() {
     condicionSalud: "",
   });
 
+  const [submitted, setSubmitted] = useState(false);
+  const [bookingCode, setBookingCode] = useState("");
+
   const total = precioBase * form.personas;
 
   const handleChange = (
@@ -43,17 +48,77 @@ export default function Reservas() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
-    alert(t("reserva_exitosa"));
+    setBookingCode(`TUM-${Date.now().toString(36).toUpperCase()}`);
+    setSubmitted(true);
   };
 
   // Clases compartidas para los inputs (Estilo Premium Clean)
   const inputStyle =
     "w-full bg-slate-50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 p-3 pl-11 rounded-xl text-slate-800 font-normal transition-all outline-none text-sm";
 
+  if (submitted) {
+    return (
+      <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800 flex items-center justify-center p-4">
+        <div className="max-w-lg w-full bg-white rounded-3xl border border-slate-100 shadow-sm p-8 md:p-10 text-center animate-in fade-in zoom-in-95 duration-300">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-emerald-50 flex items-center justify-center">
+            <CheckCircle2 className="text-emerald-500" size={36} />
+          </div>
+          <span className="text-xs font-semibold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full">
+            Reserva confirmada
+          </span>
+          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-slate-900 mt-4 mb-2">
+            {t("reserva_exitosa")}
+          </h1>
+          <p className="text-sm text-slate-400 font-light mb-8">
+            Te enviaremos los detalles a <span className="font-medium text-slate-600">{form.email}</span>. Guarda tu código de reserva.
+          </p>
+
+          <div className="bg-slate-50 border border-dashed border-slate-200 rounded-2xl p-5 mb-8">
+            <p className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider mb-1">Código de reserva</p>
+            <p className="text-2xl font-bold tracking-widest text-indigo-600">{bookingCode}</p>
+          </div>
+
+          <div className="space-y-2.5 text-sm text-left bg-slate-50 rounded-2xl p-5 mb-8">
+            <div className="flex justify-between text-slate-500">
+              <span className="font-light">{t("tour")}</span>
+              <span className="font-medium text-slate-800">{tourName}</span>
+            </div>
+            <div className="flex justify-between text-slate-500">
+              <span className="font-light">{t("personas")}</span>
+              <span className="font-medium text-slate-800">{form.personas}</span>
+            </div>
+            <div className="flex justify-between text-slate-500">
+              <span className="font-light">Fecha</span>
+              <span className="font-medium text-slate-800">{form.fechaTour || "—"}</span>
+            </div>
+            <div className="flex justify-between text-slate-500 pt-2.5 border-t border-slate-200">
+              <span className="font-light">{t("total")}</span>
+              <span className="font-semibold text-indigo-600">${total} USD</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={() => navigate("/tours")}
+              className="flex-1 bg-white border border-slate-200 text-slate-600 py-3 rounded-xl font-medium text-sm hover:bg-slate-50 transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              Ver más tours
+            </button>
+            <button
+              onClick={() => navigate("/")}
+              className="flex-1 bg-indigo-600 text-white py-3 rounded-xl font-medium text-sm hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Home size={16} /> Ir al inicio
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800 pb-20 p-4 md:p-6">
-      
+
       {/* BOTÓN VOLVER SUTIL */}
       <div className="max-w-6xl mx-auto mb-6">
         <button

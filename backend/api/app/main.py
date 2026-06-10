@@ -34,7 +34,10 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-        # Si tienes frontend en otro puerto o dominio, agrégalo aquí
+        "http://localhost:4173",
+        "http://127.0.0.1:4173",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
     ],
     allow_credentials=False,  # Si necesitas cookies/tokens, cámbialo a True
     allow_methods=["*"],
