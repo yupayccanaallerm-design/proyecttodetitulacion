@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 import { 
   Map, Menu, X, Globe, ArrowRight, MessageSquare, ShieldCheck, Sparkles, 
-  Compass, Heart, Leaf, Star, Award, Users 
+  Compass, Leaf, Star, Award
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -12,14 +12,24 @@ import Reservas from "./pages/Reservas";
 import ChatBot from "./pages/ChatBot";
 import Planificador from "./pages/Recomendador";
 import PerfilViajero from "./pages/PerfilViajero";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminReservas from "./pages/admin/AdminReservas";
+import AdminTours from "./pages/admin/AdminTours";
+import AdminPaquetes from "./pages/admin/AdminPaquetes";
+import DetalleTour from "./pages/DetalleTour";
+import Login from "./pages/Login";
+import GestiónUsuarios from "./pages/admin/GestionUsuarios";
 
-function App() {
+
+
+function AppContent() {
   const [visible, setVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openChat, setOpenChat] = useState(false);
   const [chatContext, setChatContext] = useState<string>("");
 
   const { i18n, t } = useTranslation();
+  const navigate = useNavigate(); // 👈 Hook para la redirección del doble clic
 
   useEffect(() => {
     setVisible(true);
@@ -30,15 +40,19 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800 flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800 flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
-        {/* 🔝 NAVBAR PREMIUM */}
-        <nav className="fixed top-0 w-full z-[100] px-4 md:px-8 py-4">
-          <div className="max-w-7xl mx-auto flex justify-between items-center bg-white/80 backdrop-blur-md border border-slate-200/50 rounded-2xl px-6 py-3 shadow-xs">
+      {/* 🔝 NAVBAR PREMIUM CLIENTE */}
+      <nav className="fixed top-0 w-full z-[100] px-4 md:px-8 py-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center bg-white/80 backdrop-blur-md border border-slate-200/50 rounded-2xl px-6 py-3 shadow-xs">
 
-            {/* LOGO CORPORATIVO */}
-            <Link to="/" className="flex items-center gap-2.5 group">
+          {/* 🔐 LOGO CORPORATIVO CON ACCESO SECRETO POR DOBLE CLIC */}
+          <div 
+            onDoubleClick={() => navigate("/login")} // ← CAMBIADO DE "/admin" A "/login"
+            className="flex items-center gap-2.5 group cursor-pointer select-none"
+            title="Doble clic para acceso operativo de administración"
+          >
+            <Link to="/" className="flex items-center gap-2.5">
               <div className="bg-indigo-600 p-2 rounded-xl text-white group-hover:bg-indigo-700 transition-colors">
                 <Map size={18} />
               </div>
@@ -46,102 +60,124 @@ function App() {
                 GRUPO TUMPERU<span className="text-indigo-600 font-bold">.</span>
               </span>
             </Link>
+          </div>
 
-            {/* ENLACES DESKTOP */}
-            <div className="hidden md:flex gap-8 text-xs font-medium uppercase tracking-wider text-slate-600">
-              <Link to="/" className="hover:text-indigo-600 transition-colors">Inicio</Link>
-              <Link to="/tours" className="hover:text-indigo-600 transition-colors">Tours</Link>
-              <Link to="/reservas" className="hover:text-indigo-600 transition-colors">Reservas</Link>
-              <Link to="/planificador" className="hover:text-indigo-600 transition-colors">Planificador</Link>
-              <Link to="/perfilviajero" className="hover:text-indigo-600 transition-colors">Perfil Viajero</Link>
-            </div>
+          {/* ENLACES DESKTOP (PÚBLICOS Y LIMPIOS) */}
+          <div className="hidden md:flex gap-8 text-xs font-medium uppercase tracking-wider text-slate-600">
+            <Link to="/" className="hover:text-indigo-600 transition-colors">Inicio</Link>
+            <Link to="/tours" className="hover:text-indigo-600 transition-colors">Tours</Link>
+            <Link to="/reservas" className="hover:text-indigo-600 transition-colors">Reservas</Link>
+            <Link to="/planificador" className="hover:text-indigo-600 transition-colors">Planificador</Link>
+            <Link to="/perfilviajero" className="hover:text-indigo-600 transition-colors">Perfil Viajero</Link>
+          </div>
 
-            {/* SECCIÓN DERECHA */}
-            <div className="flex items-center gap-4">
-              {/* Idiomas */}
-              <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl text-[11px] font-medium border border-slate-200/40">
-                <Globe size={12} className="text-slate-400 ml-1.5 hidden sm:inline" />
-                <button
-                  onClick={() => changeLang("es")}
-                  className={`px-2 py-0.5 rounded-md transition-colors cursor-pointer ${i18n.language === "es" ? "bg-white text-indigo-600 shadow-xs font-semibold" : "text-slate-500 hover:text-slate-900"}`}
-                >
-                  ES
-                </button>
-                <button
-                  onClick={() => changeLang("en")}
-                  className={`px-2 py-0.5 rounded-md transition-colors cursor-pointer ${i18n.language === "en" ? "bg-white text-indigo-600 shadow-xs font-semibold" : "text-slate-500 hover:text-slate-900"}`}
-                >
-                  EN
-                </button>
-              </div>
-
-              {/* Botón Chat IA */}
+          {/* SECCIÓN DERECHA */}
+          <div className="flex items-center gap-4">
+            {/* Idiomas */}
+            <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl text-[11px] font-medium border border-slate-200/40">
+              <Globe size={12} className="text-slate-400 ml-1.5 hidden sm:inline" />
               <button
-                onClick={() => {
-                  setOpenChat(!openChat);
-                  if (!openChat) setChatContext(""); // Limpiar contexto al abrir manualmente
-                }}
-                className={`p-2 rounded-xl transition-all duration-300 cursor-pointer border ${openChat ? "bg-slate-900 text-white border-slate-900" : "bg-white text-indigo-600 border-slate-200 hover:bg-slate-50"}`}
+                onClick={() => changeLang("es")}
+                className={`px-2 py-0.5 rounded-md transition-colors cursor-pointer ${i18n.language === "es" ? "bg-white text-indigo-600 shadow-xs font-semibold" : "text-slate-500 hover:text-slate-900"}`}
               >
-                <MessageSquare size={18} />
+                ES
               </button>
-
-              {/* Mobile Menu Trigger */}
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-slate-600 p-1">
-                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              <button
+                onClick={() => changeLang("en")}
+                className={`px-2 py-0.5 rounded-md transition-colors cursor-pointer ${i18n.language === "en" ? "bg-white text-indigo-600 shadow-xs font-semibold" : "text-slate-500 hover:text-slate-900"}`}
+              >
+                EN
               </button>
             </div>
+
+            {/* Botón Chat IA */}
+            <button
+              onClick={() => {
+                setOpenChat(!openChat);
+                if (!openChat) setChatContext(""); 
+              }}
+              className={`p-2 rounded-xl transition-all duration-300 cursor-pointer border ${openChat ? "bg-slate-900 text-white border-slate-900" : "bg-white text-indigo-600 border-slate-200 hover:bg-slate-50"}`}
+            >
+              <MessageSquare size={18} />
+            </button>
+
+            {/* Mobile Menu Trigger */}
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-slate-600 p-1">
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
-        </nav>
+        </div>
+      </nav>
 
-        {/* MENU MOBILE */}
-        {isMenuOpen && (
-          <div className="fixed top-[76px] left-4 right-4 bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-slate-200 shadow-lg z-50 flex flex-col gap-4 text-center text-sm font-medium">
-            <Link to="/" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Inicio</Link>
-            <Link to="/tours" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Tours</Link>
-            <Link to="/reservas" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Reservas</Link>
-            <Link to="/planificador" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Planificador</Link>
-            <Link to="/perfilviajero" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Perfil Viajero</Link>
+      {/* MENU MOBILE CLIENTE */}
+      {isMenuOpen && (
+        <div className="fixed top-[76px] left-4 right-4 bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-slate-200 shadow-lg z-50 flex flex-col gap-4 text-center text-sm font-medium">
+          <Link to="/" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Inicio</Link>
+          <Link to="/tours" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Tours</Link>
+          <Link to="/reservas" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Reservas</Link>
+          <Link to="/planificador" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Planificador</Link>
+          <Link to="/perfilviajero" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Perfil Viajero</Link>
+        </div>
+      )}
+
+      {/* CHAT FLOTANTE */}
+      {openChat && (
+        <div className="fixed bottom-24 right-4 md:right-8 w-[350px] h-[500px] bg-white border border-slate-200 rounded-2xl shadow-xl z-[200] overflow-hidden flex flex-col">
+          <div className="flex justify-between items-center px-4 py-3.5 bg-gradient-to-r from-slate-900 to-indigo-950 text-white">
+            <span className="text-xs font-medium tracking-wide">Concierge Virtual SGEV</span>
+            <button onClick={() => setOpenChat(false)} className="text-slate-400 hover:text-white cursor-pointer text-xs">✕</button>
           </div>
-        )}
-
-        {/* CHAT FLOTANTE */}
-        {openChat && (
-          <div className="fixed bottom-24 right-4 md:right-8 w-[350px] h-[500px] bg-white border border-slate-200 rounded-2xl shadow-xl z-[200] overflow-hidden flex flex-col">
-            <div className="flex justify-between items-center px-4 py-3.5 bg-gradient-to-r from-slate-900 to-indigo-950 text-white">
-              <span className="text-xs font-medium tracking-wide">Concierge Virtual SGEV</span>
-              <button onClick={() => setOpenChat(false)} className="text-slate-400 hover:text-white cursor-pointer text-xs">✕</button>
-            </div>
-            <div className="flex-1 overflow-auto bg-slate-50/50">
-              <ChatBot initialContext={openChat && chatContext ? chatContext : ""} />
-            </div>
+          <div className="flex-1 overflow-auto bg-slate-50/50">
+            <ChatBot initialContext={openChat && chatContext ? chatContext : ""} />
           </div>
-        )}
+        </div>
+      )}
 
-        {/* NAVEGACIÓN DE VISTAS */}
-        <main className="flex-grow pt-20">
-          <Routes>
-            <Route path="/" element={<Home visible={visible} />} />
-            <Route path="/tours" element={<Tours />} />
-            <Route path="/reservas" element={<Reservas />} />
-            <Route path="/planificador" element={<Planificador onConsultarChat={(destino) => { setChatContext(destino); setOpenChat(true); }} />} />
-            <Route path="/perfilviajero" element={<PerfilViajero onPlaceDetected={(place) => { setChatContext(place); setOpenChat(true); }} />} />
-          </Routes>
-        </main>
+      {/* NAVEGACIÓN DE VISTAS */}
+      <main className="flex-grow pt-20">
+        <Routes>
+          {/* Rutas Públicas de la Experiencia del Viajero */}
+          <Route path="/" element={<Home visible={visible} />} />
+          <Route path="/tours" element={<Tours />} />
+          <Route path="/reservas" element={<Reservas />} />
+          <Route path="/planificador" element={<Planificador onConsultarChat={(destino) => { setChatContext(destino); setOpenChat(true); }} />} />
+          <Route path="/perfilviajero" element={<PerfilViajero onPlaceDetected={(place) => { setChatContext(place); setOpenChat(true); }} />} />
+          <Route path="/detalle/:id" element={<DetalleTour />} />
+          <Route path="/login" element={<Login />} />
+          {/* 🔐 CONTROL INTERNO (ADMINISTRACIÓN ANIDADA) */}
+          <Route path="/admin" element={<AdminDashboard />}>
+            <Route index element={<AdminReservas />} /> 
+            <Route path="reservas" element={<AdminReservas />} />
+            <Route path="tours" element={<AdminTours />} />
+            <Route path="paquetes" element={<AdminPaquetes />} /> 
+            <Route path="usuarios" element={<GestiónUsuarios />} />  
+          </Route>
+        </Routes>
+      </main>
 
-        {/* FOOTER */}
-        <footer className="py-8 bg-white border-t border-slate-200/60 text-center text-slate-400 text-[11px] font-light">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p>© 2026 GGRUPO TUMPERU. Todos los derechos reservados.</p>
+      {/* FOOTER */}
+      <footer className="py-8 bg-white border-t border-slate-200/60 text-center text-slate-400 text-[11px] font-light">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p>© 2026 GRUPO TUMPERU. Todos los derechos reservados.</p>
+          <div className="flex items-center gap-4">
             <p className="font-normal text-slate-500">SGEV — Gestión Turística Inteligente</p>
           </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+// 📦 CONTENEDOR ENVOLTORIO OBLIGATORIO PARA EL HOOK useNavigate
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
 
-/* 🏠 VISTA HOME COMPLETA (CARÁTULA INTACTA + SECCIÓN NOSOTROS) */
+/* 🏠 VISTA HOME COMPLETA */
 function Home({ visible }: { visible: boolean }) {
   const acronimo = [
     { letra: "G", texto: "Grandes experiencias diseñadas para ti." },
@@ -157,8 +193,7 @@ function Home({ visible }: { visible: boolean }) {
 
   return (
     <div className="space-y-20">
-
-      {/* 1. CARÁTULA PRINCIPAL (HERO) — SE CONSERVA SU FILTRO Y ESTILO */}
+      {/* 1. CARÁTULA PRINCIPAL (HERO) */}
       <div className="px-4 md:px-8 pt-4">
         <header className="min-h-[85vh] flex items-center justify-center text-center relative rounded-3xl overflow-hidden shadow-xs">
           <div
@@ -186,7 +221,7 @@ function Home({ visible }: { visible: boolean }) {
         </header>
       </div>
 
-      {/* 2. SECCIÓN CONÓCENOS & HISTORIA (MÉTRICA PREMIUM) */}
+      {/* 2. SECCIÓN CONÓCENOS & HISTORIA */}
       <section className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
           <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
@@ -204,7 +239,6 @@ function Home({ visible }: { visible: boolean }) {
             </p>
           </div>
 
-          {/* Misión y Visión de Impacto Corto */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs">
               <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wide mb-2 flex items-center gap-2">
@@ -225,7 +259,6 @@ function Home({ visible }: { visible: boolean }) {
           </div>
         </div>
 
-        {/* INTERFAZ DEL SIGNIFICADO DE MARCA INTERACTIVO */}
         <div className="bg-gradient-to-b from-slate-900 to-indigo-950 p-6 md:p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
           <div className="absolute -right-10 -bottom-10 opacity-5 text-white">
             <Map size={240} />
@@ -247,9 +280,8 @@ function Home({ visible }: { visible: boolean }) {
           </div>
         </div>
       </section>
-      
 
-      {/* 3. SECCIÓN VALORES CORPORATIVOS CLAN */}
+      {/* 3. SECCIÓN VALORES CORPORATIVOS */}
       <section className="bg-white py-16 border-y border-slate-100">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
@@ -262,25 +294,21 @@ function Home({ visible }: { visible: boolean }) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Autenticidad */}
             <div className="p-5 rounded-2xl hover:bg-slate-50 transition-colors flex flex-col gap-3">
               <Award className="text-indigo-600" size={24} />
               <h3 className="text-sm font-semibold text-slate-800">Autenticidad</h3>
               <p className="text-xs text-slate-400 font-light leading-relaxed">Experiencias culturales genuinas, resaltando la verdadera riqueza histórica de cada destino.</p>
             </div>
-            {/* Sostenibilidad */}
             <div className="p-5 rounded-2xl hover:bg-slate-50 transition-colors flex flex-col gap-3">
               <Leaf className="text-emerald-600" size={24} />
               <h3 className="text-sm font-semibold text-slate-800">Sostenibilidad</h3>
               <p className="text-xs text-slate-400 font-light leading-relaxed">Respeto absoluto por la conservación del patrimonio natural y el soporte a economías locales.</p>
             </div>
-            {/* Confianza */}
             <div className="p-5 rounded-2xl hover:bg-slate-50 transition-colors flex flex-col gap-3">
               <ShieldCheck className="text-indigo-600" size={24} />
               <h3 className="text-sm font-semibold text-slate-800">Confianza</h3>
               <p className="text-xs text-slate-400 font-light leading-relaxed">Garantía de un servicio transparente y completamente seguro en cada fase de tu travesía.</p>
             </div>
-            {/* Exclusividad */}
             <div className="p-5 rounded-2xl hover:bg-slate-50 transition-colors flex flex-col gap-3">
               <Star className="text-amber-500" size={24} />
               <h3 className="text-sm font-semibold text-slate-800">Exclusividad</h3>
@@ -289,9 +317,6 @@ function Home({ visible }: { visible: boolean }) {
           </div>
         </div>
       </section>
-
     </div>
   );
 }
-
-export default App;
