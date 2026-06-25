@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { createPortal } from "react-dom";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import {
   Plane, MapPin, Heart, Camera, Users, Mountain,
-  Utensils, Compass, Trees, Landmark, Loader2, Footprints, MessageCircle
+  Utensils, Compass, Trees, Landmark, Loader2, Footprints, 
+  MessageCircle, Plus, Sparkles, ChevronDown, ChevronUp,
+  Clock, DollarSign, Award, Info, RefreshCw, X, Star,
+  TrendingUp, Check, Calendar, Sun, Cloud
 } from "lucide-react";
 import MapaDestinos from "../components/MapaDestinos";
+import { useItinerario } from "../contexts/ItinerarioContext";
+import { AgregarDestinoModal } from "../components/AgregarDestinoModal";
 
-// Inicialización de seguridad para silenciar advertencias de idioma en la consola
+// Inicialización de i18n
 if (!i18n.isInitialized) {
   i18n.use(initReactI18next).init({
     resources: {},
@@ -20,53 +26,192 @@ if (!i18n.isInitialized) {
 interface Destino {
   destino: string;
   score?: number;
+  descripcion?: string;
+  imagen?: string;
+  duracion_sugerida?: string;
+  nivel_dificultad?: string;
 }
 
 interface RecomendadorProps {
   onConsultarChat?: (destino: string) => void;
 }
 
+const PRESETS_KEY = 'recomendador_preferencias';
+const RESULTADOS_KEY = 'recomendador_resultados';
+
+// 🆕 Información adicional de destinos
+const INFO_DESTINOS: Record<string, any> = {
+  "machupicchu": {
+    emoji: "🏛️",
+    color: "from-amber-500 to-orange-600",
+    duracion: "2-3 días",
+    dificultad: "Moderada",
+    mejor_epoca: "Mayo - Septiembre",
+    tipo: "Arqueológico"
+  },
+  "sacsayhuaman": {
+    emoji: "🏗️",
+    color: "from-indigo-500 to-purple-600",
+    duracion: "Medio día",
+    dificultad: "Baja",
+    mejor_epoca: "Todo el año",
+    tipo: "Arqueológico"
+  },
+  "qorikancha": {
+    emoji: "✨",
+    color: "from-yellow-400 to-amber-600",
+    duracion: "2-3 horas",
+    dificultad: "Baja",
+    mejor_epoca: "Todo el año",
+    tipo: "Templo/Museo"
+  },
+  "moray": {
+    emoji: "🌾",
+    color: "from-emerald-400 to-teal-600",
+    duracion: "2-3 horas",
+    dificultad: "Baja",
+    mejor_epoca: "Marzo - Octubre",
+    tipo: "Arqueológico"
+  },
+  "salineras": {
+    emoji: "🧂",
+    color: "from-sky-400 to-blue-600",
+    duracion: "2 horas",
+    dificultad: "Baja",
+    mejor_epoca: "Todo el año",
+    tipo: "Natural"
+  },
+  "tipon": {
+    emoji: "💧",
+    color: "from-cyan-400 to-blue-600",
+    duracion: "2-3 horas",
+    dificultad: "Baja",
+    mejor_epoca: "Todo el año",
+    tipo: "Arqueológico"
+  },
+  "7colores": {
+    emoji: "🌈",
+    color: "from-pink-400 to-purple-600",
+    duracion: "1 día",
+    dificultad: "Alta",
+    mejor_epoca: "Mayo - Septiembre",
+    tipo: "Natural"
+  },
+  "laguna_huamantay": {
+    emoji: "🏞️",
+    color: "from-teal-400 to-emerald-600",
+    duracion: "1 día",
+    dificultad: "Alta",
+    mejor_epoca: "Abril - Octubre",
+    tipo: "Natural"
+  }
+};
+
 export default function RecomendadorModerno({ onConsultarChat }: RecomendadorProps = {}) {
   const [loading, setLoading] = useState(false);
-  const [resultado, setResultado] = useState<{ top: Destino[] } | null>(null);
+  const [resultado, setResultado] = useState<{ top: Destino[] } | null>(() => {
+    // 🆕 Cargar resultados guardados
+    const saved = localStorage.getItem(RESULTADOS_KEY);
+    return saved ? JSON.parse(saved) : null;
+  });
   const [error, setError] = useState("");
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [selectedDestino, setSelectedDestino] = useState<{nombre: string, tipo: string, tour: string} | null>(null);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(!resultado);
+  const [destinoSeleccionado, setDestinoSeleccionado] = useState<string | null>(null);
+  
+  const { agregarDestino } = useItinerario();
 
-  const [formulario, setFormulario] = useState({
-    Edad: 25,
-    "País / Procedencia": "Perú",
-    Idioma: "Español",
-    Presupuesto: "Medio", // "Bajo", "Medio", "Alto"
-    "Días de viaje": 5,
-    "Tipo de viaje": "Cultural",
-    "Problemas respiratorios": "No",
-    "Movilidad reducida": "No",
-    Alergias: "No",
-    "Apto para adulto mayor": "Sí",
-    "Apto para niños": "No",
-    Comida: "Sí",
-    Naturaleza: "Sí",
-    Historia: "Sí",
-    Fotografía: "Sí",
-    Trekking: "Sí",
-    "Nivel de dificultad": "Medio", // "Bajo", "Medio", "Alto"
-    "Requiere caminata": "Sí",
-    "Altura máxima tolerada": 3500,
-    "Recomendación médica": "No",
-    "Tipo de transporte": "Bus",
-    "Tour recomendado": "Full Day",
-    "Riesgo por altura": "Medio",
+  type FormularioType = Record<string, any>;
+
+  const [formulario, setFormulario] = useState<FormularioType>(() => {
+    const saved = localStorage.getItem(PRESETS_KEY);
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        // Si hay error, usar valores por defecto
+      }
+    }
+    return {
+      Edad: 25,
+      "País / Procedencia": "Perú",
+      Idioma: "Español",
+      Presupuesto: "Medio",
+      "Días de viaje": 5,
+      "Tipo de viaje": "Cultural",
+      "Problemas respiratorios": "No",
+      "Movilidad reducida": "No",
+      Alergias: "No",
+      "Apto para adulto mayor": "Sí",
+      "Apto para niños": "No",
+      Comida: "Sí",
+      Naturaleza: "Sí",
+      Historia: "Sí",
+      Fotografía: "Sí",
+      Trekking: "Sí",
+      "Nivel de dificultad": "Medio",
+      "Requiere caminata": "Sí",
+      "Altura máxima tolerada": 3500,
+      "Recomendación médica": "No",
+      "Tipo de transporte": "Bus",
+      "Tour recomendado": "Full Day",
+      "Riesgo por altura": "Medio",
+    };
   });
 
-  const handleChange = (name: string, value: any) => {
+  useEffect(() => {
+    localStorage.setItem(PRESETS_KEY, JSON.stringify(formulario));
+  }, [formulario]);
+
+  // 🆕 Guardar resultados cuando cambian
+  useEffect(() => {
+    if (resultado) {
+      localStorage.setItem(RESULTADOS_KEY, JSON.stringify(resultado));
+    }
+  }, [resultado]);
+
+  const handleChange = useCallback((name: string, value: any) => {
     setFormulario((prev) => ({ ...prev, [name]: value }));
-  };
+  }, []);
+
+  const resetFormulario = useCallback(() => {
+    setFormulario({
+      Edad: 25,
+      "País / Procedencia": "Perú",
+      Idioma: "Español",
+      Presupuesto: "Medio",
+      "Días de viaje": 5,
+      "Tipo de viaje": "Cultural",
+      "Problemas respiratorios": "No",
+      "Movilidad reducida": "No",
+      Alergias: "No",
+      "Apto para adulto mayor": "Sí",
+      "Apto para niños": "No",
+      Comida: "Sí",
+      Naturaleza: "Sí",
+      Historia: "Sí",
+      Fotografía: "Sí",
+      Trekking: "Sí",
+      "Nivel de dificultad": "Medio",
+      "Requiere caminata": "Sí",
+      "Altura máxima tolerada": 3500,
+      "Recomendación médica": "No",
+      "Tipo de transporte": "Bus",
+      "Tour recomendado": "Full Day",
+      "Riesgo por altura": "Medio",
+    });
+    setResultado(null);
+    localStorage.removeItem(RESULTADOS_KEY);
+  }, []);
 
   const enviarDatos = async () => {
     setLoading(true);
     setError("");
     setResultado(null);
+    setIsFirstLoad(false);
     
-    // --- MAPEO DE TEXTO A NÚMERO EXCLUSIVO PARA EL MODELO IA DE PYTHON ---
     const mapeoDificultad: Record<string, number> = { "Bajo": 0, "Medio": 1, "Alto": 2 };
     const mapeoPresupuesto: Record<string, number> = { "Bajo": 0, "Medio": 1, "Alto": 2 };
     const mapeoSiNo: Record<string, number> = { "No": 0, "Sí": 1 };
@@ -89,20 +234,24 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
     };
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
       const response = await fetch("/recomendar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(datosFormateados), // Enviamos la estructura numérica limpia
+        body: JSON.stringify(datosFormateados),
+        signal: controller.signal,
       });
 
-      if (!response.ok) throw new Error("Error en la respuesta del servidor");
+      clearTimeout(timeoutId);
+
+      if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`);
       
       const data = await response.json();
-      console.log("Datos crudos recibidos del Backend:", data);
 
       let listaExtraida: any[] = [];
 
-      // Extractor flexible de listas en el JSON de respuesta
       if (Array.isArray(data)) {
         listaExtraida = data;
       } else if (data && typeof data === 'object') {
@@ -115,58 +264,184 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
       }
 
       if (listaExtraida.length > 0) {
-        const formateado = listaExtraida.map(item => {
-          if (typeof item === 'string') return { destino: item };
-          const nombre = item.destino || item.nombre || item.lugar || Object.values(item).find(v => typeof v === 'string');
-          return { destino: String(nombre || "Destino sugerido") };
+        const formateado = listaExtraida.slice(0, 5).map((item, index) => {
+          let nombre = '';
+          if (typeof item === 'string') {
+            nombre = item;
+          } else {
+            nombre = item.destino || item.nombre || item.lugar || Object.values(item).find(v => typeof v === 'string') || '';
+          }
+          
+          const nombreLower = String(nombre).toLowerCase().replace(/ /g, '_').replace(/[áéíóú]/g, (c) => "aeiou"["áéíóú".indexOf(c)]);
+          const info = INFO_DESTINOS[nombreLower] || INFO_DESTINOS[String(nombre).toLowerCase().replace(/ /g, '_')] || {};
+          
+          return { 
+            destino: String(nombre || "Destino sugerido"),
+            score: item.score ?? (1 - (index * 0.1)),
+            descripcion: item.descripcion || item.desc || info.descripcion || "",
+            duracion_sugerida: info.duracion || "Variable",
+            nivel_dificultad: info.dificultad || "Moderada"
+          };
         });
         setResultado({ top: formateado });
       } else {
-        // En caso de que el backend retorne un objeto de error o vacío, lo imprimimos como destino de contingencia
-        setResultado({ top: [{ destino: data.message || data.error || JSON.stringify(data) }] });
+        setResultado({ top: [{ destino: data.message || data.error || "No se encontraron destinos" }] });
       }
 
     } catch (err: any) {
-      setError("No pudimos conectar con el modelo. Verifica tu API en el puerto 8000.");
+      if (err.name === 'AbortError') {
+        setError("⏳ La búsqueda está tomando demasiado tiempo. Intenta nuevamente.");
+      } else {
+        setError("No pudimos conectar con el modelo. Verifica tu API en el puerto 8000.");
+      }
       console.error("Fetch error:", err);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleAgregarItinerario = useCallback((destino: string) => {
+    setSelectedDestino({
+      nombre: destino,
+      tipo: "Destino recomendado",
+      tour: `Tour personalizado a ${destino}`
+    });
+    setShowAddModal(true);
+  }, []);
+
+  const handleConfirmarAgregar = useCallback((data: { 
+    fechaInicio: string; 
+    duracion: number; 
+    nivelExigencia: 1 | 2 | 3 | 4 | 5 
+  }) => {
+    if (!selectedDestino) return;
+    agregarDestino({
+      nombre: selectedDestino.nombre,
+      tipo: selectedDestino.tipo,
+      tourRecomendado: selectedDestino.tour,
+      fechaInicio: data.fechaInicio,
+      duracion: data.duracion,
+      nivelExigencia: data.nivelExigencia,
+      actividades: [
+        `Visita a ${selectedDestino.nombre}`,
+        "Experiencia cultural",
+        "Fotografía de paisajes"
+      ]
+    });
+    setShowAddModal(false);
+    
+    // Feedback visual
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-28 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-6 py-3 rounded-2xl text-sm font-bold shadow-2xl z-[99999] animate-in slide-in-from-bottom-4 duration-300';
+    toast.textContent = `✅ ${selectedDestino.nombre} agregado a tu itinerario`;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.classList.add('animate-out', 'slide-out-to-bottom', 'duration-300');
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }, [selectedDestino, agregarDestino]);
+
+  const resumenPreferencias = useMemo(() => {
+    const intereses = [];
+    if (formulario.Fotografía === "Sí") intereses.push("📸 Fotos");
+    if (formulario.Comida === "Sí") intereses.push("🍜 Comida");
+    if (formulario.Trekking === "Sí") intereses.push("🥾 Trekking");
+    if (formulario.Naturaleza === "Sí") intereses.push("🌿 Naturaleza");
+    if (formulario.Historia === "Sí") intereses.push("🏛️ Historia");
+    return intereses;
+  }, [formulario]);
+
+  // 🆕 Obtener info del destino
+  const getDestinoInfo = (nombre: string) => {
+    const key = nombre.toLowerCase().replace(/ /g, '_').replace(/[áéíóú]/g, (c) => "aeiou"["áéíóú".indexOf(c)]);
+    return INFO_DESTINOS[key] || INFO_DESTINOS[nombre.toLowerCase().replace(/ /g, '_')] || {
+      emoji: "📍",
+      color: "from-slate-400 to-slate-600",
+      duracion: "Variable",
+      dificultad: "Moderada",
+      mejor_epoca: "Consultar",
+      tipo: "Destino"
+    };
+  };
+
   return (
     <div className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 selection:bg-indigo-100">
-      {/* Navbar */}
-      <nav className="p-6 max-w-7xl mx-auto flex justify-between items-center">
+      <nav className="p-6 max-w-7xl mx-auto flex justify-between items-center relative z-10">
         <div className="flex items-center gap-2">
           <div className="bg-indigo-600 p-2 rounded-xl text-white"><Plane size={24} /></div>
           <span className="text-xl font-black tracking-tighter uppercase italic">CuscoGo!</span>
         </div>
+        {resultado && resultado.top && resultado.top.length > 0 && (
+          <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-600">
+            <Sparkles size={12} /> {resultado.top.length} destinos encontrados
+          </span>
+        )}
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className="max-w-7xl mx-auto px-4 py-8 relative z-0">
         <section className="text-center mb-12">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full mb-4">
+            <Sparkles size={12} /> Planificador Inteligente
+          </span>
           <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">
             Diseña tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-500">experiencia épica</span>
           </h1>
           <p className="text-slate-500 font-medium">Motor de Inteligencia Turística — Tumperu Cusco</p>
+          
+          {resumenPreferencias.length > 0 && (
+            <div className="flex flex-wrap justify-center gap-2 mt-4">
+              {resumenPreferencias.map((item, i) => (
+                <span key={i} className="text-xs bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">
+                  {item}
+                </span>
+              ))}
+            </div>
+          )}
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Columna Izquierda: Formulario */}
-          <div className="lg:col-span-8 space-y-8">
+          {/* Formulario */}
+          <div className="lg:col-span-8 space-y-6">
+            <div className="flex justify-end">
+              <button
+                onClick={resetFormulario}
+                className="text-xs text-slate-400 hover:text-slate-600 transition-colors flex items-center gap-1.5"
+              >
+                <RefreshCw size={12} /> Restablecer preferencias
+              </button>
+            </div>
+
             <Section icon={<Users className="text-indigo-500" />} title="¿Quiénes viajan?">
               <div className="grid md:grid-cols-3 gap-4 mt-4">
                 <InputGroup label="Edad">
-                  <input type="number" value={formulario.Edad} onChange={(e) => handleChange("Edad", Number(e.target.value))} className={inputStyle} />
+                  <input 
+                    type="number" 
+                    value={formulario.Edad} 
+                    onChange={(e) => handleChange("Edad", Number(e.target.value))} 
+                    min={1}
+                    max={120}
+                    className={inputStyle} 
+                  />
                 </InputGroup>
                 <InputGroup label="Procedencia">
-                  <input type="text" value={formulario["País / Procedencia"]} onChange={(e) => handleChange("País / Procedencia", e.target.value)} className={inputStyle} />
+                  <input 
+                    type="text" 
+                    value={formulario["País / Procedencia"]} 
+                    onChange={(e) => handleChange("País / Procedencia", e.target.value)} 
+                    className={inputStyle} 
+                    placeholder="Ej: Perú, Chile, USA..."
+                  />
                 </InputGroup>
                 <InputGroup label="¿Viajas con niños?">
                   <div className="grid grid-cols-2 gap-2 h-[56px]">
                     {["Sí", "No"].map(op => (
-                      <button key={op} onClick={() => handleChange("Apto para niños", op)} className={`${badgeStyle} ${formulario["Apto para niños"] === op ? "bg-indigo-600 text-white" : "bg-slate-50 text-slate-600"}`}>{op}</button>
+                      <button 
+                        key={op} 
+                        onClick={() => handleChange("Apto para niños", op)} 
+                        className={`${badgeStyle} ${formulario["Apto para niños"] === op ? "bg-indigo-600 text-white" : "bg-slate-50 text-slate-600"}`}
+                      >
+                        {op}
+                      </button>
                     ))}
                   </div>
                 </InputGroup>
@@ -174,12 +449,38 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
             </Section>
 
             <Section icon={<Heart className="text-pink-500" />} title="Tus Intereses">
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-4">
-                <InterestCard icon={<Camera size={20} />} label="Fotos" active={formulario.Fotografía === "Sí"} onClick={() => handleChange("Fotografía", formulario.Fotografía === "Sí" ? "No" : "Sí")} />
-                <InterestCard icon={<Utensils size={20} />} label="Comida" active={formulario.Comida === "Sí"} onClick={() => handleChange("Comida", formulario.Comida === "Sí" ? "No" : "Sí")} />
-                <InterestCard icon={<Compass size={20} />} label="Trekking" active={formulario.Trekking === "Sí"} onClick={() => handleChange("Trekking", formulario.Trekking === "Sí" ? "No" : "Sí")} />
-                <InterestCard icon={<Trees size={20} />} label="Naturaleza" active={formulario.Naturaleza === "Sí"} onClick={() => handleChange("Naturaleza", formulario.Naturaleza === "Sí" ? "No" : "Sí")} />
-                <InterestCard icon={<Landmark size={20} />} label="Historia" active={formulario.Historia === "Sí"} onClick={() => handleChange("Historia", formulario.Historia === "Sí" ? "No" : "Sí")} />
+              <p className="text-xs text-slate-400 mb-3">Selecciona tus intereses principales</p>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <InterestCard 
+                  icon={<Camera size={20} />} 
+                  label="Fotos" 
+                  active={formulario.Fotografía === "Sí"} 
+                  onClick={() => handleChange("Fotografía", formulario.Fotografía === "Sí" ? "No" : "Sí")} 
+                />
+                <InterestCard 
+                  icon={<Utensils size={20} />} 
+                  label="Comida" 
+                  active={formulario.Comida === "Sí"} 
+                  onClick={() => handleChange("Comida", formulario.Comida === "Sí" ? "No" : "Sí")} 
+                />
+                <InterestCard 
+                  icon={<Compass size={20} />} 
+                  label="Trekking" 
+                  active={formulario.Trekking === "Sí"} 
+                  onClick={() => handleChange("Trekking", formulario.Trekking === "Sí" ? "No" : "Sí")} 
+                />
+                <InterestCard 
+                  icon={<Trees size={20} />} 
+                  label="Naturaleza" 
+                  active={formulario.Naturaleza === "Sí"} 
+                  onClick={() => handleChange("Naturaleza", formulario.Naturaleza === "Sí" ? "No" : "Sí")} 
+                />
+                <InterestCard 
+                  icon={<Landmark size={20} />} 
+                  label="Historia" 
+                  active={formulario.Historia === "Sí"} 
+                  onClick={() => handleChange("Historia", formulario.Historia === "Sí" ? "No" : "Sí")} 
+                />
               </div>
             </Section>
 
@@ -188,7 +489,11 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                 <InputGroup label="¿Deseas caminata?">
                   <div className="grid grid-cols-2 gap-2">
                     {["Sí", "No"].map(op => (
-                      <button key={op} onClick={() => handleChange("Requiere caminata", op)} className={`${badgeStyle} ${formulario["Requiere caminata"] === op ? "bg-amber-500 text-white" : "bg-slate-50 text-slate-600"}`}>
+                      <button 
+                        key={op} 
+                        onClick={() => handleChange("Requiere caminata", op)} 
+                        className={`${badgeStyle} ${formulario["Requiere caminata"] === op ? "bg-amber-500 text-white" : "bg-slate-50 text-slate-600"}`}
+                      >
                         {op === "Sí" ? <><Footprints size={16} /> Sí</> : "No"}
                       </button>
                     ))}
@@ -197,90 +502,274 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                 <InputGroup label="Dificultad">
                   <div className="flex bg-slate-50 p-1 rounded-2xl gap-1">
                     {["Bajo", "Medio", "Alto"].map(dif => (
-                      <button key={dif} onClick={() => handleChange("Nivel de dificultad", dif)} className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${formulario["Nivel de dificultad"] === dif ? "bg-white shadow-sm text-slate-900" : "text-slate-400"}`}>{dif}</button>
+                      <button 
+                        key={dif} 
+                        onClick={() => handleChange("Nivel de dificultad", dif)} 
+                        className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${formulario["Nivel de dificultad"] === dif ? "bg-white shadow-sm text-slate-900" : "text-slate-400"}`}
+                      >
+                        {dif}
+                      </button>
                     ))}
                   </div>
                 </InputGroup>
                 <InputGroup label="Altura Máx (msnm)">
-                  <input type="number" value={formulario["Altura máxima tolerada"]} onChange={(e) => handleChange("Altura máxima tolerada", Number(e.target.value))} className={inputStyle} />
+                  <input 
+                    type="number" 
+                    value={formulario["Altura máxima tolerada"]} 
+                    onChange={(e) => handleChange("Altura máxima tolerada", Number(e.target.value))} 
+                    min={0}
+                    max={7000}
+                    className={inputStyle} 
+                  />
                 </InputGroup>
               </div>
             </Section>
 
-            <button onClick={enviarDatos} disabled={loading} className="w-full bg-slate-900 text-white py-5 rounded-3xl text-lg font-bold hover:bg-indigo-600 transition-all shadow-xl flex items-center justify-center gap-3 disabled:opacity-70 active:scale-[0.99]">
-              {loading ? <><Loader2 className="animate-spin" /> Analizando coordenadas...</> : "Buscar Destinos Ideales 🧭"}
+            {/* Sección avanzada */}
+            <div className="bg-white rounded-[35px] shadow-sm border border-slate-100 overflow-hidden">
+              <button
+                onClick={() => setShowAdvanced(!showAdvanced)}
+                className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors"
+              >
+                <span className="flex items-center gap-2 text-sm font-bold text-slate-600">
+                  <Award size={16} className="text-indigo-500" />
+                  Preferencias avanzadas
+                </span>
+                {showAdvanced ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+              </button>
+              
+              {showAdvanced && (
+                <div className="p-6 pt-0 border-t border-slate-100 space-y-4 animate-in slide-in-from-top-2 duration-200">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <InputGroup label="Presupuesto">
+                      <div className="flex bg-slate-50 p-1 rounded-2xl gap-1">
+                        {["Bajo", "Medio", "Alto"].map(p => (
+                          <button 
+                            key={p} 
+                            onClick={() => handleChange("Presupuesto", p)} 
+                            className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1 ${formulario.Presupuesto === p ? "bg-white shadow-sm text-slate-900" : "text-slate-400"}`}
+                          >
+                            {p === "Bajo" && "💰"}
+                            {p === "Medio" && "💰💰"}
+                            {p === "Alto" && "💰💰💰"}
+                            {p}
+                          </button>
+                        ))}
+                      </div>
+                    </InputGroup>
+                    <InputGroup label="Días de viaje">
+                      <input 
+                        type="number" 
+                        value={formulario["Días de viaje"]} 
+                        onChange={(e) => handleChange("Días de viaje", Number(e.target.value))} 
+                        min={1}
+                        max={30}
+                        className={inputStyle} 
+                      />
+                    </InputGroup>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <InputGroup label="Tipo de viaje">
+                      <select 
+                        value={formulario["Tipo de viaje"]} 
+                        onChange={(e) => handleChange("Tipo de viaje", e.target.value)} 
+                        className={inputStyle}
+                      >
+                        <option value="Cultural">Cultural</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Relax">Relax</option>
+                        <option value="Gastronómico">Gastronómico</option>
+                        <option value="Fotográfico">Fotográfico</option>
+                      </select>
+                    </InputGroup>
+                    <InputGroup label="Tipo de transporte">
+                      <select 
+                        value={formulario["Tipo de transporte"]} 
+                        onChange={(e) => handleChange("Tipo de transporte", e.target.value)} 
+                        className={inputStyle}
+                      >
+                        <option value="Bus">Bus</option>
+                        <option value="Auto privado">Auto privado</option>
+                        <option value="Tren">Tren</option>
+                        <option value="Avión">Avión</option>
+                      </select>
+                    </InputGroup>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <button 
+              onClick={enviarDatos} 
+              disabled={loading} 
+              className="w-full bg-slate-900 text-white py-5 rounded-3xl text-lg font-bold hover:bg-indigo-600 transition-all shadow-xl flex items-center justify-center gap-3 disabled:opacity-70 active:scale-[0.99] relative overflow-hidden group"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="animate-spin" /> 
+                  Analizando coordenadas...
+                </>
+              ) : (
+                <>
+                  <span className="relative z-10 flex items-center gap-3">
+                    Buscar Destinos Ideales 🧭
+                    <Sparkles size={18} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </>
+              )}
             </button>
           </div>
 
-          {/* Columna Derecha: Sidebar de Resultados */}
-          <div className="lg:col-span-4 lg:sticky lg:top-8 h-fit">
-            {resultado && resultado.top && resultado.top.length > 0 ? (
-              <div className="bg-white p-6 rounded-[35px] shadow-xl border border-slate-100 animate-in fade-in slide-in-from-bottom-4">
-                <h2 className="text-xl font-black mb-4 flex items-center gap-2">🚀 Match de Aventura</h2>
-                <div className="space-y-3">
+          {/* Sidebar de Resultados - MEJORADO */}
+          <div className="lg:col-span-4 lg:sticky lg:top-8 h-fit z-0">
+            {loading ? (
+              <div className="bg-white p-8 rounded-[35px] shadow-xl border border-slate-100 text-center animate-pulse">
+                <div className="w-16 h-16 mx-auto rounded-full bg-indigo-50 flex items-center justify-center mb-4">
+                  <Loader2 size={32} className="text-indigo-600 animate-spin" />
+                </div>
+                <p className="font-bold text-slate-800">Buscando los mejores destinos...</p>
+                <p className="text-xs text-slate-400 mt-1">Esto puede tomar unos segundos</p>
+              </div>
+            ) : resultado && resultado.top && resultado.top.length > 0 ? (
+              <div className="bg-white p-6 rounded-[35px] shadow-xl border border-slate-100 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-black flex items-center gap-2">🚀 Top 5 Destinos</h2>
+                  <span className="text-xs bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full font-bold">
+                    {resultado.top.length} destinos
+                  </span>
+                </div>
+                <div className="space-y-3 max-h-[600px] overflow-y-auto pr-1">
                   {resultado.top.map((item, i) => {
                     const pct = item.score != null ? Math.round(item.score * 100) : null;
-                    const barColor = i === 0 ? "bg-indigo-600" : i === 1 ? "bg-indigo-400" : "bg-slate-300";
+                    const info = getDestinoInfo(item.destino);
+                    const colores = info.color ? info.color.split(' ') : ['from-indigo-500', 'to-purple-600'];
+                    
                     return (
-                      <div key={i} className="p-4 bg-slate-50 rounded-2xl border border-transparent hover:border-indigo-500 transition-all">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-[10px] font-black uppercase text-indigo-500">Destino Recomendado</span>
-                          <div className="flex items-center gap-2">
+                      <div 
+                        key={i} 
+                        className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-slate-50 p-4 transition-all hover:border-indigo-200 hover:shadow-md"
+                      >
+                        {/* Badge de posición */}
+                        <div className={`absolute top-0 right-0 px-3 py-1 text-[10px] font-bold text-white rounded-bl-2xl bg-gradient-to-r ${colores.join(' ')}`}>
+                          #{i + 1}
+                        </div>
+                        
+                        <div className="flex items-start gap-3 pr-12">
+                          <span className="text-2xl">{info.emoji || '📍'}</span>
+                          <div className="flex-1">
+                            <h3 className="font-bold text-slate-800 text-sm">{item.destino}</h3>
+                            <div className="flex flex-wrap gap-1.5 mt-1">
+                              <span className="text-[9px] bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded-full">{info.tipo || 'Destino'}</span>
+                              <span className="text-[9px] bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+                                <Clock size={9} /> {info.duracion || 'Variable'}
+                              </span>
+                              <span className={`text-[9px] px-1.5 py-0.5 rounded-full ${
+                                info.dificultad === 'Baja' ? 'bg-green-50 text-green-600' :
+                                info.dificultad === 'Alta' ? 'bg-red-50 text-red-600' :
+                                'bg-yellow-50 text-yellow-600'
+                              }`}>
+                                {info.dificultad || 'Moderada'}
+                              </span>
+                            </div>
                             {pct !== null && (
-                              <span className="text-[10px] font-bold text-slate-500">{pct}%</span>
+                              <div className="flex items-center gap-2 mt-2">
+                                <div className="flex-1 bg-slate-200 rounded-full h-1">
+                                  <div 
+                                    className={`h-1 rounded-full bg-gradient-to-r ${colores.join(' ')} transition-all duration-1000`} 
+                                    style={{ width: `${Math.min(pct, 100)}%` }} 
+                                  />
+                                </div>
+                                <span className="text-[9px] font-bold text-slate-500">{pct}%</span>
+                              </div>
                             )}
-                            <div className="w-5 h-5 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600 font-bold text-xs">{i + 1}</div>
                           </div>
                         </div>
-                        <p className="text-base font-black text-slate-800 mb-2">{item.destino}</p>
-                        {pct !== null && (
-                          <div className="w-full bg-slate-200 rounded-full h-1.5 mb-3">
-                            <div className={`${barColor} h-1.5 rounded-full transition-all`} style={{ width: `${Math.min(pct, 100)}%` }} />
-                          </div>
-                        )}
-                        {onConsultarChat && (
+                        
+                        <div className="flex gap-2 mt-3 pt-3 border-t border-slate-100">
+                          {onConsultarChat && (
+                            <button
+                              onClick={() => onConsultarChat(item.destino)}
+                              className="flex-1 flex items-center justify-center gap-1.5 text-[10px] font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-xl py-1.5 transition-colors"
+                            >
+                              <MessageCircle size={12} /> Chat
+                            </button>
+                          )}
                           <button
-                            onClick={() => onConsultarChat(item.destino)}
-                            className="w-full flex items-center justify-center gap-1.5 text-[11px] font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-xl py-2 transition-colors"
+                            onClick={() => handleAgregarItinerario(item.destino)}
+                            className="flex-1 flex items-center justify-center gap-1.5 text-[10px] font-bold text-emerald-600 bg-emerald-50 hover:bg-emerald-100 rounded-xl py-1.5 transition-colors"
                           >
-                            <MessageCircle size={13} /> Preguntar al asistente
+                            <Plus size={12} /> Agregar
                           </button>
-                        )}
+                        </div>
                       </div>
                     );
                   })}
                 </div>
               </div>
             ) : (
-              <div className="bg-indigo-50/60 p-8 rounded-[35px] border-2 border-dashed border-indigo-100 text-center">
-                {!loading ? (
-                  <>
-                    <MapPin className="mx-auto mb-3 text-indigo-500" size={30} />
-                    <p className="text-indigo-950 font-black text-sm">Configura tu brújula</p>
-                    <p className="text-indigo-400 text-xs mt-1">Elige tus preferencias a la izquierda para ver tu recomendación al instante.</p>
-                  </>
-                ) : <p className="animate-pulse font-bold text-indigo-600">Consultando al experto en Cusco...</p>}
+              <div className={`bg-indigo-50/60 p-8 rounded-[35px] border-2 border-dashed border-indigo-100 text-center transition-all ${isFirstLoad ? 'opacity-100' : 'opacity-0'}`}>
+                <MapPin className="mx-auto mb-3 text-indigo-500" size={30} />
+                <p className="text-indigo-950 font-black text-sm">Configura tu brújula</p>
+                <p className="text-indigo-400 text-xs mt-1">Elige tus preferencias a la izquierda para ver tu recomendación al instante.</p>
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">🌄 Machu Picchu</span>
+                  <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">🏔️ Montaña 7 Colores</span>
+                  <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">🏞️ Laguna Humantay</span>
+                </div>
               </div>
             )}
-            {error && <p className="mt-4 text-red-500 text-center font-bold text-sm bg-red-50 p-3 rounded-xl border border-red-100">{error}</p>}
+            {error && (
+              <div className="mt-4 text-red-500 text-center font-bold text-sm bg-red-50 p-3 rounded-xl border border-red-100 animate-in fade-in slide-in-from-bottom-2">
+                <Info size={14} className="inline mr-1.5" />
+                {error}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Mapa interactivo: aparece debajo cuando hay resultados */}
+        {/* Mapa interactivo */}
         {resultado && resultado.top && resultado.top.length > 0 && (
-          <div className="mt-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <MapaDestinos destinos={resultado.top} />
+          <div className="mt-8 animate-in fade-in slide-in-from-bottom-4 duration-500 relative z-0">
+            <div className="bg-white rounded-[35px] shadow-sm border border-slate-100 overflow-hidden p-4">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-bold text-slate-600 flex items-center gap-2">
+                  <MapPin size={16} className="text-indigo-500" />
+                  Ubicación de los {resultado.top.length} destinos recomendados
+                </span>
+                <span className="text-[10px] text-slate-400">{resultado.top.length} destinos en el mapa</span>
+              </div>
+              <MapaDestinos destinos={resultado.top} />
+            </div>
           </div>
         )}
       </main>
+
+      {/* Modal con Portal */}
+      {showAddModal && selectedDestino && 
+        createPortal(
+          <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-md flex items-center justify-center p-4 md:p-6 transition-all animate-in fade-in duration-200 z-[99999]">
+            <div className="w-full max-w-lg transform transition-all animate-in zoom-in-95 slide-in-from-bottom-8 duration-300">
+              <AgregarDestinoModal
+                lugarNombre={selectedDestino.nombre}
+                lugarTipo={selectedDestino.tipo}
+                tourRecomendado={selectedDestino.tour}
+                onClose={() => setShowAddModal(false)}
+                onAgregar={handleConfirmarAgregar}
+              />
+            </div>
+          </div>,
+          document.body
+        )
+      }
     </div>
   );
 }
 
-// Subcomponentes de UI Estilizados con Tailwind
+// Subcomponentes de UI
 function Section({ icon, title, children }: any) {
   return (
-    <div className="bg-white p-6 md:p-8 rounded-[35px] shadow-sm border border-slate-100">
+    <div className="bg-white p-6 md:p-8 rounded-[35px] shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 bg-slate-50 rounded-xl">{icon}</div>
         <h3 className="text-lg font-black text-slate-800">{title}</h3>
@@ -301,12 +790,21 @@ function InputGroup({ label, children }: any) {
 
 function InterestCard({ icon, label, active, onClick }: any) {
   return (
-    <button type="button" onClick={onClick} className={`p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2 font-bold text-xs ${active ? "border-indigo-600 bg-indigo-50 text-indigo-600 scale-105 shadow-md" : "border-slate-100 bg-slate-50 text-slate-400 hover:bg-white"}`}>
+    <button 
+      type="button" 
+      onClick={onClick} 
+      className={`p-4 rounded-2xl border-2 transition-all flex flex-col items-center gap-2 font-bold text-xs ${
+        active 
+          ? "border-indigo-600 bg-indigo-50 text-indigo-600 scale-105 shadow-md" 
+          : "border-slate-100 bg-slate-50 text-slate-400 hover:bg-white hover:border-slate-200"
+      }`}
+    >
       {icon}
       <span>{label}</span>
+      {active && <span className="text-[8px] bg-indigo-600 text-white px-1.5 py-0.5 rounded-full">✓</span>}
     </button>
   );
 }
 
-const inputStyle = "w-full bg-slate-50 border-none rounded-2xl px-4 py-4 focus:ring-4 focus:ring-indigo-100 font-bold text-sm transition-all";
+const inputStyle = "w-full bg-slate-50 border-none rounded-2xl px-4 py-4 focus:ring-4 focus:ring-indigo-100 font-bold text-sm transition-all outline-none";
 const badgeStyle = "flex-1 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all active:scale-95 border border-transparent shadow-sm";

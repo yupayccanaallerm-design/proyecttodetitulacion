@@ -19,6 +19,7 @@ from .routes.paquetes import router as paquetes_router
 from .routes.tours import router as tours_router
 from .routes.auth import router as auth_router
 from .routes.usuarios import router as usuarios_router
+from .routes.reservas import router as reservas_router
 
 # ===== CONFIGURACIÓN DE PATHS =====
 BASE_DIR = os.path.abspath(
@@ -56,6 +57,7 @@ app.include_router(tours_router)
 app.include_router(paquetes_router)
 app.include_router(auth_router)
 app.include_router(usuarios_router)
+app.include_router(reservas_router)
 # ===== ENDPOINT DE PRUEBA =====
 @app.get("/")
 async def root():

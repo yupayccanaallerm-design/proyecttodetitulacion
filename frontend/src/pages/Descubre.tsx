@@ -181,19 +181,48 @@ const PLACES: Record<string, PlaceInfo> = {
 // ------------------ API (usando el endpoint integrado del chatbot) ------------------
 const API = {
   vision: {
-    // Endpoint integrado: chatbot/recognize (RAG + Visión combinados)
-    predict: (file: File) => {
+    predict: async (file: File) => {
       const form = new FormData();
       form.append("file", file);
-      // Intentar primero el endpoint integrado del chatbot
-      return fetch("/chatbot/recognize", { method: "POST", body: form })
-        .then(r => r.json())
-        .catch(() => {
-          // Fallback al endpoint directo de visión
-          const form2 = new FormData();
-          form2.append("file", file);
-          return fetch("/vision/predict", { method: "POST", body: form2 }).then(r => r.json());
+      
+      try {
+        // Intentar primero el endpoint integrado del chatbot
+        const response = await fetch("/chatbot/recognize", { 
+          method: "POST", 
+          body: form 
         });
+        
+        // Si la respuesta es exitosa, devolver el JSON
+        if (response.ok) {
+          return await response.json();
+        }
+        
+        // Si el endpoint no existe (404) o hay otro error, usar fallback
+        console.warn(`⚠️ /chatbot/recognize respondió con ${response.status}, usando fallback`);
+        
+        // Fallback al endpoint directo de visión
+        const form2 = new FormData();
+        form2.append("file", file);
+        const fallbackResponse = await fetch("/vision/predict", { 
+          method: "POST", 
+          body: form2 
+        });
+        
+        return await fallbackResponse.json();
+        
+      } catch (error) {
+        // Si hay error de red (sin conexión, etc.), usar fallback
+        console.warn("⚠️ Error en /chatbot/recognize, usando fallback:", error);
+        
+        const form2 = new FormData();
+        form2.append("file", file);
+        const fallbackResponse = await fetch("/vision/predict", { 
+          method: "POST", 
+          body: form2 
+        });
+        
+        return await fallbackResponse.json();
+      }
     },
   },
 };

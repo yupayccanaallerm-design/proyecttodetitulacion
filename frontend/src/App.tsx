@@ -11,25 +11,44 @@ import Tours from "./pages/Tours";
 import Reservas from "./pages/Reservas";
 import ChatBot from "./pages/ChatBot";
 import Planificador from "./pages/Recomendador";
-import PerfilViajero from "./pages/PerfilViajero";
+import Descubre from "./pages/Descubre";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminReservas from "./pages/admin/AdminReservas";
 import AdminTours from "./pages/admin/AdminTours";
 import AdminPaquetes from "./pages/admin/AdminPaquetes";
 import DetalleTour from "./pages/DetalleTour";
 import Login from "./pages/Login";
+import Paquetes from "./pages/Paquetes";
+import DetallePaquete from "./pages/DetallePaquete";
 import GestiónUsuarios from "./pages/admin/GestionUsuarios";
+import { ItinerarioProvider } from './contexts/ItinerarioContext';
+import { ResumenItinerario } from './components/ResumenItinerario';
 
 
+// ============================================================
+// 🆕 COMPONENTE PRINCIPAL - El Provider envuelve TODO
+// ============================================================
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ItinerarioProvider>
+        <AppContent />
+      </ItinerarioProvider>
+    </BrowserRouter>
+  );
+}
 
+// ============================================================
+// TODO EL CONTENIDO DE LA APP (DENTRO DEL PROVIDER)
+// ============================================================
 function AppContent() {
   const [visible, setVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openChat, setOpenChat] = useState(false);
   const [chatContext, setChatContext] = useState<string>("");
 
-  const { i18n, t } = useTranslation();
-  const navigate = useNavigate(); // 👈 Hook para la redirección del doble clic
+  const { i18n } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setVisible(true);
@@ -41,14 +60,11 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800 flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
-
-      {/* 🔝 NAVBAR PREMIUM CLIENTE */}
+      {/* 🔝 NAVBAR */}
       <nav className="fixed top-0 w-full z-[100] px-4 md:px-8 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center bg-white/80 backdrop-blur-md border border-slate-200/50 rounded-2xl px-6 py-3 shadow-xs">
-
-          {/* 🔐 LOGO CORPORATIVO CON ACCESO SECRETO POR DOBLE CLIC */}
           <div 
-            onDoubleClick={() => navigate("/login")} // ← CAMBIADO DE "/admin" A "/login"
+            onDoubleClick={() => navigate("/login")} 
             className="flex items-center gap-2.5 group cursor-pointer select-none"
             title="Doble clic para acceso operativo de administración"
           >
@@ -62,18 +78,15 @@ function AppContent() {
             </Link>
           </div>
 
-          {/* ENLACES DESKTOP (PÚBLICOS Y LIMPIOS) */}
           <div className="hidden md:flex gap-8 text-xs font-medium uppercase tracking-wider text-slate-600">
             <Link to="/" className="hover:text-indigo-600 transition-colors">Inicio</Link>
             <Link to="/tours" className="hover:text-indigo-600 transition-colors">Tours</Link>
-            <Link to="/reservas" className="hover:text-indigo-600 transition-colors">Reservas</Link>
             <Link to="/planificador" className="hover:text-indigo-600 transition-colors">Planificador</Link>
-            <Link to="/perfilviajero" className="hover:text-indigo-600 transition-colors">Perfil Viajero</Link>
+            <Link to="/descubre" className="hover:text-indigo-600 transition-colors">Descubre</Link>
+            <Link to="/paquetes" className="hover:text-indigo-600 transition-colors">Paquetes</Link>
           </div>
 
-          {/* SECCIÓN DERECHA */}
           <div className="flex items-center gap-4">
-            {/* Idiomas */}
             <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl text-[11px] font-medium border border-slate-200/40">
               <Globe size={12} className="text-slate-400 ml-1.5 hidden sm:inline" />
               <button
@@ -90,7 +103,6 @@ function AppContent() {
               </button>
             </div>
 
-            {/* Botón Chat IA */}
             <button
               onClick={() => {
                 setOpenChat(!openChat);
@@ -101,7 +113,6 @@ function AppContent() {
               <MessageSquare size={18} />
             </button>
 
-            {/* Mobile Menu Trigger */}
             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-slate-600 p-1">
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -109,18 +120,16 @@ function AppContent() {
         </div>
       </nav>
 
-      {/* MENU MOBILE CLIENTE */}
       {isMenuOpen && (
         <div className="fixed top-[76px] left-4 right-4 bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-slate-200 shadow-lg z-50 flex flex-col gap-4 text-center text-sm font-medium">
           <Link to="/" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Inicio</Link>
           <Link to="/tours" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Tours</Link>
-          <Link to="/reservas" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Reservas</Link>
           <Link to="/planificador" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Planificador</Link>
-          <Link to="/perfilviajero" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Perfil Viajero</Link>
+          <Link to="/descubre" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Descubre</Link>
+          <Link to="/paquetes" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Paquetes</Link>
         </div>
       )}
 
-      {/* CHAT FLOTANTE */}
       {openChat && (
         <div className="fixed bottom-24 right-4 md:right-8 w-[350px] h-[500px] bg-white border border-slate-200 rounded-2xl shadow-xl z-[200] overflow-hidden flex flex-col">
           <div className="flex justify-between items-center px-4 py-3.5 bg-gradient-to-r from-slate-900 to-indigo-950 text-white">
@@ -133,18 +142,18 @@ function AppContent() {
         </div>
       )}
 
-      {/* NAVEGACIÓN DE VISTAS */}
+      {/* 🆕 MAIN CON ROUTES - AHORA DENTRO DEL PROVIDER */}
       <main className="flex-grow pt-20">
         <Routes>
-          {/* Rutas Públicas de la Experiencia del Viajero */}
           <Route path="/" element={<Home visible={visible} />} />
           <Route path="/tours" element={<Tours />} />
           <Route path="/reservas" element={<Reservas />} />
           <Route path="/planificador" element={<Planificador onConsultarChat={(destino) => { setChatContext(destino); setOpenChat(true); }} />} />
-          <Route path="/perfilviajero" element={<PerfilViajero onPlaceDetected={(place) => { setChatContext(place); setOpenChat(true); }} />} />
+          <Route path="/descubre" element={<Descubre onPlaceDetected={(place) => { setChatContext(place); setOpenChat(true); }} />} />
           <Route path="/detalle/:id" element={<DetalleTour />} />
+          <Route path="/paquetes" element={<Paquetes />} />
+          <Route path="/detalle-paquete/:id" element={<DetallePaquete />} />
           <Route path="/login" element={<Login />} />
-          {/* 🔐 CONTROL INTERNO (ADMINISTRACIÓN ANIDADA) */}
           <Route path="/admin" element={<AdminDashboard />}>
             <Route index element={<AdminReservas />} /> 
             <Route path="reservas" element={<AdminReservas />} />
@@ -155,7 +164,9 @@ function AppContent() {
         </Routes>
       </main>
 
-      {/* FOOTER */}
+      {/* 🆕 ResumenItinerario - AHORA DENTRO DEL PROVIDER */}
+      <ResumenItinerario />
+
       <footer className="py-8 bg-white border-t border-slate-200/60 text-center text-slate-400 text-[11px] font-light">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p>© 2026 GRUPO TUMPERU. Todos los derechos reservados.</p>
@@ -168,16 +179,9 @@ function AppContent() {
   );
 }
 
-// 📦 CONTENEDOR ENVOLTORIO OBLIGATORIO PARA EL HOOK useNavigate
-export default function App() {
-  return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
-  );
-}
-
-/* 🏠 VISTA HOME COMPLETA */
+// ============================================================
+// 🏠 HOME
+// ============================================================
 function Home({ visible }: { visible: boolean }) {
   const acronimo = [
     { letra: "G", texto: "Grandes experiencias diseñadas para ti." },
@@ -193,7 +197,7 @@ function Home({ visible }: { visible: boolean }) {
 
   return (
     <div className="space-y-20">
-      {/* 1. CARÁTULA PRINCIPAL (HERO) */}
+      {/* HERO */}
       <div className="px-4 md:px-8 pt-4">
         <header className="min-h-[85vh] flex items-center justify-center text-center relative rounded-3xl overflow-hidden shadow-xs">
           <div
@@ -221,7 +225,7 @@ function Home({ visible }: { visible: boolean }) {
         </header>
       </div>
 
-      {/* 2. SECCIÓN CONÓCENOS & HISTORIA */}
+      {/* SECCIÓN CONÓCENOS */}
       <section className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
           <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
@@ -281,7 +285,7 @@ function Home({ visible }: { visible: boolean }) {
         </div>
       </section>
 
-      {/* 3. SECCIÓN VALORES CORPORATIVOS */}
+      {/* VALORES */}
       <section className="bg-white py-16 border-y border-slate-100">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
