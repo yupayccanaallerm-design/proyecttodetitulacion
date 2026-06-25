@@ -2,9 +2,10 @@
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 from api.database import obtener_conexion
+import json
 
 router = APIRouter(
     prefix="/api/reservas",
@@ -12,114 +13,101 @@ router = APIRouter(
 )
 
 # ============================================================
-# MODELO
+# MODELOS
 # ============================================================
 
-class ReservaCreate(BaseModel):
-    paquete_id: Optional[str] = ""
-    paquete_nombre: str
-    precio_referencial: Optional[float] = 0
-    nombre_cliente: str
-    email_cliente: str
-    telefono_cliente: str
-    fecha_viaje: str
-    numero_pasajeros: int
+class ItinerarioItem(BaseModel):
+    lugar: str
+    tipo: str
+    fechaInicio: str
+    duracion: int
+    nivelExigencia: int
+    tourRecomendado: str
+    actividades: List[str]
+
+class ClienteData(BaseModel):
+    nombre: str
+    email: str
+    telefono: str
     comentarios: Optional[str] = ""
-    tipo: Optional[str] = ""
-    duracion: Optional[str] = ""
+
+class EstadisticasData(BaseModel):
+    totalDias: int
+    nivelPromedio: int
+    tipos: List[str]
+    actividades: List[str]
+
+class ReservaCompleta(BaseModel):
+    cliente: ClienteData
+    itinerario: List[ItinerarioItem]
+    totalDias: int
+    totalDestinos: int
+    estadisticas: EstadisticasData
+    fechaReserva: str
 
 # ============================================================
-# ENDPOINTS - ORDEN CORRECTO
+# ENDPOINTS
 # ============================================================
 
-# 1️⃣ ENDPOINT DE TEST
-@router.get("/test")
-async def test_reservas():
-    """Endpoint de prueba para verificar que el router funciona"""
-    return {
-        "status": "ok",
-        "message": "El router de reservas está funcionando correctamente",
-        "timestamp": datetime.now().isoformat()
-    }
-
-
-# 2️⃣ ENDPOINT POST - CREAR RESERVA
 @router.post("/")
-async def crear_reserva(reserva: ReservaCreate):
-    """Guardar solicitud de reserva del cliente"""
+async def crear_reserva(reserva: ReservaCompleta):
+    """Guardar reserva en la tabla existente"""
     print("=" * 50)
-    print("📥 Recibida solicitud de reserva")
-    print(f"   Paquete: {reserva.paquete_nombre}")
-    print(f"   Cliente: {reserva.nombre_cliente}")
-    print(f"   Email: {reserva.email_cliente}")
-    print(f"   Fecha: {reserva.fecha_viaje}")
-    print(f"   Pasajeros: {reserva.numero_pasajeros}")
+    print("📥 Recibida reserva")
+    print(f"   Cliente: {reserva.cliente.nombre}")
+    print(f"   Email: {reserva.cliente.email}")
+    print(f"   Destinos: {reserva.totalDestinos}")
     print("=" * 50)
     
     conexion = obtener_conexion()
     if not conexion:
-        print("❌ Error de conexión a la base de datos")
         raise HTTPException(status_code=500, detail="Error de conexión a la base de datos")
     
     try:
         with conexion.cursor() as cursor:
-            # ✅ Verificar si la tabla existe ANTES de crearla
-            cursor.execute("""
-                SELECT COUNT(*)
-                FROM information_schema.tables
-                WHERE table_schema = DATABASE()
-                AND table_name = 'reservas'
-            """)
-            table_exists = cursor.fetchone()[0] > 0
             
-            # ✅ Solo crear la tabla si NO existe
-            if not table_exists:
-                cursor.execute("""
-                    CREATE TABLE reservas (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        paquete_id VARCHAR(50),
-                        paquete_nombre VARCHAR(255) NOT NULL,
-                        precio_referencial DECIMAL(10,2) DEFAULT 0,
-                        nombre_cliente VARCHAR(255) NOT NULL,
-                        email_cliente VARCHAR(255) NOT NULL,
-                        telefono_cliente VARCHAR(50) NOT NULL,
-                        fecha_viaje DATE NOT NULL,
-                        numero_pasajeros INT NOT NULL,
-                        comentarios TEXT,
-                        tipo VARCHAR(50),
-                        duracion VARCHAR(50),
-                        fecha_solicitud DATETIME DEFAULT CURRENT_TIMESTAMP
-                    )
-                """)
-                print("✅ Tabla 'reservas' creada")
-            else:
-                print("✅ Tabla 'reservas' ya existe")
-            
-            # ✅ Insertar la reserva
+            # ✅ INSERTAR EN LA TABLA EXISTENTE
             sql = """
                 INSERT INTO reservas (
-                    paquete_id, paquete_nombre, precio_referencial,
-                    nombre_cliente, email_cliente, telefono_cliente,
-                    fecha_viaje, numero_pasajeros, comentarios,
-                    tipo, duracion, fecha_solicitud
+                    paquete_id,
+                    paquete_nombre,
+                    precio_referencial,
+                    nombre_cliente,
+                    email_cliente,
+                    telefono_cliente,
+                    fecha_viaje,
+                    numero_pasajeros,
+                    comentarios,
+                    tipo,
+                    duracion,
+                    fecha_solicitud
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             
             now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             
+            # Tomar el primer destino como referencia
+            primer_destino = reserva.itinerario[0] if reserva.itinerario else None
+            
+            # Construir lista de destinos para el campo "paquete_nombre"
+            nombres_destinos = ", ".join([d.lugar for d in reserva.itinerario])
+            
+            # Construir tipos
+            tipos_str = ", ".join(reserva.estadisticas.tipos)
+            
             cursor.execute(sql, (
-                reserva.paquete_id,
-                reserva.paquete_nombre,
-                reserva.precio_referencial,
-                reserva.nombre_cliente,
-                reserva.email_cliente,
-                reserva.telefono_cliente,
-                reserva.fecha_viaje,
-                reserva.numero_pasajeros,
-                reserva.comentarios,
-                reserva.tipo,
-                reserva.duracion,
-                now
+                "",  # paquete_id (vacío porque viene del itinerario)
+                nombres_destinos,  # paquete_nombre (todos los destinos)
+                0,  # precio_referencial
+                reserva.cliente.nombre,
+                reserva.cliente.email,
+                reserva.cliente.telefono,
+                primer_destino.fechaInicio if primer_destino else now,  # fecha_viaje
+                reserva.totalDestinos,  # numero_pasajeros (usamos total destinos)
+                reserva.cliente.comentarios or "",
+                tipos_str,  # tipo
+                f"{reserva.totalDias} días",  # duracion
+                now  # fecha_solicitud
             ))
             
             reserva_id = cursor.lastrowid
@@ -130,21 +118,19 @@ async def crear_reserva(reserva: ReservaCreate):
             
             return {
                 "status": "success",
-                "message": "Solicitud registrada exitosamente",
+                "message": "Reserva registrada exitosamente",
                 "reserva_id": reserva_id
             }
             
     except Exception as e:
         conexion.rollback()
         print(f"❌ Error en MySQL: {str(e)}")
-        print("=" * 50)
         raise HTTPException(status_code=400, detail=f"Error: {str(e)}")
     finally:
         conexion.close()
         print("🔌 Conexión cerrada")
 
 
-# 3️⃣ ENDPOINT GET - LISTAR RESERVAS
 @router.get("/")
 async def listar_reservas():
     """Listar todas las reservas"""
@@ -179,7 +165,6 @@ async def listar_reservas():
         conexion.close()
 
 
-# 4️⃣ ENDPOINT GET - OBTENER RESERVA POR ID (DEBE IR AL FINAL)
 @router.get("/{reserva_id}")
 async def obtener_reserva(reserva_id: int):
     """Obtener detalle de una reserva específica"""
