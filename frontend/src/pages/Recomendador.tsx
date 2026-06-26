@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import {
   Plane, MapPin, Heart, Camera, Users, Mountain,
   Utensils, Compass, Trees, Landmark, Loader2, Footprints, 
@@ -12,16 +11,6 @@ import {
 import MapaDestinos from "../components/MapaDestinos";
 import { useItinerario } from "../contexts/ItinerarioContext";
 import { AgregarDestinoModal } from "../components/AgregarDestinoModal";
-
-// Inicialización de i18n
-if (!i18n.isInitialized) {
-  i18n.use(initReactI18next).init({
-    resources: {},
-    lng: "es",
-    fallbackLng: "es",
-    interpolation: { escapeValue: false }
-  });
-}
 
 interface Destino {
   destino: string;
@@ -120,6 +109,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(!resultado);
   const [destinoSeleccionado, setDestinoSeleccionado] = useState<string | null>(null);
+  const { t } = useTranslation();
   
   const { agregarDestino } = useItinerario();
 
@@ -292,7 +282,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
       if (err.name === 'AbortError') {
         setError("⏳ La búsqueda está tomando demasiado tiempo. Intenta nuevamente.");
       } else {
-        setError("No pudimos conectar con el modelo. Verifica tu API en el puerto 8000.");
+        setError(t("recomendador.error"));
       }
       console.error("Fetch error:", err);
     } finally {
@@ -333,7 +323,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
     // Feedback visual
     const toast = document.createElement('div');
     toast.className = 'fixed bottom-28 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-6 py-3 rounded-2xl text-sm font-bold shadow-2xl z-[99999] animate-in slide-in-from-bottom-4 duration-300';
-    toast.textContent = `✅ ${selectedDestino.nombre} agregado a tu itinerario`;
+    toast.textContent = t("recomendador.toastAdded", { name: selectedDestino.nombre });
     document.body.appendChild(toast);
     setTimeout(() => {
       toast.classList.add('animate-out', 'slide-out-to-bottom', 'duration-300');
@@ -369,11 +359,11 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
       <nav className="p-6 max-w-7xl mx-auto flex justify-between items-center relative z-10">
         <div className="flex items-center gap-2">
           <div className="bg-indigo-600 p-2 rounded-xl text-white"><Plane size={24} /></div>
-          <span className="text-xl font-black tracking-tighter uppercase italic">CuscoGo!</span>
+          <span className="text-xl font-black tracking-tighter uppercase italic">{t("recomendador.brand")}</span>
         </div>
         {resultado && resultado.top && resultado.top.length > 0 && (
           <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-600">
-            <Sparkles size={12} /> {resultado.top.length} destinos encontrados
+            <Sparkles size={12} /> {resultado.top.length} {t("recomendador.found")}
           </span>
         )}
       </nav>
@@ -384,9 +374,9 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
             <Sparkles size={12} /> Planificador Inteligente
           </span>
           <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">
-            Diseña tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-500">experiencia épica</span>
+            {t("recomendador.title")}
           </h1>
-          <p className="text-slate-500 font-medium">Motor de Inteligencia Turística — Tumperu Cusco</p>
+          <p className="text-slate-500 font-medium">{t("recomendador.subtitle")}</p>
           
           {resumenPreferencias.length > 0 && (
             <div className="flex flex-wrap justify-center gap-2 mt-4">
@@ -407,13 +397,13 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                 onClick={resetFormulario}
                 className="text-xs text-slate-400 hover:text-slate-600 transition-colors flex items-center gap-1.5"
               >
-                <RefreshCw size={12} /> Restablecer preferencias
+                <RefreshCw size={12} /> {t("recomendador.reset")}
               </button>
             </div>
 
-            <Section icon={<Users className="text-indigo-500" />} title="¿Quiénes viajan?">
+            <Section icon={<Users className="text-indigo-500" />} title={t("recomendador.sections.travelers") }>
               <div className="grid md:grid-cols-3 gap-4 mt-4">
-                <InputGroup label="Edad">
+                <InputGroup label={t("recomendador.fields.age")}>
                   <input 
                     type="number" 
                     value={formulario.Edad} 
@@ -423,7 +413,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                     className={inputStyle} 
                   />
                 </InputGroup>
-                <InputGroup label="Procedencia">
+                <InputGroup label={t("recomendador.fields.origin")}>
                   <input 
                     type="text" 
                     value={formulario["País / Procedencia"]} 
@@ -432,7 +422,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                     placeholder="Ej: Perú, Chile, USA..."
                   />
                 </InputGroup>
-                <InputGroup label="¿Viajas con niños?">
+                <InputGroup label={t("recomendador.fields.children")}>
                   <div className="grid grid-cols-2 gap-2 h-[56px]">
                     {["Sí", "No"].map(op => (
                       <button 
@@ -448,45 +438,45 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
               </div>
             </Section>
 
-            <Section icon={<Heart className="text-pink-500" />} title="Tus Intereses">
-              <p className="text-xs text-slate-400 mb-3">Selecciona tus intereses principales</p>
+            <Section icon={<Heart className="text-pink-500" />} title={t("recomendador.sections.interests") }>
+              <p className="text-xs text-slate-400 mb-3">{t("recomendador.interests.subtitle")}</p>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 <InterestCard 
                   icon={<Camera size={20} />} 
-                  label="Fotos" 
+                  label={t("recomendador.interests.photos")} 
                   active={formulario.Fotografía === "Sí"} 
                   onClick={() => handleChange("Fotografía", formulario.Fotografía === "Sí" ? "No" : "Sí")} 
                 />
                 <InterestCard 
                   icon={<Utensils size={20} />} 
-                  label="Comida" 
+                  label={t("recomendador.interests.food")} 
                   active={formulario.Comida === "Sí"} 
                   onClick={() => handleChange("Comida", formulario.Comida === "Sí" ? "No" : "Sí")} 
                 />
                 <InterestCard 
                   icon={<Compass size={20} />} 
-                  label="Trekking" 
+                  label={t("recomendador.interests.trekking")} 
                   active={formulario.Trekking === "Sí"} 
                   onClick={() => handleChange("Trekking", formulario.Trekking === "Sí" ? "No" : "Sí")} 
                 />
                 <InterestCard 
                   icon={<Trees size={20} />} 
-                  label="Naturaleza" 
+                  label={t("recomendador.interests.nature")} 
                   active={formulario.Naturaleza === "Sí"} 
                   onClick={() => handleChange("Naturaleza", formulario.Naturaleza === "Sí" ? "No" : "Sí")} 
                 />
                 <InterestCard 
                   icon={<Landmark size={20} />} 
-                  label="Historia" 
+                  label={t("recomendador.interests.history")} 
                   active={formulario.Historia === "Sí"} 
                   onClick={() => handleChange("Historia", formulario.Historia === "Sí" ? "No" : "Sí")} 
                 />
               </div>
             </Section>
 
-            <Section icon={<Mountain className="text-amber-500" />} title="Configuración Física">
+            <Section icon={<Mountain className="text-amber-500" />} title={t("recomendador.sections.physical") }>
               <div className="grid md:grid-cols-3 gap-6 mt-4">
-                <InputGroup label="¿Deseas caminata?">
+                <InputGroup label={t("recomendador.fields.walking")}>
                   <div className="grid grid-cols-2 gap-2">
                     {["Sí", "No"].map(op => (
                       <button 
@@ -499,7 +489,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                     ))}
                   </div>
                 </InputGroup>
-                <InputGroup label="Dificultad">
+                <InputGroup label={t("recomendador.fields.difficulty")}>
                   <div className="flex bg-slate-50 p-1 rounded-2xl gap-1">
                     {["Bajo", "Medio", "Alto"].map(dif => (
                       <button 
@@ -512,7 +502,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                     ))}
                   </div>
                 </InputGroup>
-                <InputGroup label="Altura Máx (msnm)">
+                <InputGroup label={t("recomendador.fields.altitude")}>
                   <input 
                     type="number" 
                     value={formulario["Altura máxima tolerada"]} 
@@ -533,7 +523,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
               >
                 <span className="flex items-center gap-2 text-sm font-bold text-slate-600">
                   <Award size={16} className="text-indigo-500" />
-                  Preferencias avanzadas
+                  {t("recomendador.sections.advanced")}
                 </span>
                 {showAdvanced ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
               </button>
@@ -607,12 +597,12 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
               {loading ? (
                 <>
                   <Loader2 className="animate-spin" /> 
-                  Analizando coordenadas...
+                  {t("recomendador.loading")}
                 </>
               ) : (
                 <>
                   <span className="relative z-10 flex items-center gap-3">
-                    Buscar Destinos Ideales 🧭
+                    {t("recomendador.search")}
                     <Sparkles size={18} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -628,13 +618,13 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                 <div className="w-16 h-16 mx-auto rounded-full bg-indigo-50 flex items-center justify-center mb-4">
                   <Loader2 size={32} className="text-indigo-600 animate-spin" />
                 </div>
-                <p className="font-bold text-slate-800">Buscando los mejores destinos...</p>
-                <p className="text-xs text-slate-400 mt-1">Esto puede tomar unos segundos</p>
+                <p className="font-bold text-slate-800">{t("recomendador.searching")}</p>
+                <p className="text-xs text-slate-400 mt-1">{t("recomendador.wait")}</p>
               </div>
             ) : resultado && resultado.top && resultado.top.length > 0 ? (
               <div className="bg-white p-6 rounded-[35px] shadow-xl border border-slate-100 animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-black flex items-center gap-2">🚀 Top 5 Destinos</h2>
+                  <h2 className="text-xl font-black flex items-center gap-2">🚀 {t("recomendador.topTitle")}</h2>
                   <span className="text-xs bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full font-bold">
                     {resultado.top.length} destinos
                   </span>
@@ -710,8 +700,8 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
             ) : (
               <div className={`bg-indigo-50/60 p-8 rounded-[35px] border-2 border-dashed border-indigo-100 text-center transition-all ${isFirstLoad ? 'opacity-100' : 'opacity-0'}`}>
                 <MapPin className="mx-auto mb-3 text-indigo-500" size={30} />
-                <p className="text-indigo-950 font-black text-sm">Configura tu brújula</p>
-                <p className="text-indigo-400 text-xs mt-1">Elige tus preferencias a la izquierda para ver tu recomendación al instante.</p>
+                <p className="text-indigo-950 font-black text-sm">{t("recomendador.empty.title")}</p>
+                <p className="text-indigo-400 text-xs mt-1">{t("recomendador.empty.subtitle")}</p>
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
                   <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">🌄 Machu Picchu</span>
                   <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">🏔️ Montaña 7 Colores</span>

@@ -79,11 +79,11 @@ function AppContent() {
           </div>
 
           <div className="hidden md:flex gap-8 text-xs font-medium uppercase tracking-wider text-slate-600">
-            <Link to="/" className="hover:text-indigo-600 transition-colors">Inicio</Link>
-            <Link to="/tours" className="hover:text-indigo-600 transition-colors">Tours</Link>
-            <Link to="/planificador" className="hover:text-indigo-600 transition-colors">Planificador</Link>
-            <Link to="/descubre" className="hover:text-indigo-600 transition-colors">Descubre</Link>
-            <Link to="/paquetes" className="hover:text-indigo-600 transition-colors">Paquetes</Link>
+            <Link to="/" className="hover:text-indigo-600 transition-colors">{i18n.t("nav_inicio")}</Link>
+            <Link to="/tours" className="hover:text-indigo-600 transition-colors">{i18n.t("nav_tours")}</Link>
+            <Link to="/planificador" className="hover:text-indigo-600 transition-colors">{i18n.t("nav_planificador")}</Link>
+            <Link to="/descubre" className="hover:text-indigo-600 transition-colors">{i18n.t("nav_descubre")}</Link>
+            <Link to="/paquetes" className="hover:text-indigo-600 transition-colors">{i18n.t("nav_paquetes")}</Link>
           </div>
 
           <div className="flex items-center gap-4">
@@ -122,11 +122,11 @@ function AppContent() {
 
       {isMenuOpen && (
         <div className="fixed top-[76px] left-4 right-4 bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-slate-200 shadow-lg z-50 flex flex-col gap-4 text-center text-sm font-medium">
-          <Link to="/" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Inicio</Link>
-          <Link to="/tours" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Tours</Link>
-          <Link to="/planificador" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Planificador</Link>
-          <Link to="/descubre" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Descubre</Link>
-          <Link to="/paquetes" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">Paquetes</Link>
+          <Link to="/" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">{i18n.t("nav_inicio")}</Link>
+          <Link to="/tours" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">{i18n.t("nav_tours")}</Link>
+          <Link to="/planificador" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">{i18n.t("nav_planificador")}</Link>
+          <Link to="/descubre" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">{i18n.t("nav_descubre")}</Link>
+          <Link to="/paquetes" onClick={() => setIsMenuOpen(false)} className="py-2 hover:bg-slate-50 rounded-xl">{i18n.t("nav_paquetes")}</Link>
         </div>
       )}
 
@@ -169,9 +169,9 @@ function AppContent() {
 
       <footer className="py-8 bg-white border-t border-slate-200/60 text-center text-slate-400 text-[11px] font-light">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>© 2026 GRUPO TUMPERU. Todos los derechos reservados.</p>
+          <p>{i18n.t("footer_derechos")}</p>
           <div className="flex items-center gap-4">
-            <p className="font-normal text-slate-500">SGEV — Gestión Turística Inteligente</p>
+            <p className="font-normal text-slate-500">{i18n.t("footer_sgev")}</p>
           </div>
         </div>
       </footer>
@@ -183,6 +183,7 @@ function AppContent() {
 // 🏠 HOME
 // ============================================================
 function Home({ visible }: { visible: boolean }) {
+  const { t } = useTranslation();
   const acronimo = [
     { letra: "G", texto: "Grandes experiencias diseñadas para ti." },
     { letra: "T", texto: "Tu pasión por viajar es nuestra inspiración." },
@@ -207,17 +208,17 @@ function Home({ visible }: { visible: boolean }) {
 
           <div className={`relative z-10 max-w-2xl px-4 transition-all duration-700 transform ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full">
-              <Sparkles size={12} className="text-amber-400" /> Turismo Exclusivo y Sostenible
+              <Sparkles size={12} className="text-amber-400" /> {t("home_badge")}
             </span>
             <h1 className="text-4xl md:text-6xl font-extralight tracking-tight text-white mb-4">
-              GRUPO TUMPERU TRAVEL
+              {t("home_hero_titulo")}
             </h1>
             <p className="text-sm md:text-base text-slate-300 mb-8 max-w-md mx-auto font-light leading-relaxed">
-              Turismo inteligente con IA en Cusco. Diseñamos experiencias memorables y soluciones a tu medida.
+              {t("home_hero_desc")}
             </p>
             <Link to="/tours">
               <button className="bg-white text-slate-900 px-8 py-3.5 rounded-full text-xs font-medium tracking-wide hover:bg-slate-50 transition-all shadow-lg flex items-center gap-2 group mx-auto cursor-pointer">
-                Explorar Paquetes
+                {t("home_hero_btn")}
                 <ArrowRight size={14} className="text-indigo-600 transform group-hover:translate-x-0.5 transition-transform" />
               </button>
             </Link>
@@ -229,10 +230,10 @@ function Home({ visible }: { visible: boolean }) {
       <section className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
           <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
-            Nuestra Historia
+            {t("home_about_badge")}
           </span>
           <h2 className="text-3xl font-light tracking-tight text-slate-900 mt-3 mb-6">
-            Comprometidos con la <span className="font-semibold text-indigo-600">excelencia</span>
+            {t("home_about_titulo")}
           </h2>
           <div className="space-y-4 text-slate-500 font-light text-sm leading-relaxed">
             <p>
@@ -246,18 +247,18 @@ function Home({ visible }: { visible: boolean }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs">
               <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wide mb-2 flex items-center gap-2">
-                <Compass size={14} className="text-indigo-600" /> Misión
+                <Compass size={14} className="text-indigo-600" /> {t("home_mision_titulo")}
               </h4>
               <p className="text-xs text-slate-400 font-light leading-relaxed">
-                Crear itinerarios únicos y personalizados conectando a los viajeros con la riqueza cultural del Perú mediante turismo sostenible.
+                {t("home_mision_desc")}
               </p>
             </div>
             <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs">
               <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wide mb-2 flex items-center gap-2">
-                <Leaf size={14} className="text-emerald-600" /> Visión
+                <Leaf size={14} className="text-emerald-600" /> {t("home_vision_titulo")}
               </h4>
               <p className="text-xs text-slate-400 font-light leading-relaxed">
-                Ser la agencia referente de turismo sostenible en el país, llevando la esencia del Perú al mundo con respeto al medio ambiente.
+                {t("home_vision_desc")}
               </p>
             </div>
           </div>
@@ -290,33 +291,33 @@ function Home({ visible }: { visible: boolean }) {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
-              Filosofía de Viaje
+              {t("home_pilares_badge")}
             </span>
             <h2 className="text-2xl md:text-3xl font-light tracking-tight text-slate-900 mt-3">
-              Nuestros Pilares Fundamentales
+              {t("home_pilares_titulo")}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="p-5 rounded-2xl hover:bg-slate-50 transition-colors flex flex-col gap-3">
               <Award className="text-indigo-600" size={24} />
-              <h3 className="text-sm font-semibold text-slate-800">Autenticidad</h3>
-              <p className="text-xs text-slate-400 font-light leading-relaxed">Experiencias culturales genuinas, resaltando la verdadera riqueza histórica de cada destino.</p>
+              <h3 className="text-sm font-semibold text-slate-800">{t("home_pilar1_titulo")}</h3>
+              <p className="text-xs text-slate-400 font-light leading-relaxed">{t("home_pilar1_desc")}</p>
             </div>
             <div className="p-5 rounded-2xl hover:bg-slate-50 transition-colors flex flex-col gap-3">
               <Leaf className="text-emerald-600" size={24} />
-              <h3 className="text-sm font-semibold text-slate-800">Sostenibilidad</h3>
-              <p className="text-xs text-slate-400 font-light leading-relaxed">Respeto absoluto por la conservación del patrimonio natural y el soporte a economías locales.</p>
+              <h3 className="text-sm font-semibold text-slate-800">{t("home_pilar2_titulo")}</h3>
+              <p className="text-xs text-slate-400 font-light leading-relaxed">{t("home_pilar2_desc")}</p>
             </div>
             <div className="p-5 rounded-2xl hover:bg-slate-50 transition-colors flex flex-col gap-3">
               <ShieldCheck className="text-indigo-600" size={24} />
-              <h3 className="text-sm font-semibold text-slate-800">Confianza</h3>
-              <p className="text-xs text-slate-400 font-light leading-relaxed">Garantía de un servicio transparente y completamente seguro en cada fase de tu travesía.</p>
+              <h3 className="text-sm font-semibold text-slate-800">{t("home_pilar3_titulo")}</h3>
+              <p className="text-xs text-slate-400 font-light leading-relaxed">{t("home_pilar3_desc")}</p>
             </div>
             <div className="p-5 rounded-2xl hover:bg-slate-50 transition-colors flex flex-col gap-3">
               <Star className="text-amber-500" size={24} />
-              <h3 className="text-sm font-semibold text-slate-800">Exclusividad</h3>
-              <p className="text-xs text-slate-400 font-light leading-relaxed">Máxima personalización y cuidado meticuloso en cada pequeño detalle de tu itinerario.</p>
+              <h3 className="text-sm font-semibold text-slate-800">{t("home_pilar4_titulo")}</h3>
+              <p className="text-xs text-slate-400 font-light leading-relaxed">{t("home_pilar4_desc")}</p>
             </div>
           </div>
         </div>

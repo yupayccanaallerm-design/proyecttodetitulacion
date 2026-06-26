@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Search, ShieldCheck, Sparkles, Clock, RefreshCw, AlertCircle, TrendingUp, ArrowRight } from "lucide-react";
 
 interface Paquete {
@@ -16,15 +17,16 @@ interface Paquete {
 
 export default function Paquetes() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [paquetes, setPaquetes] = useState<Paquete[]>([]);
   const [cargando, setCargando] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedPerfil, setSelectedPerfil] = useState("Todos");
+  const [selectedPerfil, setSelectedPerfil] = useState(t("paquetes_perfil_todos"));
 
-  const perfiles = ["Todos", "Aventurero", "Familiar", "Cultural", "Trekking"];
+  const perfiles = [t("paquetes_perfil_todos"), "Aventurero", "Familiar", "Cultural", "Trekking"];
 
   useEffect(() => {
     const obtenerPaquetesBD = async () => {
@@ -80,7 +82,7 @@ export default function Paquetes() {
 
   const filteredPaquetes = paquetes.filter(paquete => {
     const matchesSearch = paquete.nombre.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesPerfil = selectedPerfil === "Todos" || paquete.perfil_usuario === selectedPerfil;
+    const matchesPerfil = selectedPerfil === t("paquetes_perfil_todos") || paquete.perfil_usuario === selectedPerfil;
     return matchesSearch && matchesPerfil;
   });
 
@@ -92,17 +94,17 @@ export default function Paquetes() {
       {/* HEADER */}
       <header className="max-w-4xl mx-auto mb-16 text-center">
         <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
-          SGEV · Base de Datos Hostinger Activa
+          {t("paquetes_badge")}
         </span>
         <h1 className="text-3xl md:text-5xl font-light tracking-tight text-slate-900 mt-4 mb-6">
-          Nuestros Paquetes <span className="font-semibold text-indigo-600">Optimizados</span>
+          {t("paquetes_titulo")} <span className="font-semibold text-indigo-600">{t("paquetes_titulo_highlight")}</span>
         </h1>
 
         <div className="relative max-w-2xl mx-auto mb-8 shadow-xs rounded-2xl">
           <Search className="absolute left-4 top-4 text-slate-400" size={18} />
           <input
             type="text"
-            placeholder="Busca en tus paquetes reales (Ej. Cusco Express, Imperial...)"
+            placeholder={t("paquetes_buscar")}
             className="w-full bg-white border border-slate-200 py-4 pl-12 pr-4 rounded-2xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition text-slate-700 text-sm"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -132,7 +134,7 @@ export default function Paquetes() {
       {cargando && (
         <div className="flex flex-col items-center justify-center py-24 space-y-3">
           <RefreshCw className="text-indigo-600 animate-spin" size={26} />
-          <p className="text-xs text-slate-400 font-medium">Sincronizando catálogo de paquetes ...</p>
+          <p className="text-xs text-slate-400 font-medium">{t("paquetes_cargando")}</p>
         </div>
       )}
 
@@ -140,19 +142,19 @@ export default function Paquetes() {
       {error && (
         <div className="max-w-md mx-auto bg-red-50 border border-red-200 p-4 rounded-xl flex items-center gap-3 text-red-700 text-xs font-medium mb-12">
           <AlertCircle size={18} className="text-red-500 shrink-0" />
-          <p>{error} Verifica que tu servidor FastAPI local en el puerto 8000 esté encendido.</p>
+          <p>{error} {t("paquetes_error_servidor")}</p>
         </div>
       )}
 
       {!cargando && !error && (
         <>
           {/* RECOMENDADOS TOP */}
-          {searchTerm === "" && selectedPerfil === "Todos" && recommended.length > 0 && (
+          {searchTerm === "" && selectedPerfil === t("paquetes_perfil_todos") && recommended.length > 0 && (
             <div className="max-w-6xl mx-auto mb-14 bg-gradient-to-r from-indigo-50/40 via-purple-50/20 to-transparent p-6 rounded-2xl border border-indigo-100/60">
               <div className="flex items-center justify-between gap-2 mb-4">
                 <div className="flex items-center gap-2 text-indigo-700 font-medium text-sm">
                   <Sparkles size={16} className="text-indigo-600 animate-pulse" />
-                  <span>Circuitos Destacados en tu Red SGEV</span>
+                  <span>{t("paquetes_destacados")}</span>
                 </div>
               </div>
 
@@ -198,10 +200,10 @@ export default function Paquetes() {
                     <div>
                       <div className="flex justify-between items-center text-xs text-slate-400 mb-2.5">
                         <span className="flex items-center gap-1 font-semibold text-slate-600">
-                          <TrendingUp size={13} className="text-indigo-500" /> Perfil: {paquete.perfil_usuario}
+                          <TrendingUp size={13} className="text-indigo-500" /> {t("paquetes_perfil")}: {paquete.perfil_usuario}
                         </span>
                         <span className="flex items-center gap-1 font-medium text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md">
-                          <Sparkles size={12} className="text-amber-500" /> Calificado
+                          <Sparkles size={12} className="text-amber-500" /> {t("paquetes_calificado")}
                         </span>
                       </div>
 
@@ -215,7 +217,7 @@ export default function Paquetes() {
 
                       <div className="flex items-center gap-4 text-[11px] text-slate-500 font-medium mb-4">
                         <span className="flex items-center gap-1">
-                          <Clock size={12} className="text-indigo-500" /> {paquete.duracion_dias} días
+                          <Clock size={12} className="text-indigo-500" /> {paquete.duracion_dias} {t("paquetes_dias")}
                         </span>
                       </div>
 
@@ -232,7 +234,7 @@ export default function Paquetes() {
                       {/* ACCIONES */}
                       <div className="flex justify-between items-center pt-4 border-t border-slate-100">
                         <div className="flex flex-col">
-                          <span className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Precio Sugerido</span>
+                          <span className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">{t("paquetes_precio")}</span>
                           <span className="text-lg font-bold text-slate-800">
                             ${paquete.precio_sugerido} <span className="text-xs font-light text-slate-400">USD</span>
                           </span>
@@ -243,20 +245,20 @@ export default function Paquetes() {
                             onClick={() => navigate(`/reservas?package=${paquete.nombre}&price=${paquete.precio_sugerido}`)}
                             className="bg-indigo-600 text-white px-3 py-2 rounded-xl text-xs font-medium tracking-wide hover:bg-indigo-700 transition shadow-xs cursor-pointer active:scale-95"
                           >
-                            Reservar
+                            {t("paquetes_btn_reservar")}
                           </button>
                           <button
                             onClick={() => navigate(`/detalle-paquete/${paquete.id}`)}
                             className="bg-white border border-slate-200 text-slate-700 px-3 py-2 rounded-xl text-xs font-medium hover:bg-slate-50 transition flex items-center gap-1 cursor-pointer"
                           >
-                            Detalles <ArrowRight size={11} />
+                            {t("paquetes_btn_detalles")} <ArrowRight size={11} />
                           </button>
                         </div>
                       </div>
 
                       <div className="mt-3.5 flex items-center gap-1.5 text-[11px] text-slate-400 font-light">
                         <ShieldCheck size={13} className="text-emerald-500" />
-                        Indexado en u796907883_agenciaGTP
+                        {t("tours_indexado")}
                       </div>
                     </div>
 
@@ -265,7 +267,7 @@ export default function Paquetes() {
               ))
             ) : (
               <div className="col-span-full text-center py-24 text-slate-400 font-light text-sm bg-white rounded-2xl border border-dashed border-slate-200">
-                Aún no has registrado paquetes integrales para este circuito en tu panel administrativo.
+                {t("paquetes_sin_resultados")}
               </div>
             )}
           </main>

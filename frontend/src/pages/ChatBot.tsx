@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Send, Sparkles, X, AlertCircle, Database, Brain } from "lucide-react";
+import { Send, Sparkles, X, AlertCircle, Database, Brain, Mic, MicOff, Volume2, VolumeX } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface Message {
   from: "user" | "bot";
@@ -15,71 +16,83 @@ interface ChatBotProps {
   isFloating?: boolean;
   onClose?: () => void;
   userId?: string;
-  initialContext?: string;  // Contexto de lugar detectado desde PerfilViajero
+  initialContext?: string;
 }
 
-export default function ChatBot({ 
-  isFloating = false, 
+const SpeechRecognitionAPI =
+  (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+export default function ChatBot({
+  isFloating = false,
   onClose,
   userId = "usuario",
-  initialContext 
+  initialContext,
 }: ChatBotProps) {
+  const { t, i18n } = useTranslation();
+
   const [messages, setMessages] = useState<Message[]>([
-    { 
-      from: "bot", 
-      text: "👋 ¡Hola! Soy Travel Assistant, tu experto en turismo de Cusco. Puedo ayudarte con información sobre:\n\n📍 Tours y destinos\n🏨 Hoteles y alojamiento\n🍽️ Restaurantes y gastronomía\n📜 Historia y cultura\n🚗 Transporte y logística\n\n¿En qué puedo asistirte hoy?" 
-    }
+    { from: "bot", text: t("chat_bienvenida") },
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentIntent, setCurrentIntent] = useState<string>("");
   const [modelInfo, setModelInfo] = useState<string>("Cargando...");
+
+  // ── VOZ ───────────────────────────────────────────────────
+  const [recording, setRecording] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const recognitionRef = useRef<any>(null);
+
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll al último mensaje
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  // Cuando se recibe un contexto (lugar detectado desde PerfilViajero), enviar automáticamente
+  // Cuando cambia el idioma, actualizar el mensaje de bienvenida
+  useEffect(() => {
+    setMessages([{ from: "bot", text: t("chat_bienvenida") }]);
+  }, [i18n.language]);
+
   useEffect(() => {
     if (initialContext) {
       const question = `Cuéntame sobre ${initialContext}`;
       setInput(question);
-      // Pequeño delay para que el input se actualice antes de enviar
       setTimeout(() => {
         setInput("");
         setIsTyping(true);
         setError(null);
-        const userMsg = { from: "user" as const, text: question };
-        setMessages(prev => [...prev, userMsg]);
-
+        setMessages((prev) => [...prev, { from: "user" as const, text: question }]);
         fetch("/chatbot/ask", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ user_id: userId, query: question, top_k: 2 }),
         })
-          .then(r => r.json())
-          .then(data => {
-            setMessages(prev => [...prev, {
-              from: "bot",
-              text: data.answer,
-              sources: data.sources?.length > 0 ? data.sources : undefined,
-            }]);
+          .then((r) => r.json())
+          .then((data) => {
+            const botText = data.answer;
+            setMessages((prev) => [
+              ...prev,
+              {
+                from: "bot",
+                text: botText,
+                sources: data.sources?.length > 0 ? data.sources : undefined,
+              },
+            ]);
+            speakText(botText);
           })
           .catch(() => {
-            setMessages(prev => [...prev, {
-              from: "bot",
-              text: "🔌 No pude conectarme al servidor para consultar sobre este lugar.",
-            }]);
+            setMessages((prev) => [
+              ...prev,
+              { from: "bot", text: t("chat_error_lugar") },
+            ]);
           })
           .finally(() => setIsTyping(false));
       }, 100);
     }
   }, [initialContext]);
 
-  // Obtener configuración del backend al iniciar
   useEffect(() => {
     const fetchConfig = async () => {
       try {
@@ -90,22 +103,55 @@ export default function ChatBot({
         } else {
           setModelInfo("Ollama");
         }
-      } catch (err) {
-        console.error("Error obteniendo configuración:", err);
+      } catch {
         setModelInfo("Ollama");
       }
     };
-    
     fetchConfig();
   }, []);
 
+  // ── FUNCIÓN TTS ───────────────────────────────────────────
+  const speakText = (text: string) => {
+    if (!voiceEnabled || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text.replace(/[🎯📍🏨🍽️📜🚗👋🔌🧠🔍📸]/gu, ""));
+    utterance.lang = i18n.language === "en" ? "en-US" : "es-ES";
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  // ── GRABACIÓN DE VOZ ──────────────────────────────────────
+  const startRecording = () => {
+    if (!SpeechRecognitionAPI) {
+      alert("Tu navegador no soporta reconocimiento de voz. Usa Chrome.");
+      return;
+    }
+    const recognition = new SpeechRecognitionAPI();
+    recognition.lang = i18n.language === "en" ? "en-US" : "es-ES";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(transcript);
+    };
+    recognition.onerror = () => setRecording(false);
+    recognition.onend = () => setRecording(false);
+    recognitionRef.current = recognition;
+    recognition.start();
+    setRecording(true);
+  };
+
+  const stopRecording = () => {
+    recognitionRef.current?.stop();
+    setRecording(false);
+  };
+
+  // ── ENVÍO DE MENSAJE ──────────────────────────────────────
   const sendMessage = async () => {
     if (!input.trim() || isTyping) return;
-
     const userText = input;
-    const userMsg: Message = { from: "user", text: userText };
-    
-    setMessages(prev => [...prev, userMsg]);
+    setMessages((prev) => [...prev, { from: "user", text: userText }]);
     setInput("");
     setIsTyping(true);
     setError(null);
@@ -114,51 +160,31 @@ export default function ChatBot({
     try {
       const response = await fetch("/chatbot/ask", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          query: userText,
-          top_k: 2
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId, query: userText, top_k: 2 }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
-      }
+      if (!response.ok) throw new Error(`Error ${response.status}`);
 
       const data = await response.json();
-      
       setCurrentIntent(data.intent);
-      
-      const botMsg: Message = { 
-        from: "bot", 
+
+      const botMsg: Message = {
+        from: "bot",
         text: data.answer,
-        sources: data.sources && data.sources.length > 0 ? data.sources : undefined,
-        moduleData: data.module_data || undefined
+        sources: data.sources?.length > 0 ? data.sources : undefined,
+        moduleData: data.module_data || undefined,
       };
-      
-      setMessages(prev => [...prev, botMsg]);
+      setMessages((prev) => [...prev, botMsg]);
+      speakText(data.answer);
 
-      if (data.intent === "memorizar") {
-        await saveToMemory(userText);
-      }
-
-      // Si hay datos de recomendaciones, navegar al planificador
-      if (data.module_data?.type === "recomendacion" && data.module_data?.top) {
-        // Mostrar recomendaciones destacadas
-      }
-
-    } catch (err) {
-      console.error("Error en chat:", err);
+      if (data.intent === "memorizar") await saveToMemory(userText);
+    } catch {
       setError("No se pudo conectar con el servidor.");
-      
-      const errorMsg: Message = { 
-        from: "bot", 
-        text: "🔌 Lo siento, no puedo conectarme al servidor. Verifica que el backend esté corriendo en http://127.0.0.1:8000" 
-      };
-      setMessages(prev => [...prev, errorMsg]);
+      setMessages((prev) => [
+        ...prev,
+        { from: "bot", text: t("chat_error_conexion") },
+      ]);
     } finally {
       setIsTyping(false);
     }
@@ -168,65 +194,81 @@ export default function ChatBot({
     try {
       await fetch("/chatbot/mem/fact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user_id: userId,
-          fact_text: fact.replace("recuerda que", "").trim()
+          fact_text: fact.replace("recuerda que", "").trim(),
         }),
       });
-    } catch (err) {
-      console.error("Error guardando en memoria:", err);
-    }
+    } catch {}
   };
 
-  const formatText = (text: string) => {
-    return text.split('\n').map((line, i) => (
+  const formatText = (text: string) =>
+    text.split("\n").map((line, i) => (
       <p key={i} className="mb-2 last:mb-0">
         {line}
-        {line.startsWith('📍') && <span className="ml-2 text-indigo-500">🗺️</span>}
-        {line.startsWith('🏨') && <span className="ml-2 text-indigo-500">🏨</span>}
-        {line.startsWith('🍽️') && <span className="ml-2 text-indigo-500">🍴</span>}
-        {line.startsWith('📜') && <span className="ml-2 text-indigo-500">📖</span>}
-        {line.startsWith('🚗') && <span className="ml-2 text-indigo-500">🚗</span>}
       </p>
     ));
+
+  const suggestions = [
+    t("chat_sug_machupicchu"),
+    t("chat_sug_recomienda"),
+    t("chat_sug_sagrado"),
+    t("chat_sug_colores"),
+    t("chat_sug_foto"),
+    t("chat_sug_hoteles"),
+  ];
+
+  const intentLabels: Record<string, string> = {
+    saludo: t("chat_intent_saludo"),
+    consulta: t("chat_intent_consulta"),
+    memorizar: t("chat_intent_memorizar"),
+    recomendar: t("chat_intent_recomendar"),
+    imagen: t("chat_intent_imagen"),
   };
 
   return (
-    <div className={isFloating 
-      ? "fixed bottom-24 right-4 md:right-8 w-[400px] h-[600px] bg-white border border-slate-200/80 rounded-2xl shadow-2xl z-[200] overflow-hidden flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-300"
-      : "w-full h-full flex flex-col bg-gradient-to-b from-slate-50 to-white text-slate-800 font-sans"
-    }>
-      
+    <div
+      className={
+        isFloating
+          ? "fixed bottom-24 right-4 md:right-8 w-[400px] h-[600px] bg-white border border-slate-200/80 rounded-2xl shadow-2xl z-[200] overflow-hidden flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-300"
+          : "w-full h-full flex flex-col bg-gradient-to-b from-slate-50 to-white text-slate-800 font-sans"
+      }
+    >
       {/* HEADER */}
       <div className="flex justify-between items-center px-5 py-4 bg-gradient-to-r from-slate-900 to-indigo-950 text-white select-none shadow-lg">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
-            <div className="absolute inset-0 w-3 h-3 rounded-full bg-emerald-400 animate-ping opacity-75"></div>
+            <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="absolute inset-0 w-3 h-3 rounded-full bg-emerald-400 animate-ping opacity-75" />
           </div>
           <div className="flex flex-col">
             <span className="text-sm font-black tracking-tight">Travel Assistant</span>
             <div className="flex items-center gap-2 text-[10px] text-slate-300">
               <Brain size={10} />
-              <span>IA con RAG • {modelInfo}</span>
+              <span>{t("chat_ia_rag")} • {modelInfo}</span>
             </div>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          {currentIntent && (
+          {currentIntent && intentLabels[currentIntent] && (
             <span className="text-[10px] bg-white/10 px-2 py-1 rounded-full">
-              {currentIntent === "saludo" && "👋 Saludo"}
-              {currentIntent === "consulta" && "🔍 Consulta"}
-              {currentIntent === "memorizar" && "🧠 Aprendiendo"}
-              {currentIntent === "recomendar" && "🎯 Recomendar"}
-              {currentIntent === "imagen" && "📸 Visión"}
+              {intentLabels[currentIntent]}
             </span>
           )}
+          {/* Botón silenciar/activar bot voz */}
+          <button
+            onClick={() => {
+              setVoiceEnabled(!voiceEnabled);
+              if (voiceEnabled) window.speechSynthesis?.cancel();
+            }}
+            title={voiceEnabled ? t("chat_voz_desactivar") : t("chat_voz_activar")}
+            className="text-slate-400 hover:text-white transition-all p-1.5 rounded-lg hover:bg-white/10"
+          >
+            {voiceEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
+          </button>
           {isFloating && onClose && (
-            <button 
+            <button
               onClick={onClose}
               className="text-slate-400 hover:text-white transition-all p-1.5 rounded-lg hover:bg-white/10"
             >
@@ -236,7 +278,7 @@ export default function ChatBot({
         </div>
       </div>
 
-      {/* Resto del componente igual... */}
+      {/* MENSAJES */}
       <div className="flex-1 p-4 space-y-3 overflow-y-auto custom-scrollbar">
         {messages.map((msg, i) => (
           <div
@@ -250,16 +292,16 @@ export default function ChatBot({
                   : "bg-white text-slate-700 border border-slate-200 rounded-bl-none"
               }`}
             >
-              <div className="text-sm leading-relaxed">
-                {formatText(msg.text)}
-              </div>
-              
+              <div className="text-sm leading-relaxed">{formatText(msg.text)}</div>
+
               {msg.sources && msg.sources.length > 0 && (
                 <div className="mt-2 pt-2 border-t border-slate-100 text-[10px] text-slate-400">
                   <Database size={10} className="inline mr-1" />
-                  Fuentes: {msg.sources.map((s, idx) => (
+                  {t("chat_fuentes")}:{" "}
+                  {msg.sources.map((s, idx) => (
                     <span key={idx} className="ml-1">
-                      {s.source}{s.chunk !== "?" && ` (chunk ${s.chunk})`}
+                      {s.source}
+                      {s.chunk !== "?" && ` (chunk ${s.chunk})`}
                       {idx < msg.sources!.length - 1 && ","}
                     </span>
                   ))}
@@ -268,19 +310,24 @@ export default function ChatBot({
 
               {msg.moduleData?.top && (
                 <div className="mt-2 pt-2 border-t border-slate-100">
-                  <p className="text-[10px] font-bold text-indigo-600 mb-1">🎯 Recomendaciones:</p>
+                  <p className="text-[10px] font-bold text-indigo-600 mb-1">
+                    {t("chat_recomendaciones")}
+                  </p>
                   <div className="flex flex-wrap gap-1.5">
                     {msg.moduleData.top.map((rec, idx) => (
-                      <span key={idx} className="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full font-medium">
-                        {idx+1}. {rec.destino}
+                      <span
+                        key={idx}
+                        className="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full font-medium"
+                      >
+                        {idx + 1}. {rec.destino}
                       </span>
                     ))}
                   </div>
                   <p className="text-[10px] text-slate-400 mt-1">
-                    💡 Usa el Planificador de Viajes para más detalles.
+                    {t("chat_planificador_tip")}
                   </p>
                 </div>
-                )}
+              )}
             </div>
           </div>
         ))}
@@ -288,10 +335,10 @@ export default function ChatBot({
         {isTyping && (
           <div className="flex justify-start animate-in fade-in duration-200">
             <div className="bg-white border border-slate-200 p-3 rounded-2xl rounded-bl-none flex items-center gap-1.5 shadow-sm">
-              <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-              <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-              <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-              <span className="text-xs text-slate-400 ml-1">Consultando base de conocimiento... (puede tardar 1-2 min)</span>
+              <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+              <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+              <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+              <span className="text-xs text-slate-400 ml-1">{t("chat_consultando")}</span>
             </div>
           </div>
         )}
@@ -311,18 +358,31 @@ export default function ChatBot({
       {/* INPUT */}
       <div className="p-4 bg-white border-t border-slate-200 shadow-sm">
         <div className="flex items-center gap-2">
+          {/* Botón micrófono */}
+          <button
+            onClick={recording ? stopRecording : startRecording}
+            title={recording ? t("chat_detener") : t("chat_grabar")}
+            className={`p-3 rounded-xl transition-all border flex items-center justify-center min-w-[44px] ${
+              recording
+                ? "bg-red-500 text-white border-red-500 animate-pulse"
+                : "bg-white text-slate-500 border-slate-200 hover:bg-slate-50 hover:text-indigo-600"
+            }`}
+          >
+            {recording ? <MicOff size={18} /> : <Mic size={18} />}
+          </button>
+
           <div className="flex-1 relative">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ej: ¿Cuánto cuesta Machu Picchu? o recuerda que me gusta la aventura..."
+              placeholder={t("chat_placeholder")}
               className="w-full bg-slate-50 text-slate-800 placeholder:text-slate-400 pl-4 pr-10 py-3 rounded-xl text-sm border border-slate-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               disabled={isTyping}
             />
             <Sparkles size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-indigo-400" />
           </div>
-          
+
           <button
             onClick={sendMessage}
             disabled={isTyping || !input.trim()}
@@ -331,9 +391,9 @@ export default function ChatBot({
             <Send size={18} />
           </button>
         </div>
-        
+
         <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
-          {["Machu Picchu", "Recomiéndame", "Valle Sagrado", "Montaña 7 Colores", "Identifica una foto", "Hoteles"].map(sug => (
+          {suggestions.map((sug) => (
             <button
               key={sug}
               onClick={() => setInput(sug)}
@@ -346,20 +406,10 @@ export default function ChatBot({
       </div>
 
       <style>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 5px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #f1f1f1;
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #cbd5e1;
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #94a3b8;
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
       `}</style>
     </div>
   );

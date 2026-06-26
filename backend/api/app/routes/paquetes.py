@@ -1,19 +1,17 @@
 # backend/routes/paquetes.py
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime
-from api.database import obtener_conexion
+from database import obtener_conexion
+from ..i18n import tr
 
 router = APIRouter(
     prefix="/api/paquetes",
     tags=["Paquetes"]
 )
 
-# ============================================================
-# MODELOS
-# ============================================================
 
 class PaqueteCreate(BaseModel):
     nombre: str
@@ -22,6 +20,7 @@ class PaqueteCreate(BaseModel):
     perfil_usuario: str
     precio_sugerido: float
     tours: List[int] = []
+
 
 class PaqueteUpdate(BaseModel):
     nombre: Optional[str] = None
@@ -32,33 +31,28 @@ class PaqueteUpdate(BaseModel):
     tours: Optional[List[int]] = None
     estado: Optional[int] = None
 
-# ============================================================
-# ENDPOINTS
-# ============================================================
 
-# 1️⃣ LISTAR PAQUETES
 @router.get("/")
-async def obtener_paquetes():
-    """Obtener todos los paquetes activos"""
+async def obtener_paquetes(request: Request):
     conexion = obtener_conexion()
     if not conexion:
-        raise HTTPException(status_code=500, detail="Error de conexión a la Base de Datos")
-    
+        raise HTTPException(status_code=500, detail=tr(request, "error_conexion_db"))
+
     try:
         with conexion.cursor() as cursor:
             sql = """
-                SELECT 
-                    p.id, 
-                    p.nombre, 
-                    p.descripcion_base, 
-                    p.duracion_dias, 
-                    p.perfil_usuario, 
+                SELECT
+                    p.id,
+                    p.nombre,
+                    p.descripcion_base,
+                    p.duracion_dias,
+                    p.perfil_usuario,
                     p.precio_sugerido,
                     p.estado,
                     p.created_at,
                     p.updated_at,
                     (
-                        SELECT ti.imagen_url 
+                        SELECT ti.imagen_url
                         FROM paquete_tour pt
                         LEFT JOIN tour_imagenes ti ON pt.tour_id = ti.tour_id
                         WHERE pt.paquete_id = p.id
@@ -70,7 +64,7 @@ async def obtener_paquetes():
             """
             cursor.execute(sql)
             resultados = cursor.fetchall()
-            
+
             paquetes = []
             for r in resultados:
                 paquetes.append({
@@ -85,59 +79,49 @@ async def obtener_paquetes():
                     "updated_at": r[8].strftime("%Y-%m-%d %H:%M:%S") if r[8] else None,
                     "imagen_base64": r[9] if r[9] else None
                 })
-                
+
             return paquetes
-            
+
     except Exception as e:
         print(f"❌ Error al obtener paquetes: {str(e)}")
-        raise HTTPException(status_code=400, detail=f"Error en MySQL: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"{tr(request, 'error_mysql')}: {str(e)}")
     finally:
         conexion.close()
 
 
-# 2️⃣ CREAR PAQUETE (POST) - ✅ AGREGADO
 @router.post("/")
-async def crear_paquete(paquete: PaqueteCreate):
-    """Crear un nuevo paquete"""
+async def crear_paquete(paquete: PaqueteCreate, request: Request):
     print("=" * 50)
     print("📥 Creando nuevo paquete")
     print(f"   Nombre: {paquete.nombre}")
-    print(f"   Perfil: {paquete.perfil_usuario}")
-    print(f"   Precio: {paquete.precio_sugerido}")
-    print(f"   Tours: {paquete.tours}")
     print("=" * 50)
-    
+
     conexion = obtener_conexion()
     if not conexion:
-        raise HTTPException(status_code=500, detail="Error de conexión a la base de datos")
-    
+        raise HTTPException(status_code=500, detail=tr(request, "error_conexion_db"))
+
     try:
         with conexion.cursor() as cursor:
-            # Insertar paquete
             sql_paquete = """
                 INSERT INTO paquetes (
-                    nombre, descripcion_base, duracion_dias, 
+                    nombre, descripcion_base, duracion_dias,
                     perfil_usuario, precio_sugerido, estado,
                     created_at, updated_at
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
-            
             now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            
             cursor.execute(sql_paquete, (
                 paquete.nombre,
                 paquete.descripcion_base,
                 paquete.duracion_dias,
                 paquete.perfil_usuario,
                 paquete.precio_sugerido,
-                1,  # estado activo
+                1,
                 now,
                 now
             ))
-            
             paquete_id = cursor.lastrowid
-            
-            # Insertar tours relacionados
+
             if paquete.tours:
                 sql_tour = """
                     INSERT INTO paquete_tour (paquete_id, tour_id, orden_dia)
@@ -145,18 +129,16 @@ async def crear_paquete(paquete: PaqueteCreate):
                 """
                 for idx, tour_id in enumerate(paquete.tours):
                     cursor.execute(sql_tour, (paquete_id, tour_id, idx + 1))
-            
+
             conexion.commit()
-            
             print(f"✅ Paquete creado con ID: {paquete_id}")
-            print("=" * 50)
-            
+
             return {
                 "status": "success",
-                "message": "Paquete creado exitosamente",
+                "message": tr(request, "paquete_creado"),
                 "paquete_id": paquete_id
             }
-            
+
     except Exception as e:
         conexion.rollback()
         print(f"❌ Error: {str(e)}")
@@ -165,30 +147,27 @@ async def crear_paquete(paquete: PaqueteCreate):
         conexion.close()
 
 
-# 3️⃣ OBTENER PAQUETE POR ID
 @router.get("/{paquete_id}")
-async def obtener_detalle_paquete(paquete_id: int):
-    """Obtener detalle de un paquete específico"""
+async def obtener_detalle_paquete(paquete_id: int, request: Request):
     conexion = obtener_conexion()
     if not conexion:
-        raise HTTPException(status_code=500, detail="Error de conexión")
-    
+        raise HTTPException(status_code=500, detail=tr(request, "error_conexion"))
+
     try:
         with conexion.cursor() as cursor:
-            # Información del paquete
             sql_paquete = """
-                SELECT 
-                    p.id, 
-                    p.nombre, 
-                    p.descripcion_base, 
-                    p.duracion_dias, 
-                    p.perfil_usuario, 
+                SELECT
+                    p.id,
+                    p.nombre,
+                    p.descripcion_base,
+                    p.duracion_dias,
+                    p.perfil_usuario,
                     p.precio_sugerido,
                     p.estado,
                     p.created_at,
                     p.updated_at,
                     (
-                        SELECT ti.imagen_url 
+                        SELECT ti.imagen_url
                         FROM paquete_tour pt
                         LEFT JOIN tour_imagenes ti ON pt.tour_id = ti.tour_id
                         WHERE pt.paquete_id = p.id
@@ -200,11 +179,10 @@ async def obtener_detalle_paquete(paquete_id: int):
             """
             cursor.execute(sql_paquete, (paquete_id,))
             res_paquete = cursor.fetchone()
-            
+
             if not res_paquete:
-                raise HTTPException(status_code=404, detail="Paquete no encontrado")
-            
-            # Tours vinculados
+                raise HTTPException(status_code=404, detail=tr(request, "paquete_no_encontrado"))
+
             sql_tours = """
                 SELECT t.id, t.nombre, t.zona_geografica, t.descripcion, pt.orden_dia
                 FROM paquete_tour pt
@@ -214,7 +192,7 @@ async def obtener_detalle_paquete(paquete_id: int):
             """
             cursor.execute(sql_tours, (paquete_id,))
             res_tours = cursor.fetchall()
-            
+
             tours_vinculados = []
             for t in res_tours:
                 tours_vinculados.append({
@@ -224,7 +202,7 @@ async def obtener_detalle_paquete(paquete_id: int):
                     "descripcion": str(t[3]),
                     "orden_dia": int(t[4])
                 })
-            
+
             return {
                 "id": int(res_paquete[0]),
                 "nombre": str(res_paquete[1]),
@@ -238,7 +216,7 @@ async def obtener_detalle_paquete(paquete_id: int):
                 "imagen_base64": res_paquete[9] if res_paquete[9] else None,
                 "tours": tours_vinculados
             }
-            
+
     except HTTPException as he:
         raise he
     except Exception as e:
@@ -248,73 +226,60 @@ async def obtener_detalle_paquete(paquete_id: int):
         conexion.close()
 
 
-# 4️⃣ ACTUALIZAR PAQUETE (PUT)
 @router.put("/{paquete_id}")
-async def actualizar_paquete(paquete_id: int, paquete: PaqueteUpdate):
-    """Actualizar un paquete existente"""
+async def actualizar_paquete(paquete_id: int, paquete: PaqueteUpdate, request: Request):
     conexion = obtener_conexion()
     if not conexion:
-        raise HTTPException(status_code=500, detail="Error de conexión")
-    
+        raise HTTPException(status_code=500, detail=tr(request, "error_conexion"))
+
     try:
         with conexion.cursor() as cursor:
-            # Verificar que existe
             cursor.execute("SELECT id FROM paquetes WHERE id = %s", (paquete_id,))
             if not cursor.fetchone():
-                raise HTTPException(status_code=404, detail="Paquete no encontrado")
-            
+                raise HTTPException(status_code=404, detail=tr(request, "paquete_no_encontrado"))
+
             updates = []
             params = []
-            
+
             if paquete.nombre is not None:
                 updates.append("nombre = %s")
                 params.append(paquete.nombre)
-            
             if paquete.descripcion_base is not None:
                 updates.append("descripcion_base = %s")
                 params.append(paquete.descripcion_base)
-            
             if paquete.duracion_dias is not None:
                 updates.append("duracion_dias = %s")
                 params.append(paquete.duracion_dias)
-            
             if paquete.perfil_usuario is not None:
                 updates.append("perfil_usuario = %s")
                 params.append(paquete.perfil_usuario)
-            
             if paquete.precio_sugerido is not None:
                 updates.append("precio_sugerido = %s")
                 params.append(paquete.precio_sugerido)
-            
             if paquete.estado is not None:
                 updates.append("estado = %s")
                 params.append(paquete.estado)
-            
+
             if updates:
                 updates.append("updated_at = %s")
                 params.append(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                 params.append(paquete_id)
-                
                 sql = f"UPDATE paquetes SET {', '.join(updates)} WHERE id = %s"
                 cursor.execute(sql, params)
-            
-            # Actualizar tours
+
             if paquete.tours is not None:
-                # Eliminar tours antiguos
                 cursor.execute("DELETE FROM paquete_tour WHERE paquete_id = %s", (paquete_id,))
-                
-                # Insertar nuevos tours
                 sql_tour = "INSERT INTO paquete_tour (paquete_id, tour_id, orden_dia) VALUES (%s, %s, %s)"
                 for idx, tour_id in enumerate(paquete.tours):
                     cursor.execute(sql_tour, (paquete_id, tour_id, idx + 1))
-            
+
             conexion.commit()
-            
+
             return {
                 "status": "success",
-                "message": "Paquete actualizado exitosamente"
+                "message": tr(request, "paquete_actualizado")
             }
-            
+
     except Exception as e:
         conexion.rollback()
         print(f"❌ Error: {str(e)}")
@@ -323,29 +288,26 @@ async def actualizar_paquete(paquete_id: int, paquete: PaqueteUpdate):
         conexion.close()
 
 
-# 5️⃣ ELIMINAR PAQUETE (DELETE)
 @router.delete("/{paquete_id}")
-async def eliminar_paquete(paquete_id: int):
-    """Eliminar (desactivar) un paquete"""
+async def eliminar_paquete(paquete_id: int, request: Request):
     conexion = obtener_conexion()
     if not conexion:
-        raise HTTPException(status_code=500, detail="Error de conexión")
-    
+        raise HTTPException(status_code=500, detail=tr(request, "error_conexion"))
+
     try:
         with conexion.cursor() as cursor:
             cursor.execute("""
-                UPDATE paquetes 
+                UPDATE paquetes
                 SET estado = 0, updated_at = %s
                 WHERE id = %s
             """, (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), paquete_id))
-            
             conexion.commit()
-            
+
             return {
                 "status": "success",
-                "message": "Paquete eliminado (desactivado) exitosamente"
+                "message": tr(request, "paquete_eliminado")
             }
-            
+
     except Exception as e:
         print(f"❌ Error: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))

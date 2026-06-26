@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Camera, Sparkles, Image, MapPin, Clock, Sun, Star,
   AlertCircle, Compass, Navigation, ShieldCheck, Heart,
@@ -240,22 +241,24 @@ interface IVisionResult {
 
 // ------------------ Componente Principal ------------------
 export default function PerfilViajero({ onPlaceDetected }: { onPlaceDetected?: (place: string) => void }) {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 selection:bg-indigo-100">
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Header */}
         <section className="text-center mb-12">
           <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full inline-flex items-center gap-1.5">
-            <Sparkles size={12} /> Descubre tu destino
+            <Sparkles size={12} /> {t("descubre.badge")}
           </span>
           <h1 className="text-3xl md:text-5xl font-black tracking-tight mt-4 mb-3">
-            Descubridor{" "}
+            {t("descubre.title")} 
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-500">
-              Inteligente
+              {t("descubre.titleHighlight")}
             </span>
           </h1>
           <p className="text-slate-500 text-sm max-w-xl mx-auto">
-            Toma una foto o sube una imagen de cualquier lugar turistico de Cusco y descubre su historia, datos curiosos y tours recomendados.
+            {t("descubre.intro")}
           </p>
         </section>
 
@@ -269,6 +272,7 @@ export default function PerfilViajero({ onPlaceDetected }: { onPlaceDetected?: (
 // VISOR TURISTICO
 // ================================================================
 function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => void }) {
+  const { t } = useTranslation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [result, setResult] = useState<IVisionResult | null>(null);
@@ -278,6 +282,7 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
   const [cameraActive, setCameraActive] = useState(false);
   const [showTour, setShowTour] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const suggestedPlaces = t("descubre.examples", { returnObjects: true }) as string[];
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -290,38 +295,91 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
     return () => stopCamera();
   }, []);
 
+  useEffect(() => {
+    const attachStream = async () => {
+      if (!cameraActive || !streamRef.current || !videoRef.current) return;
+
+      const video = videoRef.current;
+      video.muted = true;
+      video.playsInline = true;
+      video.srcObject = streamRef.current;
+
+      try {
+        await video.play();
+      } catch (err) {
+        console.error("Error al iniciar la vista previa de la cámara:", err);
+      }
+    };
+
+    attachStream();
+  }, [cameraActive]);
+
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: 1280, height: 720 } });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: "environment",
+        },
+        audio: false,
+      });
+
+      setError(null);
       streamRef.current = stream;
-      if (videoRef.current) videoRef.current.srcObject = stream;
-      setCameraActive(true);
       setSelectedFile(null);
       setPreview(null);
       setResult(null);
-      setError(null);
-    } catch {
-      setError("No se pudo acceder a la camara. Verifica los permisos.");
+      setCameraActive(true);
+
+    } catch (err) {
+      console.error("Camera error:", err);
+      setError("No se pudo acceder a la cámara");
     }
   };
 
   const stopCamera = () => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(t => t.stop());
-      streamRef.current = null;
+    streamRef.current?.getTracks().forEach((t) => t.stop());
+    streamRef.current = null;
+
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.srcObject = null;
     }
+
     setCameraActive(false);
   };
 
-  const capturePhoto = () => {
+  const capturePhoto = async () => {
     if (!videoRef.current || !canvasRef.current) return;
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    canvas.getContext("2d")?.drawImage(video, 0, 0);
+
+    if (video.readyState < 2) {
+      await new Promise<void>((resolve) => {
+        const handler = () => {
+          video.removeEventListener("loadedmetadata", handler);
+          resolve();
+        };
+        video.addEventListener("loadedmetadata", handler);
+      });
+    }
+
+    const width = video.videoWidth || 1280;
+    const height = video.videoHeight || 720;
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      setError(t("descubre.processingError"));
+      return;
+    }
+
+    ctx.drawImage(video, 0, 0, width, height);
     canvas.toBlob((blob) => {
-      if (!blob) return;
+      if (!blob) {
+        setError(t("descubre.processingError"));
+        return;
+      }
       const file = new File([blob], "captura.jpg", { type: "image/jpeg" });
       setSelectedFile(file);
       setPreview(URL.createObjectURL(blob));
@@ -349,7 +407,7 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
   };
 
   const processFile = (file: File) => {
-    if (file.size > 10 * 1024 * 1024) { setError("La imagen supera el limite de 10MB"); return; }
+    if (file.size > 10 * 1024 * 1024) { setError(t("descubre.imageTooLarge")); return; }
     setSelectedFile(file);
     setPreview(URL.createObjectURL(file));
     setResult(null);
@@ -365,9 +423,9 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
       if (data.success) {
         setResult(data);
       }
-      else setError(data.error || "Error al procesar la imagen");
+      else setError(data.error || t("descubre.processingError"));
     } catch {
-      setError("No se pudo conectar con el servicio.");
+      setError(t("descubre.serviceConnectionError"));
     } finally { setLoading(false); }
   };
 
@@ -408,8 +466,8 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
               <Image size={28} className="text-indigo-600" />
             </div>
-            <h3 className="text-sm font-bold text-slate-800 mb-1">Subir imagen</h3>
-            <p className="text-[11px] text-slate-400">Arrastra o selecciona un archivo</p>
+            <h3 className="text-sm font-bold text-slate-800 mb-1">{t("descubre.uploadTitle")}</h3>
+            <p className="text-[11px] text-slate-400">{t("descubre.uploadSubtitle")}</p>
             <input ref={fileRef} type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
           </div>
 
@@ -421,8 +479,8 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform">
               <Camera size={28} className="text-indigo-600" />
             </div>
-            <h3 className="text-sm font-bold text-slate-800 mb-1">Usar camara</h3>
-            <p className="text-[11px] text-slate-400">Toma una foto en vivo</p>
+            <h3 className="text-sm font-bold text-slate-800 mb-1">{t("descubre.cameraTitle")}</h3>
+            <p className="text-[11px] text-slate-400">{t("descubre.cameraSubtitle")}</p>
           </div>
         </div>
       )}
@@ -431,20 +489,20 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
       {cameraActive && (
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-[35px] overflow-hidden border border-slate-100 shadow-sm">
-            <div className="relative">
-              <video ref={videoRef} autoPlay playsInline className="w-full aspect-[4/3] object-cover bg-slate-100" />
-              <div className="absolute inset-0 border-[3px] border-dashed border-indigo-300/40 rounded-2xl m-4 pointer-events-none" />
-            </div>
+                    <div className="relative">
+                <video ref={videoRef} muted autoPlay playsInline className="w-full aspect-[4/3] object-cover bg-slate-100" />
+                <div className="absolute inset-0 border-[3px] border-dashed border-indigo-300/40 rounded-2xl m-4 pointer-events-none" />
+              </div>
             <div className="flex gap-3 p-4 justify-center">
               <button onClick={capturePhoto}
                 className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-lg shadow-indigo-500/20"
               >
-                <Camera size={14} /> Capturar
+                <Camera size={14} /> {t("descubre.capture")}
               </button>
               <button onClick={stopCamera}
                 className="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold uppercase tracking-wider transition-all"
               >
-                Cancelar
+                {t("descubre.cancel")}
               </button>
             </div>
           </div>
@@ -461,7 +519,7 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                 <img src={preview} alt="Preview" className="w-full aspect-[4/3] object-cover bg-slate-100" />
                 {result && !isUnknown && (
                   <div className="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
-                    Reconocido
+                    {t("descubre.recognized")}
                   </div>
                 )}
               </div>
@@ -472,12 +530,12 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                       loading ? "bg-slate-100 text-slate-400" : "bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20"
                     }`}
                   >
-                    {loading ? <><Sparkles size={14} className="animate-spin" /> Analizando...</> : <><Compass size={14} /> Descubrir lugar</>}
+                    {loading ? <><Sparkles size={14} className="animate-spin" /> {t("descubre.analyzing")}</> : <><Compass size={14} /> {t("descubre.discoverPlace")}</>}
                   </button>
                   <button onClick={resetView}
                     className="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-500 rounded-xl text-xs transition-all"
                   >
-                    Cambiar
+                    {t("descubre.change")}
                   </button>
                 </div>
               )}
@@ -495,7 +553,7 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
               <button onClick={() => { resetView(); startCamera(); }}
                 className="w-full py-3 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-500 hover:text-slate-800 transition-all flex items-center justify-center gap-2 shadow-sm"
               >
-                <Camera size={14} /> Descubrir otro lugar
+                <Camera size={14} /> {t("descubre.discoverAnother")}
               </button>
             )}
           </div>
@@ -507,8 +565,8 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                 <div className="w-20 h-20 rounded-full bg-indigo-50 flex items-center justify-center mb-6 animate-pulse">
                   <Compass size={36} className="text-indigo-600" />
                 </div>
-                <p className="text-lg font-bold text-slate-800 mb-2">Descubriendo tu destino...</p>
-                <p className="text-xs text-slate-400">Nuestra IA esta analizando la imagen para identificar el lugar</p>
+                <p className="text-lg font-bold text-slate-800 mb-2">{t("descubre.discoveringDestination")}</p>
+                <p className="text-xs text-slate-400">{t("descubre.analyzingImage")}</p>
               </div>
             ) : result && !isUnknown && placeInfo ? (
               <div className="space-y-4">
@@ -532,7 +590,7 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                   <div className="p-6 md:p-8 space-y-6">
                     {/* Descripcion */}
                     <div>
-                      <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Sobre este lugar</h4>
+                      <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">{t("descubre.aboutPlace")}</h4>
                       <p className="text-sm text-slate-600 leading-relaxed">{placeInfo.descripcion}</p>
                     </div>
 
@@ -540,29 +598,29 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       <div className="bg-slate-50 rounded-2xl p-3">
                         <Clock size={12} className="text-indigo-500 mb-1" />
-                        <p className="text-[10px] text-slate-400 uppercase font-bold">Horario</p>
+                        <p className="text-[10px] text-slate-400 uppercase font-bold">{t("descubre.schedule")}</p>
                         <p className="text-xs text-slate-700 font-semibold">{placeInfo.horario}</p>
                       </div>
                       <div className="bg-slate-50 rounded-2xl p-3">
                         <Mountain size={12} className="text-emerald-500 mb-1" />
-                        <p className="text-[10px] text-slate-400 uppercase font-bold">Altitud</p>
+                        <p className="text-[10px] text-slate-400 uppercase font-bold">{t("descubre.altitude")}</p>
                         <p className="text-xs text-slate-700 font-semibold">{placeInfo.altitud}</p>
                       </div>
                       <div className="bg-slate-50 rounded-2xl p-3">
                         <Sun size={12} className="text-amber-500 mb-1" />
-                        <p className="text-[10px] text-slate-400 uppercase font-bold">Ideal para</p>
+                        <p className="text-[10px] text-slate-400 uppercase font-bold">{t("descubre.idealFor")}</p>
                         <p className="text-xs text-slate-700 font-semibold truncate">{placeInfo.idealPara.split(",")[0]}</p>
                       </div>
                       <div className="bg-slate-50 rounded-2xl p-3">
                         <Star size={12} className="text-amber-500 mb-1" />
-                        <p className="text-[10px] text-slate-400 uppercase font-bold">Reconocido</p>
-                        <p className="text-xs text-slate-700 font-semibold">Patrimonio Cultural</p>
+                        <p className="text-[10px] text-slate-400 uppercase font-bold">{t("descubre.recognizedBadge")}</p>
+                        <p className="text-xs text-slate-700 font-semibold">{t("descubre.culturalHeritage")}</p>
                       </div>
                     </div>
 
                     {/* Destacados */}
                     <div>
-                      <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3">Que ver y hacer</h4>
+                      <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3">{t("descubre.whatToSee")}</h4>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {placeInfo.destacados.map((item, i) => (
                           <div key={i} className="flex items-start gap-2.5 bg-slate-50 border border-slate-100 rounded-xl p-3">
@@ -580,7 +638,7 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                       <div className="flex items-start gap-3">
                         <Sparkles size={16} className="text-amber-500 shrink-0 mt-0.5" />
                         <div>
-                          <p className="text-[10px] font-bold text-amber-600 uppercase tracking-wider mb-1">Dato curioso</p>
+                          <p className="text-[10px] font-bold text-amber-600 uppercase tracking-wider mb-1">{t("descubre.funFact")}</p>
                           <p className="text-xs text-slate-600 leading-relaxed">{placeInfo.datoCurioso}</p>
                         </div>
                       </div>
@@ -592,7 +650,7 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                         onClick={() => onPlaceDetected(placeInfo.nombre)}
                         className="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 mb-3"
                       >
-                        <MessageSquare size={14} /> Preguntar al Chatbot sobre {placeInfo.nombre}
+                        <MessageSquare size={14} /> {t("descubre.askChatbot", { name: placeInfo.nombre })}
                       </button>
                     )}
 
@@ -601,7 +659,7 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                       <button onClick={() => setShowTour(true)}
                         className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl text-xs font-bold uppercase tracking-widest transition-all shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-2"
                       >
-                        <ShieldCheck size={14} /> Ver tour recomendado
+                        <ShieldCheck size={14} /> {t("descubre.viewTour")}
                       </button>
                     ) : (
                       <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 rounded-2xl p-5">
@@ -610,12 +668,12 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                             <Heart size={18} className="text-indigo-600" />
                           </div>
                           <div className="flex-1">
-                            <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-wider mb-1">Tour recomendado por GRUPO TUMPERU</p>
+                            <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-wider mb-1">{t("descubre.recommendedTourBy")}</p>
                             <p className="text-sm font-bold text-slate-800 mb-2">{placeInfo.tourRecomendado}</p>
                             <button onClick={() => setShowTour(false)}
                               className="text-[10px] text-indigo-500 hover:text-indigo-700 transition-colors flex items-center gap-1 font-bold"
                             >
-                              Ocultar <ChevronRight size={10} />
+                              {t("descubre.hide")} <ChevronRight size={10} />
                             </button>
                           </div>
                         </div>
@@ -629,14 +687,14 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
                 <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mb-4">
                   <MapPin size={36} className="text-slate-400" />
                 </div>
-                <p className="text-lg font-bold text-slate-800 mb-2">Lugar no identificado</p>
+                <p className="text-lg font-bold text-slate-800 mb-2">{t("descubre.placeNotIdentified")}</p>
                 <p className="text-xs text-slate-400 max-w-sm mb-6">
-                  No pudimos reconocer este lugar. Prueba con otra foto mas nitida o de algun destino conocido de Cusco.
+                  {t("descubre.placeNotIdentifiedSubtitle")}
                 </p>
                 <button onClick={resetView}
                   className="py-3 px-8 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all"
                 >
-                  Intentar de nuevo
+                  {t("descubre.tryAgain")}
                 </button>
               </div>
             ) : null}
@@ -651,13 +709,12 @@ function VisionTab({ onPlaceDetected }: { onPlaceDetected?: (place: string) => v
             <div className="w-20 h-20 mx-auto rounded-full bg-indigo-50 flex items-center justify-center mb-4">
               <Navigation size={36} className="text-indigo-600" />
             </div>
-            <p className="text-lg font-bold text-slate-800 mb-2">Descubre lugares increibles</p>
+            <p className="text-lg font-bold text-slate-800 mb-2">{t("descubre.heroTitle")}</p>
             <p className="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
-              Toma una foto o sube una imagen de cualquier destino turistico de Cusco.
-              Nuestra IA lo identificara y te mostrara toda la informacion que necesitas para tu viaje.
+              {t("descubre.heroDescription")}
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
-              {["Machu Picchu", "Monta\u00f1a 7 Colores", "Sacsayhuaman", "Laguna Humantay"].map((name) => (
+              {suggestedPlaces.map((name) => (
                 <span key={name} className="text-[10px] bg-slate-50 text-slate-500 px-3 py-1.5 rounded-full border border-slate-200 font-medium">
                   {name}
                 </span>

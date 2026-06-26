@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Search, MapPin, Star, ShieldCheck, Sparkles, Clock, Users as UsersIcon, RefreshCw, AlertCircle } from "lucide-react";
 
 interface Tour {
@@ -19,15 +20,16 @@ interface Tour {
 
 export default function Tours() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [tours, setTours] = useState<Tour[]>([]);
   const [cargando, setCargando] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedZona, setSelectedZona] = useState("Todas");
+  const [selectedZona, setSelectedZona] = useState(t("tours_zona_todas"));
 
-  const zonas = ["Todas", "Cusco Ciudad", "Valle Sagrado", "Machu Picchu", "Rutas Sur"];
+  const zonas = [t("tours_zona_todas"), "Cusco Ciudad", "Valle Sagrado", "Machu Picchu", "Rutas Sur"];
 
   useEffect(() => {
     const obtenerToursBD = async () => {
@@ -88,7 +90,7 @@ export default function Tours() {
 
   const filteredTours = tours.filter(tour => {
     const matchesSearch = tour.nombre.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesZona = selectedZona === "Todas" || tour.zona_geografica === selectedZona;
+    const matchesZona = selectedZona === t("tours_zona_todas") || tour.zona_geografica === selectedZona;
     return matchesSearch && matchesZona;
   });
 
@@ -99,17 +101,17 @@ export default function Tours() {
       
       <header className="max-w-4xl mx-auto mb-16 text-center">
         <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
-          SGEV · Base de Datos Hostinger Activa
+          {t("tours_badge")}
         </span>
         <h1 className="text-3xl md:text-5xl font-light tracking-tight text-slate-900 mt-4 mb-6">
-          Mis Atractivos <span className="font-semibold text-indigo-600">Indexados</span>
+          {t("tours_titulo")} <span className="font-semibold text-indigo-600">{t("tours_titulo_highlight")}</span>
         </h1>
 
         <div className="relative max-w-2xl mx-auto mb-8 shadow-xs rounded-2xl">
           <Search className="absolute left-4 top-4 text-slate-400" size={18} />
           <input
             type="text"
-            placeholder="Busca en tus atractivos reales (Ej. Ollantaytambo, Qorikancha...)"
+            placeholder={t("tours_buscar")}
             className="w-full bg-white border border-slate-200 py-4 pl-12 pr-4 rounded-2xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition text-slate-700 text-sm"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -137,25 +139,25 @@ export default function Tours() {
       {cargando && (
         <div className="flex flex-col items-center justify-center py-24 space-y-3">
           <RefreshCw className="text-indigo-600 animate-spin" size={26} />
-          <p className="text-xs text-slate-400 font-medium">Sincronizando catálogo con base de datos remota...</p>
+          <p className="text-xs text-slate-400 font-medium">{t("tours_cargando")}</p>
         </div>
       )}
 
       {error && (
         <div className="max-w-md mx-auto bg-red-50 border border-red-200 p-4 rounded-xl flex items-center gap-3 text-red-700 text-xs font-medium mb-12">
           <AlertCircle size={18} className="text-red-500 shrink-0" />
-          <p>{error} Verifica que tu servidor FastAPI local en el puerto 8000 esté encendido.</p>
+          <p>{error} {t("tours_error_servidor")}</p>
         </div>
       )}
 
       {!cargando && !error && (
         <>
-          {searchTerm === "" && selectedZona === "Todas" && recommended.length > 0 && (
+          {searchTerm === "" && selectedZona === t("tours_zona_todas") && recommended.length > 0 && (
             <div className="max-w-6xl mx-auto mb-14 bg-gradient-to-r from-indigo-50/40 via-purple-50/20 to-transparent p-6 rounded-2xl border border-indigo-100/60">
               <div className="flex items-center justify-between gap-2 mb-4">
                 <div className="flex items-center gap-2 text-indigo-700 font-medium text-sm">
                   <Sparkles size={16} className="text-indigo-600 animate-pulse" />
-                  <span>Nodos Recientes en tu Red SGEV</span>
+                  <span>{t("tours_recientes")}</span>
                 </div>
               </div>
 
@@ -235,7 +237,7 @@ export default function Tours() {
                     <div>
                       <div className="flex justify-between items-center pt-4 border-t border-slate-100">
                         <div className="flex flex-col">
-                          <span className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Precio Inversión</span>
+                          <span className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">{t("tours_precio")}</span>
                           <span className="text-lg font-bold text-slate-800">
                             ${tour.price} <span className="text-xs font-light text-slate-400">USD</span>
                           </span>
@@ -245,19 +247,19 @@ export default function Tours() {
                           onClick={() => navigate(`/reservas?tour=${tour.nombre}&price=${tour.price}`)}
                           className="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-medium tracking-wide hover:bg-indigo-700 transition shadow-xs cursor-pointer active:scale-95"
                         >
-                          Reservar
+                          {t("tours_btn_reservar")}
                         </button>
                         <button
                           onClick={() => navigate(`/detalle/${tour.id}`)}
                           className="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-xl text-xs font-medium hover:bg-slate-50 transition"
                         >
-                          Ver Detalles
+                          {t("tours_btn_detalles")}
                         </button>
                       </div>
 
                       <div className="mt-3.5 flex items-center gap-1.5 text-[11px] text-slate-400 font-light">
                         <ShieldCheck size={13} className="text-emerald-500" />
-                        Indexado en u796907883_agenciaGTP
+                        {t("tours_indexado")}
                       </div>
                     </div>
 
@@ -266,7 +268,7 @@ export default function Tours() {
               ))
             ) : (
               <div className="col-span-full text-center py-24 text-slate-400 font-light text-sm bg-white rounded-2xl border border-dashed border-slate-200">
-                Aún no has registrado atractivos para este circuito en tu panel administrativo.
+                {t("tours_sin_resultados")}
               </div>
             )}
           </main>
