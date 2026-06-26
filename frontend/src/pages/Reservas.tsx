@@ -72,6 +72,7 @@ export default function Reservas() {
       return;
     }
 
+    const usuarioId = localStorage.getItem("user_id");
     const datosCliente = {
       paquete_id: paqueteId,
       paquete_nombre: paqueteNombre,
@@ -84,11 +85,12 @@ export default function Reservas() {
       comentarios: comentarios,
       tipo: tipo,
       duracion: duracion,
-      fecha_solicitud: new Date().toISOString()
+      fecha_solicitud: new Date().toISOString(),
+      usuario_id: usuarioId ? parseInt(usuarioId) : null,
     };
 
     try {
-      const response = await fetch("/api/reservas/paquete", {
+      const response = await fetch("http://localhost:8000/api/reservas/paquete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datosCliente)

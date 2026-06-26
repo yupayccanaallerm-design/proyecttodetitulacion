@@ -35,7 +35,7 @@ export default function Login() {
       localStorage.setItem('user_id', data.usuario.id.toString());
       localStorage.setItem('admin_name', data.usuario.nombre);
       localStorage.setItem('user_email', data.usuario.email);
-      localStorage.setItem('user_rol', data.usuario.rol);
+      localStorage.setItem('user_role', data.usuario.rol);
 
       window.location.href = '/admin';
 

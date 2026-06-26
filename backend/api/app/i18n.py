@@ -38,6 +38,10 @@ MESSAGES = {
         # Reservas
         "reserva_creada": "Reserva registrada exitosamente",
         "reserva_no_encontrada": "Reserva no encontrada",
+        "reserva_actualizada": "Estado de reserva actualizado",
+        # Tours nuevos
+        "tour_actualizado": "Tour actualizado exitosamente",
+        "tour_eliminado": "Tour desactivado exitosamente",
         # Usuarios
         "usuario_creado": "Usuario registrado con éxito",
         "usuario_no_encontrado": "Usuario no encontrado.",
@@ -73,6 +77,10 @@ MESSAGES = {
         # Reservas
         "reserva_creada": "Reservation registered successfully",
         "reserva_no_encontrada": "Reservation not found",
+        "reserva_actualizada": "Reservation status updated",
+        # Tours nuevos
+        "tour_actualizado": "Tour updated successfully",
+        "tour_eliminado": "Tour deactivated successfully",
         # Usuarios
         "usuario_creado": "User registered successfully",
         "usuario_no_encontrado": "User not found.",

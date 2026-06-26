@@ -1,17 +1,49 @@
-# backend/routes/reservas.py
-
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel
 from typing import Optional, List
-from datetime import datetime
+import random
+import string
 from database import obtener_conexion
 from ..i18n import tr
-import json
 
-router = APIRouter(
-    prefix="/api/reservas",
-    tags=["Reservas"]
-)
+router = APIRouter(prefix="/api/reservas", tags=["Reservas"])
+
+
+def _generar_codigo() -> str:
+    sufijo = "".join(random.choices(string.ascii_uppercase + string.digits, k=8))
+    return f"RES-{sufijo}"
+
+
+def _obtener_o_crear_cliente(cursor, nombre: str, email: str, telefono: str) -> int:
+    cursor.execute("SELECT id FROM clientes WHERE email = %s LIMIT 1", (email,))
+    fila = cursor.fetchone()
+    if fila:
+        cursor.execute(
+            "UPDATE clientes SET nombre = %s, telefono = %s, updated_at = NOW() WHERE id = %s",
+            (nombre, telefono, fila[0])
+        )
+        return fila[0]
+    cursor.execute(
+        "INSERT INTO clientes (nombre, email, telefono, created_at, updated_at) VALUES (%s, %s, %s, NOW(), NOW())",
+        (nombre, email, telefono)
+    )
+    return cursor.lastrowid
+
+
+class ReservaPaqueteRequest(BaseModel):
+    paquete_id: Optional[str] = ""
+    paquete_nombre: Optional[str] = ""
+    precio_referencial: float = 0
+    nombre_cliente: str
+    email_cliente: str
+    telefono_cliente: str
+    fecha_viaje: str
+    numero_pasajeros: int = 1
+    comentarios: Optional[str] = ""
+    tipo: Optional[str] = "Cultural"
+    duracion: Optional[str] = ""
+    fecha_solicitud: Optional[str] = None
+    usuario_id: Optional[int] = None
 
 
 class ItinerarioItem(BaseModel):
@@ -38,156 +70,130 @@ class EstadisticasData(BaseModel):
     actividades: List[str]
 
 
-class ReservaCompleta(BaseModel):
+class ReservaItinerario(BaseModel):
     cliente: ClienteData
     itinerario: List[ItinerarioItem]
     totalDias: int
     totalDestinos: int
     estadisticas: EstadisticasData
     fechaReserva: str
+    usuario_id: Optional[int] = None
 
 
-class ReservaPaquete(BaseModel):
-    paquete_id: Optional[str] = ""
-    paquete_nombre: str
-    precio_referencial: float = 0
-    nombre_cliente: str
-    email_cliente: str
-    telefono_cliente: str
-    fecha_viaje: str
-    numero_pasajeros: int = 1
-    comentarios: Optional[str] = ""
-    tipo: Optional[str] = "Cultural"
-    duracion: Optional[str] = ""
-    fecha_solicitud: Optional[str] = None
+class ActualizarEstadoRequest(BaseModel):
+    estado: str
 
 
 @router.post("/paquete")
-async def crear_reserva_paquete(reserva: ReservaPaquete, request: Request):
+async def crear_reserva_paquete(reserva: ReservaPaqueteRequest, request: Request):
     conexion = obtener_conexion()
     if not conexion:
         raise HTTPException(status_code=500, detail=tr(request, "error_conexion_db"))
-
     try:
         with conexion.cursor() as cursor:
-            sql = """
-                INSERT INTO reservas (
-                    paquete_id,
-                    paquete_nombre,
-                    precio_referencial,
-                    nombre_cliente,
-                    email_cliente,
-                    telefono_cliente,
-                    fecha_viaje,
-                    numero_pasajeros,
-                    comentarios,
-                    tipo,
-                    duracion,
-                    fecha_solicitud
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """
-            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            paquete_id_val = int(reserva.paquete_id) if reserva.paquete_id and reserva.paquete_id.isdigit() else None
-
-            cursor.execute(sql, (
-                paquete_id_val,
-                reserva.paquete_nombre,
-                reserva.precio_referencial,
+            cliente_id = _obtener_o_crear_cliente(
+                cursor,
                 reserva.nombre_cliente,
                 reserva.email_cliente,
                 reserva.telefono_cliente,
-                reserva.fecha_viaje,
-                reserva.numero_pasajeros,
-                reserva.comentarios or "",
-                reserva.tipo,
-                reserva.duracion,
-                reserva.fecha_solicitud or now
-            ))
-
+            )
+            paquete_id_val = (
+                int(reserva.paquete_id)
+                if reserva.paquete_id and str(reserva.paquete_id).isdigit()
+                else None
+            )
+            monto = reserva.precio_referencial * reserva.numero_pasajeros
+            codigo = _generar_codigo()
+            cursor.execute(
+                """
+                INSERT INTO reservas (
+                    codigo, cliente_id, usuario_id, paquete_id,
+                    fecha_viaje, num_personas, monto_total,
+                    estado, notas, created_at, updated_at
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW())
+                """,
+                (
+                    codigo,
+                    cliente_id,
+                    reserva.usuario_id,
+                    paquete_id_val,
+                    reserva.fecha_viaje,
+                    reserva.numero_pasajeros,
+                    monto,
+                    "pendiente",
+                    reserva.comentarios or "",
+                ),
+            )
             reserva_id = cursor.lastrowid
-            conexion.commit()
-
-            return {
-                "status": "success",
-                "message": tr(request, "reserva_creada"),
-                "reserva_id": reserva_id
-            }
-
+        conexion.commit()
+        return {
+            "status": "success",
+            "message": tr(request, "reserva_creada"),
+            "reserva_id": reserva_id,
+            "codigo": codigo,
+        }
     except Exception as e:
         conexion.rollback()
-        print(f"❌ Error en MySQL: {str(e)}")
+        print(f"Error creando reserva paquete: {e}")
         raise HTTPException(status_code=400, detail=f"{tr(request, 'error_detalle')}: {str(e)}")
     finally:
         conexion.close()
 
 
 @router.post("/")
-async def crear_reserva(reserva: ReservaCompleta, request: Request):
-    print("=" * 50)
-    print("📥 Recibida reserva")
-    print(f"   Cliente: {reserva.cliente.nombre}")
-    print(f"   Destinos: {reserva.totalDestinos}")
-    print("=" * 50)
-
+async def crear_reserva_itinerario(reserva: ReservaItinerario, request: Request):
     conexion = obtener_conexion()
     if not conexion:
         raise HTTPException(status_code=500, detail=tr(request, "error_conexion_db"))
-
     try:
         with conexion.cursor() as cursor:
-            sql = """
-                INSERT INTO reservas (
-                    paquete_id,
-                    paquete_nombre,
-                    precio_referencial,
-                    nombre_cliente,
-                    email_cliente,
-                    telefono_cliente,
-                    fecha_viaje,
-                    numero_pasajeros,
-                    comentarios,
-                    tipo,
-                    duracion,
-                    fecha_solicitud
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """
-            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            primer_destino = reserva.itinerario[0] if reserva.itinerario else None
-            nombres_destinos = ", ".join([d.lugar for d in reserva.itinerario])
-            tipos_str = ", ".join(reserva.estadisticas.tipos)
-
-            cursor.execute(sql, (
-                "",
-                nombres_destinos,
-                0,
+            cliente_id = _obtener_o_crear_cliente(
+                cursor,
                 reserva.cliente.nombre,
                 reserva.cliente.email,
                 reserva.cliente.telefono,
-                primer_destino.fechaInicio if primer_destino else now,
-                reserva.totalDestinos,
-                reserva.cliente.comentarios or "",
-                tipos_str,
-                str(reserva.totalDias),
-                now
-            ))
-
+            )
+            primer_fecha = (
+                reserva.itinerario[0].fechaInicio
+                if reserva.itinerario
+                else reserva.fechaReserva[:10]
+            )
+            lugares = ", ".join(d.lugar for d in reserva.itinerario)
+            notas = f"Itinerario: {lugares}. {reserva.cliente.comentarios or ''}".strip()
+            codigo = _generar_codigo()
+            cursor.execute(
+                """
+                INSERT INTO reservas (
+                    codigo, cliente_id, usuario_id,
+                    fecha_viaje, num_personas, monto_total,
+                    estado, notas, created_at, updated_at
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW())
+                """,
+                (
+                    codigo,
+                    cliente_id,
+                    reserva.usuario_id,
+                    primer_fecha,
+                    reserva.totalDestinos,
+                    0,
+                    "pendiente",
+                    notas,
+                ),
+            )
             reserva_id = cursor.lastrowid
-            conexion.commit()
-            print(f"✅ Reserva guardada con ID: {reserva_id}")
-
-            return {
-                "status": "success",
-                "message": tr(request, "reserva_creada"),
-                "reserva_id": reserva_id
-            }
-
+        conexion.commit()
+        return {
+            "status": "success",
+            "message": tr(request, "reserva_creada"),
+            "reserva_id": reserva_id,
+            "codigo": codigo,
+        }
     except Exception as e:
         conexion.rollback()
-        print(f"❌ Error en MySQL: {str(e)}")
+        print(f"Error creando reserva itinerario: {e}")
         raise HTTPException(status_code=400, detail=f"{tr(request, 'error_detalle')}: {str(e)}")
     finally:
         conexion.close()
-        print("🔌 Conexión cerrada")
 
 
 @router.get("/")
@@ -195,28 +201,44 @@ async def listar_reservas(request: Request):
     conexion = obtener_conexion()
     if not conexion:
         raise HTTPException(status_code=500, detail=tr(request, "error_conexion"))
-
     try:
         with conexion.cursor(dictionary=True) as cursor:
-            cursor.execute("""
-                SELECT * FROM reservas
-                ORDER BY fecha_solicitud DESC
-            """)
+            cursor.execute(
+                """
+                SELECT
+                    r.id,
+                    r.codigo,
+                    r.estado,
+                    r.estado_ia,
+                    r.fecha_viaje,
+                    r.num_personas  AS numero_pasajeros,
+                    r.monto_total,
+                    r.notas         AS comentarios,
+                    r.paquete_id,
+                    r.usuario_id,
+                    r.created_at    AS fecha_solicitud,
+                    r.updated_at,
+                    c.nombre        AS nombre_cliente,
+                    c.email         AS email_cliente,
+                    c.telefono      AS telefono_cliente,
+                    p.nombre        AS paquete_nombre,
+                    p.precio_sugerido AS precio_referencial,
+                    p.duracion_dias AS duracion,
+                    p.perfil_usuario AS tipo
+                FROM reservas r
+                LEFT JOIN clientes c ON r.cliente_id = c.id
+                LEFT JOIN paquetes p ON r.paquete_id = p.id
+                ORDER BY r.created_at DESC
+                """
+            )
             reservas = cursor.fetchall()
-
             for r in reservas:
-                if r.get('fecha_solicitud'):
-                    r['fecha_solicitud'] = r['fecha_solicitud'].strftime("%Y-%m-%d %H:%M:%S")
-                if r.get('fecha_viaje'):
-                    r['fecha_viaje'] = r['fecha_viaje'].strftime("%Y-%m-%d")
-
-            return {
-                "reservas": reservas,
-                "total": len(reservas)
-            }
-
+                for campo in ("fecha_viaje", "fecha_solicitud", "updated_at"):
+                    if r.get(campo) and hasattr(r[campo], "strftime"):
+                        r[campo] = r[campo].strftime("%Y-%m-%d %H:%M:%S")
+        return {"reservas": reservas, "total": len(reservas)}
     except Exception as e:
-        print(f"❌ Error listando reservas: {str(e)}")
+        print(f"Error listando reservas: {e}")
         raise HTTPException(status_code=400, detail=str(e))
     finally:
         conexion.close()
@@ -227,24 +249,54 @@ async def obtener_reserva(reserva_id: int, request: Request):
     conexion = obtener_conexion()
     if not conexion:
         raise HTTPException(status_code=500, detail=tr(request, "error_conexion"))
-
     try:
         with conexion.cursor(dictionary=True) as cursor:
-            cursor.execute("SELECT * FROM reservas WHERE id = %s", (reserva_id,))
+            cursor.execute(
+                """
+                SELECT r.*,
+                    c.nombre  AS nombre_cliente,
+                    c.email   AS email_cliente,
+                    c.telefono AS telefono_cliente,
+                    p.nombre  AS paquete_nombre
+                FROM reservas r
+                LEFT JOIN clientes c ON r.cliente_id = c.id
+                LEFT JOIN paquetes p ON r.paquete_id = p.id
+                WHERE r.id = %s
+                """,
+                (reserva_id,),
+            )
             reserva = cursor.fetchone()
-
             if not reserva:
                 raise HTTPException(status_code=404, detail=tr(request, "reserva_no_encontrada"))
-
-            if reserva.get('fecha_solicitud'):
-                reserva['fecha_solicitud'] = reserva['fecha_solicitud'].strftime("%Y-%m-%d %H:%M:%S")
-            if reserva.get('fecha_viaje'):
-                reserva['fecha_viaje'] = reserva['fecha_viaje'].strftime("%Y-%m-%d")
-
+            for campo in ("fecha_viaje", "created_at", "updated_at"):
+                if reserva.get(campo) and hasattr(reserva[campo], "strftime"):
+                    reserva[campo] = reserva[campo].strftime("%Y-%m-%d %H:%M:%S")
             return reserva
-
+    except HTTPException:
+        raise
     except Exception as e:
-        print(f"❌ Error obteniendo reserva: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        conexion.close()
+
+
+@router.put("/{reserva_id}/estado")
+async def actualizar_estado_reserva(
+    reserva_id: int, data: ActualizarEstadoRequest, request: Request
+):
+    conexion = obtener_conexion()
+    if not conexion:
+        raise HTTPException(status_code=500, detail=tr(request, "error_conexion"))
+    try:
+        with conexion.cursor() as cursor:
+            cursor.execute(
+                "UPDATE reservas SET estado = %s, updated_at = NOW() WHERE id = %s",
+                (data.estado, reserva_id),
+            )
+        conexion.commit()
+        return {"status": "success", "message": tr(request, "reserva_actualizada")}
+    except Exception as e:
+        conexion.rollback()
         raise HTTPException(status_code=400, detail=str(e))
     finally:
         conexion.close()

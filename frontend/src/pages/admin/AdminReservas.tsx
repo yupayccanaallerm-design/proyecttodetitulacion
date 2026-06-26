@@ -50,7 +50,7 @@ export default function AdminReservas() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("/api/reservas");
+      const response = await fetch("http://localhost:8000/api/reservas");
       if (!response.ok) throw new Error("Error cargando reservas");
       const data = await response.json();
       setReservas(data.reservas || []);
@@ -65,7 +65,18 @@ export default function AdminReservas() {
   const marcarNotificado = async (id: number) => {
     setActualizando(true);
     try {
-      alert(t("admin_reservas_notificada_msg", { id }));
+      const res = await fetch(`/api/reservas/${id}/estado`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ estado: "notificada" }),
+      });
+      if (res.ok) {
+        setReservas((prev) =>
+          prev.map((r) => (r.id === id ? { ...r, estado: "notificada" } : r))
+        );
+      } else {
+        alert(t("error_generico"));
+      }
     } catch (err) {
       console.error("Error:", err);
     } finally {

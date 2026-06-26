@@ -21,6 +21,7 @@ import Login from "./pages/Login";
 import Paquetes from "./pages/Paquetes";
 import DetallePaquete from "./pages/DetallePaquete";
 import GestiónUsuarios from "./pages/admin/GestionUsuarios";
+import AdminClientes from "./pages/admin/AdminClientes";
 import { ItinerarioProvider } from './contexts/ItinerarioContext';
 import { ResumenItinerario } from './components/ResumenItinerario';
 
@@ -156,11 +157,12 @@ function AppContent() {
           <Route path="/detalle-paquete/:id" element={<DetallePaquete />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<AdminDashboard />}>
-            <Route index element={<AdminReservas />} /> 
+            <Route index element={<AdminReservas />} />
             <Route path="reservas" element={<AdminReservas />} />
             <Route path="tours" element={<AdminTours />} />
-            <Route path="paquetes" element={<AdminPaquetes />} /> 
-            <Route path="usuarios" element={<GestiónUsuarios />} />  
+            <Route path="paquetes" element={<AdminPaquetes />} />
+            <Route path="clientes" element={<AdminClientes />} />
+            <Route path="usuarios" element={<GestiónUsuarios />} />
           </Route>
         </Routes>
       </main>

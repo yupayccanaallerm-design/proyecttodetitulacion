@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Plus, Sparkles, Check, Clock, Layers, DollarSign, MapPin } from "lucide-react";
+import { Plus, Sparkles, Check, Clock, Layers, DollarSign, MapPin, Pencil, Trash2, RefreshCw, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { API_BASE } from "../../api";
 
 interface Tour {
   id: number;
@@ -8,8 +9,21 @@ interface Tour {
   zona_geografica: string;
 }
 
+interface Paquete {
+  id: number;
+  nombre: string;
+  duracion_dias: number;
+  precio_sugerido: number;
+  perfil_usuario: string;
+  estado: number;
+  imagen_base64?: string;
+}
+
 export default function AdminPaquetes() {
   const { t } = useTranslation();
+  const [tab, setTab] = useState<"crear" | "gestionar">("crear");
+  const [editando, setEditando] = useState<Paquete | null>(null);
+
   const [guardado, setGuardado] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [perfil, setPerfil] = useState("Aventurero");
@@ -19,30 +33,66 @@ export default function AdminPaquetes() {
   const [toursDisponibles, setToursDisponibles] = useState<Tour[]>([]);
   const [toursSeleccionados, setToursSeleccionados] = useState<number[]>([]);
 
+  const [paquetes, setPaquetes] = useState<Paquete[]>([]);
+  const [cargandoLista, setCargandoLista] = useState(false);
+
   useEffect(() => {
-    fetch("http://localhost:8000/api/tours")
-      .then((res) => {
-        if (!res.ok) throw new Error("Error en la respuesta del servidor");
-        return res.json();
-      })
-      .then((data) => setToursDisponibles(data))
-      .catch((err) => {
-        console.error("Error loading tours:", err);
-        setToursDisponibles([
-          { id: 1, nombre: "Machu Picchu Tradicional", zona_geografica: "Machu Picchu" },
-          { id: 2, nombre: "Valle Sagrado de los Incas", zona_geografica: "Valle Sagrado" },
-          { id: 3, nombre: "Montaña de 7 Colores", zona_geografica: "Cusco Sur" },
-          { id: 4, nombre: "City Tour Arqueológico", zona_geografica: "Cusco Centro" },
-        ]);
-      });
+    fetch(`${API_BASE}/api/tours`)
+      .then((r) => r.json())
+      .then(setToursDisponibles)
+      .catch(() => setToursDisponibles([]));
   }, []);
 
+  const cargarPaquetes = async () => {
+    setCargandoLista(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/paquetes`);
+      if (res.ok) setPaquetes(await res.json());
+    } catch (e) { console.error(e); }
+    finally { setCargandoLista(false); }
+  };
+
+  useEffect(() => {
+    if (tab === "gestionar") cargarPaquetes();
+  }, [tab]);
+
+  const resetFormulario = () => {
+    setTitulo(""); setPerfil("Aventurero"); setDuracion("1");
+    setPrecio(""); setDescripcion(""); setToursSeleccionados([]);
+    setEditando(null);
+  };
+
+  const iniciarEdicion = async (paquete: Paquete) => {
+    setEditando(paquete);
+    setTitulo(paquete.nombre);
+    setPerfil(paquete.perfil_usuario);
+    setDuracion(String(paquete.duracion_dias));
+    setPrecio(String(paquete.precio_sugerido));
+    // Cargar tours del paquete
+    try {
+      const res = await fetch(`${API_BASE}/api/paquetes/${paquete.id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setDescripcion(data.descripcion_base || "");
+        setToursSeleccionados((data.tours || []).map((t: any) => t.id));
+      }
+    } catch { /**/ }
+    setTab("crear");
+  };
+
+  const eliminarPaquete = async (id: number) => {
+    if (!window.confirm(t("admin_paquetes_confirmar_eliminar") || "¿Desactivar este paquete?")) return;
+    try {
+      const res = await fetch(`${API_BASE}/api/paquetes/${id}`, { method: "DELETE" });
+      if (res.ok) cargarPaquetes();
+      else alert(t("error_generico"));
+    } catch { alert(t("admin_paquetes_error_servidor")); }
+  };
+
   const manejarSeleccionTour = (id: number) => {
-    if (toursSeleccionados.includes(id)) {
-      setToursSeleccionados(toursSeleccionados.filter((tourId) => tourId !== id));
-    } else {
-      setToursSeleccionados([...toursSeleccionados, id]);
-    }
+    setToursSeleccionados((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
   };
 
   const manejarGuardar = async (e: React.FormEvent) => {
@@ -51,183 +101,170 @@ export default function AdminPaquetes() {
       alert(t("admin_paquetes_validacion"));
       return;
     }
-
-    const nuevoPaquete = {
+    const payload = {
       nombre: titulo,
       descripcion_base: descripcion,
       duracion_dias: parseInt(duracion),
       perfil_usuario: perfil,
-      precio_sugerido: parseFloat(precio) || 0.00,
+      precio_sugerido: parseFloat(precio) || 0,
       tours: toursSeleccionados,
     };
-
     try {
-      const res = await fetch("http://localhost:8000/api/paquetes", {
-        method: "POST",
+      const url = editando ? `${API_BASE}/api/paquetes/${editando.id}` : `${API_BASE}/api/paquetes`;
+      const method = editando ? "PUT" : "POST";
+      const res = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(nuevoPaquete),
+        body: JSON.stringify(payload),
       });
-
       if (res.ok) {
         setGuardado(true);
-        setTimeout(() => {
-          setGuardado(false);
-          setTitulo("");
-          setPrecio("");
-          setDescripcion("");
-          setToursSeleccionados([]);
-        }, 2500);
+        setTimeout(() => { setGuardado(false); resetFormulario(); }, 2500);
       } else {
-        const errorData = await res.json();
-        alert(`${t("error_generico")}: ${errorData.detail || ""}`);
+        const err = await res.json();
+        alert(`${t("error_generico")}: ${err.detail || ""}`);
       }
-    } catch (error) {
-      console.error("Error de red al intentar conectar con FastAPI:", error);
-      alert(t("admin_paquetes_error_servidor"));
-    }
+    } catch { alert(t("admin_paquetes_error_servidor")); }
   };
 
   return (
     <div className="space-y-6 max-w-2xl mx-auto mb-10">
-      {/* CABECERA */}
+      {/* Encabezado */}
       <div>
         <h1 className="text-xl font-semibold text-slate-900 tracking-tight">{t("admin_paquetes_titulo")}</h1>
         <p className="text-xs text-slate-400 font-light mt-0.5">{t("admin_paquetes_desc")}</p>
       </div>
 
-      {/* FORMULARIO */}
-      <form onSubmit={manejarGuardar} className="bg-white border border-slate-200/60 rounded-xl p-6 shadow-xs space-y-5">
+      {/* Tabs */}
+      <div className="flex gap-2 bg-slate-100 p-1 rounded-xl w-fit">
+        <button onClick={() => { resetFormulario(); setTab("crear"); }}
+          className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all ${tab === "crear" ? "bg-white shadow text-indigo-700" : "text-slate-500 hover:text-slate-700"}`}>
+          {editando ? "Editar Paquete" : `+ ${t("admin_paquetes_titulo")}`}
+        </button>
+        <button onClick={() => setTab("gestionar")}
+          className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all ${tab === "gestionar" ? "bg-white shadow text-indigo-700" : "text-slate-500 hover:text-slate-700"}`}>
+          Gestionar Paquetes
+        </button>
+      </div>
 
-        {/* Título */}
-        <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_nombre_label")}</label>
-          <input
-            type="text"
-            placeholder={t("admin_paquetes_nombre_ph")}
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-xs font-light outline-none focus:border-indigo-500 focus:bg-white transition-all text-slate-700"
-            required
-          />
-        </div>
+      {/* Tab Crear/Editar */}
+      {tab === "crear" && (
+        <form onSubmit={manejarGuardar} className="bg-white border border-slate-200/60 rounded-xl p-6 shadow-xs space-y-5">
+          {editando && (
+            <div className="bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-2 text-xs text-indigo-700 font-semibold flex items-center justify-between">
+              <span>Editando: <strong>{editando.nombre}</strong></span>
+              <button type="button" onClick={resetFormulario} className="text-indigo-400 hover:text-red-500"><X size={14} /></button>
+            </div>
+          )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {/* Perfil */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_perfil_label")}</label>
-            <select
-              value={perfil}
-              onChange={(e) => setPerfil(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-600 outline-none cursor-pointer focus:border-indigo-500 transition-colors"
-            >
-              <option value="Aventurero">{t("admin_paquetes_perfil_aventurero")}</option>
-              <option value="Cultural">{t("admin_paquetes_perfil_cultural")}</option>
-              <option value="Gastronomico">{t("admin_paquetes_perfil_gastro")}</option>
-              <option value="Relajacion">{t("admin_paquetes_perfil_premium")}</option>
-            </select>
+          {/* Nombre */}
+          <div>
+            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">{t("admin_paquetes_nombre_label")}</label>
+            <input type="text" value={titulo} onChange={(e) => setTitulo(e.target.value)} placeholder={t("admin_paquetes_nombre_ph")} required
+              className="w-full bg-slate-50 border border-slate-200 px-3 py-2.5 rounded-lg text-xs outline-none focus:border-indigo-500 transition-all" />
           </div>
 
-          {/* Duración */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_duracion_label")}</label>
-            <div className="relative">
-              <Clock size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-              <select
-                value={duracion}
-                onChange={(e) => setDuracion(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 pl-10 rounded-xl text-xs font-medium text-slate-600 outline-none cursor-pointer focus:border-indigo-500 transition-colors"
-              >
-                <option value="1">{t("admin_paquetes_duracion_1")}</option>
-                <option value="2">{t("admin_paquetes_duracion_2")}</option>
-                <option value="3">{t("admin_paquetes_duracion_3")}</option>
-                <option value="4">{t("admin_paquetes_duracion_4")}</option>
+          {/* Perfil + Duración */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">{t("admin_paquetes_perfil_label")}</label>
+              <select value={perfil} onChange={(e) => setPerfil(e.target.value)}
+                className="w-full bg-slate-50 border border-slate-200 px-3 py-2.5 rounded-lg text-xs outline-none focus:border-indigo-500 transition-all">
+                {["Aventurero", "Familias", "Cultural", "Romántico", "Senior"].map((p) => (
+                  <option key={p} value={p}>{p}</option>
+                ))}
               </select>
+            </div>
+            <div>
+              <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 flex items-center gap-1"><Clock size={10} />{t("admin_paquetes_duracion_label")}</label>
+              <input type="number" min="1" max="30" value={duracion} onChange={(e) => setDuracion(e.target.value)}
+                className="w-full bg-slate-50 border border-slate-200 px-3 py-2.5 rounded-lg text-xs outline-none focus:border-indigo-500 transition-all" />
             </div>
           </div>
 
           {/* Precio */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_precio_label")}</label>
-            <div className="relative">
-              <DollarSign size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-              <input
-                type="number"
-                step="0.01"
-                placeholder="0.00"
-                value={precio}
-                onChange={(e) => setPrecio(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 pl-10 rounded-xl text-xs font-light outline-none focus:border-indigo-500 focus:bg-white transition-all text-slate-700"
-                required
-              />
+          <div>
+            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 flex items-center gap-1"><DollarSign size={10} />{t("admin_paquetes_precio_label")}</label>
+            <input type="number" min="0" step="0.01" value={precio} onChange={(e) => setPrecio(e.target.value)}
+              placeholder="0.00"
+              className="w-full bg-slate-50 border border-slate-200 px-3 py-2.5 rounded-lg text-xs outline-none focus:border-indigo-500 transition-all" />
+          </div>
+
+          {/* Descripción */}
+          <div>
+            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">{t("admin_paquetes_desc_label")}</label>
+            <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)} rows={3}
+              placeholder={t("admin_paquetes_desc_ph")}
+              className="w-full bg-slate-50 border border-slate-200 px-3 py-2.5 rounded-lg text-xs outline-none focus:border-indigo-500 transition-all resize-none" />
+          </div>
+
+          {/* Selección de tours */}
+          <div>
+            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-2">{t("admin_paquetes_tours_label")}</label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {toursDisponibles.map((tour) => {
+                const sel = toursSeleccionados.includes(tour.id);
+                return (
+                  <button key={tour.id} type="button" onClick={() => manejarSeleccionTour(tour.id)}
+                    className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-medium transition-all text-left ${sel ? "bg-indigo-600 text-white border-indigo-600" : "bg-white text-slate-600 border-slate-200 hover:border-indigo-300"}`}>
+                    <MapPin size={12} className={sel ? "text-indigo-200" : "text-slate-400"} />
+                    <div className="flex-1 min-w-0">
+                      <p className="truncate font-semibold">{tour.nombre}</p>
+                      <p className={`text-[9px] truncate ${sel ? "text-indigo-200" : "text-slate-400"}`}>{tour.zona_geografica}</p>
+                    </div>
+                    {sel && <Check size={12} className="text-white shrink-0" />}
+                  </button>
+                );
+              })}
             </div>
           </div>
-        </div>
 
-        {/* Tours */}
-        <div className="space-y-2">
-          <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide block">
-            {t("admin_paquetes_tours_label")} ({t("admin_paquetes_tours_sel", { count: toursSeleccionados.length })})
-          </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-slate-100 rounded-xl p-3 bg-slate-50/50">
-            {toursDisponibles.map((tour) => (
-              <div
-                key={tour.id}
-                onClick={() => manejarSeleccionTour(tour.id)}
-                className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all ${
-                  toursSeleccionados.includes(tour.id)
-                    ? "bg-indigo-50/70 border-indigo-200"
-                    : "bg-white border-slate-200/60 hover:bg-slate-50"
-                }`}
-              >
-                <div className="space-y-0.5">
-                  <p className="text-xs font-medium text-slate-700">{tour.nombre}</p>
-                  <div className="flex items-center gap-1 text-[10px] text-slate-400">
-                    <MapPin size={10} />
-                    <span>{tour.zona_geografica}</span>
+          <button type="submit"
+            className={`w-full text-xs font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 ${guardado ? "bg-emerald-600 text-white" : "bg-indigo-600 hover:bg-indigo-700 text-white"}`}>
+            {guardado ? <><Check size={14} /> {t("admin_paquetes_guardado")}</> : <><Plus size={14} /> {editando ? "Guardar Cambios" : t("admin_paquetes_btn")}</>}
+          </button>
+        </form>
+      )}
+
+      {/* Tab Gestionar */}
+      {tab === "gestionar" && (
+        <div className="bg-white border border-slate-200/60 rounded-xl shadow-xs overflow-hidden">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+            <h2 className="text-sm font-bold text-slate-800">Paquetes registrados</h2>
+            <button onClick={cargarPaquetes} className="text-xs text-indigo-600 flex items-center gap-1 hover:underline"><RefreshCw size={12} /> Actualizar</button>
+          </div>
+          {cargandoLista ? (
+            <div className="p-8 text-center text-xs text-slate-400"><RefreshCw className="animate-spin mx-auto mb-2" size={20} /> Cargando...</div>
+          ) : paquetes.length === 0 ? (
+            <div className="p-8 text-center text-xs text-slate-400">No hay paquetes registrados.</div>
+          ) : (
+            <div className="divide-y divide-slate-50">
+              {paquetes.map((p) => (
+                <div key={p.id} className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition-colors">
+                  {p.imagen_base64 ? (
+                    <img src={p.imagen_base64} alt={p.nombre} className="w-12 h-12 rounded-xl object-cover shrink-0" />
+                  ) : (
+                    <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center shrink-0"><Layers size={16} className="text-slate-400" /></div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-slate-800 truncate">{p.nombre}</p>
+                    <p className="text-xs text-slate-400">{p.perfil_usuario} · {p.duracion_dias} días · ${p.precio_sugerido}</p>
+                  </div>
+                  <div className="flex items-center gap-1 shrink-0">
+                    <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${p.estado ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-500"}`}>
+                      {p.estado ? "Activo" : "Inactivo"}
+                    </span>
+                    <button onClick={() => iniciarEdicion(p)} title="Editar"
+                      className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"><Pencil size={14} /></button>
+                    <button onClick={() => eliminarPaquete(p.id)} title="Desactivar"
+                      className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={14} /></button>
                   </div>
                 </div>
-                <div className={`w-4 h-4 rounded-md border flex items-center justify-center transition-all ${
-                  toursSeleccionados.includes(tour.id)
-                    ? "bg-indigo-600 border-indigo-600 text-white"
-                    : "border-slate-300 bg-white"
-                }`}>
-                  {toursSeleccionados.includes(tour.id) && <Check size={10} strokeWidth={3} />}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Itinerario */}
-        <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_itin_label")}</label>
-          <textarea
-            rows={3}
-            placeholder={t("admin_paquetes_itin_ph")}
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-xs font-light outline-none focus:border-indigo-500 focus:bg-white transition-all text-slate-700 resize-none"
-            required
-          />
-        </div>
-
-        {/* BOTÓN */}
-        <button
-          type="submit"
-          className={`w-full text-xs font-medium py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer ${
-            guardado
-              ? "bg-emerald-600 text-white shadow-emerald-600/10"
-              : "bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-600/10"
-          }`}
-        >
-          {guardado ? (
-            <><Check size={14} /> {t("admin_paquetes_btn_guardado")}</>
-          ) : (
-            <><Layers size={14} /> {t("admin_paquetes_btn")}</>
+              ))}
+            </div>
           )}
-        </button>
-
-      </form>
+        </div>
+      )}
     </div>
   );
 }

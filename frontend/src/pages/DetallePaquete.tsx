@@ -214,7 +214,7 @@ export default function DetallePaquete() {
             <button
               onClick={() =>
                 navigate(
-                  `/reservas?package=${paquete.nombre}&price=${paquete.precio_sugerido}`
+                  `/reservas?package=${encodeURIComponent(paquete.nombre)}&price=${paquete.precio_sugerido}&id=${paquete.id}&duracion=${paquete.duracion_dias}+días`
                 )
               }
               className="w-full mt-6 bg-indigo-600 text-white py-3 rounded-xl text-xs font-bold hover:bg-indigo-700 transition"

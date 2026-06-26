@@ -56,6 +56,7 @@ export function ResumenItinerario() {
 
     setEnviando(true);
 
+    const usuarioId = localStorage.getItem("user_id");
     const payload = {
       cliente: clienteData,
       itinerario: destinos.map((d: any) => ({
@@ -71,10 +72,11 @@ export function ResumenItinerario() {
       totalDestinos,
       estadisticas,
       fechaReserva: new Date().toISOString(),
+      usuario_id: usuarioId ? parseInt(usuarioId) : null,
     };
 
     try {
-      const response = await fetch('/api/reservas', {
+      const response = await fetch('http://localhost:8000/api/reservas', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

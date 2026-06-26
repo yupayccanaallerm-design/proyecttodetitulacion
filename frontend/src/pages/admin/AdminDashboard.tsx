@@ -32,9 +32,10 @@ export default function AdminDashboard() {
 
   const menuItems = [
     { icon: <FolderHeart size={18} />, label: t("admin_menu_reservas"), path: "reservas" },
-    { icon: <MapPin size={18} />,     label: t("admin_menu_tours"),    path: "tours" },
-    { icon: <Layers size={18} />,     label: t("admin_menu_paquetes"), path: "paquetes" },
-    { icon: <Users size={18} />,      label: t("admin_menu_usuarios"), path: "usuarios" },
+    { icon: <MapPin size={18} />,      label: t("admin_menu_tours"),    path: "tours" },
+    { icon: <Layers size={18} />,      label: t("admin_menu_paquetes"), path: "paquetes" },
+    { icon: <Users size={18} />,       label: "Clientes",               path: "clientes" },
+    { icon: <Sparkles size={18} />,    label: t("admin_menu_usuarios"), path: "usuarios" },
   ];
 
   const handleLogout = () => {

@@ -4,12 +4,11 @@ import joblib
 import numpy as np
 import pandas as pd
 import os
+from database import obtener_conexion
 
 router = APIRouter(tags=["Recomendacion"])
 
-BASE_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../../..")
-)
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 MODELS_DIR = os.path.join(BASE_DIR, "ml", "trained_models")
 
 FEATURES = [
@@ -41,7 +40,6 @@ load_models()
 
 
 def _encode_safe(encoder, value: str):
-    """Encode a string value; returns 0 if unseen."""
     classes = list(encoder.classes_)
     return classes.index(value) if value in classes else 0
 
@@ -50,7 +48,6 @@ def _build_feature_row(body: Dict[str, Any]) -> list:
     pais_enc = _encode_safe(encoders["País / Procedencia"], str(body.get("País / Procedencia", "Perú")))
     idioma_enc = _encode_safe(encoders["Idioma"], str(body.get("Idioma", "Español")))
     tipo_enc = _encode_safe(encoders["Tipo de viaje"], str(body.get("Tipo de viaje", "Cultural")))
-
     return [
         int(body.get("Edad", 25)),
         pais_enc,
@@ -72,6 +69,57 @@ def _build_feature_row(body: Dict[str, Any]) -> list:
         int(body.get("Requiere caminata", 1)),
         int(body.get("Altura máxima tolerada", 3500)),
     ]
+
+
+def _guardar_recomendacion_db(body: Dict[str, Any], resultados: list):
+    try:
+        conexion = obtener_conexion()
+        if not conexion:
+            return
+        with conexion.cursor() as cursor:
+            cursor.execute(
+                """
+                INSERT INTO recomendaciones_ia (
+                    edad, pais_procedencia, viaja_con_ninos,
+                    presupuesto, dias_viaje, tipo_viaje, generado_en
+                ) VALUES (%s, %s, %s, %s, %s, %s, NOW())
+                """,
+                (
+                    int(body.get("Edad", 25)),
+                    str(body.get("País / Procedencia", "Perú")),
+                    int(body.get("Apto para niños", 0)),
+                    int(body.get("Presupuesto", 1)),
+                    int(body.get("Días de viaje", 5)),
+                    str(body.get("Tipo de viaje", "Cultural")),
+                ),
+            )
+            rec_id = cursor.lastrowid
+            for item in resultados:
+                cursor.execute(
+                    "SELECT id FROM tours WHERE nombre LIKE %s LIMIT 1",
+                    (f"%{item['destino'][:30]}%",),
+                )
+                tour = cursor.fetchone()
+                if tour:
+                    cursor.execute(
+                        """
+                        INSERT INTO recomendaciones_ia_detalle (recomendacion_id, tour_id, score)
+                        VALUES (%s, %s, %s)
+                        """,
+                        (rec_id, tour[0], item["score"]),
+                    )
+        conexion.commit()
+    except Exception as e:
+        print(f"[WARN] No se pudo guardar recomendacion en DB: {e}")
+        try:
+            conexion.rollback()
+        except Exception:
+            pass
+    finally:
+        try:
+            conexion.close()
+        except Exception:
+            pass
 
 
 @router.get("/recomendar/status")
@@ -116,9 +164,11 @@ def recomendar(body: Dict[str, Any]):
         validos = [r for r in recomendaciones if r["score"] > 0]
 
         if not validos:
-            return [{"destino": "Centro Histórico de Cusco (City Tour o Museos)", "score": 1.0}]
+            validos = [{"destino": "Centro Histórico de Cusco (City Tour o Museos)", "score": 1.0}]
 
-        return validos[:5]
+        top5 = validos[:5]
+        _guardar_recomendacion_db(body, top5)
+        return top5
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en predicción: {str(e)}")
