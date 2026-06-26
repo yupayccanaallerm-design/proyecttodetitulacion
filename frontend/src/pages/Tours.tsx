@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 import { Search, MapPin, Star, ShieldCheck, Sparkles, Clock, Users as UsersIcon, RefreshCw, AlertCircle } from "lucide-react";
 
 interface Tour {
@@ -12,7 +13,6 @@ interface Tour {
   imagen_url?: string;
   price: number;
   duration: string;
-  groupSize: string;
   rating: number;
   tags: string[];
   img: string;
@@ -35,7 +35,7 @@ export default function Tours() {
     const obtenerToursBD = async () => {
       try {
         setCargando(true);
-        const res = await fetch("http://localhost:8000/api/tours");
+        const res = await fetch(`http://localhost:8000/api/tours?lang=${i18n.language}`);
         
         if (!res.ok) {
           throw new Error("No se pudo obtener el catálogo de atractivos desde la base de datos.");
@@ -43,15 +43,12 @@ export default function Tours() {
         
         const data: any[] = await res.json();
         
-        const toursFormateados = data.map((t, index) => {
+        const toursFormateados = data.map((tourItem, index) => {
           let rutaImagenReal = "";
 
-          if (t.imagen_url) {
-            // Corrección: Comentarios JS válidos. Limpiamos posibles barras al concatenar
-            
-            rutaImagenReal = t.imagen_url;
+          if (tourItem.imagen_url) {
+            rutaImagenReal = tourItem.imagen_url;
           } else {
-            // Si el registro no tiene imagen, se aplica el carrusel de respaldo
             rutaImagenReal = [
               "https://images.unsplash.com/photo-1587595431973-160d0d94add1",
               "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2",
@@ -61,17 +58,16 @@ export default function Tours() {
           }
 
           return {
-            id: t.id,
-            nombre: t.nombre,
-            zona_geografica: t.zona_geografica,
-            descripcion: t.descripcion,
-            estado: t.estado,
-            img: rutaImagenReal, 
-            price: [45, 60, 85, 120, 35][index % 5], 
-            duration: index % 2 === 0 ? "1 día" : "Medio día",
-            groupSize: "Hasta 12",
+            id: tourItem.id,
+            nombre: tourItem.nombre,
+            zona_geografica: tourItem.zona_geografica,
+            descripcion: tourItem.descripcion,
+            estado: tourItem.estado,
+            img: rutaImagenReal,
+            price: [45, 60, 85, 120, 35][index % 5],
+            duration: index % 2 === 0 ? t("tours_duracion_dia") : t("tours_duracion_medio"),
             rating: parseFloat((4.5 + (index % 5) * 0.1).toFixed(1)),
-            tags: ["Operativo SGEV", t.zona_geografica, "Dataset Activo"]
+            tags: [t("tours_tag_operativo"), tourItem.zona_geografica, t("tours_tag_dataset")]
           };
         });
 
@@ -221,7 +217,7 @@ export default function Tours() {
                           <Clock size={12} className="text-indigo-500" /> {tour.duration}
                         </span>
                         <span className="flex items-center gap-1">
-                          <UsersIcon size={12} className="text-indigo-500" /> {tour.groupSize}
+                          <UsersIcon size={12} className="text-indigo-500" /> {t("tours_grupo")}
                         </span>
                       </div>
 

@@ -28,71 +28,63 @@ interface RecomendadorProps {
 const PRESETS_KEY = 'recomendador_preferencias';
 const RESULTADOS_KEY = 'recomendador_resultados';
 
-// 🆕 Información adicional de destinos
+// Información adicional de destinos — duracion_key/dificultad_key/tipo_key son claves de i18n
 const INFO_DESTINOS: Record<string, any> = {
   "machupicchu": {
     emoji: "🏛️",
     color: "from-amber-500 to-orange-600",
-    duracion: "2-3 días",
-    dificultad: "Moderada",
-    mejor_epoca: "Mayo - Septiembre",
-    tipo: "Arqueológico"
+    duracion_key: "dur_2_3_dias",
+    dificultad_key: "dif_moderada",
+    tipo_key: "tipo_arqueologico"
   },
   "sacsayhuaman": {
     emoji: "🏗️",
     color: "from-indigo-500 to-purple-600",
-    duracion: "Medio día",
-    dificultad: "Baja",
-    mejor_epoca: "Todo el año",
-    tipo: "Arqueológico"
+    duracion_key: "dur_medio_dia",
+    dificultad_key: "dif_baja",
+    tipo_key: "tipo_arqueologico"
   },
   "qorikancha": {
     emoji: "✨",
     color: "from-yellow-400 to-amber-600",
-    duracion: "2-3 horas",
-    dificultad: "Baja",
-    mejor_epoca: "Todo el año",
-    tipo: "Templo/Museo"
+    duracion_key: "dur_2_3_horas",
+    dificultad_key: "dif_baja",
+    tipo_key: "tipo_templo"
   },
   "moray": {
     emoji: "🌾",
     color: "from-emerald-400 to-teal-600",
-    duracion: "2-3 horas",
-    dificultad: "Baja",
-    mejor_epoca: "Marzo - Octubre",
-    tipo: "Arqueológico"
+    duracion_key: "dur_2_3_horas",
+    dificultad_key: "dif_baja",
+    tipo_key: "tipo_arqueologico"
   },
   "salineras": {
     emoji: "🧂",
     color: "from-sky-400 to-blue-600",
-    duracion: "2 horas",
-    dificultad: "Baja",
-    mejor_epoca: "Todo el año",
-    tipo: "Natural"
+    duracion_key: "dur_2_horas",
+    dificultad_key: "dif_baja",
+    tipo_key: "tipo_natural"
   },
   "tipon": {
     emoji: "💧",
     color: "from-cyan-400 to-blue-600",
-    duracion: "2-3 horas",
-    dificultad: "Baja",
-    mejor_epoca: "Todo el año",
-    tipo: "Arqueológico"
+    duracion_key: "dur_2_3_horas",
+    dificultad_key: "dif_baja",
+    tipo_key: "tipo_arqueologico"
   },
   "7colores": {
     emoji: "🌈",
     color: "from-pink-400 to-purple-600",
-    duracion: "1 día",
-    dificultad: "Alta",
-    mejor_epoca: "Mayo - Septiembre",
-    tipo: "Natural"
+    duracion_key: "dur_1_dia",
+    dificultad_key: "dif_alta",
+    tipo_key: "tipo_natural"
   },
   "laguna_huamantay": {
     emoji: "🏞️",
     color: "from-teal-400 to-emerald-600",
-    duracion: "1 día",
-    dificultad: "Alta",
-    mejor_epoca: "Abril - Octubre",
-    tipo: "Natural"
+    duracion_key: "dur_1_dia",
+    dificultad_key: "dif_alta",
+    tipo_key: "tipo_natural"
   }
 };
 
@@ -265,12 +257,12 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
           const nombreLower = String(nombre).toLowerCase().replace(/ /g, '_').replace(/[áéíóú]/g, (c) => "aeiou"["áéíóú".indexOf(c)]);
           const info = INFO_DESTINOS[nombreLower] || INFO_DESTINOS[String(nombre).toLowerCase().replace(/ /g, '_')] || {};
           
-          return { 
-            destino: String(nombre || "Destino sugerido"),
+          return {
+            destino: String(nombre || t("recomendador.defaultDestino")),
             score: item.score ?? (1 - (index * 0.1)),
-            descripcion: item.descripcion || item.desc || info.descripcion || "",
-            duracion_sugerida: info.duracion || "Variable",
-            nivel_dificultad: info.dificultad || "Moderada"
+            descripcion: item.descripcion || item.desc || "",
+            duracion_sugerida: info.duracion_key || "dur_variable",
+            nivel_dificultad: info.dificultad_key || "dif_moderada"
           };
         });
         setResultado({ top: formateado });
@@ -280,7 +272,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
 
     } catch (err: any) {
       if (err.name === 'AbortError') {
-        setError("⏳ La búsqueda está tomando demasiado tiempo. Intenta nuevamente.");
+        setError(t("recomendador.timeout"));
       } else {
         setError(t("recomendador.error"));
       }
@@ -293,11 +285,11 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
   const handleAgregarItinerario = useCallback((destino: string) => {
     setSelectedDestino({
       nombre: destino,
-      tipo: "Destino recomendado",
-      tour: `Tour personalizado a ${destino}`
+      tipo: t("recomendador.tipoRecomendado"),
+      tour: t("recomendador.tourDefault", { nombre: destino })
     });
     setShowAddModal(true);
-  }, []);
+  }, [t]);
 
   const handleConfirmarAgregar = useCallback((data: { 
     fechaInicio: string; 
@@ -333,24 +325,22 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
 
   const resumenPreferencias = useMemo(() => {
     const intereses = [];
-    if (formulario.Fotografía === "Sí") intereses.push("📸 Fotos");
-    if (formulario.Comida === "Sí") intereses.push("🍜 Comida");
-    if (formulario.Trekking === "Sí") intereses.push("🥾 Trekking");
-    if (formulario.Naturaleza === "Sí") intereses.push("🌿 Naturaleza");
-    if (formulario.Historia === "Sí") intereses.push("🏛️ Historia");
+    if (formulario.Fotografía === "Sí") intereses.push(`📸 ${t("recomendador.interests.photos")}`);
+    if (formulario.Comida === "Sí") intereses.push(`🍜 ${t("recomendador.interests.food")}`);
+    if (formulario.Trekking === "Sí") intereses.push(`🥾 ${t("recomendador.interests.trekking")}`);
+    if (formulario.Naturaleza === "Sí") intereses.push(`🌿 ${t("recomendador.interests.nature")}`);
+    if (formulario.Historia === "Sí") intereses.push(`🏛️ ${t("recomendador.interests.history")}`);
     return intereses;
-  }, [formulario]);
+  }, [formulario, t]);
 
-  // 🆕 Obtener info del destino
   const getDestinoInfo = (nombre: string) => {
     const key = nombre.toLowerCase().replace(/ /g, '_').replace(/[áéíóú]/g, (c) => "aeiou"["áéíóú".indexOf(c)]);
     return INFO_DESTINOS[key] || INFO_DESTINOS[nombre.toLowerCase().replace(/ /g, '_')] || {
       emoji: "📍",
       color: "from-slate-400 to-slate-600",
-      duracion: "Variable",
-      dificultad: "Moderada",
-      mejor_epoca: "Consultar",
-      tipo: "Destino"
+      duracion_key: "dur_variable",
+      dificultad_key: "dif_moderada",
+      tipo_key: "tipo_destino"
     };
   };
 
@@ -371,7 +361,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
       <main className="max-w-7xl mx-auto px-4 py-8 relative z-0">
         <section className="text-center mb-12">
           <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full mb-4">
-            <Sparkles size={12} /> Planificador Inteligente
+            <Sparkles size={12} /> {t("recomendador.badge")}
           </span>
           <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">
             {t("recomendador.title")}
@@ -531,12 +521,12 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
               {showAdvanced && (
                 <div className="p-6 pt-0 border-t border-slate-100 space-y-4 animate-in slide-in-from-top-2 duration-200">
                   <div className="grid md:grid-cols-2 gap-4">
-                    <InputGroup label="Presupuesto">
+                    <InputGroup label={t("recomendador.fields.budget")}>
                       <div className="flex bg-slate-50 p-1 rounded-2xl gap-1">
                         {["Bajo", "Medio", "Alto"].map(p => (
-                          <button 
-                            key={p} 
-                            onClick={() => handleChange("Presupuesto", p)} 
+                          <button
+                            key={p}
+                            onClick={() => handleChange("Presupuesto", p)}
                             className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1 ${formulario.Presupuesto === p ? "bg-white shadow-sm text-slate-900" : "text-slate-400"}`}
                           >
                             {p === "Bajo" && "💰"}
@@ -547,22 +537,22 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                         ))}
                       </div>
                     </InputGroup>
-                    <InputGroup label="Días de viaje">
-                      <input 
-                        type="number" 
-                        value={formulario["Días de viaje"]} 
-                        onChange={(e) => handleChange("Días de viaje", Number(e.target.value))} 
+                    <InputGroup label={t("recomendador.fields.days")}>
+                      <input
+                        type="number"
+                        value={formulario["Días de viaje"]}
+                        onChange={(e) => handleChange("Días de viaje", Number(e.target.value))}
                         min={1}
                         max={30}
-                        className={inputStyle} 
+                        className={inputStyle}
                       />
                     </InputGroup>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
-                    <InputGroup label="Tipo de viaje">
-                      <select 
-                        value={formulario["Tipo de viaje"]} 
-                        onChange={(e) => handleChange("Tipo de viaje", e.target.value)} 
+                    <InputGroup label={t("recomendador.fields.tripType")}>
+                      <select
+                        value={formulario["Tipo de viaje"]}
+                        onChange={(e) => handleChange("Tipo de viaje", e.target.value)}
                         className={inputStyle}
                       >
                         <option value="Cultural">Cultural</option>
@@ -572,10 +562,10 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                         <option value="Fotográfico">Fotográfico</option>
                       </select>
                     </InputGroup>
-                    <InputGroup label="Tipo de transporte">
-                      <select 
-                        value={formulario["Tipo de transporte"]} 
-                        onChange={(e) => handleChange("Tipo de transporte", e.target.value)} 
+                    <InputGroup label={t("recomendador.fields.transport")}>
+                      <select
+                        value={formulario["Tipo de transporte"]}
+                        onChange={(e) => handleChange("Tipo de transporte", e.target.value)}
                         className={inputStyle}
                       >
                         <option value="Bus">Bus</option>
@@ -626,7 +616,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-black flex items-center gap-2">🚀 {t("recomendador.topTitle")}</h2>
                   <span className="text-xs bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full font-bold">
-                    {resultado.top.length} destinos
+                    {resultado.top.length} {t("recomendador.found")}
                   </span>
                 </div>
                 <div className="space-y-3 max-h-[600px] overflow-y-auto pr-1">
@@ -650,16 +640,16 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                           <div className="flex-1">
                             <h3 className="font-bold text-slate-800 text-sm">{item.destino}</h3>
                             <div className="flex flex-wrap gap-1.5 mt-1">
-                              <span className="text-[9px] bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded-full">{info.tipo || 'Destino'}</span>
+                              <span className="text-[9px] bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded-full">{t(info.tipo_key || 'tipo_destino')}</span>
                               <span className="text-[9px] bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
-                                <Clock size={9} /> {info.duracion || 'Variable'}
+                                <Clock size={9} /> {t(info.duracion_key || 'dur_variable')}
                               </span>
                               <span className={`text-[9px] px-1.5 py-0.5 rounded-full ${
-                                info.dificultad === 'Baja' ? 'bg-green-50 text-green-600' :
-                                info.dificultad === 'Alta' ? 'bg-red-50 text-red-600' :
+                                info.dificultad_key === 'dif_baja' ? 'bg-green-50 text-green-600' :
+                                info.dificultad_key === 'dif_alta' ? 'bg-red-50 text-red-600' :
                                 'bg-yellow-50 text-yellow-600'
                               }`}>
-                                {info.dificultad || 'Moderada'}
+                                {t(info.dificultad_key || 'dif_moderada')}
                               </span>
                             </div>
                             {pct !== null && (
@@ -689,7 +679,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                             onClick={() => handleAgregarItinerario(item.destino)}
                             className="flex-1 flex items-center justify-center gap-1.5 text-[10px] font-bold text-emerald-600 bg-emerald-50 hover:bg-emerald-100 rounded-xl py-1.5 transition-colors"
                           >
-                            <Plus size={12} /> Agregar
+                            <Plus size={12} /> {t("recomendador.addBtn")}
                           </button>
                         </div>
                       </div>
@@ -721,16 +711,11 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
         {/* Mapa interactivo */}
         {resultado && resultado.top && resultado.top.length > 0 && (
           <div className="mt-8 animate-in fade-in slide-in-from-bottom-4 duration-500 relative z-0">
-            <div className="bg-white rounded-[35px] shadow-sm border border-slate-100 overflow-hidden p-4">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-bold text-slate-600 flex items-center gap-2">
-                  <MapPin size={16} className="text-indigo-500" />
-                  Ubicación de los {resultado.top.length} destinos recomendados
-                </span>
-                <span className="text-[10px] text-slate-400">{resultado.top.length} destinos en el mapa</span>
-              </div>
-              <MapaDestinos destinos={resultado.top} />
-            </div>
+            <MapaDestinos
+              destinos={resultado.top}
+              titleOverride={t("recomendador.mapTitle", { count: resultado.top.length })}
+              subtitleOverride={t("recomendador.mapCount", { count: resultado.top.length })}
+            />
           </div>
         )}
       </main>

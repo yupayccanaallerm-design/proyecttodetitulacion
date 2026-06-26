@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Sparkles, Check, Clock, Layers, DollarSign, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-// Definimos la estructura de un Tour para TypeScript
 interface Tour {
   id: number;
   nombre: string;
@@ -9,27 +9,25 @@ interface Tour {
 }
 
 export default function AdminPaquetes() {
+  const { t } = useTranslation();
   const [guardado, setGuardado] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [perfil, setPerfil] = useState("Aventurero");
   const [duracion, setDuracion] = useState("1");
   const [precio, setPrecio] = useState("");
   const [descripcion, setDescripcion] = useState("");
-  
-  // Estados para manejar los tours traídos de la base de datos
   const [toursDisponibles, setToursDisponibles] = useState<Tour[]>([]);
   const [toursSeleccionados, setToursSeleccionados] = useState<number[]>([]);
 
-  // 1. Jalar los tours de la base de datos de Hostinger al cargar la página
   useEffect(() => {
-    fetch("http://localhost:8000/api/tours") 
+    fetch("http://localhost:8000/api/tours")
       .then((res) => {
         if (!res.ok) throw new Error("Error en la respuesta del servidor");
         return res.json();
       })
       .then((data) => setToursDisponibles(data))
       .catch((err) => {
-        console.error("Error jalando tours, usando datos simulados para pruebas:", err);
+        console.error("Error loading tours:", err);
         setToursDisponibles([
           { id: 1, nombre: "Machu Picchu Tradicional", zona_geografica: "Machu Picchu" },
           { id: 2, nombre: "Valle Sagrado de los Incas", zona_geografica: "Valle Sagrado" },
@@ -39,7 +37,6 @@ export default function AdminPaquetes() {
       });
   }, []);
 
-  // 2. Controlar la selección/deselección de tours
   const manejarSeleccionTour = (id: number) => {
     if (toursSeleccionados.includes(id)) {
       setToursSeleccionados(toursSeleccionados.filter((tourId) => tourId !== id));
@@ -48,11 +45,10 @@ export default function AdminPaquetes() {
     }
   };
 
-  // 3. Enviar el paquete estructurado al backend real de FastAPI
   const manejarGuardar = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!titulo || toursSeleccionados.length === 0) {
-      alert("Por favor introduce un título y selecciona al menos un tour.");
+      alert(t("admin_paquetes_validacion"));
       return;
     }
 
@@ -62,22 +58,17 @@ export default function AdminPaquetes() {
       duracion_dias: parseInt(duracion),
       perfil_usuario: perfil,
       precio_sugerido: parseFloat(precio) || 0.00,
-      tours: toursSeleccionados // Aquí viajan los IDs amarrados (Ej: [1, 3])
+      tours: toursSeleccionados,
     };
 
     try {
-      // Petición POST real hacia tu backend
       const res = await fetch("http://localhost:8000/api/paquetes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(nuevoPaquete)
+        body: JSON.stringify(nuevoPaquete),
       });
 
       if (res.ok) {
-        const resultado = await res.json();
-        console.log("Respuesta del servidor:", resultado);
-        
-        // Activar animación de éxito y limpiar formulario
         setGuardado(true);
         setTimeout(() => {
           setGuardado(false);
@@ -88,11 +79,11 @@ export default function AdminPaquetes() {
         }, 2500);
       } else {
         const errorData = await res.json();
-        alert(`Error al guardar en el servidor: ${errorData.detail || "Error desconocido"}`);
+        alert(`${t("error_generico")}: ${errorData.detail || ""}`);
       }
     } catch (error) {
       console.error("Error de red al intentar conectar con FastAPI:", error);
-      alert("No se pudo establecer conexión con el backend de Python.");
+      alert(t("admin_paquetes_error_servidor"));
     }
   };
 
@@ -100,21 +91,19 @@ export default function AdminPaquetes() {
     <div className="space-y-6 max-w-2xl mx-auto mb-10">
       {/* CABECERA */}
       <div>
-        <h1 className="text-xl font-semibold text-slate-900 tracking-tight">Diseñador de Paquetes Base</h1>
-        <p className="text-xs text-slate-400 font-light mt-0.5">
-          Estructura las plantillas de rutas que el Planificador IA utilizará para empaquetar de forma personalizada.
-        </p>
+        <h1 className="text-xl font-semibold text-slate-900 tracking-tight">{t("admin_paquetes_titulo")}</h1>
+        <p className="text-xs text-slate-400 font-light mt-0.5">{t("admin_paquetes_desc")}</p>
       </div>
 
       {/* FORMULARIO */}
       <form onSubmit={manejarGuardar} className="bg-white border border-slate-200/60 rounded-xl p-6 shadow-xs space-y-5">
-        
-        {/* Título del Paquete */}
+
+        {/* Título */}
         <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Nombre / Título del Paquete Sugerido</label>
-          <input 
-            type="text" 
-            placeholder="Ej. Aventura Express Humantay, Cusco Cultural Premium..." 
+          <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_nombre_label")}</label>
+          <input
+            type="text"
+            placeholder={t("admin_paquetes_nombre_ph")}
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
             className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-xs font-light outline-none focus:border-indigo-500 focus:bg-white transition-all text-slate-700"
@@ -123,48 +112,48 @@ export default function AdminPaquetes() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {/* Clasificación de Perfil */}
+          {/* Perfil */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Asignación de Perfil (IA)</label>
-            <select 
+            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_perfil_label")}</label>
+            <select
               value={perfil}
               onChange={(e) => setPerfil(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-600 outline-none cursor-pointer focus:border-indigo-500 transition-colors"
             >
-              <option value="Aventurero">Eco-Aventurero / Trekking</option>
-              <option value="Cultural">Histórico / Cultural Tradicional</option>
-              <option value="Gastronomico">Gastronómico / Vivencial</option>
-              <option value="Relajacion">Premium / Confort y Relajación</option>
+              <option value="Aventurero">{t("admin_paquetes_perfil_aventurero")}</option>
+              <option value="Cultural">{t("admin_paquetes_perfil_cultural")}</option>
+              <option value="Gastronomico">{t("admin_paquetes_perfil_gastro")}</option>
+              <option value="Relajacion">{t("admin_paquetes_perfil_premium")}</option>
             </select>
           </div>
 
-          {/* Duración Estimada */}
+          {/* Duración */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Duración Base</label>
+            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_duracion_label")}</label>
             <div className="relative">
               <Clock size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-              <select 
+              <select
                 value={duracion}
                 onChange={(e) => setDuracion(e.target.value)}
                 className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 pl-10 rounded-xl text-xs font-medium text-slate-600 outline-none cursor-pointer focus:border-indigo-500 transition-colors"
               >
-                <option value="1">1 Día Completo (Full Day)</option>
-                <option value="2">2 Días / 1 Noche</option>
-                <option value="3">3 Días / 2 Noches</option>
-                <option value="4">4 a más Días</option>
+                <option value="1">{t("admin_paquetes_duracion_1")}</option>
+                <option value="2">{t("admin_paquetes_duracion_2")}</option>
+                <option value="3">{t("admin_paquetes_duracion_3")}</option>
+                <option value="4">{t("admin_paquetes_duracion_4")}</option>
               </select>
             </div>
           </div>
 
-          {/* Precio Sugerido */}
+          {/* Precio */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Precio Base (PE$)</label>
+            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_precio_label")}</label>
             <div className="relative">
               <DollarSign size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-              <input 
-                type="number" 
+              <input
+                type="number"
                 step="0.01"
-                placeholder="0.00" 
+                placeholder="0.00"
                 value={precio}
                 onChange={(e) => setPrecio(e.target.value)}
                 className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 pl-10 rounded-xl text-xs font-light outline-none focus:border-indigo-500 focus:bg-white transition-all text-slate-700"
@@ -174,14 +163,14 @@ export default function AdminPaquetes() {
           </div>
         </div>
 
-        {/* 🌟 SECCIÓN DINÁMICA: SELECCIÓN DE TOURS ENLAZADOS */}
+        {/* Tours */}
         <div className="space-y-2">
           <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide block">
-            Seleccionar Tours Específicos para este Paquete ({toursSeleccionados.length} seleccionados)
+            {t("admin_paquetes_tours_label")} ({t("admin_paquetes_tours_sel", { count: toursSeleccionados.length })})
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-slate-100 rounded-xl p-3 bg-slate-50/50">
             {toursDisponibles.map((tour) => (
-              <div 
+              <div
                 key={tour.id}
                 onClick={() => manejarSeleccionTour(tour.id)}
                 className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all ${
@@ -209,12 +198,12 @@ export default function AdminPaquetes() {
           </div>
         </div>
 
-        {/* Detalle del itinerario paso a paso */}
+        {/* Itinerario */}
         <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Descripción del Itinerario Sugerido (Bloques breves)</label>
-          <textarea 
+          <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{t("admin_paquetes_itin_label")}</label>
+          <textarea
             rows={3}
-            placeholder="Día 1: Recojo y aclimatación. Día 2: Tour guiado y almuerzo buffet..." 
+            placeholder={t("admin_paquetes_itin_ph")}
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
             className="w-full bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl text-xs font-light outline-none focus:border-indigo-500 focus:bg-white transition-all text-slate-700 resize-none"
@@ -222,23 +211,19 @@ export default function AdminPaquetes() {
           />
         </div>
 
-        {/* BOTÓN GUARDAR */}
-        <button 
+        {/* BOTÓN */}
+        <button
           type="submit"
           className={`w-full text-xs font-medium py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer ${
-            guardado 
-              ? "bg-emerald-600 text-white shadow-emerald-600/10" 
+            guardado
+              ? "bg-emerald-600 text-white shadow-emerald-600/10"
               : "bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-600/10"
           }`}
         >
           {guardado ? (
-            <>
-              <Check size={14} /> Paquete Enlazado e Indexado con Éxito
-            </>
+            <><Check size={14} /> {t("admin_paquetes_btn_guardado")}</>
           ) : (
-            <>
-              <Layers size={14} /> Registrar y Publicar Paquete
-            </>
+            <><Layers size={14} /> {t("admin_paquetes_btn")}</>
           )}
         </button>
 

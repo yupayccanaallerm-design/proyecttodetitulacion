@@ -47,7 +47,7 @@ function AppContent() {
   const [openChat, setOpenChat] = useState(false);
   const [chatContext, setChatContext] = useState<string>("");
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,7 +55,8 @@ function AppContent() {
   }, []);
 
   const changeLang = (lang: string) => {
-    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+    window.location.reload();
   };
 
   return (
@@ -66,7 +67,7 @@ function AppContent() {
           <div 
             onDoubleClick={() => navigate("/login")} 
             className="flex items-center gap-2.5 group cursor-pointer select-none"
-            title="Doble clic para acceso operativo de administración"
+            title={t("app_admin_tooltip")}
           >
             <Link to="/" className="flex items-center gap-2.5">
               <div className="bg-indigo-600 p-2 rounded-xl text-white group-hover:bg-indigo-700 transition-colors">
@@ -133,7 +134,7 @@ function AppContent() {
       {openChat && (
         <div className="fixed bottom-24 right-4 md:right-8 w-[350px] h-[500px] bg-white border border-slate-200 rounded-2xl shadow-xl z-[200] overflow-hidden flex flex-col">
           <div className="flex justify-between items-center px-4 py-3.5 bg-gradient-to-r from-slate-900 to-indigo-950 text-white">
-            <span className="text-xs font-medium tracking-wide">Concierge Virtual SGEV</span>
+            <span className="text-xs font-medium tracking-wide">{i18n.t("app_concierge")}</span>
             <button onClick={() => setOpenChat(false)} className="text-slate-400 hover:text-white cursor-pointer text-xs">✕</button>
           </div>
           <div className="flex-1 overflow-auto bg-slate-50/50">
@@ -185,15 +186,15 @@ function AppContent() {
 function Home({ visible }: { visible: boolean }) {
   const { t } = useTranslation();
   const acronimo = [
-    { letra: "G", texto: "Grandes experiencias diseñadas para ti." },
-    { letra: "T", texto: "Tu pasión por viajar es nuestra inspiración." },
-    { letra: "P", texto: "Promovemos el turismo sostenible y exclusivo." },
-    { letra: "T", texto: "Te llevamos a explorar destinos extraordinarios." },
-    { letra: "R", texto: "Respaldamos tus sueños con itinerarios únicos." },
-    { letra: "A", texto: "Aventuras que conectan con la cultura y la naturaleza." },
-    { letra: "V", texto: "Viajes llenos de excelencia y dedicación." },
-    { letra: "E", texto: "Emociones que recordarás toda la vida." },
-    { letra: "L", texto: "Lealtad y confianza en cada paso de tu travesía." }
+    { letra: "G", texto: t("home_acronimo_g") },
+    { letra: "T", texto: t("home_acronimo_t1") },
+    { letra: "P", texto: t("home_acronimo_p") },
+    { letra: "T", texto: t("home_acronimo_t2") },
+    { letra: "R", texto: t("home_acronimo_r") },
+    { letra: "A", texto: t("home_acronimo_a") },
+    { letra: "V", texto: t("home_acronimo_v") },
+    { letra: "E", texto: t("home_acronimo_e") },
+    { letra: "L", texto: t("home_acronimo_l") },
   ];
 
   return (
@@ -236,12 +237,8 @@ function Home({ visible }: { visible: boolean }) {
             {t("home_about_titulo")}
           </h2>
           <div className="space-y-4 text-slate-500 font-light text-sm leading-relaxed">
-            <p>
-              GRUPO TUMPERU nació de la iniciativa de un grupo de profesionales multidisciplinarios con amplia experiencia en el sector turístico, quienes decidieron unir sus conocimientos y pasión por el Perú para ofrecer una propuesta única y exclusiva.
-            </p>
-            <p>
-              A través de itinerarios exclusivos, atención personalizada y un profundo compromiso con el turismo sostenible, la agencia se ha consolidado como un referente para aquellos que buscan vivir experiencias auténticas e inolvidables.
-            </p>
+            <p>{t("home_about_p1")}</p>
+            <p>{t("home_about_p2")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
@@ -269,7 +266,11 @@ function Home({ visible }: { visible: boolean }) {
             <Map size={240} />
           </div>
           <h3 className="text-lg font-light tracking-wide mb-6">
-            ¿Qué significa <span className="font-semibold text-indigo-400">GRUPO TUMPERU</span>?
+            {t("home_acronimo_titulo").split("GRUPO TUMPERU").map((part, i, arr) =>
+              i < arr.length - 1
+                ? <span key={i}>{part}<span className="font-semibold text-indigo-400">GRUPO TUMPERU</span></span>
+                : <span key={i}>{part}</span>
+            )}
           </h3>
           <div className="space-y-3.5">
             {acronimo.map((item, idx) => (

@@ -123,6 +123,7 @@ class AskReq(BaseModel):
     user_id: str = "usuario"
     query: str
     top_k: int = TOP_K_DEFAULT
+    lang: str = "es"
 
 
 class AskResp(BaseModel):
@@ -214,24 +215,18 @@ def detect_intent(query: str):
     q = query.lower()
 
     if any(x in q for x in [
-        "hola",
-        "buenas",
-        "buenos dias",
-        "saludos",
-        "hey",
-        "holi"
+        "hola", "buenas", "buenos dias", "saludos", "hey", "holi",
+        "hello", "hi", "good morning", "good afternoon", "good evening", "greetings"
     ]):
         return "saludo"
 
     if any(x in q for x in [
-        "adios",
-        "hasta luego",
-        "nos vemos",
-        "chao"
+        "adios", "hasta luego", "nos vemos", "chao",
+        "goodbye", "bye", "see you", "farewell", "take care"
     ]):
         return "despedida"
 
-    if "recuerda que" in q or "aprende que" in q:
+    if "recuerda que" in q or "aprende que" in q or "remember that" in q or "note that" in q:
         return "memorizar"
 
     return "consulta"
@@ -289,45 +284,89 @@ def query_kb(query: str, top_k: int):
 # PROMPT
 # ==================================================
 
-def build_prompt(query, docs, metas, user_facts: list = None):
+LANG_INSTRUCTIONS = {
+    "es": {
+        "lang_rule": "Responde SIEMPRE en español de manera amigable y útil.",
+        "specialist": "Especialista en",
+        "topics": [
+            "Turismo y destinos turísticos",
+            "Hoteles y alojamiento",
+            "Restaurantes y gastronomía",
+            "Tours y excursiones",
+            "Cultura e historia",
+            "Transporte y logística",
+            "Clima y mejor época para visitar",
+        ],
+        "instructions": [
+            "Usa SOLO la información del contexto proporcionado",
+            "Si no encuentras la información en el contexto, indica que no está disponible",
+            "Sé conciso pero informativo",
+            "Si hay datos recordados del usuario, personaliza tu respuesta considerándolos",
+        ],
+        "memory_header": "Datos recordados del usuario",
+        "question_label": "Pregunta del usuario",
+        "context_label": "Contexto de la base de conocimiento",
+    },
+    "en": {
+        "lang_rule": "ALWAYS respond in English in a friendly and helpful manner.",
+        "specialist": "Specialist in",
+        "topics": [
+            "Tourism and tourist destinations",
+            "Hotels and accommodation",
+            "Restaurants and gastronomy",
+            "Tours and excursions",
+            "Culture and history",
+            "Transportation and logistics",
+            "Climate and best time to visit",
+        ],
+        "instructions": [
+            "Use ONLY the information from the provided context",
+            "If you cannot find the information in the context, indicate it is not available",
+            "Be concise but informative",
+            "If there is remembered data about the user, personalize your response accordingly",
+        ],
+        "memory_header": "Remembered user data",
+        "question_label": "User question",
+        "context_label": "Knowledge base context",
+    },
+}
+
+
+def build_prompt(query, docs, metas, user_facts: list = None, lang: str = "es"):
+
+    li = LANG_INSTRUCTIONS.get(lang, LANG_INSTRUCTIONS["es"])
 
     context = []
     for d, m in zip(docs, metas):
         source = m.get("source", "?")
         page = m.get("page", "?")
-        context.append(f"{d}\nFuente: {source} Página: {page}")
+        context.append(f"{d}\nSource: {source} Page: {page}")
 
     ctx = "\n\n".join(context)
 
     memory_section = ""
     if user_facts:
         facts_text = "\n".join(f"- {f}" for f in user_facts)
-        memory_section = f"\nDatos recordados del usuario:\n{facts_text}\n"
+        memory_section = f"\n{li['memory_header']}:\n{facts_text}\n"
 
-    return f"""Eres Travel Assistant, un experto en turismo de Cusco, Perú.
+    topics = "\n".join(f"- {t}" for t in li["topics"])
+    instructions = "\n".join(f"{i+1}. {ins}" for i, ins in enumerate(li["instructions"]))
 
-Especialista en:
-- Turismo y destinos turísticos
-- Hoteles y alojamiento
-- Restaurantes y gastronomía
-- Tours y excursiones
-- Cultura e historia
-- Transporte y logística
-- Clima y mejor época para visitar
+    return f"""You are Travel Assistant, an expert in tourism in Cusco, Peru.
+{li['lang_rule']}
 
-Instrucciones importantes:
-1. Usa SOLO la información del contexto proporcionado
-2. Si no encuentras la información en el contexto, indica que no está disponible
-3. Responde en español de manera amigable y útil
-4. Sé conciso pero informativo
-5. Si hay datos recordados del usuario, personaliza tu respuesta considerándolos
+{li['specialist']}:
+{topics}
+
+Important instructions:
+{instructions}
 {memory_section}
-Pregunta del usuario: {query}
+{li['question_label']}: {query}
 
-Contexto de la base de conocimiento:
+{li['context_label']}:
 {ctx}
 
-Respuesta:"""
+Answer:"""
 
 # ==================================================
 # ENDPOINTS
@@ -345,51 +384,50 @@ def get_config():
     }
 
 
+RESPONSES = {
+    "es": {
+        "saludo": "👋 ¡Hola! Soy Travel Assistant. ¿En qué puedo ayudarte con tu viaje a Cusco? Puedo informarte sobre tours, hoteles, restaurantes y más.",
+        "despedida": "✨ ¡Hasta pronto! Que tengas un excelente viaje. No dudes en volver si necesitas más información.",
+        "sin_docs": "📚 Aún estoy aprendiendo sobre ese tema. ¿Podrías ser más específico o preguntar sobre Machu Picchu, Valle Sagrado, o recomendaciones generales para Cusco?",
+        "error": "Lo siento, tuve un problema procesando tu consulta. Por favor, intenta de nuevo o reformula tu pregunta.",
+    },
+    "en": {
+        "saludo": "👋 Hello! I'm Travel Assistant. How can I help you with your trip to Cusco? I can provide information on tours, hotels, restaurants and more.",
+        "despedida": "✨ Farewell! Have a wonderful trip. Don't hesitate to come back if you need more information.",
+        "sin_docs": "📚 I'm still learning about that topic. Could you be more specific or ask about Machu Picchu, Sacred Valley, or general recommendations for Cusco?",
+        "error": "I'm sorry, I had trouble processing your query. Please try again or rephrase your question.",
+    },
+}
+
+
 @router.post("/ask")
 def ask(body: AskReq):
     """Endpoint principal para consultar al chatbot"""
-    
+
+    lang = body.lang if body.lang in RESPONSES else "es"
+    msgs = RESPONSES[lang]
+
     intent = detect_intent(body.query)
 
-    # Manejo de saludos
     if intent == "saludo":
-        return {
-            "intent": intent,
-            "answer": "👋 ¡Hola! Soy Travel Assistant. ¿En qué puedo ayudarte con tu viaje a Cusco? Puedo informarte sobre tours, hoteles, restaurantes y más.",
-            "sources": []
-        }
+        return {"intent": intent, "answer": msgs["saludo"], "sources": []}
 
-    # Manejo de despedidas
     if intent == "despedida":
-        return {
-            "intent": intent,
-            "answer": "✨ ¡Hasta pronto! Que tengas un excelente viaje. No dudes en volver si necesitas más información.",
-            "sources": []
-        }
+        return {"intent": intent, "answer": msgs["despedida"], "sources": []}
 
-    # Para consultas normales, usar RAG
     docs, metas = query_kb(body.query, body.top_k)
 
-    # Si no hay documentos en la KB, usar respuesta genérica
     if not docs or len(docs) == 0:
-        return {
-            "intent": "consulta",
-            "answer": "📚 Aún estoy aprendiendo sobre ese tema. ¿Podrías ser más específico o preguntar sobre Machu Picchu, Valle Sagrado, o recomendaciones generales para Cusco?",
-            "sources": []
-        }
+        return {"intent": "consulta", "answer": msgs["sin_docs"], "sources": []}
 
     user_facts = get_recent_facts(body.user_id, limit=5)
-    prompt = build_prompt(body.query, docs, metas, user_facts=user_facts)
+    prompt = build_prompt(body.query, docs, metas, user_facts=user_facts, lang=lang)
     answer = call_ollama(prompt)
 
     if not answer:
-        answer = "Lo siento, tuve un problema procesando tu consulta. Por favor, intenta de nuevo o reformula tu pregunta."
+        answer = msgs["error"]
 
-    return {
-        "intent": intent,
-        "answer": answer,
-        "sources": metas
-    }
+    return {"intent": intent, "answer": answer, "sources": metas}
 
 
 @router.post("/mem/fact")

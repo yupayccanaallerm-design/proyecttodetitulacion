@@ -1,5 +1,22 @@
 from fastapi import Request
 
+try:
+    from deep_translator import GoogleTranslator
+    _TRANSLATOR_AVAILABLE = True
+except ImportError:
+    _TRANSLATOR_AVAILABLE = False
+
+
+def translate_content(text: str, target_lang: str) -> str:
+    """Traduce contenido dinámico de la BD usando Google Translate. Sin cambio si lang=es."""
+    if not text or target_lang == "es" or not _TRANSLATOR_AVAILABLE:
+        return text
+    try:
+        return GoogleTranslator(source="es", target=target_lang).translate(text[:4500]) or text
+    except Exception:
+        return text
+
+
 MESSAGES = {
     "es": {
         # Auth
@@ -34,6 +51,7 @@ MESSAGES = {
         "error_editar_usuario": "Error al editar usuario",
         "error_eliminar_usuario": "Error al eliminar usuario",
         "error_listar_usuarios": "Error en el servidor al listar",
+        "error_detalle": "Error",
     },
     "en": {
         # Auth
@@ -68,6 +86,7 @@ MESSAGES = {
         "error_editar_usuario": "Error editing user",
         "error_eliminar_usuario": "Error deleting user",
         "error_listar_usuarios": "Server error while listing",
+        "error_detalle": "Error",
     }
 }
 

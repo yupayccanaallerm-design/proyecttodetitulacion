@@ -6,6 +6,7 @@
 - pypdf
 - requests
 - reportlab
+- deep-translator
 
 ## IA
 - Ollama

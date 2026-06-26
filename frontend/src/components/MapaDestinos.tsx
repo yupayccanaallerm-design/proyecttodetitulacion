@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
 // -------------------------------------------------------
 // Coordenadas de todos los destinos turísticos de Cusco
@@ -66,6 +68,8 @@ interface Destino {
 
 interface MapaDestinosProps {
   destinos: Destino[];
+  titleOverride?: string;
+  subtitleOverride?: string;
 }
 
 function resolveCoords(nombre: string): [number, number] | null {
@@ -79,7 +83,8 @@ function resolveCoords(nombre: string): [number, number] | null {
   return null;
 }
 
-export default function MapaDestinos({ destinos }: MapaDestinosProps) {
+export default function MapaDestinos({ destinos, titleOverride, subtitleOverride }: MapaDestinosProps) {
+  const { t } = useTranslation();
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -163,14 +168,14 @@ export default function MapaDestinos({ destinos }: MapaDestinosProps) {
             padding: 2px 8px;
             border-radius: 999px;
             margin-bottom: 6px;
-          ">Recomendación ${rank}</div>
+          ">${i18n.t("mapa_recomendacion")} ${rank}</div>
           <div style="font-weight: 900; font-size: 14px; color: #1e293b; margin-bottom: 4px; line-height: 1.3;">
             ${item.destino}
           </div>
           ${pct !== null ? `
             <div style="margin-top: 6px;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
-                <span style="font-size: 10px; color: #64748b; font-weight: 600;">Compatibilidad</span>
+                <span style="font-size: 10px; color: #64748b; font-weight: 600;">${i18n.t("mapa_compatibilidad")}</span>
                 <span style="font-size: 11px; font-weight: 900; color: ${color};">${pct}%</span>
               </div>
               <div style="background: #e2e8f0; border-radius: 999px; height: 5px; overflow: hidden;">
@@ -203,8 +208,8 @@ export default function MapaDestinos({ destinos }: MapaDestinosProps) {
     <div className="bg-white rounded-[35px] border border-slate-100 shadow-sm overflow-hidden">
       <div className="px-6 pt-5 pb-3 flex items-center justify-between">
         <div>
-          <h3 className="text-base font-black text-slate-800">Mapa de Destinos</h3>
-          <p className="text-xs text-slate-400 mt-0.5">Haz clic en cada marcador para más información</p>
+          <h3 className="text-base font-black text-slate-800">{titleOverride || t("mapa_titulo")}</h3>
+          <p className="text-xs text-slate-400 mt-0.5">{subtitleOverride || t("mapa_clic")}</p>
         </div>
         <div className="flex items-center gap-1.5">
           {destinos.slice(0, 3).map((_, i) => (

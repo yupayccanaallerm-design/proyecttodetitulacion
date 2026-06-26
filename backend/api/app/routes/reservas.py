@@ -116,7 +116,7 @@ async def crear_reserva_paquete(reserva: ReservaPaquete, request: Request):
     except Exception as e:
         conexion.rollback()
         print(f"❌ Error en MySQL: {str(e)}")
-        raise HTTPException(status_code=400, detail=f"Error: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"{tr(request, 'error_detalle')}: {str(e)}")
     finally:
         conexion.close()
 
@@ -167,7 +167,7 @@ async def crear_reserva(reserva: ReservaCompleta, request: Request):
                 reserva.totalDestinos,
                 reserva.cliente.comentarios or "",
                 tipos_str,
-                f"{reserva.totalDias} días",
+                str(reserva.totalDias),
                 now
             ))
 
@@ -184,7 +184,7 @@ async def crear_reserva(reserva: ReservaCompleta, request: Request):
     except Exception as e:
         conexion.rollback()
         print(f"❌ Error en MySQL: {str(e)}")
-        raise HTTPException(status_code=400, detail=f"Error: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"{tr(request, 'error_detalle')}: {str(e)}")
     finally:
         conexion.close()
         print("🔌 Conexión cerrada")

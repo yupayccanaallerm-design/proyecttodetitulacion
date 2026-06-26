@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { X, Calendar, Clock, Mountain, AlertCircle } from 'lucide-react';
 
 interface Props {
@@ -20,6 +21,7 @@ export function AgregarDestinoModal({
   onClose, 
   onAgregar 
 }: Props) {
+  const { t } = useTranslation();
   const [fechaInicio, setFechaInicio] = useState('');
   const [duracion, setDuracion] = useState(1);
   const [nivelExigencia, setNivelExigencia] = useState<1 | 2 | 3 | 4 | 5>(3);
@@ -27,7 +29,7 @@ export function AgregarDestinoModal({
 
   const handleSubmit = () => {
     if (!fechaInicio) {
-      setError('Por favor selecciona una fecha de inicio');
+      setError(t('modal_fecha_requerida'));
       return;
     }
     setError('');
@@ -66,7 +68,7 @@ export function AgregarDestinoModal({
 
         {/* Tour recomendado */}
         <div className="bg-indigo-50 rounded-xl p-3 mb-4">
-          <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-wider">Tour recomendado</p>
+          <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-wider">{t('modal_tour_recomendado')}</p>
           <p className="text-xs text-slate-600">{tourRecomendado}</p>
         </div>
 
@@ -83,7 +85,7 @@ export function AgregarDestinoModal({
           {/* Fecha */}
           <div>
             <label className="text-xs font-bold text-slate-600 flex items-center gap-2 mb-1.5">
-              <Calendar size={14} /> Fecha de inicio
+              <Calendar size={14} /> {t('modal_fecha_inicio')}
             </label>
             <input
               type="date"
@@ -97,7 +99,7 @@ export function AgregarDestinoModal({
           {/* Duración */}
           <div>
             <label className="text-xs font-bold text-slate-600 flex items-center gap-2 mb-1.5">
-              <Clock size={14} /> Duración (días)
+              <Clock size={14} /> {t('modal_duracion')}
             </label>
             <div className="flex gap-2">
               {[1, 2, 3, 4, 5].map((d) => (
@@ -119,7 +121,7 @@ export function AgregarDestinoModal({
           {/* Nivel de exigencia */}
           <div>
             <label className="text-xs font-bold text-slate-600 flex items-center gap-2 mb-1.5">
-              <Mountain size={14} /> Nivel de exigencia física
+              <Mountain size={14} /> {t('modal_nivel_exigencia')}
             </label>
             <div className="flex gap-2">
               {[1, 2, 3, 4, 5].map((n) => (
@@ -148,13 +150,13 @@ export function AgregarDestinoModal({
             onClick={onClose} 
             className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold transition-all"
           >
-            Cancelar
+            {t('modal_cancelar')}
           </button>
           <button 
             onClick={handleSubmit} 
             className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-lg shadow-indigo-500/20"
           >
-            Agregar al itinerario
+            {t('modal_agregar')}
           </button>
         </div>
       </div>

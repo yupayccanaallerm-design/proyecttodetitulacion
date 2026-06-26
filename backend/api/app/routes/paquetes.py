@@ -1,11 +1,11 @@
 # backend/routes/paquetes.py
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request, Query
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime
 from database import obtener_conexion
-from ..i18n import tr
+from ..i18n import tr, translate_content
 
 router = APIRouter(
     prefix="/api/paquetes",
@@ -33,7 +33,7 @@ class PaqueteUpdate(BaseModel):
 
 
 @router.get("/")
-async def obtener_paquetes(request: Request):
+async def obtener_paquetes(request: Request, lang: str = Query("es")):
     conexion = obtener_conexion()
     if not conexion:
         raise HTTPException(status_code=500, detail=tr(request, "error_conexion_db"))
@@ -67,10 +67,11 @@ async def obtener_paquetes(request: Request):
 
             paquetes = []
             for r in resultados:
+                descripcion = translate_content(str(r[2]), lang)
                 paquetes.append({
                     "id": int(r[0]),
                     "nombre": str(r[1]),
-                    "descripcion_base": str(r[2]),
+                    "descripcion_base": descripcion,
                     "duracion_dias": int(r[3]),
                     "perfil_usuario": str(r[4]),
                     "precio_sugerido": float(r[5]),
@@ -141,8 +142,8 @@ async def crear_paquete(paquete: PaqueteCreate, request: Request):
 
     except Exception as e:
         conexion.rollback()
-        print(f"❌ Error: {str(e)}")
-        raise HTTPException(status_code=400, detail=f"Error: {str(e)}")
+        print(f"Error: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"{tr(request, 'error_detalle')}: {str(e)}")
     finally:
         conexion.close()
 

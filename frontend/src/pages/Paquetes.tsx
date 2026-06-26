@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 import { Search, ShieldCheck, Sparkles, Clock, RefreshCw, AlertCircle, TrendingUp, ArrowRight } from "lucide-react";
 
 interface Paquete {
@@ -32,7 +33,7 @@ export default function Paquetes() {
     const obtenerPaquetesBD = async () => {
       try {
         setCargando(true);
-        const res = await fetch("http://localhost:8000/api/paquetes");
+        const res = await fetch(`http://localhost:8000/api/paquetes?lang=${i18n.language}`);
         
         if (!res.ok) {
           throw new Error("No se pudo obtener el catálogo de paquetes desde la base de datos.");
@@ -63,7 +64,7 @@ export default function Paquetes() {
             precio_sugerido: p.precio_sugerido,
             img: rutaImagenReal,
             rating: parseFloat((4.6 + (index % 4) * 0.1).toFixed(1)),
-            tags: ["Circuito Completo", p.perfil_usuario, "Dataset Activo"]
+            tags: [t("paquetes_tag_circuito"), p.perfil_usuario, t("tours_tag_dataset")]
           };
         });
 

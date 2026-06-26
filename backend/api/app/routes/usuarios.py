@@ -121,7 +121,7 @@ async def cambiar_password(data: CambiarPasswordRequest, request: Request):
         return {"message": tr(request, "password_cambiada")}
     except Exception as e:
         conn.rollback()
-        raise HTTPException(status_code=400, detail=f"Error: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"{tr(request, 'error_detalle')}: {str(e)}")
     finally:
         cursor.close()
         conn.close()

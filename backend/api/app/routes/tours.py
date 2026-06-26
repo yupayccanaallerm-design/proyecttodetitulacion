@@ -1,8 +1,8 @@
 import base64
 import os
-from fastapi import APIRouter, HTTPException, Request, UploadFile, File, Form
+from fastapi import APIRouter, HTTPException, Request, UploadFile, File, Form, Query
 from database import obtener_conexion
-from ..i18n import tr
+from ..i18n import tr, translate_content
 
 router = APIRouter(
     prefix="/api",
@@ -61,7 +61,7 @@ async def registrar_tour(
 
 
 @router.get("/tours")
-async def listar_tours():
+async def listar_tours(lang: str = Query("es")):
     conexion = obtener_conexion()
     try:
         with conexion.cursor(dictionary=True) as cursor:
@@ -74,7 +74,11 @@ async def listar_tours():
                 ORDER BY t.id DESC
             """
             cursor.execute(sql)
-            return cursor.fetchall()
+            rows = cursor.fetchall()
+            if lang != "es":
+                for row in rows:
+                    row["descripcion"] = translate_content(row.get("descripcion", ""), lang)
+            return rows
     finally:
         conexion.close()
 

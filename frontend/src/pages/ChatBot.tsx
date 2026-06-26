@@ -37,7 +37,7 @@ export default function ChatBot({
   const [isTyping, setIsTyping] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentIntent, setCurrentIntent] = useState<string>("");
-  const [modelInfo, setModelInfo] = useState<string>("Cargando...");
+  const [modelInfo, setModelInfo] = useState<string>("");
 
   // ── VOZ ───────────────────────────────────────────────────
   const [recording, setRecording] = useState(false);
@@ -57,7 +57,7 @@ export default function ChatBot({
 
   useEffect(() => {
     if (initialContext) {
-      const question = `Cuéntame sobre ${initialContext}`;
+      const question = t("chat_contexto_intro", { lugar: initialContext });
       setInput(question);
       setTimeout(() => {
         setInput("");
@@ -67,7 +67,7 @@ export default function ChatBot({
         fetch("/chatbot/ask", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ user_id: userId, query: question, top_k: 2 }),
+          body: JSON.stringify({ user_id: userId, query: question, top_k: 2, lang: i18n.language }),
         })
           .then((r) => r.json())
           .then((data) => {
@@ -124,7 +124,7 @@ export default function ChatBot({
   // ── GRABACIÓN DE VOZ ──────────────────────────────────────
   const startRecording = () => {
     if (!SpeechRecognitionAPI) {
-      alert("Tu navegador no soporta reconocimiento de voz. Usa Chrome.");
+      alert(t("chat_voz_no_soportada"));
       return;
     }
     const recognition = new SpeechRecognitionAPI();
@@ -161,7 +161,7 @@ export default function ChatBot({
       const response = await fetch("/chatbot/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId, query: userText, top_k: 2 }),
+        body: JSON.stringify({ user_id: userId, query: userText, top_k: 2, lang: i18n.language }),
       });
 
       if (!response.ok) throw new Error(`Error ${response.status}`);
@@ -180,7 +180,7 @@ export default function ChatBot({
 
       if (data.intent === "memorizar") await saveToMemory(userText);
     } catch {
-      setError("No se pudo conectar con el servidor.");
+      setError(t("chat_error_servidor"));
       setMessages((prev) => [
         ...prev,
         { from: "bot", text: t("chat_error_conexion") },
@@ -246,7 +246,7 @@ export default function ChatBot({
             <span className="text-sm font-black tracking-tight">Travel Assistant</span>
             <div className="flex items-center gap-2 text-[10px] text-slate-300">
               <Brain size={10} />
-              <span>{t("chat_ia_rag")} • {modelInfo}</span>
+              <span>{t("chat_ia_rag")} • {modelInfo || t("chat_cargando")}</span>
             </div>
           </div>
         </div>
