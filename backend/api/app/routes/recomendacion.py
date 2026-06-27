@@ -4,7 +4,8 @@ import joblib
 import numpy as np
 import pandas as pd
 import os
-from ...database import obtener_conexion
+import traceback
+from database import obtener_conexion
 
 router = APIRouter(tags=["Recomendacion"])
 
@@ -36,7 +37,55 @@ def load_models():
         print(f"[ERROR] No se pudieron cargar los modelos de recomendación: {e}")
 
 
+# ==================================================
+# INICIALIZACIÓN DE TABLAS EN MYSQL
+# ==================================================
+
+def _inicializar_tablas():
+    """Crea las tablas de recomendaciones si no existen. Se llama al cargar el módulo."""
+    conexion = obtener_conexion()
+    if not conexion:
+        print("[WARN] _inicializar_tablas: no se pudo conectar a la BD")
+        return
+    cursor = conexion.cursor()
+    try:
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS recomendaciones_ia (
+                id                BIGINT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                reserva_id        INT             NULL,
+                cliente_id        BIGINT          NULL,
+                edad              INT             NULL,
+                pais_procedencia  VARCHAR(100)    NULL,
+                viaja_con_ninos   TINYINT(1)      NULL,
+                presupuesto       DECIMAL(10, 2)  NULL,
+                dias_viaje        INT             NULL,
+                tipo_viaje        VARCHAR(50)     NULL,
+                generado_en       TIMESTAMP       NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS recomendaciones_ia_detalle (
+                id                BIGINT UNSIGNED  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                recomendacion_id  BIGINT           NOT NULL,
+                tour_id           BIGINT UNSIGNED  NULL,
+                destino_nombre    VARCHAR(200)     NOT NULL DEFAULT '',
+                score             DECIMAL(6, 4)    NULL,
+                FOREIGN KEY (recomendacion_id)
+                    REFERENCES recomendaciones_ia(id) ON DELETE CASCADE
+            )
+        """)
+        conexion.commit()
+        print("[OK] Tablas recomendaciones_ia y recomendaciones_ia_detalle verificadas")
+    except Exception as e:
+        print(f"[ERROR] _inicializar_tablas: {e}")
+        traceback.print_exc()
+    finally:
+        cursor.close()
+        conexion.close()
+
+
 load_models()
+_inicializar_tablas()
 
 
 def _encode_safe(encoder, value: str):
@@ -72,50 +121,77 @@ def _build_feature_row(body: Dict[str, Any]) -> list:
 
 
 def _guardar_recomendacion_db(body: Dict[str, Any], resultados: list):
+    """
+    Guarda la consulta al recomendador y sus resultados en MySQL.
+    Siempre guarda destino_nombre; tour_id es NULL si no hay coincidencia en tours.
+    """
+    conexion = obtener_conexion()
+    if not conexion:
+        return
+    cursor = conexion.cursor()
     try:
-        conexion = obtener_conexion()
-        if not conexion:
+        # 1. Insertar cabecera con reserva_id=NULL (no vinculado a una reserva)
+        cursor.execute(
+            """
+            INSERT INTO recomendaciones_ia (
+                reserva_id, edad, pais_procedencia, viaja_con_ninos,
+                presupuesto, dias_viaje, tipo_viaje, generado_en
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, NOW())
+            """,
+            (
+                None,
+                int(body.get("Edad", 25)),
+                str(body.get("País / Procedencia", "Perú")),
+                int(body.get("Apto para niños", 0)),
+                float(body.get("Presupuesto", 1)),
+                int(body.get("Días de viaje", 5)),
+                str(body.get("Tipo de viaje", "Cultural")),
+            ),
+        )
+        rec_id = cursor.lastrowid
+
+        if not rec_id:
+            print("[ERROR] lastrowid es 0, abortando")
+            conexion.rollback()
             return
-        with conexion.cursor() as cursor:
+
+        # 2. Insertar un detalle por cada destino recomendado
+        for item in resultados:
+            destino_nombre = item.get("destino", "Desconocido")
+            score_val = float(item.get("score", 0))
+
+            # Buscar tour por nombre (tour_id=NULL si no hay match)
+            cursor.execute(
+                "SELECT id FROM tours WHERE nombre LIKE %s AND estado = 1 LIMIT 1",
+                (f"%{destino_nombre[:40]}%",),
+            )
+            fila_tour = cursor.fetchone()
+            tour_id = fila_tour[0] if fila_tour else None
+
             cursor.execute(
                 """
-                INSERT INTO recomendaciones_ia (
-                    edad, pais_procedencia, viaja_con_ninos,
-                    presupuesto, dias_viaje, tipo_viaje, generado_en
-                ) VALUES (%s, %s, %s, %s, %s, %s, NOW())
+                INSERT INTO recomendaciones_ia_detalle
+                    (recomendacion_id, tour_id, destino_nombre, score)
+                VALUES (%s, %s, %s, %s)
                 """,
-                (
-                    int(body.get("Edad", 25)),
-                    str(body.get("País / Procedencia", "Perú")),
-                    int(body.get("Apto para niños", 0)),
-                    int(body.get("Presupuesto", 1)),
-                    int(body.get("Días de viaje", 5)),
-                    str(body.get("Tipo de viaje", "Cultural")),
-                ),
+                (rec_id, tour_id, destino_nombre, score_val),
             )
-            rec_id = cursor.lastrowid
-            for item in resultados:
-                cursor.execute(
-                    "SELECT id FROM tours WHERE nombre LIKE %s LIMIT 1",
-                    (f"%{item['destino'][:30]}%",),
-                )
-                tour = cursor.fetchone()
-                if tour:
-                    cursor.execute(
-                        """
-                        INSERT INTO recomendaciones_ia_detalle (recomendacion_id, tour_id, score)
-                        VALUES (%s, %s, %s)
-                        """,
-                        (rec_id, tour[0], item["score"]),
-                    )
+
         conexion.commit()
+        print(f"[OK] Recomendación id={rec_id} guardada con {len(resultados)} detalles")
+
     except Exception as e:
-        print(f"[WARN] No se pudo guardar recomendacion en DB: {e}")
+        print(f"[ERROR] _guardar_recomendacion_db falló: {e}")
+        traceback.print_exc()
         try:
             conexion.rollback()
         except Exception:
             pass
     finally:
+        try:
+            cursor.close()
+        except Exception:
+            pass
         try:
             conexion.close()
         except Exception:

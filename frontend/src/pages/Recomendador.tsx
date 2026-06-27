@@ -31,56 +31,48 @@ const RESULTADOS_KEY = 'recomendador_resultados';
 // Información adicional de destinos — duracion_key/dificultad_key/tipo_key son claves de i18n
 const INFO_DESTINOS: Record<string, any> = {
   "machupicchu": {
-    emoji: "🏛️",
     color: "from-amber-500 to-orange-600",
     duracion_key: "dur_2_3_dias",
     dificultad_key: "dif_moderada",
     tipo_key: "tipo_arqueologico"
   },
   "sacsayhuaman": {
-    emoji: "🏗️",
     color: "from-indigo-500 to-purple-600",
     duracion_key: "dur_medio_dia",
     dificultad_key: "dif_baja",
     tipo_key: "tipo_arqueologico"
   },
   "qorikancha": {
-    emoji: "✨",
     color: "from-yellow-400 to-amber-600",
     duracion_key: "dur_2_3_horas",
     dificultad_key: "dif_baja",
     tipo_key: "tipo_templo"
   },
   "moray": {
-    emoji: "🌾",
     color: "from-emerald-400 to-teal-600",
     duracion_key: "dur_2_3_horas",
     dificultad_key: "dif_baja",
     tipo_key: "tipo_arqueologico"
   },
   "salineras": {
-    emoji: "🧂",
     color: "from-sky-400 to-blue-600",
     duracion_key: "dur_2_horas",
     dificultad_key: "dif_baja",
     tipo_key: "tipo_natural"
   },
   "tipon": {
-    emoji: "💧",
     color: "from-cyan-400 to-blue-600",
     duracion_key: "dur_2_3_horas",
     dificultad_key: "dif_baja",
     tipo_key: "tipo_arqueologico"
   },
   "7colores": {
-    emoji: "🌈",
     color: "from-pink-400 to-purple-600",
     duracion_key: "dur_1_dia",
     dificultad_key: "dif_alta",
     tipo_key: "tipo_natural"
   },
   "laguna_huamantay": {
-    emoji: "🏞️",
     color: "from-teal-400 to-emerald-600",
     duracion_key: "dur_1_dia",
     dificultad_key: "dif_alta",
@@ -91,7 +83,6 @@ const INFO_DESTINOS: Record<string, any> = {
 export default function RecomendadorModerno({ onConsultarChat }: RecomendadorProps = {}) {
   const [loading, setLoading] = useState(false);
   const [resultado, setResultado] = useState<{ top: Destino[] } | null>(() => {
-    // 🆕 Cargar resultados guardados
     const saved = localStorage.getItem(RESULTADOS_KEY);
     return saved ? JSON.parse(saved) : null;
   });
@@ -147,7 +138,6 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
     localStorage.setItem(PRESETS_KEY, JSON.stringify(formulario));
   }, [formulario]);
 
-  // 🆕 Guardar resultados cuando cambian
   useEffect(() => {
     if (resultado) {
       localStorage.setItem(RESULTADOS_KEY, JSON.stringify(resultado));
@@ -276,7 +266,6 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
       } else {
         setError(t("recomendador.error"));
       }
-      console.error("Fetch error:", err);
     } finally {
       setLoading(false);
     }
@@ -325,18 +314,17 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
 
   const resumenPreferencias = useMemo(() => {
     const intereses = [];
-    if (formulario.Fotografía === "Sí") intereses.push(`📸 ${t("recomendador.interests.photos")}`);
-    if (formulario.Comida === "Sí") intereses.push(`🍜 ${t("recomendador.interests.food")}`);
-    if (formulario.Trekking === "Sí") intereses.push(`🥾 ${t("recomendador.interests.trekking")}`);
-    if (formulario.Naturaleza === "Sí") intereses.push(`🌿 ${t("recomendador.interests.nature")}`);
-    if (formulario.Historia === "Sí") intereses.push(`🏛️ ${t("recomendador.interests.history")}`);
+    if (formulario.Fotografía === "Sí") intereses.push(t("recomendador.interests.photos"));
+    if (formulario.Comida === "Sí") intereses.push(t("recomendador.interests.food"));
+    if (formulario.Trekking === "Sí") intereses.push(t("recomendador.interests.trekking"));
+    if (formulario.Naturaleza === "Sí") intereses.push(t("recomendador.interests.nature"));
+    if (formulario.Historia === "Sí") intereses.push(t("recomendador.interests.history"));
     return intereses;
   }, [formulario, t]);
 
   const getDestinoInfo = (nombre: string) => {
     const key = nombre.toLowerCase().replace(/ /g, '_').replace(/[áéíóú]/g, (c) => "aeiou"["áéíóú".indexOf(c)]);
     return INFO_DESTINOS[key] || INFO_DESTINOS[nombre.toLowerCase().replace(/ /g, '_')] || {
-      emoji: "📍",
       color: "from-slate-400 to-slate-600",
       duracion_key: "dur_variable",
       dificultad_key: "dif_moderada",
@@ -346,7 +334,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
 
   return (
     <div className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 selection:bg-indigo-100">
-      <nav className="p-6 max-w-7xl mx-auto flex justify-between items-center relative z-10">
+      <nav className="px-4 py-4 md:p-6 max-w-7xl mx-auto flex justify-between items-center relative z-10">
 
         {resultado && resultado.top && resultado.top.length > 0 && (
           <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-600">
@@ -355,12 +343,12 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
         )}
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 py-8 relative z-0">
-        <section className="text-center mb-12">
+      <main className="max-w-7xl mx-auto px-4 py-6 md:py-8 relative z-0">
+        <section className="text-center mb-8 md:mb-12">
           <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full mb-4">
             <Sparkles size={12} /> {t("recomendador.badge")}
           </span>
-          <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 tracking-tight">
             {t("recomendador.title")}
           </h1>
           <p className="text-slate-500 font-medium">{t("recomendador.subtitle")}</p>
@@ -526,9 +514,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                             onClick={() => handleChange("Presupuesto", p)}
                             className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1 ${formulario.Presupuesto === p ? "bg-white shadow-sm text-slate-900" : "text-slate-400"}`}
                           >
-                            {p === "Bajo" && "💰"}
-                            {p === "Medio" && "💰💰"}
-                            {p === "Alto" && "💰💰💰"}
+                            <DollarSign size={11} className={formulario.Presupuesto === p ? "text-indigo-500" : ""} />
                             {p}
                           </button>
                         ))}
@@ -611,7 +597,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
             ) : resultado && resultado.top && resultado.top.length > 0 ? (
               <div className="bg-white p-6 rounded-[35px] shadow-xl border border-slate-100 animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-black flex items-center gap-2">🚀 {t("recomendador.topTitle")}</h2>
+                  <h2 className="text-xl font-black flex items-center gap-2"><TrendingUp size={18} className="text-indigo-500" /> {t("recomendador.topTitle")}</h2>
                   <span className="text-xs bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full font-bold">
                     {resultado.top.length} {t("recomendador.found")}
                   </span>
@@ -633,7 +619,9 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                         </div>
                         
                         <div className="flex items-start gap-3 pr-12">
-                          <span className="text-2xl">{info.emoji || '📍'}</span>
+                          <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${info.color || 'from-indigo-500 to-purple-600'} shrink-0`}>
+                            <MapPin size={16} />
+                          </div>
                           <div className="flex-1">
                             <h3 className="font-bold text-slate-800 text-sm">{item.destino}</h3>
                             <div className="flex flex-wrap gap-1.5 mt-1">
@@ -690,9 +678,9 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
                 <p className="text-indigo-950 font-black text-sm">{t("recomendador.empty.title")}</p>
                 <p className="text-indigo-400 text-xs mt-1">{t("recomendador.empty.subtitle")}</p>
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
-                  <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">🌄 Machu Picchu</span>
-                  <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">🏔️ Montaña 7 Colores</span>
-                  <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">🏞️ Laguna Humantay</span>
+                  <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">Machu Picchu</span>
+                  <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">Montaña 7 Colores</span>
+                  <span className="text-[10px] bg-white/60 px-3 py-1 rounded-full border border-indigo-100">Laguna Humantay</span>
                 </div>
               </div>
             )}
@@ -773,7 +761,7 @@ function InterestCard({ icon, label, active, onClick }: any) {
     >
       {icon}
       <span>{label}</span>
-      {active && <span className="text-[8px] bg-indigo-600 text-white px-1.5 py-0.5 rounded-full">✓</span>}
+      {active && <span className="bg-indigo-600 text-white p-0.5 rounded-full flex items-center justify-center"><Check size={9} /></span>}
     </button>
   );
 }

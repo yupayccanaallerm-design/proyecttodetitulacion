@@ -11,7 +11,7 @@ export default function DetalleTour() {
   const [tour, setTour] = useState<any>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/tours/${id}`)
+    fetch(`/api/tours/${id}`)
       .then(res => res.json())
       .then(data => {
         setTour({
@@ -50,22 +50,22 @@ export default function DetalleTour() {
           <ChevronLeft />
         </button>
 
-        <div className="absolute bottom-6 left-6 text-white">
+        <div className="absolute bottom-6 left-4 md:left-6 right-4 text-white">
           <p className="text-xs flex items-center gap-2">
             <MapPin size={14} />
             {tour.zona_geografica}
           </p>
 
-          <h1 className="text-2xl font-bold mt-1">
+          <h1 className="text-xl md:text-2xl font-bold mt-1">
             {tour.nombre}
           </h1>
         </div>
       </div>
 
       {/* CONTENT */}
-      <main className="max-w-4xl mx-auto -mt-16 px-6 relative z-10">
+      <main className="max-w-4xl mx-auto -mt-16 px-4 md:px-6 relative z-10">
 
-        <div className="bg-white rounded-3xl p-8 shadow-xl">
+        <div className="bg-white rounded-3xl p-5 md:p-8 shadow-xl">
 
           {/* DESCRIPCIÓN */}
           <section className="mb-10">

@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
-import { Search, MapPin, Star, ShieldCheck, Sparkles, Clock, Users as UsersIcon, RefreshCw, AlertCircle } from "lucide-react";
+import {
+  Search, MapPin, Star, ShieldCheck, Clock,
+  Users, RefreshCw, AlertCircle, ArrowRight, SlidersHorizontal
+} from "lucide-react";
 
 interface Tour {
   id: number;
@@ -14,259 +17,245 @@ interface Tour {
   price: number;
   duration: string;
   rating: number;
-  tags: string[];
   img: string;
 }
+
+const ZONAS = ["Cusco Ciudad", "Valle Sagrado", "Machu Picchu", "Rutas Sur"];
+
+const FALLBACK_IMAGES = [
+  "https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1614918236617-6d1e09d6efb0?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1590050751117-238cb0ffaa28?auto=format&fit=crop&w=600&q=80",
+];
 
 export default function Tours() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [tours, setTours] = useState<Tour[]>([]);
-  const [cargando, setCargando] = useState<boolean>(true);
+  const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedZona, setSelectedZona] = useState(t("tours_zona_todas"));
-
-  const zonas = [t("tours_zona_todas"), "Cusco Ciudad", "Valle Sagrado", "Machu Picchu", "Rutas Sur"];
+  const [selectedZona, setSelectedZona] = useState<string | null>(null);
 
   useEffect(() => {
-    const obtenerToursBD = async () => {
+    const fetchTours = async () => {
       try {
         setCargando(true);
-        const res = await fetch(`http://localhost:8000/api/tours?lang=${i18n.language}`);
-        
-        if (!res.ok) {
-          throw new Error("No se pudo obtener el catálogo de atractivos desde la base de datos.");
-        }
-        
+        const res = await fetch(`/api/tours?lang=${i18n.language}`);
+        if (!res.ok) throw new Error("No se pudo obtener el catálogo de tours.");
         const data: any[] = await res.json();
-        
-        const toursFormateados = data.map((tourItem, index) => {
-          let rutaImagenReal = "";
 
-          if (tourItem.imagen_url) {
-            rutaImagenReal = tourItem.imagen_url;
-          } else {
-            rutaImagenReal = [
-              "https://images.unsplash.com/photo-1587595431973-160d0d94add1",
-              "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2",
-              "https://images.unsplash.com/photo-1614918236617-6d1e09d6efb0",
-              "https://images.unsplash.com/photo-1590050751117-238cb0ffaa28",
-            ][index % 4];
-          }
-
-          return {
-            id: tourItem.id,
-            nombre: tourItem.nombre,
-            zona_geografica: tourItem.zona_geografica,
-            descripcion: tourItem.descripcion,
-            estado: tourItem.estado,
-            img: rutaImagenReal,
+        setTours(
+          data.map((item, index) => ({
+            id: item.id,
+            nombre: item.nombre,
+            zona_geografica: item.zona_geografica,
+            descripcion: item.descripcion,
+            estado: item.estado,
+            img: item.imagen_url || FALLBACK_IMAGES[index % FALLBACK_IMAGES.length],
             price: [45, 60, 85, 120, 35][index % 5],
             duration: index % 2 === 0 ? t("tours_duracion_dia") : t("tours_duracion_medio"),
             rating: parseFloat((4.5 + (index % 5) * 0.1).toFixed(1)),
-            tags: [t("tours_tag_operativo"), tourItem.zona_geografica, t("tours_tag_dataset")]
-          };
-        });
-
-        setTours(toursFormateados);
+          }))
+        );
         setError(null);
       } catch (err: any) {
-        console.error("Error cargando experiencias:", err);
-        setError(err.message || "Error al conectar con el servidor SGEV.");
+        setError(err.message || "Error al conectar con el servidor.");
       } finally {
         setCargando(false);
       }
     };
 
-    obtenerToursBD();
+    fetchTours();
   }, []);
 
-  const filteredTours = tours.filter(tour => {
-    const matchesSearch = tour.nombre.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesZona = selectedZona === t("tours_zona_todas") || tour.zona_geografica === selectedZona;
-    return matchesSearch && matchesZona;
+  const filtered = tours.filter((tour) => {
+    const matchSearch = tour.nombre.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchZona = !selectedZona || tour.zona_geografica === selectedZona;
+    return matchSearch && matchZona;
   });
 
-  const recommended = tours.slice(0, 3);
-
   return (
-    <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800 pb-20 p-4 md:p-12">
-      
-      <header className="max-w-4xl mx-auto mb-16 text-center">
-        <h1 className="text-3xl md:text-5xl font-light tracking-tight text-slate-900 mt-4 mb-6">
-          {t("tours_titulo")} <span className="font-semibold text-indigo-600">{t("tours_titulo_highlight")}</span>
-        </h1>
+    <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800">
+      {/* PAGE HEADER */}
+      <div className="bg-white border-b border-slate-100 pt-8 pb-8 md:pt-10 md:pb-10 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
+            {t("tours_badge")}
+          </span>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900 mt-3 mb-1">
+            {t("tours_titulo")}{" "}
+            <span className="text-indigo-600">{t("tours_titulo_highlight")}</span>
+          </h1>
+          <p className="text-sm text-slate-500 mb-7 font-light">
+            Explora los destinos más emblemáticos de Cusco y la región.
+          </p>
 
-        <div className="relative max-w-2xl mx-auto mb-8 shadow-xs rounded-2xl">
-          <Search className="absolute left-4 top-4 text-slate-400" size={18} />
-          <input
-            type="text"
-            placeholder={t("tours_buscar")}
-            className="w-full bg-white border border-slate-200 py-4 pl-12 pr-4 rounded-2xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition text-slate-700 text-sm"
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
+          <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+            <div className="relative w-full sm:flex-1 sm:max-w-sm">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+              <input
+                type="text"
+                placeholder={t("tours_buscar")}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-slate-50 border border-slate-200 py-2.5 pl-10 pr-4 rounded-xl focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition text-slate-700 text-sm"
+              />
+            </div>
 
-        <div className="flex flex-col gap-3.5 items-center justify-center">
-          <div className="flex flex-wrap justify-center gap-2">
-            {zonas.map(z => (
+            <div className="flex items-center gap-2 flex-wrap">
+              <SlidersHorizontal size={13} className="text-slate-400" />
               <button
-                key={z}
-                onClick={() => setSelectedZona(z)}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-200 cursor-pointer ${
-                  selectedZona === z
+                onClick={() => setSelectedZona(null)}
+                className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                  !selectedZona
                     ? "bg-indigo-600 text-white shadow-sm"
-                    : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                    : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300"
                 }`}
               >
-                {z}
+                {t("tours_zona_todas")}
               </button>
-            ))}
+              {ZONAS.map((zona) => (
+                <button
+                  key={zona}
+                  onClick={() => setSelectedZona(zona === selectedZona ? null : zona)}
+                  className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                    selectedZona === zona
+                      ? "bg-indigo-600 text-white shadow-sm"
+                      : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300"
+                  }`}
+                >
+                  {zona}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </header>
+      </div>
 
-      {cargando && (
-        <div className="flex flex-col items-center justify-center py-24 space-y-3">
-          <RefreshCw className="text-indigo-600 animate-spin" size={26} />
-          <p className="text-xs text-slate-400 font-medium">{t("tours_cargando")}</p>
-        </div>
-      )}
+      {/* CONTENT */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-10">
+        {cargando && (
+          <div className="flex flex-col items-center justify-center py-32 gap-3">
+            <RefreshCw className="text-indigo-500 animate-spin" size={22} />
+            <p className="text-sm text-slate-400">{t("tours_cargando")}</p>
+          </div>
+        )}
 
-      {error && (
-        <div className="max-w-md mx-auto bg-red-50 border border-red-200 p-4 rounded-xl flex items-center gap-3 text-red-700 text-xs font-medium mb-12">
-          <AlertCircle size={18} className="text-red-500 shrink-0" />
-          <p>{error} {t("tours_error_servidor")}</p>
-        </div>
-      )}
+        {error && (
+          <div className="max-w-md mx-auto bg-red-50 border border-red-200 p-4 rounded-2xl flex items-center gap-3 text-red-700 text-sm">
+            <AlertCircle size={18} className="text-red-500 shrink-0" />
+            <p>{error}</p>
+          </div>
+        )}
 
-      {!cargando && !error && (
-        <>
-          {searchTerm === "" && selectedZona === t("tours_zona_todas") && recommended.length > 0 && (
-            <div className="max-w-6xl mx-auto mb-14 bg-gradient-to-r from-indigo-50/40 via-purple-50/20 to-transparent p-6 rounded-2xl border border-indigo-100/60">
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <div className="flex items-center gap-2 text-indigo-700 font-medium text-sm">
-                  <Sparkles size={16} className="text-indigo-600 animate-pulse" />
-                  <span>{t("tours_recientes")}</span>
-                </div>
-              </div>
+        {!cargando && !error && (
+          <>
+            <p className="text-xs text-slate-400 mb-6 font-medium">
+              {filtered.length} {filtered.length === 1 ? "destino" : "destinos"} encontrados
+            </p>
 
-              <div className="flex flex-wrap gap-3">
-                {recommended.map((r, i) => (
-                  <div
-                    key={i}
-                    onClick={() => navigate(`/reservas?tour=${r.nombre}&price=${r.price}&tour_id=${r.id}`)}
-                    className="bg-white hover:border-indigo-300 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-medium text-slate-700 shadow-xs cursor-pointer flex items-center gap-3 transition-all"
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.length > 0 ? (
+                filtered.map((tour) => (
+                  <article
+                    key={tour.id}
+                    className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    {r.nombre}
-                    <span className="text-indigo-600 font-semibold">${r.price} USD</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+                    <div className="relative h-48 bg-slate-200 overflow-hidden">
+                      <img
+                        src={tour.img}
+                        alt={tour.nombre}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = FALLBACK_IMAGES[0];
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
+                      <span className="absolute top-3 left-3 bg-white/95 text-indigo-700 text-[10px] font-bold px-2 py-1 rounded-lg">
+                        ID {tour.id}
+                      </span>
+                      <span className="absolute top-3 right-3 bg-white/95 text-amber-600 text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+                        <Star size={10} className="fill-amber-500 text-amber-500" />
+                        {tour.rating}
+                      </span>
+                    </div>
 
-          <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {filteredTours.length > 0 ? (
-              filteredTours.map((tour) => (
-                <div key={tour.id} className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col group">
-
-                  <div className="overflow-hidden relative h-52 bg-slate-200">
-                    <img 
-                      src={tour.img}
-                      alt={tour.nombre}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1587595431973-160d0d94add1";
-                      }}
-                    />
-                    <span className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-xs px-2.5 py-1 rounded-full text-[9px] font-bold tracking-wider text-white uppercase">
-                      ID: {tour.id}
-                    </span>
-                  </div>
-
-                  <div className="p-6 flex flex-col flex-1 justify-between">
-                    <div>
-                      <div className="flex justify-between items-center text-xs text-slate-400 mb-2.5">
-                        <span className="flex items-center gap-1 font-semibold text-slate-600">
-                          <MapPin size={13} className="text-indigo-500" /> {tour.zona_geografica}
-                        </span>
-                        <span className="flex items-center gap-1 font-medium text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md">
-                          <Star size={12} className="fill-amber-500 text-amber-500" /> {tour.rating}
-                        </span>
+                    <div className="p-5 flex flex-col flex-1">
+                      <div className="flex items-center gap-1 text-[11px] text-slate-400 mb-2">
+                        <MapPin size={11} className="text-indigo-400" />
+                        {tour.zona_geografica}
                       </div>
 
-                      <h3 className="text-base font-bold text-slate-900 mb-1.5 tracking-tight group-hover:text-indigo-600 transition-colors line-clamp-1">
+                      <h3 className="text-[15px] font-bold text-slate-900 mb-2 leading-snug group-hover:text-indigo-600 transition-colors line-clamp-2">
                         {tour.nombre}
                       </h3>
 
-                      <p className="text-xs text-slate-400 font-light leading-relaxed mb-4 line-clamp-2">
+                      <p className="text-xs text-slate-400 leading-relaxed mb-4 line-clamp-2 flex-1">
                         {tour.descripcion}
                       </p>
 
-                      <div className="flex items-center gap-4 text-[11px] text-slate-500 font-medium mb-4">
+                      <div className="flex items-center gap-4 text-[11px] text-slate-500 mb-4">
                         <span className="flex items-center gap-1">
-                          <Clock size={12} className="text-indigo-500" /> {tour.duration}
+                          <Clock size={11} className="text-indigo-400" />
+                          {tour.duration}
                         </span>
                         <span className="flex items-center gap-1">
-                          <UsersIcon size={12} className="text-indigo-500" /> {t("tours_grupo")}
+                          <Users size={11} className="text-indigo-400" />
+                          {t("tours_grupo")}
                         </span>
                       </div>
 
-                      <div className="flex flex-wrap gap-1.5 mb-2">
-                        {tour.tags.map((tag, ti) => (
-                          <span key={ti} className="text-[10px] font-medium text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between items-center pt-4 border-t border-slate-100">
-                        <div className="flex flex-col">
-                          <span className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">{t("tours_precio")}</span>
-                          <span className="text-lg font-bold text-slate-800">
-                            ${tour.price} <span className="text-xs font-light text-slate-400">USD</span>
-                          </span>
+                      <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div>
+                          <p className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">{t("tours_precio")}</p>
+                          <p className="text-xl font-black text-slate-900">
+                            ${tour.price}
+                            <span className="text-xs font-normal text-slate-400 ml-1">USD</span>
+                          </p>
                         </div>
-
-                        {/* ✅ CORREGIDO: Envía tour_id */}
-                        <button
-                          onClick={() => navigate(`/reservas?tour=${tour.nombre}&price=${tour.price}&tour_id=${tour.id}`)}
-                          className="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-medium tracking-wide hover:bg-indigo-700 transition shadow-xs cursor-pointer active:scale-95"
-                        >
-                          {t("tours_btn_reservar")}
-                        </button>
-                        <button
-                          onClick={() => navigate(`/detalle/${tour.id}`)}
-                          className="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-xl text-xs font-medium hover:bg-slate-50 transition"
-                        >
-                          {t("tours_btn_detalles")}
-                        </button>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => navigate(`/detalle/${tour.id}`)}
+                            title="Ver detalle"
+                            className="p-2 border border-slate-200 text-slate-500 rounded-xl hover:bg-slate-50 transition cursor-pointer"
+                          >
+                            <ArrowRight size={14} />
+                          </button>
+                          <button
+                            onClick={() => navigate(`/reservas?tour=${tour.nombre}&price=${tour.price}`)}
+                            className="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-indigo-700 transition cursor-pointer"
+                          >
+                            {t("tours_btn_reservar")}
+                          </button>
+                        </div>
                       </div>
 
-                      <div className="mt-3.5 flex items-center gap-1.5 text-[11px] text-slate-400 font-light">
-                        <ShieldCheck size={13} className="text-emerald-500" />
+                      <div className="flex items-center gap-1 mt-3 text-[10px] text-slate-400">
+                        <ShieldCheck size={10} className="text-emerald-500" />
                         {t("tours_indexado")}
                       </div>
                     </div>
-
-                  </div>
+                  </article>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-24 bg-white rounded-2xl border border-dashed border-slate-200">
+                  <Search size={28} className="text-slate-300 mx-auto mb-3" />
+                  <p className="text-sm text-slate-400 font-medium">{t("tours_sin_resultados")}</p>
+                  <button
+                    onClick={() => { setSearchTerm(""); setSelectedZona(null); }}
+                    className="mt-4 text-xs text-indigo-600 hover:underline cursor-pointer"
+                  >
+                    Limpiar filtros
+                  </button>
                 </div>
-              ))
-            ) : (
-              <div className="col-span-full text-center py-24 text-slate-400 font-light text-sm bg-white rounded-2xl border border-dashed border-slate-200">
-                {t("tours_sin_resultados")}
-              </div>
-            )}
-          </main>
-        </>
-      )}
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

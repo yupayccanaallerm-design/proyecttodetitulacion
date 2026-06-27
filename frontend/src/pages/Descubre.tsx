@@ -199,7 +199,7 @@ const API = {
         }
         
         // Si el endpoint no existe (404) o hay otro error, usar fallback
-        console.warn(`⚠️ /chatbot/recognize respondió con ${response.status}, usando fallback`);
+        console.warn(` /chatbot/recognize respondió con ${response.status}, usando fallback`);
         
         // Fallback al endpoint directo de visión
         const form2 = new FormData();
@@ -213,7 +213,7 @@ const API = {
         
       } catch (error) {
         // Si hay error de red (sin conexión, etc.), usar fallback
-        console.warn("⚠️ Error en /chatbot/recognize, usando fallback:", error);
+        console.warn(" Error en /chatbot/recognize, usando fallback:", error);
         
         const form2 = new FormData();
         form2.append("file", file);
@@ -245,9 +245,9 @@ export default function PerfilViajero({ onPlaceDetected }: { onPlaceDetected?: (
 
   return (
     <div className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 selection:bg-indigo-100">
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
         {/* Header */}
-        <section className="text-center mb-12">
+        <section className="text-center mb-8 md:mb-12">
           <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full inline-flex items-center gap-1.5">
             <Sparkles size={12} /> {t("descubre.badge")}
           </span>

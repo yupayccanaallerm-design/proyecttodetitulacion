@@ -1,20 +1,54 @@
-# 🧠 Proyecto Travel Assistant - Instalaciones
+# Proyecto Travel Assistant - Instalaciones
 
-## Backend
-- FastAPI
-- Uvicorn
-- pypdf
-- requests
-- reportlab
-- deep-translator
+## Backend - Cómo iniciar el servidor
 
-## IA
-- Ollama
-- Modelo: llama3 / gemma3
-- pip install chromadb pypdf
+```bash
+# Desde la carpeta backend/api/  (IMPORTANTE: ejecutar desde aquí)
+cd backend/api
+uvicorn app.main:app --reload
+```
+
+> El servidor queda disponible en: http://127.0.0.1:8000
+
+**¿Por qué desde `backend/api/`?**
+- `main.py` usa imports relativos (`from .routes.*`) que requieren que `app` sea un paquete.
+- Los routes usan `from database import obtener_conexion`, que solo encuentra `database.py` si `backend/api/` está en el Python path.
+
+---
+
+## Dependencias Python
+
+```
+fastapi
+uvicorn
+mysql-connector-python
+chromadb
+sentence-transformers
+requests
+pypdf
+pillow
+numpy
+tensorflow
+```
+
+## IA - Ollama
+
+```bash
+# Instalar e iniciar Ollama
+ollama serve
+ollama pull llama3
+```
+
+URL local: http://127.0.0.1:11434
+
+---
 
 ## Frontend
-- install i18next react-i18next
 
-## APIs externas
-- Ollama local: http://127.0.0.1:11434
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+> Disponible en: http://localhost:5173

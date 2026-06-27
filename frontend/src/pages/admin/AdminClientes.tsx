@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Users, Mail, Phone, MapPin, Calendar, FolderHeart, ChevronDown, ChevronUp, RefreshCw, AlertCircle, Globe } from "lucide-react";
-import { API_BASE } from "../../api";
+import { API_BASE, authFetch } from "../../api";
 
 interface Cliente {
   id: number;
@@ -40,7 +40,7 @@ export default function AdminClientes() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`${API_BASE}/api/clientes`);
+      const res = await authFetch(`${API_BASE}/api/clientes`);
       if (!res.ok) throw new Error("Error cargando clientes");
       const data = await res.json();
       setClientes(data.clientes || []);
@@ -55,7 +55,7 @@ export default function AdminClientes() {
     if (historialCliente[clienteId]) return;
     setCargandoHistorial(clienteId);
     try {
-      const res = await fetch(`${API_BASE}/api/clientes/${clienteId}/reservas`);
+      const res = await authFetch(`${API_BASE}/api/clientes/${clienteId}/reservas`);
       if (res.ok) {
         const data = await res.json();
         setHistorialCliente((prev) => ({ ...prev, [clienteId]: data.reservas || [] }));

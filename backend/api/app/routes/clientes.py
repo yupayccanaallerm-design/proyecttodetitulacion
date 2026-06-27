@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Request
-from ...database import obtener_conexion
+from database import obtener_conexion
 from ..i18n import tr
 
 router = APIRouter(prefix="/api/clientes", tags=["Clientes"])

@@ -38,9 +38,9 @@ export function AgregarDestinoModal({
   };
 
   const getNivelDescripcion = (n: number) => {
-    if (n <= 2) return '🟢 Suave - Para todos';
-    if (n <= 4) return '🟡 Moderado - Algo de caminata';
-    return '🔴 Exigente - Alta montaña';
+    if (n <= 2) return t('modal_nivel_suave') || 'Suave — Para todos';
+    if (n <= 4) return t('modal_nivel_moderado') || 'Moderado — Algo de caminata';
+    return t('modal_nivel_exigente') || 'Exigente — Alta montaña';
   };
 
   const getNivelColor = (n: number) => {

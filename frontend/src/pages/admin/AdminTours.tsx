@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { Plus, Image as ImageIcon, MapPin, Sparkles, Check, X, RefreshCw, Layers, FileText, Pencil, Trash2, Eye, EyeOff } from "lucide-react";
+import { Plus, Image as ImageIcon, MapPin, Check, X, RefreshCw, Layers, FileText, Pencil, Trash2, AlertCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { API_BASE } from "../../api";
+import { API_BASE, authFetch } from "../../api";
 
 interface Tour {
   id: number;
@@ -31,6 +31,7 @@ export default function AdminTours() {
   // Estado lista
   const [tours, setTours] = useState<Tour[]>([]);
   const [cargandoLista, setCargandoLista] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -44,9 +45,9 @@ export default function AdminTours() {
   const cargarTours = async () => {
     setCargandoLista(true);
     try {
-      const res = await fetch(`${API_BASE}/api/tours/admin/todos`);
+      const res = await authFetch(`${API_BASE}/api/tours/admin/todos`);
       if (res.ok) setTours(await res.json());
-    } catch (e) { console.error(e); }
+    } catch { setErrorMsg(t("admin_tours_error_conexion")); }
     finally { setCargandoLista(false); }
   };
 
@@ -75,10 +76,10 @@ export default function AdminTours() {
   const eliminarTour = async (id: number) => {
     if (!window.confirm(t("admin_tours_confirmar_eliminar"))) return;
     try {
-      const res = await fetch(`${API_BASE}/api/tours/${id}`, { method: "DELETE" });
+      const res = await authFetch(`${API_BASE}/api/tours/${id}`, { method: "DELETE" });
       if (res.ok) cargarTours();
-      else alert(t("error_generico"));
-    } catch (e) { alert(t("admin_tours_error_conexion")); }
+      else setErrorMsg(t("error_generico"));
+    } catch { setErrorMsg(t("admin_tours_error_conexion")); }
   };
 
   const manejarSeleccionArchivo = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +96,7 @@ export default function AdminTours() {
   const manejarGuardar = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!nombre.trim() || !descripcion.trim() || (!editando && !archivoImagen)) {
-      alert(t("admin_tours_validacion"));
+      setErrorMsg(t("admin_tours_validacion"));
       return;
     }
     setCargando(true);
@@ -113,16 +114,16 @@ export default function AdminTours() {
         ? `${API_BASE}/api/tours/${editando.id}`
         : `${API_BASE}/api/tours`;
       const method = editando ? "PUT" : "POST";
-      const res = await fetch(url, { method, body: formData });
+      const res = await authFetch(url, { method, body: formData });
       if (res.ok) {
         setGuardado(true);
         setTimeout(() => { setGuardado(false); resetFormulario(); }, 2500);
       } else {
         const err = await res.json();
-        alert(`Error ${res.status}: ${JSON.stringify(err.detail) || t("error_generico")}`);
+        setErrorMsg(err.detail ? String(err.detail) : t("error_generico"));
       }
     } catch {
-      alert(t("admin_tours_error_conexion"));
+      setErrorMsg(t("admin_tours_error_conexion"));
     } finally {
       setCargando(false);
     }
@@ -156,6 +157,14 @@ export default function AdminTours() {
           {t("admin_tours_gestionar") || "Gestionar Tours"}
         </button>
       </div>
+
+      {errorMsg && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-3 flex items-center gap-2 text-red-700 text-sm">
+          <AlertCircle size={16} />
+          <span className="flex-1">{errorMsg}</span>
+          <button onClick={() => setErrorMsg("")} className="text-red-400 hover:text-red-600"><X size={14} /></button>
+        </div>
+      )}
 
       {/* Tab Crear/Editar */}
       {tab === "crear" && (

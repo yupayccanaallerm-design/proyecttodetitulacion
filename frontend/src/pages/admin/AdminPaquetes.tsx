@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Plus, Sparkles, Check, Clock, Layers, DollarSign, MapPin, Pencil, Trash2, RefreshCw, X } from "lucide-react";
+import { Plus, Check, Clock, Layers, DollarSign, MapPin, Pencil, Trash2, RefreshCw, X, AlertCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { API_BASE } from "../../api";
+import { API_BASE, authFetch } from "../../api";
 
 interface Tour {
   id: number;
@@ -35,6 +35,7 @@ export default function AdminPaquetes() {
 
   const [paquetes, setPaquetes] = useState<Paquete[]>([]);
   const [cargandoLista, setCargandoLista] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     fetch(`${API_BASE}/api/tours`)
@@ -46,9 +47,9 @@ export default function AdminPaquetes() {
   const cargarPaquetes = async () => {
     setCargandoLista(true);
     try {
-      const res = await fetch(`${API_BASE}/api/paquetes`);
+      const res = await authFetch(`${API_BASE}/api/paquetes`);
       if (res.ok) setPaquetes(await res.json());
-    } catch (e) { console.error(e); }
+    } catch { setErrorMsg(t("admin_paquetes_error_servidor") || "Error al cargar paquetes"); }
     finally { setCargandoLista(false); }
   };
 
@@ -70,7 +71,7 @@ export default function AdminPaquetes() {
     setPrecio(String(paquete.precio_sugerido));
     // Cargar tours del paquete
     try {
-      const res = await fetch(`${API_BASE}/api/paquetes/${paquete.id}`);
+      const res = await authFetch(`${API_BASE}/api/paquetes/${paquete.id}`);
       if (res.ok) {
         const data = await res.json();
         setDescripcion(data.descripcion_base || "");
@@ -83,10 +84,10 @@ export default function AdminPaquetes() {
   const eliminarPaquete = async (id: number) => {
     if (!window.confirm(t("admin_paquetes_confirmar_eliminar") || "¿Desactivar este paquete?")) return;
     try {
-      const res = await fetch(`${API_BASE}/api/paquetes/${id}`, { method: "DELETE" });
+      const res = await authFetch(`${API_BASE}/api/paquetes/${id}`, { method: "DELETE" });
       if (res.ok) cargarPaquetes();
-      else alert(t("error_generico"));
-    } catch { alert(t("admin_paquetes_error_servidor")); }
+      else setErrorMsg(t("error_generico") || "Error al eliminar");
+    } catch { setErrorMsg(t("admin_paquetes_error_servidor") || "Error de conexión"); }
   };
 
   const manejarSeleccionTour = (id: number) => {
@@ -98,7 +99,7 @@ export default function AdminPaquetes() {
   const manejarGuardar = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!titulo || toursSeleccionados.length === 0) {
-      alert(t("admin_paquetes_validacion"));
+      setErrorMsg(t("admin_paquetes_validacion") || "Completa el título y selecciona al menos un tour");
       return;
     }
     const payload = {
@@ -112,7 +113,7 @@ export default function AdminPaquetes() {
     try {
       const url = editando ? `${API_BASE}/api/paquetes/${editando.id}` : `${API_BASE}/api/paquetes`;
       const method = editando ? "PUT" : "POST";
-      const res = await fetch(url, {
+      const res = await authFetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -122,9 +123,9 @@ export default function AdminPaquetes() {
         setTimeout(() => { setGuardado(false); resetFormulario(); }, 2500);
       } else {
         const err = await res.json();
-        alert(`${t("error_generico")}: ${err.detail || ""}`);
+        setErrorMsg(err.detail ? String(err.detail) : (t("error_generico") || "Error al guardar"));
       }
-    } catch { alert(t("admin_paquetes_error_servidor")); }
+    } catch { setErrorMsg(t("admin_paquetes_error_servidor") || "Error de conexión"); }
   };
 
   return (
@@ -146,6 +147,14 @@ export default function AdminPaquetes() {
           Gestionar Paquetes
         </button>
       </div>
+
+      {errorMsg && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-3 flex items-center gap-2 text-red-700 text-sm">
+          <AlertCircle size={16} />
+          <span className="flex-1">{errorMsg}</span>
+          <button onClick={() => setErrorMsg("")} className="text-red-400 hover:text-red-600"><X size={14} /></button>
+        </div>
+      )}
 
       {/* Tab Crear/Editar */}
       {tab === "crear" && (

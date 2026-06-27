@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { authFetch } from "../../api";
 import {
   FolderHeart,
   Check,
@@ -52,12 +53,11 @@ export default function AdminReservas() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("http://localhost:8000/api/reservas");
+      const response = await authFetch("/api/reservas");
       if (!response.ok) throw new Error("Error cargando reservas");
       const data = await response.json();
       setReservas(data.reservas || []);
-    } catch (err) {
-      console.error("Error:", err);
+    } catch {
       setError(t("admin_reservas_error"));
     } finally {
       setLoading(false);
@@ -116,7 +116,7 @@ ${reserva.comentarios ? `📝 *Comentarios:* ${reserva.comentarios}` : ''}
       enviarWhatsApp(reserva);
       
       // 2. Actualizar estado en la base de datos
-      const res = await fetch(`/api/reservas/${id}/estado`, {
+      const res = await authFetch(`/api/reservas/${id}/estado`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ estado: "notificada" }),
@@ -126,15 +126,11 @@ ${reserva.comentarios ? `📝 *Comentarios:* ${reserva.comentarios}` : ''}
         setReservas((prev) =>
           prev.map((r) => (r.id === id ? { ...r, estado: "notificada" } : r))
         );
-        
-        // Mostrar feedback visual
-        // El mensaje de WhatsApp ya se abrió en otra pestaña
       } else {
-        alert(t("error_generico"));
+        setError(t("error_generico") || "Error al actualizar el estado de la reserva");
       }
-    } catch (err) {
-      console.error("Error:", err);
-      alert("Error al enviar la notificación");
+    } catch {
+      setError(t("admin_reservas_error_notificacion") || "Error al enviar la notificación");
     } finally {
       setActualizando(false);
       setNotificando(null);

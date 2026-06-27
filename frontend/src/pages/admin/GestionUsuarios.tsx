@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Eye, EyeOff, Edit, Trash2, X } from 'lucide-react';
+import { Eye, EyeOff, Edit, Trash2, X, AlertCircle, CheckCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { API_BASE, authFetch } from '../../api';
 
 interface Usuario {
   id: number;
@@ -9,6 +10,8 @@ interface Usuario {
   rol: string;
   created_at?: string;
 }
+
+type Msg = { text: string; isError: boolean };
 
 export default function GestionUsuarios() {
   const { t } = useTranslation();
@@ -19,7 +22,7 @@ export default function GestionUsuarios() {
   const [email, setEmail] = useState(localStorage.getItem('user_email') || '');
   const [passActual, setPassActual] = useState('');
   const [passNueva, setPassNueva] = useState('');
-  const [msgPerfil, setMsgPerfil] = useState({ text: '', isError: false });
+  const [msgPerfil, setMsgPerfil] = useState<Msg>({ text: '', isError: false });
   const [showPassActual, setShowPassActual] = useState(false);
   const [showPassNueva, setShowPassNueva] = useState(false);
 
@@ -27,8 +30,9 @@ export default function GestionUsuarios() {
   const [nuevoEmail, setNuevoEmail] = useState('');
   const [nuevoPass, setNuevoPass] = useState('');
   const [nuevoRol, setNuevoRol] = useState('admin');
-  const [msgCrear, setMsgCrear] = useState({ text: '', isError: false });
+  const [msgCrear, setMsgCrear] = useState<Msg>({ text: '', isError: false });
   const [showNuevoPass, setShowNuevoPass] = useState(false);
+  const [msgLista, setMsgLista] = useState<Msg>({ text: '', isError: false });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [idEditando, setIdEditando] = useState<number | null>(null);
@@ -44,15 +48,13 @@ export default function GestionUsuarios() {
 
   const obtenerUsuarios = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/usuarios');
+      const res = await authFetch(`${API_BASE}/api/usuarios`);
       if (res.ok) {
         const data = await res.json();
         setListaUsuarios(data);
-      } else {
-        console.error("FastAPI error al listar:", res.status);
       }
-    } catch (err) {
-      console.error("Error al obtener usuarios:", err);
+    } catch {
+      setMsgLista({ text: t('error_generico') || 'Error al cargar usuarios', isError: true });
     }
   };
 
@@ -65,7 +67,7 @@ export default function GestionUsuarios() {
       return;
     }
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/usuarios/actualizar-perfil', {
+      const res = await authFetch(`${API_BASE}/api/usuarios/actualizar-perfil`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id_usuario: parseInt(idUsuarioLogueado), nombre, email }),
@@ -89,7 +91,7 @@ export default function GestionUsuarios() {
       return;
     }
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/usuarios/cambiar-password', {
+      const res = await authFetch(`${API_BASE}/api/usuarios/cambiar-password`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -112,7 +114,7 @@ export default function GestionUsuarios() {
     e.preventDefault();
     setMsgCrear({ text: '', isError: false });
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/usuarios/crear', {
+      const res = await authFetch(`${API_BASE}/api/usuarios/crear`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre: nuevoNombre, email: nuevoEmail, password: nuevoPass, rol: nuevoRol }),
@@ -130,14 +132,15 @@ export default function GestionUsuarios() {
 
   const handleEliminar = async (idUsuario: number) => {
     if (!window.confirm(t('gestion_eliminar_confirm'))) return;
+    setMsgLista({ text: '', isError: false });
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/usuarios/eliminar/${idUsuario}`, { method: 'DELETE' });
+      const res = await authFetch(`${API_BASE}/api/usuarios/eliminar/${idUsuario}`, { method: 'DELETE' });
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || t('error_generico'));
-      alert(t('gestion_eliminar_exito'));
+      setMsgLista({ text: t('gestion_eliminar_exito'), isError: false });
       obtenerUsuarios();
     } catch (err: any) {
-      alert(err.message);
+      setMsgLista({ text: err.message, isError: true });
     }
   };
 
@@ -154,7 +157,7 @@ export default function GestionUsuarios() {
     e.preventDefault();
     if (idEditando === null) return;
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/usuarios/editar', {
+      const res = await authFetch(`${API_BASE}/api/usuarios/editar`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -167,11 +170,11 @@ export default function GestionUsuarios() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || t('error_generico'));
-      alert(t('gestion_actualizar_exito'));
+      setMsgLista({ text: t('gestion_actualizar_exito'), isError: false });
       setIsModalOpen(false);
       obtenerUsuarios();
     } catch (err: any) {
-      alert(err.message);
+      setMsgLista({ text: err.message, isError: true });
     }
   };
 
@@ -181,12 +184,24 @@ export default function GestionUsuarios() {
     return t('gestion_rol_empleado');
   };
 
+  const MsgAlert = ({ msg }: { msg: Msg }) =>
+    msg.text ? (
+      <div className={`flex items-center gap-2 p-3 rounded-xl text-sm border ${
+        msg.isError
+          ? 'bg-red-50 text-red-700 border-red-200'
+          : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+      }`}>
+        {msg.isError ? <AlertCircle size={14} /> : <CheckCircle size={14} />}
+        {msg.text}
+      </div>
+    ) : null;
+
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white rounded-xl shadow-md mt-6 font-sans">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">{t('gestion_titulo')}</h2>
+      <h2 className="text-2xl font-bold text-slate-800 mb-4">{t('gestion_titulo')}</h2>
 
       {/* TABS */}
-      <div className="flex border-b border-gray-200 mb-6">
+      <div className="flex border-b border-slate-200 mb-6">
         {[
           { key: 'mi_perfil',      label: t('gestion_tab_perfil') },
           { key: 'crear_usuario',  label: t('gestion_tab_crear') },
@@ -195,7 +210,7 @@ export default function GestionUsuarios() {
           <button
             key={key}
             className={`py-2 px-4 font-medium text-sm transition-colors border-b-2 ${
-              activeTab === key ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700'
+              activeTab === key ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700'
             }`}
             onClick={() => setActiveTab(key as any)}
           >
@@ -207,170 +222,165 @@ export default function GestionUsuarios() {
       {/* PESTAÑA 1: MI PERFIL */}
       {activeTab === 'mi_perfil' && (
         <div className="space-y-8">
-          {msgPerfil.text && (
-            <div className={`p-3 rounded text-sm ${msgPerfil.isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
-              {msgPerfil.text}
-            </div>
-          )}
-          <form onSubmit={handleActualizarPerfil} className="bg-gray-50 p-4 rounded-lg space-y-4">
-            <h3 className="text-lg font-semibold text-gray-700">{t('gestion_perfil_titulo')}</h3>
+          <MsgAlert msg={msgPerfil} />
+          <form onSubmit={handleActualizarPerfil} className="bg-slate-50 p-4 rounded-lg space-y-4">
+            <h3 className="text-lg font-semibold text-slate-700">{t('gestion_perfil_titulo')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">{t('gestion_nombre')}</label>
-                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required className="mt-1 block w-full rounded-md border-gray-300 p-2 text-gray-900 bg-white border outline-none focus:border-indigo-500" />
+                <label className="block text-sm font-medium text-slate-700">{t('gestion_nombre')}</label>
+                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required className="mt-1 block w-full rounded-xl border border-slate-300 p-2 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">{t('gestion_email')}</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="mt-1 block w-full rounded-md border-gray-300 p-2 text-gray-900 bg-white border outline-none focus:border-indigo-500" />
+                <label className="block text-sm font-medium text-slate-700">{t('gestion_email')}</label>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="mt-1 block w-full rounded-xl border border-slate-300 p-2 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" />
               </div>
             </div>
-            <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm font-medium">{t('gestion_guardar')}</button>
+            <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm font-medium transition-colors">{t('gestion_guardar')}</button>
           </form>
 
-          <form onSubmit={handleCambiarPassword} className="bg-gray-50 p-4 rounded-lg space-y-4">
-            <h3 className="text-lg font-semibold text-gray-700">{t('gestion_password_titulo')}</h3>
+          <form onSubmit={handleCambiarPassword} className="bg-slate-50 p-4 rounded-lg space-y-4">
+            <h3 className="text-lg font-semibold text-slate-700">{t('gestion_password_titulo')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">{t('gestion_password_actual')}</label>
+                <label className="block text-sm font-medium text-slate-700">{t('gestion_password_actual')}</label>
                 <div className="relative mt-1">
-                  <input type={showPassActual ? "text" : "password"} value={passActual} onChange={(e) => setPassActual(e.target.value)} required className="block w-full rounded-md border-gray-300 p-2 pr-10 text-gray-900 bg-white border outline-none focus:border-indigo-500" />
-                  <button type="button" onClick={() => setShowPassActual(!showPassActual)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">{showPassActual ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+                  <input type={showPassActual ? "text" : "password"} value={passActual} onChange={(e) => setPassActual(e.target.value)} required className="block w-full rounded-xl border border-slate-300 p-2 pr-10 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" />
+                  <button type="button" onClick={() => setShowPassActual(!showPassActual)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">{showPassActual ? <EyeOff size={18} /> : <Eye size={18} />}</button>
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">{t('gestion_password_nueva')}</label>
+                <label className="block text-sm font-medium text-slate-700">{t('gestion_password_nueva')}</label>
                 <div className="relative mt-1">
-                  <input type={showPassNueva ? "text" : "password"} value={passNueva} onChange={(e) => setPassNueva(e.target.value)} required className="block w-full rounded-md border-gray-300 p-2 pr-10 text-gray-900 bg-white border outline-none focus:border-indigo-500" />
-                  <button type="button" onClick={() => setShowPassNueva(!showPassNueva)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">{showPassNueva ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+                  <input type={showPassNueva ? "text" : "password"} value={passNueva} onChange={(e) => setPassNueva(e.target.value)} required className="block w-full rounded-xl border border-slate-300 p-2 pr-10 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" />
+                  <button type="button" onClick={() => setShowPassNueva(!showPassNueva)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">{showPassNueva ? <EyeOff size={18} /> : <Eye size={18} />}</button>
                 </div>
               </div>
             </div>
-            <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm font-medium">{t('gestion_password_btn')}</button>
+            <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm font-medium transition-colors">{t('gestion_password_btn')}</button>
           </form>
         </div>
       )}
 
       {/* PESTAÑA 2: CREAR USUARIOS */}
       {activeTab === 'crear_usuario' && (
-        <form onSubmit={handleCrearUsuario} className="bg-gray-50 p-4 rounded-lg space-y-4">
-          <h3 className="text-lg font-semibold text-gray-700">{t('gestion_crear_titulo')}</h3>
-          {msgCrear.text && (
-            <div className={`p-3 rounded text-sm ${msgCrear.isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
-              {msgCrear.text}
-            </div>
-          )}
+        <form onSubmit={handleCrearUsuario} className="bg-slate-50 p-4 rounded-lg space-y-4">
+          <h3 className="text-lg font-semibold text-slate-700">{t('gestion_crear_titulo')}</h3>
+          <MsgAlert msg={msgCrear} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">{t('gestion_nombre')}</label>
-              <input type="text" value={nuevoNombre} onChange={(e) => setNuevoNombre(e.target.value)} required className="mt-1 block w-full rounded-md border-gray-300 p-2 text-gray-900 bg-white border outline-none focus:border-indigo-500" />
+              <label className="block text-sm font-medium text-slate-700">{t('gestion_nombre')}</label>
+              <input type="text" value={nuevoNombre} onChange={(e) => setNuevoNombre(e.target.value)} required className="mt-1 block w-full rounded-xl border border-slate-300 p-2 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">{t('gestion_email')}</label>
-              <input type="email" value={nuevoEmail} onChange={(e) => setNuevoEmail(e.target.value)} required className="mt-1 block w-full rounded-md border-gray-300 p-2 text-gray-900 bg-white border outline-none focus:border-indigo-500" />
+              <label className="block text-sm font-medium text-slate-700">{t('gestion_email')}</label>
+              <input type="email" value={nuevoEmail} onChange={(e) => setNuevoEmail(e.target.value)} required className="mt-1 block w-full rounded-xl border border-slate-300 p-2 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">{t('gestion_crear_password')}</label>
+              <label className="block text-sm font-medium text-slate-700">{t('gestion_crear_password')}</label>
               <div className="relative mt-1">
-                <input type={showNuevoPass ? "text" : "password"} value={nuevoPass} onChange={(e) => setNuevoPass(e.target.value)} required className="block w-full rounded-md border-gray-300 p-2 pr-10 text-gray-900 bg-white border outline-none focus:border-indigo-500" />
-                <button type="button" onClick={() => setShowNuevoPass(!showNuevoPass)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">{showNuevoPass ? <EyeOff size={18} /> : <Eye size={18} />}</button>
+                <input type={showNuevoPass ? "text" : "password"} value={nuevoPass} onChange={(e) => setNuevoPass(e.target.value)} required className="block w-full rounded-xl border border-slate-300 p-2 pr-10 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" />
+                <button type="button" onClick={() => setShowNuevoPass(!showNuevoPass)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">{showNuevoPass ? <EyeOff size={18} /> : <Eye size={18} />}</button>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">{t('gestion_crear_rol')}</label>
-              <select value={nuevoRol} onChange={(e) => setNuevoRol(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 p-2 text-gray-900 bg-white border outline-none focus:border-indigo-500">
+              <label className="block text-sm font-medium text-slate-700">{t('gestion_crear_rol')}</label>
+              <select value={nuevoRol} onChange={(e) => setNuevoRol(e.target.value)} className="mt-1 block w-full rounded-xl border border-slate-300 p-2 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100">
                 <option value="admin">{t('gestion_rol_admin')}</option>
                 <option value="empleado">{t('gestion_rol_empleado')}</option>
                 <option value="guia">{t('gestion_rol_guia')}</option>
               </select>
             </div>
           </div>
-          <button type="submit" className="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 text-sm font-medium mt-2">{t('gestion_crear_btn')}</button>
+          <button type="submit" className="bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 text-sm font-medium mt-2 transition-colors">{t('gestion_crear_btn')}</button>
         </form>
       )}
 
       {/* PESTAÑA 3: LISTA */}
       {activeTab === 'lista_usuarios' && (
-        <div className="overflow-x-auto bg-white border border-gray-200 rounded-lg shadow-sm">
-          <table className="min-w-full divide-y divide-gray-200 text-left text-sm">
-            <thead className="bg-gray-50 text-gray-700 uppercase text-xs font-semibold tracking-wider">
-              <tr>
-                <th className="px-6 py-3">{t('gestion_lista_id')}</th>
-                <th className="px-6 py-3">{t('gestion_lista_nombre')}</th>
-                <th className="px-6 py-3">{t('gestion_lista_email')}</th>
-                <th className="px-6 py-3">{t('gestion_lista_rol')}</th>
-                <th className="px-6 py-3 text-center">{t('gestion_lista_acciones')}</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 text-gray-900">
-              {listaUsuarios.length === 0 ? (
+        <div className="space-y-4">
+          <MsgAlert msg={msgLista} />
+          <div className="overflow-x-auto bg-white border border-slate-200 rounded-xl shadow-sm">
+            <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+              <thead className="bg-slate-50 text-slate-700 uppercase text-xs font-semibold tracking-wider">
                 <tr>
-                  <td colSpan={5} className="text-center py-6 text-gray-500">{t('gestion_lista_vacia')}</td>
+                  <th className="px-6 py-3">{t('gestion_lista_id')}</th>
+                  <th className="px-6 py-3">{t('gestion_lista_nombre')}</th>
+                  <th className="px-6 py-3">{t('gestion_lista_email')}</th>
+                  <th className="px-6 py-3">{t('gestion_lista_rol')}</th>
+                  <th className="px-6 py-3 text-center">{t('gestion_lista_acciones')}</th>
                 </tr>
-              ) : (
-                listaUsuarios.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 font-mono text-xs text-gray-500">{user.id}</td>
-                    <td className="px-6 py-4 font-medium">{user.nombre}</td>
-                    <td className="px-6 py-4 text-gray-600">{user.email}</td>
-                    <td className="px-6 py-4">
-                      <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${
-                        user.rol === 'admin' ? 'bg-purple-100 text-purple-800' : user.rol === 'guia' ? 'bg-orange-100 text-orange-800' : 'bg-blue-100 text-blue-800'
-                      }`}>
-                        {getRolLabel(user.rol)}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-center space-x-3">
-                      <button onClick={() => abrirModalEdicion(user)} className="text-indigo-600 hover:text-indigo-900 inline-flex items-center gap-1 font-medium transition-colors">
-                        <Edit size={16} /> {t('gestion_editar')}
-                      </button>
-                      <button onClick={() => handleEliminar(user.id)} className="text-red-600 hover:text-red-900 inline-flex items-center gap-1 font-medium transition-colors">
-                        <Trash2 size={16} /> {t('gestion_borrar')}
-                      </button>
-                    </td>
+              </thead>
+              <tbody className="divide-y divide-slate-200 text-slate-900">
+                {listaUsuarios.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="text-center py-6 text-slate-500">{t('gestion_lista_vacia')}</td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : (
+                  listaUsuarios.map((user) => (
+                    <tr key={user.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-6 py-4 font-mono text-xs text-slate-500">{user.id}</td>
+                      <td className="px-6 py-4 font-medium">{user.nombre}</td>
+                      <td className="px-6 py-4 text-slate-600">{user.email}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${
+                          user.rol === 'admin' ? 'bg-purple-100 text-purple-800' : user.rol === 'guia' ? 'bg-orange-100 text-orange-800' : 'bg-blue-100 text-blue-800'
+                        }`}>
+                          {getRolLabel(user.rol)}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-center space-x-3">
+                        <button onClick={() => abrirModalEdicion(user)} className="text-indigo-600 hover:text-indigo-900 inline-flex items-center gap-1 font-medium transition-colors">
+                          <Edit size={16} /> {t('gestion_editar')}
+                        </button>
+                        <button onClick={() => handleEliminar(user.id)} className="text-red-600 hover:text-red-900 inline-flex items-center gap-1 font-medium transition-colors">
+                          <Trash2 size={16} /> {t('gestion_borrar')}
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
       {/* MODAL EDICIÓN */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 animate-fade-in">
-          <div className="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden">
-            <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-              <h3 className="text-lg font-bold text-gray-800">{t('gestion_modal_titulo', { id: idEditando })}</h3>
-              <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-600 transition-colors"><X size={20} /></button>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-lg w-full overflow-hidden">
+            <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+              <h3 className="text-lg font-bold text-slate-800">{t('gestion_modal_titulo', { id: idEditando })}</h3>
+              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors"><X size={20} /></button>
             </div>
 
             <form onSubmit={handleGuardarEdicion} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">{t('gestion_nombre')}</label>
-                <input type="text" value={nombreEditando} onChange={(e) => setNombreEditando(e.target.value)} required className="mt-1 block w-full rounded-md border-gray-300 p-2 text-gray-900 bg-white border outline-none focus:border-indigo-500" />
+                <label className="block text-sm font-medium text-slate-700">{t('gestion_nombre')}</label>
+                <input type="text" value={nombreEditando} onChange={(e) => setNombreEditando(e.target.value)} required className="mt-1 block w-full rounded-xl border border-slate-300 p-2 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">{t('gestion_email')}</label>
-                <input type="email" value={emailEditando} onChange={(e) => setEmailEditando(e.target.value)} required className="mt-1 block w-full rounded-md border-gray-300 p-2 text-gray-900 bg-white border outline-none focus:border-indigo-500" />
+                <label className="block text-sm font-medium text-slate-700">{t('gestion_email')}</label>
+                <input type="email" value={emailEditando} onChange={(e) => setEmailEditando(e.target.value)} required className="mt-1 block w-full rounded-xl border border-slate-300 p-2 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">{t('gestion_modal_rol')}</label>
-                <select value={rolEditando} onChange={(e) => setRolEditando(e.target.value)} className="mt-1 block w-full rounded-md border-gray-300 p-2 text-gray-900 bg-white border outline-none focus:border-indigo-500">
+                <label className="block text-sm font-medium text-slate-700">{t('gestion_modal_rol')}</label>
+                <select value={rolEditando} onChange={(e) => setRolEditando(e.target.value)} className="mt-1 block w-full rounded-xl border border-slate-300 p-2 text-slate-900 bg-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100">
                   <option value="admin">{t('gestion_rol_admin')}</option>
                   <option value="empleado">{t('gestion_rol_empleado')}</option>
                   <option value="guia">{t('gestion_rol_guia')}</option>
                 </select>
               </div>
-              <div className="bg-amber-50 p-3 rounded-md border border-amber-200">
+              <div className="bg-amber-50 p-3 rounded-xl border border-amber-200">
                 <label className="block text-sm font-medium text-amber-800">{t('gestion_modal_pass_label')}</label>
                 <div className="relative mt-1">
-                  <input type={showPassEditando ? "text" : "password"} value={passEditando} onChange={(e) => setPassEditando(e.target.value)} placeholder={t('gestion_modal_pass_ph')} className="block w-full rounded-md border-amber-300 p-2 pr-10 text-gray-900 bg-white border outline-none focus:border-amber-500" />
+                  <input type={showPassEditando ? "text" : "password"} value={passEditando} onChange={(e) => setPassEditando(e.target.value)} placeholder={t('gestion_modal_pass_ph')} className="block w-full rounded-xl border border-amber-300 p-2 pr-10 text-slate-900 bg-white outline-none focus:border-amber-500" />
                   <button type="button" onClick={() => setShowPassEditando(!showPassEditando)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-amber-600 hover:text-amber-800">{showPassEditando ? <EyeOff size={18} /> : <Eye size={18} />}</button>
                 </div>
                 <span className="text-xs text-amber-700 mt-1 block">{t('gestion_modal_pass_nota')}</span>
               </div>
               <div className="flex justify-end space-x-3 pt-2">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">{t('gestion_cancelar')}</button>
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors">{t('gestion_cancelar')}</button>
                 <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">{t('gestion_guardar')}</button>
               </div>
             </form>

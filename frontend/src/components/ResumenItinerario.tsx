@@ -15,6 +15,7 @@ export function ResumenItinerario() {
   const [enviando, setEnviando] = useState(false);
   const [mostrarFormularioCliente, setMostrarFormularioCliente] = useState(false);
   const [enviadoExitoso, setEnviadoExitoso] = useState(false);
+  const [reservaError, setReservaError] = useState('');
   const [clienteData, setClienteData] = useState(() => {
     const saved = localStorage.getItem('cliente_datos');
     return saved ? JSON.parse(saved) : { nombre: '', email: '', telefono: '', comentarios: '' };
@@ -55,6 +56,7 @@ export function ResumenItinerario() {
     }
 
     setEnviando(true);
+    setReservaError('');
 
     const payload = {
       cliente: {
@@ -78,46 +80,38 @@ export function ResumenItinerario() {
       fechaReserva: new Date().toISOString(),
     };
 
-    console.log("📤 Enviando reserva desde itinerario:", payload);
-
     try {
-      const response = await fetch('http://localhost:8000/api/reservas/itinerario', {
+      const response = await fetch('/api/reservas/itinerario', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log("✅ Reserva creada:", data);
-        
         setEnviadoExitoso(true);
         setTimeout(() => {
-          alert(t('itinerario_exito') || '✅ ¡Reserva enviada con éxito!\n\nLos proveedores se pondrán en contacto contigo en las próximas 24 horas.');
           limpiarItinerario();
           setIsOpen(false);
           setMostrarFormularioCliente(false);
           setEnviadoExitoso(false);
           setClienteData({ nombre: '', email: '', telefono: '', comentarios: '' });
           localStorage.removeItem('cliente_datos');
-        }, 500);
+        }, 2000);
       } else {
         const errorData = await response.json();
-        console.error("❌ Error del servidor:", errorData);
         throw new Error(errorData.detail || 'Error en el servidor');
       }
     } catch (error: any) {
-      console.error("❌ Error:", error);
-      alert(t('itinerario_error') || '❌ Error al enviar la reserva. Por favor, intenta de nuevo.');
+      setReservaError(t('itinerario_error') || 'Error al enviar la reserva. Por favor, intenta de nuevo.');
     } finally {
       setEnviando(false);
     }
   };
 
-  const getNivelEmoji = (nivel: number) => {
-    if (nivel <= 2) return '🟢';
-    if (nivel <= 4) return '🟡';
-    return '🔴';
+  const getNivelDot = (nivel: number) => {
+    if (nivel <= 2) return <span className="inline-block w-2 h-2 rounded-full bg-green-500 shrink-0" />;
+    if (nivel <= 4) return <span className="inline-block w-2 h-2 rounded-full bg-yellow-500 shrink-0" />;
+    return <span className="inline-block w-2 h-2 rounded-full bg-red-500 shrink-0" />;
   };
 
   const getNivelTexto = (nivel: number) => {
@@ -262,8 +256,9 @@ export function ResumenItinerario() {
                         }`} style={{ width: `${(destino.nivelExigencia / 5) * 100}%` }} />
 
                         {tieneCruce && (
-                          <span className="absolute top-3 right-12 text-[9px] font-black uppercase text-red-600 bg-red-100 px-2 py-0.5 rounded animate-pulse">
-                            {t('itinerario_cruce') || '⚠️ Fechas Cruzadas'}
+                          <span className="absolute top-3 right-12 text-[9px] font-black uppercase text-red-600 bg-red-100 px-2 py-0.5 rounded animate-pulse flex items-center gap-1">
+                            <AlertCircle size={9} />
+                            {t('itinerario_cruce') || 'Fechas Cruzadas'}
                           </span>
                         )}
 
@@ -276,11 +271,12 @@ export function ResumenItinerario() {
 
                             <div className="flex flex-wrap gap-1.5 mt-1.5 text-[10px]">
                               <span className="bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full">{destino.tipo}</span>
-                              <span className={`px-2 py-0.5 rounded-full flex items-center gap-0.5 ${
+                              <span className={`px-2 py-0.5 rounded-full flex items-center gap-1 ${
                                 destino.nivelExigencia <= 2 ? 'bg-green-50 text-green-600' :
                                 destino.nivelExigencia <= 4 ? 'bg-yellow-50 text-yellow-600' : 'bg-red-50 text-red-600'
                               }`}>
-                                {getNivelEmoji(destino.nivelExigencia)} {getNivelTexto(destino.nivelExigencia)}
+                                {getNivelDot(destino.nivelExigencia)}
+                                {getNivelTexto(destino.nivelExigencia)}
                               </span>
                               <span className="bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full flex items-center gap-0.5">
                                 <Clock size={10} /> {destino.duracion} {t('itinerario_dias') || 'días'}
@@ -361,6 +357,14 @@ export function ResumenItinerario() {
                 </div>
               )}
 
+              {/* MENSAJE DE ERROR */}
+              {reservaError && (
+                <div className="mt-3 flex items-center gap-2 bg-red-50 border border-red-200 text-red-600 text-xs px-3 py-2.5 rounded-xl animate-in fade-in duration-200">
+                  <AlertCircle size={13} className="shrink-0" />
+                  <span>{reservaError}</span>
+                </div>
+              )}
+
               {/* BOTONES */}
               <div className="border-t border-slate-100 pt-4 mt-4 space-y-2.5">
                 <div className="flex gap-2">
@@ -368,13 +372,13 @@ export function ResumenItinerario() {
                     onClick={limpiarItinerario}
                     className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    {t('itinerario_limpiar') || '🗑️ Limpiar todo'}
+                    {t('itinerario_limpiar') || 'Limpiar todo'}
                   </button>
                   <button
                     onClick={() => setIsOpen(false)}
                     className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    {t('itinerario_seguir') || '✏️ Seguir editando'}
+                    {t('itinerario_seguir') || 'Seguir editando'}
                   </button>
                 </div>
 

@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import Optional, List
 import random
 import string
-from ...database import obtener_conexion
+from database import obtener_conexion
 
 router = APIRouter(prefix="/api/reservas", tags=["Reservas"])
 
@@ -151,8 +151,6 @@ async def crear_reserva_paquete(reserva: ReservaPaqueteRequest, request: Request
             reserva_id = cursor.lastrowid
             conexion.commit()
             
-            print(f"✅ Reserva creada - ID: {reserva_id}, tour_id: {tour_id_val}, paquete_id: {paquete_id_val}")
-            
             return {
                 "status": "success",
                 "message": "Reserva creada exitosamente",
@@ -160,10 +158,9 @@ async def crear_reserva_paquete(reserva: ReservaPaqueteRequest, request: Request
                 "codigo": codigo,
             }
             
-    except Exception as e:
+    except Exception:
         conexion.rollback()
-        print(f"❌ Error creando reserva paquete: {e}")
-        raise HTTPException(status_code=400, detail=f"Error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error interno al crear la reserva")
     finally:
         conexion.close()
 
@@ -226,10 +223,9 @@ async def crear_reserva_itinerario(reserva: ReservaItinerario, request: Request)
                 "codigo": codigo,
             }
             
-    except Exception as e:
+    except Exception:
         conexion.rollback()
-        print(f"❌ Error creando reserva itinerario: {e}")
-        raise HTTPException(status_code=400, detail=f"Error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error interno al crear la reserva")
     finally:
         conexion.close()
 
@@ -284,9 +280,8 @@ async def listar_reservas(request: Request):
             
             return {"reservas": reservas, "total": len(reservas)}
             
-    except Exception as e:
-        print(f"❌ Error listando reservas: {e}")
-        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        raise HTTPException(status_code=500, detail="Error interno al listar reservas")
     finally:
         conexion.close()
 
@@ -331,9 +326,8 @@ async def obtener_reserva(reserva_id: int, request: Request):
             
     except HTTPException:
         raise
-    except Exception as e:
-        print(f"❌ Error obteniendo reserva: {e}")
-        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        raise HTTPException(status_code=500, detail="Error interno al obtener la reserva")
     finally:
         conexion.close()
 
@@ -343,7 +337,7 @@ async def actualizar_estado_reserva(
     reserva_id: int, data: ActualizarEstadoRequest, request: Request
 ):
     """Actualizar el estado de una reserva"""
-    estados_validos = ["pendiente", "confirmada", "cancelada", "finalizada"]
+    estados_validos = ["pendiente", "confirmada", "cancelada", "finalizada", "notificada"]
     
     if data.estado not in estados_validos:
         raise HTTPException(
@@ -368,9 +362,8 @@ async def actualizar_estado_reserva(
                 "message": f"Estado actualizado a '{data.estado}'"
             }
             
-    except Exception as e:
+    except Exception:
         conexion.rollback()
-        print(f"❌ Error actualizando estado: {e}")
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=500, detail="Error interno al actualizar el estado")
     finally:
         conexion.close()
