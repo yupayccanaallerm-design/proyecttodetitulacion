@@ -96,9 +96,6 @@ export default function Tours() {
     <div className="min-h-screen bg-slate-50 font-sans antialiased text-slate-800 pb-20 p-4 md:p-12">
       
       <header className="max-w-4xl mx-auto mb-16 text-center">
-        <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
-          {t("tours_badge")}
-        </span>
         <h1 className="text-3xl md:text-5xl font-light tracking-tight text-slate-900 mt-4 mb-6">
           {t("tours_titulo")} <span className="font-semibold text-indigo-600">{t("tours_titulo_highlight")}</span>
         </h1>
@@ -161,7 +158,7 @@ export default function Tours() {
                 {recommended.map((r, i) => (
                   <div
                     key={i}
-                    onClick={() => navigate(`/reservas?tour=${r.nombre}&price=${r.price}`)}
+                    onClick={() => navigate(`/reservas?tour=${r.nombre}&price=${r.price}&tour_id=${r.id}`)}
                     className="bg-white hover:border-indigo-300 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-medium text-slate-700 shadow-xs cursor-pointer flex items-center gap-3 transition-all"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
@@ -180,11 +177,10 @@ export default function Tours() {
 
                   <div className="overflow-hidden relative h-52 bg-slate-200">
                     <img 
-                      src={tour.img} // Aquí tour.img ya debe ser el string "data:image/jpeg;base64,..."
+                      src={tour.img}
                       alt={tour.nombre}
-                      className="..."
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       onError={(e) => {
-                        // Si falla, pone la imagen de respaldo
                         (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1587595431973-160d0d94add1";
                       }}
                     />
@@ -239,8 +235,9 @@ export default function Tours() {
                           </span>
                         </div>
 
+                        {/* ✅ CORREGIDO: Envía tour_id */}
                         <button
-                          onClick={() => navigate(`/reservas?tour=${tour.nombre}&price=${tour.price}`)}
+                          onClick={() => navigate(`/reservas?tour=${tour.nombre}&price=${tour.price}&tour_id=${tour.id}`)}
                           className="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-medium tracking-wide hover:bg-indigo-700 transition shadow-xs cursor-pointer active:scale-95"
                         >
                           {t("tours_btn_reservar")}

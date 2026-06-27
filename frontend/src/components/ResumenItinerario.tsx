@@ -56,36 +56,44 @@ export function ResumenItinerario() {
 
     setEnviando(true);
 
-    const usuarioId = localStorage.getItem("user_id");
     const payload = {
-      cliente: clienteData,
+      cliente: {
+        nombre: clienteData.nombre,
+        email: clienteData.email,
+        telefono: clienteData.telefono,
+        comentarios: clienteData.comentarios || "",
+      },
       itinerario: destinos.map((d: any) => ({
         lugar: d.nombre,
         tipo: d.tipo,
         fechaInicio: d.fechaInicio,
         duracion: d.duracion,
         nivelExigencia: d.nivelExigencia,
-        tourRecomendado: d.tourRecomendado,
-        actividades: d.actividades,
+        tourRecomendado: d.tourRecomendado || "",
+        actividades: d.actividades || [],
       })),
       totalDias,
       totalDestinos,
       estadisticas,
       fechaReserva: new Date().toISOString(),
-      usuario_id: usuarioId ? parseInt(usuarioId) : null,
     };
 
+    console.log("📤 Enviando reserva desde itinerario:", payload);
+
     try {
-      const response = await fetch('http://localhost:8000/api/reservas', {
+      const response = await fetch('http://localhost:8000/api/reservas/itinerario', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
       if (response.ok) {
+        const data = await response.json();
+        console.log("✅ Reserva creada:", data);
+        
         setEnviadoExitoso(true);
         setTimeout(() => {
-          alert(t('itinerario_exito'));
+          alert(t('itinerario_exito') || '✅ ¡Reserva enviada con éxito!\n\nLos proveedores se pondrán en contacto contigo en las próximas 24 horas.');
           limpiarItinerario();
           setIsOpen(false);
           setMostrarFormularioCliente(false);
@@ -94,10 +102,13 @@ export function ResumenItinerario() {
           localStorage.removeItem('cliente_datos');
         }, 500);
       } else {
-        throw new Error('Error en el servidor');
+        const errorData = await response.json();
+        console.error("❌ Error del servidor:", errorData);
+        throw new Error(errorData.detail || 'Error en el servidor');
       }
-    } catch {
-      alert(t('itinerario_error'));
+    } catch (error: any) {
+      console.error("❌ Error:", error);
+      alert(t('itinerario_error') || '❌ Error al enviar la reserva. Por favor, intenta de nuevo.');
     } finally {
       setEnviando(false);
     }
@@ -110,9 +121,9 @@ export function ResumenItinerario() {
   };
 
   const getNivelTexto = (nivel: number) => {
-    if (nivel <= 2) return t('itinerario_nivel_suave');
-    if (nivel <= 4) return t('itinerario_nivel_moderado');
-    return t('itinerario_nivel_exigente');
+    if (nivel <= 2) return t('itinerario_nivel_suave') || 'Suave';
+    if (nivel <= 4) return t('itinerario_nivel_moderado') || 'Moderado';
+    return t('itinerario_nivel_exigente') || 'Exigente';
   };
 
   const locale = i18n.language === "en" ? "en-US" : "es-ES";
@@ -129,7 +140,7 @@ export function ResumenItinerario() {
           {destinos.length}
         </span>
         <span className="max-w-0 group-hover:max-w-xs overflow-hidden transition-all duration-300 text-sm font-bold whitespace-nowrap">
-          {t('itinerario_ver')}
+          {t('itinerario_ver') || 'Ver mi itinerario'}
         </span>
         <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-pulse" />
       </button>
@@ -152,16 +163,16 @@ export function ResumenItinerario() {
                     <div className="bg-gradient-to-r from-indigo-500 to-purple-500 p-2 rounded-xl text-white">
                       <Eye size={18} />
                     </div>
-                    <h2 className="text-xl font-bold text-slate-800">{t('itinerario_titulo')}</h2>
+                    <h2 className="text-xl font-bold text-slate-800">{t('itinerario_titulo') || 'Mi itinerario'}</h2>
                   </div>
                   <div className="flex items-center gap-3 mt-1.5">
                     <p className="text-xs text-slate-400">
-                      {totalDestinos} {totalDestinos === 1 ? t('itinerario_destino') : t('itinerario_destinos')} • {totalDias} {totalDias === 1 ? t('itinerario_dia') : t('itinerario_dias')}
+                      {totalDestinos} {totalDestinos === 1 ? (t('itinerario_destino') || 'destino') : (t('itinerario_destinos') || 'destinos')} • {totalDias} {totalDias === 1 ? (t('itinerario_dia') || 'día') : (t('itinerario_dias') || 'días')}
                     </p>
                     <span className="w-1 h-1 rounded-full bg-slate-300" />
                     <p className="text-xs text-slate-400 flex items-center gap-1">
                       <TrendingUp size={10} />
-                      {t('itinerario_nivel')} {estadisticas.nivelPromedio}
+                      {t('itinerario_nivel') || 'Nivel'} {estadisticas.nivelPromedio}
                     </p>
                   </div>
                 </div>
@@ -177,15 +188,15 @@ export function ResumenItinerario() {
               <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-4 mb-4 border border-indigo-100">
                 <div className="grid grid-cols-3 gap-2 text-center">
                   <div>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase">{t('itinerario_stat_destinos')}</p>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">{t('itinerario_stat_destinos') || 'Destinos'}</p>
                     <p className="text-lg font-black text-indigo-600">{totalDestinos}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase">{t('itinerario_stat_dias')}</p>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">{t('itinerario_stat_dias') || 'Días'}</p>
                     <p className="text-lg font-black text-indigo-600">{totalDias}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase">{t('itinerario_stat_nivel')}</p>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">{t('itinerario_stat_nivel') || 'Nivel'}</p>
                     <p className="text-lg font-black text-indigo-600">{estadisticas.nivelPromedio}</p>
                   </div>
                 </div>
@@ -200,7 +211,7 @@ export function ResumenItinerario() {
                 )}
               </div>
 
-              {/* LISTA */}
+              {/* LISTA DE DESTINOS */}
               <div className="flex-1 overflow-y-auto space-y-3 pr-1 custom-scrollbar">
                 {destinos.map((destino: any, index: number) => {
                   const fechaInicioActual = new Date(destino.fechaInicio + "T00:00:00");
@@ -252,7 +263,7 @@ export function ResumenItinerario() {
 
                         {tieneCruce && (
                           <span className="absolute top-3 right-12 text-[9px] font-black uppercase text-red-600 bg-red-100 px-2 py-0.5 rounded animate-pulse">
-                            {t('itinerario_cruce')}
+                            {t('itinerario_cruce') || '⚠️ Fechas Cruzadas'}
                           </span>
                         )}
 
@@ -272,7 +283,7 @@ export function ResumenItinerario() {
                                 {getNivelEmoji(destino.nivelExigencia)} {getNivelTexto(destino.nivelExigencia)}
                               </span>
                               <span className="bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full flex items-center gap-0.5">
-                                <Clock size={10} /> {destino.duracion} {t('itinerario_dias')}
+                                <Clock size={10} /> {destino.duracion} {t('itinerario_dias') || 'días'}
                               </span>
                             </div>
 
@@ -315,33 +326,33 @@ export function ResumenItinerario() {
                 <div className="border-t border-slate-100 pt-4 mt-4 space-y-3 animate-in slide-in-from-bottom-2 duration-200">
                   <div className="flex items-center gap-2 mb-1">
                     <Users size={14} className="text-indigo-500" />
-                    <p className="text-xs font-bold text-slate-600">{t('itinerario_contacto_titulo')}</p>
-                    <span className="text-[9px] text-red-400">{t('itinerario_obligatorios')}</span>
+                    <p className="text-xs font-bold text-slate-600">{t('itinerario_contacto_titulo') || 'Tus datos de contacto'}</p>
+                    <span className="text-[9px] text-red-400">* {t('itinerario_obligatorios') || 'obligatorios'}</span>
                   </div>
                   <input
                     ref={firstInputRef}
                     type="text"
-                    placeholder={t('itinerario_nombre_ph')}
+                    placeholder={t('itinerario_nombre_ph') || 'Nombre completo *'}
                     value={clienteData.nombre}
                     onChange={(e) => setClienteData({ ...clienteData, nombre: e.target.value })}
                     className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50/50"
                   />
                   <input
                     type="email"
-                    placeholder={t('itinerario_email_ph')}
+                    placeholder={t('itinerario_email_ph') || 'Correo electrónico *'}
                     value={clienteData.email}
                     onChange={(e) => setClienteData({ ...clienteData, email: e.target.value })}
                     className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50/50"
                   />
                   <input
                     type="tel"
-                    placeholder={t('itinerario_telefono_ph')}
+                    placeholder={t('itinerario_telefono_ph') || 'Teléfono / WhatsApp *'}
                     value={clienteData.telefono}
                     onChange={(e) => setClienteData({ ...clienteData, telefono: e.target.value })}
                     className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50/50"
                   />
                   <textarea
-                    placeholder={t('itinerario_comentarios_ph')}
+                    placeholder={t('itinerario_comentarios_ph') || 'Comentarios adicionales (opcional)'}
                     value={clienteData.comentarios || ''}
                     onChange={(e) => setClienteData({ ...clienteData, comentarios: e.target.value })}
                     rows={2}
@@ -357,13 +368,13 @@ export function ResumenItinerario() {
                     onClick={limpiarItinerario}
                     className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    {t('itinerario_limpiar')}
+                    {t('itinerario_limpiar') || '🗑️ Limpiar todo'}
                   </button>
                   <button
                     onClick={() => setIsOpen(false)}
                     className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    {t('itinerario_seguir')}
+                    {t('itinerario_seguir') || '✏️ Seguir editando'}
                   </button>
                 </div>
 
@@ -375,20 +386,20 @@ export function ResumenItinerario() {
                   }`}
                 >
                   {enviando ? (
-                    <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {t('itinerario_enviando')}</>
+                    <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {t('itinerario_enviando') || 'Enviando reserva...'}</>
                   ) : enviadoExitoso ? (
-                    <><CheckCircle size={18} /> {t('itinerario_enviado')}</>
+                    <><CheckCircle size={18} /> {t('itinerario_enviado') || '¡Enviado!'}</>
                   ) : (
-                    <><Send size={16} /> {t('itinerario_enviar')} <Sparkles size={14} className="opacity-50" /></>
+                    <><Send size={16} /> {t('itinerario_enviar') || 'Enviar reserva'} <Sparkles size={14} className="opacity-50" /></>
                   )}
                 </button>
 
                 <div className="flex items-center gap-2 justify-center">
                   <AlertCircle size={12} className="text-slate-300" />
                   <p className="text-[9px] text-slate-400 text-center leading-relaxed">
-                    {t('itinerario_aviso')}
+                    {t('itinerario_aviso') || 'Solo guardamos tu reserva. El pago se realiza directamente con los proveedores.'}
                     <br />
-                    <span className="text-indigo-400 font-medium">{t('itinerario_aviso_24h')}</span>
+                    <span className="text-indigo-400 font-medium">{t('itinerario_aviso_24h') || 'Los proveedores te contactarán en 24h.'}</span>
                   </p>
                 </div>
               </div>

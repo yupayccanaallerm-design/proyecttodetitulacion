@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, Request, Query
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime
-from database import obtener_conexion
+from ...database import obtener_conexion
 from ..i18n import tr, translate_content
 
 router = APIRouter(

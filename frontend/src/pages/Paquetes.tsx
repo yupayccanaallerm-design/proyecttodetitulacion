@@ -94,9 +94,6 @@ export default function Paquetes() {
       
       {/* HEADER */}
       <header className="max-w-4xl mx-auto mb-16 text-center">
-        <span className="text-xs font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
-          {t("paquetes_badge")}
-        </span>
         <h1 className="text-3xl md:text-5xl font-light tracking-tight text-slate-900 mt-4 mb-6">
           {t("paquetes_titulo")} <span className="font-semibold text-indigo-600">{t("paquetes_titulo_highlight")}</span>
         </h1>
@@ -255,11 +252,6 @@ export default function Paquetes() {
                             {t("paquetes_btn_detalles")} <ArrowRight size={11} />
                           </button>
                         </div>
-                      </div>
-
-                      <div className="mt-3.5 flex items-center gap-1.5 text-[11px] text-slate-400 font-light">
-                        <ShieldCheck size={13} className="text-emerald-500" />
-                        {t("tours_indexado")}
                       </div>
                     </div>
 

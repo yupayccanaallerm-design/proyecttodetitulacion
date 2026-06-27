@@ -347,10 +347,7 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
   return (
     <div className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 selection:bg-indigo-100">
       <nav className="p-6 max-w-7xl mx-auto flex justify-between items-center relative z-10">
-        <div className="flex items-center gap-2">
-          <div className="bg-indigo-600 p-2 rounded-xl text-white"><Plane size={24} /></div>
-          <span className="text-xl font-black tracking-tighter uppercase italic">{t("recomendador.brand")}</span>
-        </div>
+
         {resultado && resultado.top && resultado.top.length > 0 && (
           <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-600">
             <Sparkles size={12} /> {resultado.top.length} {t("recomendador.found")}

@@ -3,7 +3,7 @@ import bcrypt
 from fastapi import APIRouter, HTTPException, Request, status
 from pydantic import BaseModel
 from typing import Optional
-from database import obtener_conexion
+from ...database import obtener_conexion
 from ..i18n import tr
 
 router = APIRouter(prefix="/api/usuarios", tags=["Usuarios"])

@@ -40,8 +40,8 @@ i18n.use(initReactI18next).init({
 
         // ── TOURS ───────────────────────────────────────────
         tours_badge: "SGEV · Base de Datos Hostinger Activa",
-        tours_titulo: "Mis Atractivos",
-        tours_titulo_highlight: "Indexados",
+        tours_titulo: "Explora los Mejores Tours en ",
+        tours_titulo_highlight: "Cusco",
         tours_buscar: "Busca en tus atractivos reales (Ej. Ollantaytambo, Qorikancha...)",
         tours_zona_todas: "Todas",
         tours_cargando: "Sincronizando catálogo con base de datos remota...",
@@ -167,7 +167,6 @@ i18n.use(initReactI18next).init({
         rec_agregar_itinerario: "Agregar al Itinerario",
         rec_ver_chat: "Consultar al Chat",
         recomendador: {
-          brand: "CuscoGo!",
           title: "Diseña tu experiencia épica",
           subtitle: "Motor de Inteligencia Turística — Tumperu Cusco",
           reset: "Restablecer preferencias",
@@ -345,7 +344,7 @@ i18n.use(initReactI18next).init({
         admin_administrador: "Administrador",
 
         // ── ADMIN TOURS ───────────────────────────────────
-        admin_tours_titulo: "Indexación de Atractivos Turísticos",
+        admin_tours_titulo: "Explora los Mejores Tours en Cusco",
         admin_tours_desc: "Registra nodos operativos para el SGEV y automatiza el entrenamiento de descriptores visuales mediante IA.",
         admin_tours_nombre_label: "Nombre del Punto Turístico",
         admin_tours_nombre_ph: "Ej. Templo del Sol (Qorikancha), Ollantaytambo...",
@@ -577,8 +576,8 @@ i18n.use(initReactI18next).init({
 
         // ── TOURS ───────────────────────────────────────────
         tours_badge: "SGEV · Active Hostinger Database",
-        tours_titulo: "My Attractions",
-        tours_titulo_highlight: "Indexed",
+        tours_titulo: "Explore the Best Tours in",
+        tours_titulo_highlight: "Cusco",
         tours_buscar: "Search your real attractions (e.g. Ollantaytambo, Qorikancha...)",
         tours_zona_todas: "All",
         tours_cargando: "Syncing catalog with remote database...",
@@ -704,7 +703,7 @@ i18n.use(initReactI18next).init({
         rec_agregar_itinerario: "Add to Itinerary",
         rec_ver_chat: "Ask the Chat",
         recomendador: {
-          brand: "CuscoGo!",
+
           title: "Design your epic experience",
           subtitle: "Tourism Intelligence Engine — Tumperu Cusco",
           reset: "Reset preferences",

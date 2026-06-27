@@ -4,7 +4,7 @@ import joblib
 import numpy as np
 import pandas as pd
 import os
-from database import obtener_conexion
+from ...database import obtener_conexion
 
 router = APIRouter(tags=["Recomendacion"])
 

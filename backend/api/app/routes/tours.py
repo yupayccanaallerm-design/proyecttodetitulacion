@@ -2,7 +2,7 @@ import base64
 import json
 import os
 from fastapi import APIRouter, HTTPException, Request, UploadFile, File, Form, Query
-from database import obtener_conexion
+from ...database import obtener_conexion
 from ..i18n import tr, translate_content
 
 router = APIRouter(prefix="/api", tags=["Tours"])

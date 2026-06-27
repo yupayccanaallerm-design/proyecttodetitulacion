@@ -17,7 +17,8 @@ import {
   Building2,
   ChevronDown,
   ChevronUp,
-  Send
+  Send,
+  CheckCircle
 } from "lucide-react";
 
 interface Reserva {
@@ -45,6 +46,7 @@ export default function AdminReservas() {
   const [filtro, setFiltro] = useState("Todos");
   const [expandidos, setExpandidos] = useState<number[]>([]);
   const [actualizando, setActualizando] = useState(false);
+  const [notificando, setNotificando] = useState<number | null>(null);
 
   const cargarReservas = async () => {
     setLoading(true);
@@ -62,25 +64,80 @@ export default function AdminReservas() {
     }
   };
 
-  const marcarNotificado = async (id: number) => {
+  // Función para enviar mensaje de WhatsApp
+  const enviarWhatsApp = (reserva: Reserva) => {
+    // Número fijo de destino
+    const numeroDestino = "984816613";
+    
+    // Formatear fecha de viaje
+    const fechaViaje = new Date(reserva.fecha_viaje).toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    // Construir mensaje personalizado
+    const mensaje = `🌟 *NUEVA RESERVA EN SGEV TOURS* 🌟
+
+👤 *Cliente:* ${reserva.nombre_cliente}
+📧 *Email:* ${reserva.email_cliente}
+📱 *Teléfono:* ${reserva.telefono_cliente}
+
+🗺️ *Paquete:* ${reserva.paquete_nombre}
+📅 *Fecha de viaje:* ${fechaViaje}
+👥 *Pasajeros:* ${reserva.numero_pasajeros}
+💰 *Precio:* $${reserva.precio_referencial} USD
+⏱️ *Duración:* ${reserva.duracion || 'No especificada'}
+
+${reserva.comentarios ? `📝 *Comentarios:* ${reserva.comentarios}` : ''}
+
+📋 *ID Reserva:* #${reserva.id}
+📅 *Solicitado:* ${new Date(reserva.fecha_solicitud).toLocaleString('es-ES')}
+
+---
+✅ *Por favor, contactar al cliente para confirmar la reserva.*`;
+
+    // Codificar el mensaje para URL
+    const mensajeCodificado = encodeURIComponent(mensaje);
+    
+    // Crear URL de WhatsApp
+    const urlWhatsApp = `https://wa.me/${numeroDestino}?text=${mensajeCodificado}`;
+    
+    // Abrir WhatsApp en nueva ventana/pestaña
+    window.open(urlWhatsApp, '_blank');
+  };
+
+  const marcarNotificado = async (id: number, reserva: Reserva) => {
+    setNotificando(id);
     setActualizando(true);
+    
     try {
+      // 1. Enviar mensaje de WhatsApp
+      enviarWhatsApp(reserva);
+      
+      // 2. Actualizar estado en la base de datos
       const res = await fetch(`/api/reservas/${id}/estado`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ estado: "notificada" }),
       });
+      
       if (res.ok) {
         setReservas((prev) =>
           prev.map((r) => (r.id === id ? { ...r, estado: "notificada" } : r))
         );
+        
+        // Mostrar feedback visual
+        // El mensaje de WhatsApp ya se abrió en otra pestaña
       } else {
         alert(t("error_generico"));
       }
     } catch (err) {
       console.error("Error:", err);
+      alert("Error al enviar la notificación");
     } finally {
       setActualizando(false);
+      setNotificando(null);
     }
   };
 
@@ -219,12 +276,35 @@ export default function AdminReservas() {
                 <div className="flex items-center gap-2">
                   {(!res.estado || res.estado === "pendiente") && (
                     <button
-                      onClick={(e) => { e.stopPropagation(); marcarNotificado(res.id); }}
-                      disabled={actualizando}
-                      className="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5"
+                      onClick={(e) => { 
+                        e.stopPropagation(); 
+                        marcarNotificado(res.id, res);
+                      }}
+                      disabled={actualizando || notificando === res.id}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                        notificando === res.id 
+                          ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                          : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-600'
+                      }`}
                     >
-                      <Send size={12} /> {t("admin_reservas_notificar")}
+                      {notificando === res.id ? (
+                        <>
+                          <RefreshCw size={12} className="animate-spin" />
+                          {t("admin_reservas_enviando")}
+                        </>
+                      ) : (
+                        <>
+                          <Send size={12} />
+                          {t("admin_reservas_notificar")}
+                        </>
+                      )}
                     </button>
+                  )}
+                  {res.estado === "notificada" && (
+                    <span className="px-2 py-1 bg-emerald-50 text-emerald-600 rounded-lg text-xs font-medium flex items-center gap-1">
+                      <CheckCircle size={12} />
+                      {t("admin_reservas_notificado")}
+                    </span>
                   )}
                   <button className="p-1.5 hover:bg-slate-100 rounded-lg transition-all">
                     {expandidos.includes(res.id) ? <ChevronUp size={16} className="text-slate-400" /> : <ChevronDown size={16} className="text-slate-400" />}
