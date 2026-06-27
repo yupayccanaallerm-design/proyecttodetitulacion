@@ -44,11 +44,12 @@ DOCS_PATH = os.path.join(PROJECT_ROOT, "chatbot", "docs")
 DATA_PATH = os.path.join(BASE_DIR, "data")
 DB_PATH = os.path.join(DATA_PATH, "memory.sqlite")
 
-OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434/api/generate")
+import os
+
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434/api/generate")
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3")
 TOP_K_DEFAULT = int(os.environ.get("TOP_K", "3"))
 LLM_TEMP = float(os.environ.get("LLM_TEMP", "0.2"))
-
 # Tamaño máximo de archivo para upload (5 MB)
 MAX_UPLOAD_BYTES = 5 * 1024 * 1024
 
@@ -418,14 +419,14 @@ RESPONSES = {
         "error": "Hubo un problema procesando tu consulta. Por favor, intenta de nuevo o reformula tu pregunta.",
         "empresa": (
             "TUMPERU es una empresa especializada en consultoría, capacitación y asesoría empresarial.\n\n"
-            "📋 Razón Social: TURPO PANTIGOSO MARY CARMEN\n"
-            "🔢 RUC: 10743880728\n"
-            "🏢 Dirección: Barrio Profesional, Edificio Ecological Profesional, Piso 2\n"
-            "📞 Contacto: 907775337\n"
-            "💼 Actividad: Consultoría de gestión y servicios empresariales (CIIU 7020)\n\n"
-            "🎯 Misión: Brindar servicios profesionales e integrales de consultoría, capacitación y asesoría contable, financiera y empresarial, superando las expectativas de los clientes con altos estándares de calidad y confianza.\n\n"
-            "🌟 Visión: Ser la marca líder en asesoría y soluciones empresariales en la Región Sur del país, contribuyendo con la formalización y el desarrollo sostenible de las empresas.\n\n"
-            "💡 Valores: Confianza · Innovación · Trabajo en Equipo · Empatía · Servicio · Puntualidad · Disciplina"
+            "Razón Social: TURPO PANTIGOSO MARY CARMEN\n"
+            "RUC: 10743880728\n"
+            "Dirección: Barrio Profesional, Edificio Ecological Profesional, Piso 2\n"
+            "Contacto: 907775337\n"
+            "Actividad: Consultoría de gestión y servicios empresariales (CIIU 7020)\n\n"
+            "Misión: Brindar servicios profesionales e integrales de consultoría, capacitación y asesoría contable, financiera y empresarial, superando las expectativas de los clientes con altos estándares de calidad y confianza.\n\n"
+            "Visión: Ser la marca líder en asesoría y soluciones empresariales en la Región Sur del país, contribuyendo con la formalización y el desarrollo sostenible de las empresas.\n\n"
+            "Valores: Confianza · Innovación · Trabajo en Equipo · Empatía · Servicio · Puntualidad · Disciplina"
         ),
     },
     "en": {
@@ -435,14 +436,14 @@ RESPONSES = {
         "error": "There was a problem processing your query. Please try again or rephrase your question.",
         "empresa": (
             "TUMPERU is a company specializing in consulting, training and business advisory services.\n\n"
-            "📋 Legal Name: TURPO PANTIGOSO MARY CARMEN\n"
-            "🔢 Tax ID (RUC): 10743880728\n"
-            "🏢 Address: Barrio Profesional, Ecological Professional Building, 2nd Floor\n"
-            "📞 Contact: 907775337\n"
-            "💼 Activity: Management consulting and business services (CIIU 7020)\n\n"
-            "🎯 Mission: Provide comprehensive professional consulting, training, accounting, financial and business advisory services, exceeding client expectations with quality and trust.\n\n"
-            "🌟 Vision: Be the leading brand in advisory and business solutions in the Southern Region of Peru, contributing to business formalization and sustainable development.\n\n"
-            "💡 Values: Trust · Innovation · Teamwork · Empathy · Service · Punctuality · Discipline"
+            "Legal Name: TURPO PANTIGOSO MARY CARMEN\n"
+            "Tax ID (RUC): 10743880728\n"
+            "Address: Barrio Profesional, Ecological Professional Building, 2nd Floor\n"
+            "Contact: 907775337\n"
+            "Activity: Management consulting and business services (CIIU 7020)\n\n"
+            "Mission: Provide comprehensive professional consulting, training, accounting, financial and business advisory services, exceeding client expectations with quality and trust.\n\n"
+            "Vision: Be the leading brand in advisory and business solutions in the Southern Region of Peru, contributing to business formalization and sustainable development.\n\n"
+            "Values: Trust · Innovation · Teamwork · Empathy · Service · Punctuality · Discipline"
         ),
     },
 }

@@ -37,6 +37,18 @@ i18n.use(initReactI18next).init({
         home_pilar3_desc: "Garantía de un servicio transparente y completamente seguro en cada fase de tu travesía.",
         home_pilar4_titulo: "Exclusividad",
         home_pilar4_desc: "Máxima personalización y cuidado meticuloso en cada pequeño detalle de tu itinerario.",
+        home_about_p1: "GRUPO TUMPERU nació de la iniciativa de un grupo de profesionales multidisciplinarios con amplia experiencia en el sector turístico, quienes decidieron unir sus conocimientos y pasión por el Perú para ofrecer una propuesta única y exclusiva.",
+        home_about_p2: "A través de itinerarios exclusivos, atención personalizada y un profundo compromiso con el turismo sostenible, la agencia se ha consolidado como un referente para aquellos que buscan vivir experiencias auténticas e inolvidables.",
+        home_acronimo_titulo: "¿Qué significa GRUPO TUMPERU?",
+        home_acronimo_g: "Grandes experiencias diseñadas para ti.",
+        home_acronimo_t1: "Tu pasión por viajar es nuestra inspiración.",
+        home_acronimo_p: "Promovemos el turismo sostenible y exclusivo.",
+        home_acronimo_t2: "Te llevamos a explorar destinos extraordinarios.",
+        home_acronimo_r: "Respaldamos tus sueños con itinerarios únicos.",
+        home_acronimo_a: "Aventuras que conectan con la cultura y la naturaleza.",
+        home_acronimo_v: "Viajes llenos de excelencia y dedicación.",
+        home_acronimo_e: "Emociones que recordarás toda la vida.",
+        home_acronimo_l: "Lealtad y confianza en cada paso de tu travesía.",
 
         // ── TOURS ───────────────────────────────────────────
         tours_badge: "",
@@ -52,6 +64,11 @@ i18n.use(initReactI18next).init({
         tours_btn_reservar: "Reservar",
         tours_btn_detalles: "Ver Detalles",
         tours_indexado: "",
+        tours_duracion_dia: "1 día",
+        tours_duracion_medio: "Medio día",
+        tours_tag_dataset: "Dataset Activo",
+        tours_tag_operativo: "Operativo SGEV",
+        tours_grupo: "Hasta 12",
 
         // ── PAQUETES ────────────────────────────────────────
         paquetes_badge: "",
@@ -69,93 +86,87 @@ i18n.use(initReactI18next).init({
         paquetes_btn_reservar: "Reservar",
         paquetes_btn_detalles: "Detalles",
         paquetes_calificado: "Calificado",
+        paquetes_tag_circuito: "Circuito Completo",
 
         // ── CHATBOT ─────────────────────────────────────────
-        chat_bienvenida: " ¡Hola! Soy Travel Assistant, tu experto en turismo de Cusco. Puedo ayudarte con información sobre:\n\n Tours y destinos\n Hoteles y alojamiento\n Restaurantes y gastronomía\n Historia y cultura\n Transporte y logística\n\n¿En qué puedo asistirte hoy?",
+        chat_bienvenida: "¡Hola! Soy Travel Assistant, tu experto en turismo de Cusco. Puedo ayudarte con información sobre:\n\n Tours y destinos\n Hoteles y alojamiento\n Restaurantes y gastronomía\n Historia y cultura\n Transporte y logística\n\n¿En qué puedo asistirte hoy?",
         chat_placeholder: "Ej: ¿Cuánto cuesta Machu Picchu? o recuerda que me gusta la aventura...",
         chat_consultando: "Consultando base de conocimiento... (puede tardar 1-2 min)",
-        chat_error_conexion: " Lo siento, no puedo conectarme al servidor. Verifica que el backend esté corriendo en http://127.0.0.1:8000",
-        chat_error_lugar: " No pude conectarme al servidor para consultar sobre este lugar.",
+        chat_error_conexion: "Lo siento, no puedo conectarme al servidor. Verifica que el backend esté corriendo en http://127.0.0.1:8000",
+        chat_error_lugar: "No pude conectarme al servidor para consultar sobre este lugar.",
+        chat_error_servidor: "No se pudo conectar con el servidor.",
         chat_ia_rag: "IA con RAG",
-        chat_intent_saludo: " Saludo",
-        chat_intent_consulta: " Consulta",
-        chat_intent_memorizar: " Aprendiendo",
-        chat_intent_recomendar: " Recomendar",
-        chat_intent_imagen: " Visión",
-        chat_recomendaciones: " Recomendaciones:",
-        chat_planificador_tip: " Usa el Planificador de Viajes para más detalles.",
+        chat_intent_saludo: "Saludo",
+        chat_intent_consulta: "Consulta",
+        chat_intent_memorizar: "Aprendiendo",
+        chat_intent_recomendar: "Recomendar",
+        chat_intent_imagen: "Visión",
+        chat_recomendaciones: "Recomendaciones:",
+        chat_planificador_tip: "Usa el Planificador de Viajes para más detalles.",
         chat_fuentes: "Fuentes",
         chat_grabar: "Hablar",
         chat_detener: "Detener",
         chat_voz_activar: "Activar voz del bot",
         chat_voz_desactivar: "Silenciar bot",
+        chat_voz_no_soportada: "Tu navegador no soporta reconocimiento de voz. Usa Chrome.",
         chat_sug_machupicchu: "Machu Picchu",
         chat_sug_recomienda: "Recomiéndame",
         chat_sug_sagrado: "Valle Sagrado",
         chat_sug_colores: "Montaña 7 Colores",
         chat_sug_foto: "Identifica una foto",
         chat_sug_hoteles: "Hoteles",
+        chat_contexto_intro: "Cuéntame sobre {{lugar}}",
+        chat_cargando: "Cargando...",
+        chat_disponible: "Disponible",
 
-        // ── RESERVAS ────────────────────────────────────────
-        finalizar_reserva: "FINALIZAR RESERVA",
-        volver: "VOLVER",
-        datos_personales: "DATOS PERSONALES",
-        datos_viaje: "DATOS DEL VIAJE",
-        nombre: "Nombre completo",
-        email: "Correo electrónico",
-        telefono: "Teléfono",
-        nacionalidad: "Nacionalidad",
-        pasaporte: "Pasaporte / DNI",
-        salud: "Condiciones médicas",
-        confirmar: "CONFIRMAR RESERVA",
-        resumen: "RESUMEN",
-        tour: "Tour",
-        personas: "Personas",
-        precio: "Precio",
-        total: "Total",
-        reserva_exitosa: "Reserva realizada correctamente",
-        tour_default: "Tour Personalizado",
-        reservas_titulo: "Solicitar Información",
-        reservas_subtitulo: "Completa tus datos y los proveedores se pondrán en contacto contigo.",
-        reservas_tus_datos: "Tus Datos",
-        reservas_datos_desc: "Los proveedores usarán esta información para contactarte",
-        reservas_nombre_label: "Nombre Completo",
-        reservas_email_label: "Correo Electrónico",
-        reservas_telefono_label: "Teléfono / WhatsApp",
-        reservas_fecha_label: "Fecha de Viaje",
-        reservas_pasajeros_label: "Número de Viajeros",
-        reservas_comentarios_label: "Comentarios adicionales",
-        reservas_comentarios_placeholder: "Requerimientos especiales, alergias, preferencias, etc.",
-        reservas_btn_enviar: "Enviar Solicitud",
-        reservas_enviando: "Enviando solicitud...",
-        reservas_exito_titulo: " ¡Solicitud Enviada!",
-        reservas_exito_interes: "Hemos recibido tu interés en",
-        reservas_exito_desc: "Los proveedores se pondrán en contacto contigo en las próximas 24 horas.",
-        reservas_exito_resumen: "Resumen de tu solicitud",
-        reservas_exito_contacto: "Contacto",
-        reservas_exito_fecha: "Fecha",
-        reservas_btn_inicio: "Ir al Inicio",
-        reservas_btn_mas_tours: "Ver más Tours",
-        reservas_breadcrumb_inicio: "Inicio",
-        reservas_breadcrumb_tours: "Tours",
-        reservas_tu_seleccion: "Tu Selección",
-        reservas_precio_referencial: "Precio referencial",
-        reservas_total_referencial: "Total referencial",
-        reservas_nota_precio: "* El precio final lo confirma el proveedor",
-        reservas_sin_pago: "Sin pago anticipado en la web",
-        reservas_contacto_24h: "Contacto en 24h por parte del proveedor",
-        reservas_gestion_directa: "Gestión directa con el proveedor",
-        reservas_sin_compromiso: "Sin compromiso de compra.",
-        reservas_aviso_datos: "Solo enviamos tu información a los proveedores para que te contacten.",
-        reservas_aviso_pago: "El pago y seguimiento se realizan directamente con ellos.",
-        reservas_aviso_legal: "Al enviar, aceptas que tus datos sean compartidos con los proveedores del tour.",
-        reservas_pasajero: "Pasajero",
-        reservas_pasajeros: "Pasajeros",
-        reservas_validacion_nombre: "Por favor ingresa tu nombre completo",
-        reservas_validacion_email: "Por favor ingresa un correo electrónico válido",
-        reservas_validacion_telefono: "Por favor ingresa un número de teléfono válido",
-        reservas_validacion_fecha: "Por favor selecciona una fecha de viaje",
-        reservas_error_envio: "Error al enviar la solicitud. Intenta nuevamente.",
+        // ── RESERVAS (objeto anidado — usado con t("reservas.xxx")) ─
+        reservas: {
+          titulo: "Solicitar Información",
+          subtitulo: "Completa tus datos y los proveedores se pondrán en contacto contigo.",
+          tus_datos: "Tus Datos",
+          datos_desc: "Los proveedores usarán esta información para contactarte",
+          nombre_label: "Nombre Completo",
+          nombre_placeholder: "Tu nombre completo",
+          email_label: "Correo Electrónico",
+          email_placeholder: "tu@correo.com",
+          telefono_label: "Teléfono / WhatsApp",
+          telefono_placeholder: "+51 999 999 999",
+          fecha_label: "Fecha de Viaje",
+          pasajeros_label: "Número de Viajeros",
+          comentarios_label: "Comentarios adicionales",
+          comentarios_placeholder: "Requerimientos especiales, alergias, preferencias, etc.",
+          btn_enviar: "Enviar Solicitud",
+          enviando: "Enviando solicitud...",
+          exito_titulo: "¡Solicitud Enviada!",
+          exito_interes: "Hemos recibido tu interés en",
+          exito_desc: "Los proveedores se pondrán en contacto contigo en las próximas 24 horas.",
+          exito_resumen: "Resumen de tu solicitud",
+          exito_contacto: "Contacto",
+          exito_fecha: "Fecha",
+          btn_inicio: "Ir al Inicio",
+          btn_mas_tours: "Ver más Tours",
+          breadcrumb_inicio: "Inicio",
+          breadcrumb_tours: "Tours",
+          tu_seleccion: "Tu Selección",
+          precio_referencial: "Precio referencial",
+          total_referencial: "Total referencial",
+          nota_precio: "* El precio final lo confirma el proveedor",
+          sin_pago: "Sin pago anticipado en la web",
+          contacto_24h: "Contacto en 24h por parte del proveedor",
+          gestion_directa: "Gestión directa con el proveedor",
+          sin_compromiso: "Sin compromiso de compra.",
+          aviso_datos: "Solo enviamos tu información a los proveedores para que te contacten.",
+          aviso_pago: "El pago y seguimiento se realizan directamente con ellos.",
+          aviso_legal: "Al enviar, aceptas que tus datos sean compartidos con los proveedores del tour.",
+          pasajero: "Pasajero",
+          pasajeros: "Pasajeros",
+          validacion_nombre: "Por favor ingresa tu nombre completo",
+          validacion_email: "Por favor ingresa un correo electrónico válido",
+          validacion_telefono: "Por favor ingresa un número de teléfono válido",
+          validacion_fecha: "Por favor selecciona una fecha de viaje",
+          error_envio: "Error al enviar la solicitud. Intenta nuevamente.",
+          codigo: "Código de reserva",
+        },
 
         // ── RECOMENDADOR ────────────────────────────────────
         rec_titulo: "Planificador de Viaje",
@@ -174,7 +185,7 @@ i18n.use(initReactI18next).init({
             travelers: "¿Quiénes viajan?",
             interests: "Tus Intereses",
             physical: "Configuración Física",
-            advanced: "Preferencias avanzadas"
+            advanced: "Preferencias avanzadas",
           },
           fields: {
             age: "Edad",
@@ -186,7 +197,7 @@ i18n.use(initReactI18next).init({
             budget: "Presupuesto",
             days: "Días de viaje",
             tripType: "Tipo de viaje",
-            transport: "Tipo de transporte"
+            transport: "Tipo de transporte",
           },
           interests: {
             subtitle: "Selecciona tus intereses principales",
@@ -194,7 +205,7 @@ i18n.use(initReactI18next).init({
             food: "Comida",
             trekking: "Trekking",
             nature: "Naturaleza",
-            history: "Historia"
+            history: "Historia",
           },
           search: "Buscar Destinos Ideales ",
           loading: "Analizando coordenadas...",
@@ -204,10 +215,10 @@ i18n.use(initReactI18next).init({
           wait: "Esto puede tomar unos segundos",
           empty: {
             title: "Configura tu brújula",
-            subtitle: "Elige tus preferencias a la izquierda para ver tu recomendación al instante."
+            subtitle: "Elige tus preferencias a la izquierda para ver tu recomendación al instante.",
           },
           error: "No pudimos conectar con el modelo. Verifica tu API en el puerto 8000.",
-          toastAdded: " {{name}} agregado a tu itinerario",
+          toastAdded: "{{name}} agregado a tu itinerario",
           badge: "Planificador Inteligente",
           addBtn: "Agregar",
           mapTitle: "Ubicación de los {{count}} destinos recomendados",
@@ -216,7 +227,7 @@ i18n.use(initReactI18next).init({
           tipoDestino: "Destino",
           tipoRecomendado: "Destino recomendado",
           tourDefault: "Tour personalizado a {{nombre}}",
-          timeout: "⏳ La búsqueda está tomando demasiado tiempo. Intenta nuevamente."
+          timeout: "La búsqueda está tomando demasiado tiempo. Intenta nuevamente.",
         },
 
         descubre: {
@@ -258,7 +269,7 @@ i18n.use(initReactI18next).init({
           heroTitle: "Descubre lugares increíbles",
           heroDescription: "Toma una foto o sube una imagen de cualquier destino turístico de Cusco. Nuestra IA lo identificará y te mostrará toda la información que necesitas para tu viaje.",
           examples: ["Machu Picchu", "Montaña 7 Colores", "Sacsayhuamán", "Laguna Humantay"],
-          recognized: "Reconocido"
+          recognized: "Reconocido",
         },
 
         // ── DETALLE PAQUETE ─────────────────────────────────
@@ -278,7 +289,7 @@ i18n.use(initReactI18next).init({
           incluye2: "Guía turístico",
           incluye3: "Salidas programadas",
           reservar: "Proceder a la reserva",
-          seguridad: "Pago seguro y verificado"
+          seguridad: "Pago seguro y verificado",
         },
 
         // ── DETALLE TOUR ────────────────────────────────────
@@ -286,7 +297,7 @@ i18n.use(initReactI18next).init({
           cargando: "Cargando experiencia...",
           sobre: "Sobre este destino",
           itinerario: "Itinerario detallado",
-          incluye: "¿Qué incluye?"
+          incluye: "¿Qué incluye?",
         },
 
         // ── COMUNES ─────────────────────────────────────────
@@ -297,7 +308,7 @@ i18n.use(initReactI18next).init({
         btn_volver: "Volver",
         badge_operativo: "Operativo SGEV",
 
-        // ── LOGIN ─────────────────────────────────────────
+        // ── LOGIN ────────────────────────────────────────────
         login_titulo: "Panel Administrativo",
         login_subtitulo: "SGEV - Control de Accesos",
         login_email: "Correo Electrónico",
@@ -307,29 +318,15 @@ i18n.use(initReactI18next).init({
         login_error_credenciales: "Credenciales incorrectas",
         login_error_servidor: "Hubo un problema al conectar con el servidor.",
 
-        // ── APP ──────────────────────────────────────────
+        // ── APP ──────────────────────────────────────────────
         app_concierge: "Concierge Virtual SGEV",
         app_admin_tooltip: "Doble clic para acceso operativo de administración",
-        home_about_p1: "GRUPO TUMPERU nació de la iniciativa de un grupo de profesionales multidisciplinarios con amplia experiencia en el sector turístico, quienes decidieron unir sus conocimientos y pasión por el Perú para ofrecer una propuesta única y exclusiva.",
-        home_about_p2: "A través de itinerarios exclusivos, atención personalizada y un profundo compromiso con el turismo sostenible, la agencia se ha consolidado como un referente para aquellos que buscan vivir experiencias auténticas e inolvidables.",
-        home_acronimo_titulo: "¿Qué significa GRUPO TUMPERU?",
-        home_acronimo_g: "Grandes experiencias diseñadas para ti.",
-        home_acronimo_t1: "Tu pasión por viajar es nuestra inspiración.",
-        home_acronimo_p: "Promovemos el turismo sostenible y exclusivo.",
-        home_acronimo_t2: "Te llevamos a explorar destinos extraordinarios.",
-        home_acronimo_r: "Respaldamos tus sueños con itinerarios únicos.",
-        home_acronimo_a: "Aventuras que conectan con la cultura y la naturaleza.",
-        home_acronimo_v: "Viajes llenos de excelencia y dedicación.",
-        home_acronimo_e: "Emociones que recordarás toda la vida.",
-        home_acronimo_l: "Lealtad y confianza en cada paso de tu travesía.",
 
-        // ── CHATBOT EXTRA ─────────────────────────────────
-        chat_voz_no_soportada: "Tu navegador no soporta reconocimiento de voz. Usa Chrome.",
-        chat_error_servidor: "No se pudo conectar con el servidor.",
-        chat_contexto_intro: "Cuéntame sobre {{lugar}}",
-        chat_cargando: "Cargando...",
+        // ── WHATSAPP ─────────────────────────────────────────
+        whatsapp_contacto: "Contáctanos por WhatsApp",
+        whatsapp_mensaje_predeterminado: "Hola, tengo una consulta sobre los tours y paquetes",
 
-        // ── ADMIN DASHBOARD ──────────────────────────────
+        // ── ADMIN DASHBOARD ──────────────────────────────────
         admin_menu_reservas: "Bandeja de Planes IA",
         admin_menu_tours: "Registrar Atractivos / IA",
         admin_menu_paquetes: "Diseñar Paquetes",
@@ -343,7 +340,7 @@ i18n.use(initReactI18next).init({
         admin_operador: "Operador SGEV",
         admin_administrador: "Administrador",
 
-        // ── ADMIN TOURS ───────────────────────────────────
+        // ── ADMIN TOURS ───────────────────────────────────────
         admin_tours_titulo: "Explora los Mejores Tours en Cusco",
         admin_tours_desc: "Registra nodos operativos para el SGEV y automatiza el entrenamiento de descriptores visuales mediante IA.",
         admin_tours_nombre_label: "Nombre del Punto Turístico",
@@ -354,7 +351,7 @@ i18n.use(initReactI18next).init({
         admin_tours_zona_machu: "Machu Picchu / Aguas Calientes",
         admin_tours_zona_sur: "Ruta Sur / Vinicunca",
         admin_tours_desc_label: "Descripción Breve",
-        admin_tours_desc_ph: "Escribe una pequeña descripción del atractivo que verán los operadores turísticos...",
+        admin_tours_desc_ph: "Escribe una pequeña descripción del atractivo...",
         admin_tours_itinerario_label: "Itinerario Detallado",
         admin_tours_actividad_ph: "Actividad",
         admin_tours_desc2_ph: "Descripción",
@@ -366,14 +363,19 @@ i18n.use(initReactI18next).init({
         admin_tours_foto_drag: "Arrastra o selecciona la fotografía estructural",
         admin_tours_foto_formatos: "Formatos óptimos: JPG, PNG de alta fidelidad (Máx. 10MB)",
         admin_tours_extraccion: "Extracción Lista",
+        admin_tours_preparado: "Preparado para análisis SIFT/ORB con TensorFlow",
         admin_tours_btn_guardado: "Registro Indexado y Pipeline IA Exitoso",
         admin_tours_btn_cargando: "Conectando con Hostinger e Inyectando Datos...",
         admin_tours_btn: "Confirmar Registro en SGEV",
+        admin_tours_btn_editar: "Editar Tour",
+        admin_tours_btn_guardar_cambios: "Guardar Cambios",
+        admin_tours_confirmar_eliminar: "¿Confirmar eliminación de este tour?",
+        admin_tours_gestionar: "Gestionar Tours",
+        admin_tours_lista: "Lista de Tours",
         admin_tours_validacion: "Por favor, ingresa el nombre, la descripción y selecciona una fotografía patrón.",
         admin_tours_error_conexion: "No se pudo conectar con el servidor de Python. Asegúrate de que uvicorn esté corriendo.",
-        admin_tours_preparado: "Preparado para análisis SIFT/ORB con TensorFlow",
 
-        // ── ADMIN PAQUETES ────────────────────────────────
+        // ── ADMIN PAQUETES ────────────────────────────────────
         admin_paquetes_titulo: "Diseñador de Paquetes Base",
         admin_paquetes_desc: "Estructura las plantillas de rutas que el Planificador IA utilizará para empaquetar de forma personalizada.",
         admin_paquetes_nombre_label: "Nombre / Título del Paquete Sugerido",
@@ -394,11 +396,13 @@ i18n.use(initReactI18next).init({
         admin_paquetes_itin_label: "Descripción del Itinerario Sugerido (Bloques breves)",
         admin_paquetes_itin_ph: "Día 1: Recojo y aclimatación. Día 2: Tour guiado y almuerzo buffet...",
         admin_paquetes_btn_guardado: "Paquete Enlazado e Indexado con Éxito",
+        admin_paquetes_guardado: "¡Paquete guardado exitosamente!",
         admin_paquetes_btn: "Registrar y Publicar Paquete",
+        admin_paquetes_confirmar_eliminar: "¿Confirmar eliminación de este paquete?",
         admin_paquetes_validacion: "Por favor introduce un título y selecciona al menos un tour.",
         admin_paquetes_error_servidor: "No se pudo establecer conexión con el backend de Python.",
 
-        // ── ADMIN RESERVAS ────────────────────────────────
+        // ── ADMIN RESERVAS ────────────────────────────────────
         admin_reservas_titulo: "Bandeja de Reservas",
         admin_reservas_registradas: "{{count}} reservas registradas",
         admin_reservas_pendientes: "{{count}} pendientes",
@@ -408,7 +412,10 @@ i18n.use(initReactI18next).init({
         admin_reservas_cargando: "Cargando reservas...",
         admin_reservas_error: "No se pudieron cargar las reservas. Verifica la conexión.",
         admin_reservas_notificar: "Notificar",
-        admin_reservas_notificada_msg: "✅ Reserva #{{id}} notificada al responsable.",
+        admin_reservas_enviando: "Enviando notificación...",
+        admin_reservas_notificado: "Reserva notificada correctamente.",
+        admin_reservas_error_notificacion: "Error al enviar la notificación.",
+        admin_reservas_notificada_msg: "Reserva #{{id}} notificada al responsable.",
         admin_reservas_sin_reservas: "No hay reservas en este filtro",
         admin_reservas_datos_cliente: "Datos del Cliente",
         admin_reservas_detalles_paquete: "Detalles del Paquete",
@@ -421,7 +428,7 @@ i18n.use(initReactI18next).init({
         admin_reservas_pendiente_badge: "Pendiente",
         admin_reservas_notificada_badge: "Notificada",
 
-        // ── GESTIÓN USUARIOS ──────────────────────────────
+        // ── GESTIÓN USUARIOS ──────────────────────────────────
         gestion_titulo: "Control de Usuarios - SGEV",
         gestion_tab_perfil: "Mi Perfil y Contraseña",
         gestion_tab_crear: "Asignar / Crear Usuarios",
@@ -464,7 +471,7 @@ i18n.use(initReactI18next).init({
         gestion_password_exito: "¡Contraseña modificada con éxito!",
         gestion_crear_exito: "Usuario registrado con éxito (ID: {{id}})",
 
-        // ── RESUMEN ITINERARIO ────────────────────────────
+        // ── RESUMEN ITINERARIO ────────────────────────────────
         itinerario_ver: "Ver mi itinerario",
         itinerario_titulo: "Mi itinerario",
         itinerario_destino: "destino",
@@ -486,17 +493,17 @@ i18n.use(initReactI18next).init({
         itinerario_email_ph: "Correo electrónico *",
         itinerario_telefono_ph: "Teléfono / WhatsApp *",
         itinerario_comentarios_ph: "Comentarios adicionales (opcional)",
-        itinerario_limpiar: " Limpiar todo",
-        itinerario_seguir: " Seguir editando",
+        itinerario_limpiar: "Limpiar todo",
+        itinerario_seguir: "Seguir editando",
         itinerario_enviando: "Enviando reserva...",
         itinerario_enviado: "¡Enviado!",
         itinerario_enviar: "Enviar reserva",
         itinerario_aviso: "Solo guardamos tu reserva. El pago se realiza directamente con los proveedores.",
         itinerario_aviso_24h: "Los proveedores te contactarán en 24h.",
-        itinerario_exito: " ¡Reserva enviada con éxito!\n\nLos proveedores se pondrán en contacto contigo en las próximas 24 horas para coordinar el pago y los detalles finales.",
-        itinerario_error: " Error al enviar la reserva. Por favor, intenta de nuevo.",
+        itinerario_exito: "¡Reserva enviada con éxito!\n\nLos proveedores se pondrán en contacto contigo en las próximas 24 horas para coordinar el pago y los detalles finales.",
+        itinerario_error: "Error al enviar la reserva. Por favor, intenta de nuevo.",
 
-        // ── MODAL DESTINOS ────────────────────────────────
+        // ── MODAL DESTINOS ────────────────────────────────────
         modal_fecha_requerida: "Por favor selecciona una fecha de inicio",
         modal_tour_recomendado: "Tour recomendado",
         modal_fecha_inicio: "Fecha de inicio",
@@ -505,17 +512,7 @@ i18n.use(initReactI18next).init({
         modal_cancelar: "Cancelar",
         modal_agregar: "Agregar al itinerario",
 
-        // ── TOURS EXTRAS ──────────────────────────────
-        tours_duracion_dia: "1 día",
-        tours_duracion_medio: "Medio día",
-        tours_tag_dataset: "Dataset Activo",
-        tours_tag_operativo: "Operativo SGEV",
-        tours_grupo: "Hasta 12",
-
-        // ── PAQUETES EXTRAS ───────────────────────────
-        paquetes_tag_circuito: "Circuito Completo",
-
-        // ── DIFICULTAD / TIPO ─────────────────────────
+        // ── DIFICULTAD / TIPO ─────────────────────────────────
         dif_baja: "Baja",
         dif_moderada: "Moderada",
         dif_alta: "Alta",
@@ -524,7 +521,7 @@ i18n.use(initReactI18next).init({
         tipo_templo: "Templo/Museo",
         tipo_destino: "Destino",
 
-        // ── DURACIONES ────────────────────────────────
+        // ── DURACIONES ────────────────────────────────────────
         dur_variable: "Variable",
         dur_1_dia: "1 día",
         dur_medio_dia: "Medio día",
@@ -532,12 +529,12 @@ i18n.use(initReactI18next).init({
         dur_2_3_horas: "2-3 horas",
         dur_2_horas: "2 horas",
 
-        // ── MAPA ──────────────────────────────────────
+        // ── MAPA ──────────────────────────────────────────────
         mapa_titulo: "Mapa de Destinos",
         mapa_clic: "Haz clic en cada marcador para más información",
         mapa_recomendacion: "Recomendación",
         mapa_compatibilidad: "Compatibilidad",
-      }
+      },
     },
     en: {
       translation: {
@@ -573,6 +570,18 @@ i18n.use(initReactI18next).init({
         home_pilar3_desc: "Guarantee of a transparent and completely safe service at every stage of your journey.",
         home_pilar4_titulo: "Exclusivity",
         home_pilar4_desc: "Maximum personalization and meticulous care in every detail of your itinerary.",
+        home_about_p1: "GRUPO TUMPERU was born from the initiative of a group of multidisciplinary professionals with extensive experience in the tourism sector, who decided to combine their knowledge and passion for Peru to offer a unique and exclusive proposal.",
+        home_about_p2: "Through exclusive itineraries, personalized service and a deep commitment to sustainable tourism, the agency has established itself as a reference for those seeking authentic and unforgettable experiences.",
+        home_acronimo_titulo: "What does GRUPO TUMPERU mean?",
+        home_acronimo_g: "Great experiences designed for you.",
+        home_acronimo_t1: "Your passion for travel is our inspiration.",
+        home_acronimo_p: "We promote sustainable and exclusive tourism.",
+        home_acronimo_t2: "We take you to explore extraordinary destinations.",
+        home_acronimo_r: "We support your dreams with unique itineraries.",
+        home_acronimo_a: "Adventures that connect with culture and nature.",
+        home_acronimo_v: "Journeys full of excellence and dedication.",
+        home_acronimo_e: "Emotions you will remember all your life.",
+        home_acronimo_l: "Loyalty and trust at every step of your journey.",
 
         // ── TOURS ───────────────────────────────────────────
         tours_badge: "",
@@ -588,6 +597,11 @@ i18n.use(initReactI18next).init({
         tours_btn_reservar: "Book",
         tours_btn_detalles: "View Details",
         tours_indexado: "",
+        tours_duracion_dia: "1 day",
+        tours_duracion_medio: "Half day",
+        tours_tag_dataset: "Active Dataset",
+        tours_tag_operativo: "SGEV Operational",
+        tours_grupo: "Up to 12",
 
         // ── PAQUETES ────────────────────────────────────────
         paquetes_badge: "",
@@ -605,93 +619,87 @@ i18n.use(initReactI18next).init({
         paquetes_btn_reservar: "Book",
         paquetes_btn_detalles: "Details",
         paquetes_calificado: "Rated",
+        paquetes_tag_circuito: "Full Circuit",
 
         // ── CHATBOT ─────────────────────────────────────────
-        chat_bienvenida: " Hello! I'm Travel Assistant, your Cusco tourism expert. I can help you with:\n\n Tours and destinations\n Hotels and accommodation\n🍽️ Restaurants and gastronomy\n📜 History and culture\n🚗 Transport and logistics\n\nHow can I assist you today?",
+        chat_bienvenida: "Hello! I'm Travel Assistant, your Cusco tourism expert. I can help you with:\n\n Tours and destinations\n Hotels and accommodation\n Restaurants and gastronomy\n History and culture\n Transport and logistics\n\nHow can I assist you today?",
         chat_placeholder: "E.g: How much is Machu Picchu? or remember I like adventure...",
         chat_consultando: "Consulting knowledge base... (may take 1-2 min)",
-        chat_error_conexion: " Sorry, I can't connect to the server. Verify the backend is running at http://127.0.0.1:8000",
-        chat_error_lugar: " I couldn't connect to the server to query about this place.",
+        chat_error_conexion: "Sorry, I can't connect to the server. Verify the backend is running at http://127.0.0.1:8000",
+        chat_error_lugar: "I couldn't connect to the server to query about this place.",
+        chat_error_servidor: "Could not connect to the server.",
         chat_ia_rag: "AI with RAG",
-        chat_intent_saludo: " Greeting",
-        chat_intent_consulta: " Query",
-        chat_intent_memorizar: " Learning",
-        chat_intent_recomendar: " Recommend",
-        chat_intent_imagen: " Vision",
-        chat_recomendaciones: " Recommendations:",
-        chat_planificador_tip: " Use the Travel Planner for more details.",
+        chat_intent_saludo: "Greeting",
+        chat_intent_consulta: "Query",
+        chat_intent_memorizar: "Learning",
+        chat_intent_recomendar: "Recommend",
+        chat_intent_imagen: "Vision",
+        chat_recomendaciones: "Recommendations:",
+        chat_planificador_tip: "Use the Travel Planner for more details.",
         chat_fuentes: "Sources",
         chat_grabar: "Speak",
         chat_detener: "Stop",
         chat_voz_activar: "Enable bot voice",
         chat_voz_desactivar: "Mute bot",
+        chat_voz_no_soportada: "Your browser does not support voice recognition. Use Chrome.",
         chat_sug_machupicchu: "Machu Picchu",
         chat_sug_recomienda: "Recommend me",
         chat_sug_sagrado: "Sacred Valley",
         chat_sug_colores: "Rainbow Mountain",
         chat_sug_foto: "Identify a photo",
         chat_sug_hoteles: "Hotels",
+        chat_contexto_intro: "Tell me about {{lugar}}",
+        chat_cargando: "Loading...",
+        chat_disponible: "Available",
 
-        // ── RESERVAS ────────────────────────────────────────
-        finalizar_reserva: "CHECKOUT",
-        volver: "BACK",
-        datos_personales: "PERSONAL INFO",
-        datos_viaje: "TRIP DETAILS",
-        nombre: "Full name",
-        email: "Email",
-        telefono: "Phone",
-        nacionalidad: "Nationality",
-        pasaporte: "Passport / ID",
-        salud: "Medical conditions",
-        confirmar: "CONFIRM BOOKING",
-        resumen: "SUMMARY",
-        tour: "Tour",
-        personas: "People",
-        precio: "Price",
-        total: "Total",
-        reserva_exitosa: "Booking completed",
-        tour_default: "Custom Tour",
-        reservas_titulo: "Request Information",
-        reservas_subtitulo: "Fill in your details and providers will contact you.",
-        reservas_tus_datos: "Your Details",
-        reservas_datos_desc: "Providers will use this information to contact you",
-        reservas_nombre_label: "Full Name",
-        reservas_email_label: "Email Address",
-        reservas_telefono_label: "Phone / WhatsApp",
-        reservas_fecha_label: "Travel Date",
-        reservas_pasajeros_label: "Number of Travelers",
-        reservas_comentarios_label: "Additional comments",
-        reservas_comentarios_placeholder: "Special requirements, allergies, preferences, etc.",
-        reservas_btn_enviar: "Send Request",
-        reservas_enviando: "Sending request...",
-        reservas_exito_titulo: " Request Sent!",
-        reservas_exito_interes: "We have received your interest in",
-        reservas_exito_desc: "Providers will contact you within the next 24 hours.",
-        reservas_exito_resumen: "Request summary",
-        reservas_exito_contacto: "Contact",
-        reservas_exito_fecha: "Date",
-        reservas_btn_inicio: "Go to Home",
-        reservas_btn_mas_tours: "View more Tours",
-        reservas_breadcrumb_inicio: "Home",
-        reservas_breadcrumb_tours: "Tours",
-        reservas_tu_seleccion: "Your Selection",
-        reservas_precio_referencial: "Reference price",
-        reservas_total_referencial: "Reference total",
-        reservas_nota_precio: "* The final price is confirmed by the provider",
-        reservas_sin_pago: "No upfront payment on the web",
-        reservas_contacto_24h: "Provider contact within 24 hours",
-        reservas_gestion_directa: "Direct management with the provider",
-        reservas_sin_compromiso: "No purchase commitment.",
-        reservas_aviso_datos: "We only share your information with providers to contact you.",
-        reservas_aviso_pago: "Payment and follow-up are done directly with them.",
-        reservas_aviso_legal: "By submitting, you agree that your data will be shared with tour providers.",
-        reservas_pasajero: "Passenger",
-        reservas_pasajeros: "Passengers",
-        reservas_validacion_nombre: "Please enter your full name",
-        reservas_validacion_email: "Please enter a valid email address",
-        reservas_validacion_telefono: "Please enter a valid phone number",
-        reservas_validacion_fecha: "Please select a travel date",
-        reservas_error_envio: "Error sending the request. Please try again.",
+        // ── RESERVAS (objeto anidado — usado con t("reservas.xxx")) ─
+        reservas: {
+          titulo: "Request Information",
+          subtitulo: "Fill in your details and providers will contact you.",
+          tus_datos: "Your Details",
+          datos_desc: "Providers will use this information to contact you",
+          nombre_label: "Full Name",
+          nombre_placeholder: "Your full name",
+          email_label: "Email Address",
+          email_placeholder: "your@email.com",
+          telefono_label: "Phone / WhatsApp",
+          telefono_placeholder: "+51 999 999 999",
+          fecha_label: "Travel Date",
+          pasajeros_label: "Number of Travelers",
+          comentarios_label: "Additional comments",
+          comentarios_placeholder: "Special requirements, allergies, preferences, etc.",
+          btn_enviar: "Send Request",
+          enviando: "Sending request...",
+          exito_titulo: "Request Sent!",
+          exito_interes: "We have received your interest in",
+          exito_desc: "Providers will contact you within the next 24 hours.",
+          exito_resumen: "Request summary",
+          exito_contacto: "Contact",
+          exito_fecha: "Date",
+          btn_inicio: "Go to Home",
+          btn_mas_tours: "View more Tours",
+          breadcrumb_inicio: "Home",
+          breadcrumb_tours: "Tours",
+          tu_seleccion: "Your Selection",
+          precio_referencial: "Reference price",
+          total_referencial: "Reference total",
+          nota_precio: "* The final price is confirmed by the provider",
+          sin_pago: "No upfront payment on the web",
+          contacto_24h: "Provider contact within 24 hours",
+          gestion_directa: "Direct management with the provider",
+          sin_compromiso: "No purchase commitment.",
+          aviso_datos: "We only share your information with providers to contact you.",
+          aviso_pago: "Payment and follow-up are done directly with them.",
+          aviso_legal: "By submitting, you agree that your data will be shared with tour providers.",
+          pasajero: "Passenger",
+          pasajeros: "Passengers",
+          validacion_nombre: "Please enter your full name",
+          validacion_email: "Please enter a valid email address",
+          validacion_telefono: "Please enter a valid phone number",
+          validacion_fecha: "Please select a travel date",
+          error_envio: "Error sending the request. Please try again.",
+          codigo: "Reservation code",
+        },
 
         // ── RECOMENDADOR ────────────────────────────────────
         rec_titulo: "Travel Planner",
@@ -703,7 +711,6 @@ i18n.use(initReactI18next).init({
         rec_agregar_itinerario: "Add to Itinerary",
         rec_ver_chat: "Ask the Chat",
         recomendador: {
-
           title: "Design your epic experience",
           subtitle: "Tourism Intelligence Engine — Tumperu Cusco",
           reset: "Reset preferences",
@@ -711,7 +718,7 @@ i18n.use(initReactI18next).init({
             travelers: "Who's traveling?",
             interests: "Your Interests",
             physical: "Physical Configuration",
-            advanced: "Advanced preferences"
+            advanced: "Advanced preferences",
           },
           fields: {
             age: "Age",
@@ -723,7 +730,7 @@ i18n.use(initReactI18next).init({
             budget: "Budget",
             days: "Travel Days",
             tripType: "Trip Type",
-            transport: "Transport Type"
+            transport: "Transport Type",
           },
           interests: {
             subtitle: "Select your main interests",
@@ -731,7 +738,7 @@ i18n.use(initReactI18next).init({
             food: "Food",
             trekking: "Trekking",
             nature: "Nature",
-            history: "History"
+            history: "History",
           },
           search: "Find ideal destinations ",
           loading: "Analyzing coordinates...",
@@ -741,10 +748,10 @@ i18n.use(initReactI18next).init({
           wait: "This may take a few seconds",
           empty: {
             title: "Configure your compass",
-            subtitle: "Choose your preferences on the left to see your recommendation instantly."
+            subtitle: "Choose your preferences on the left to see your recommendation instantly.",
           },
           error: "We couldn't connect to the model. Check your API on port 8000.",
-          toastAdded: " {{name}} added to your itinerary",
+          toastAdded: "{{name}} added to your itinerary",
           badge: "Smart Planner",
           addBtn: "Add",
           mapTitle: "Location of {{count}} recommended destinations",
@@ -753,7 +760,7 @@ i18n.use(initReactI18next).init({
           tipoDestino: "Destination",
           tipoRecomendado: "Recommended destination",
           tourDefault: "Custom tour to {{nombre}}",
-          timeout: " The search is taking too long. Please try again."
+          timeout: "The search is taking too long. Please try again.",
         },
 
         descubre: {
@@ -795,7 +802,7 @@ i18n.use(initReactI18next).init({
           heroTitle: "Discover amazing places",
           heroDescription: "Take a photo or upload an image of any tourist destination in Cusco. Our AI will identify it and show you everything you need for your trip.",
           examples: ["Machu Picchu", "Rainbow Mountain", "Sacsayhuamán", "Humantay Lake"],
-          recognized: "Recognized"
+          recognized: "Recognized",
         },
 
         // ── DETALLE PAQUETE ─────────────────────────────────
@@ -815,7 +822,7 @@ i18n.use(initReactI18next).init({
           incluye2: "Tour guide",
           incluye3: "Scheduled departures",
           reservar: "Proceed to booking",
-          seguridad: "Secure and verified payment"
+          seguridad: "Secure and verified payment",
         },
 
         // ── DETALLE TOUR ────────────────────────────────────
@@ -823,7 +830,7 @@ i18n.use(initReactI18next).init({
           cargando: "Loading experience...",
           sobre: "About this destination",
           itinerario: "Detailed itinerary",
-          incluye: "What's included?"
+          incluye: "What's included?",
         },
 
         // ── COMUNES ─────────────────────────────────────────
@@ -834,7 +841,7 @@ i18n.use(initReactI18next).init({
         btn_volver: "Back",
         badge_operativo: "SGEV Operational",
 
-        // ── LOGIN ─────────────────────────────────────────
+        // ── LOGIN ────────────────────────────────────────────
         login_titulo: "Admin Panel",
         login_subtitulo: "SGEV - Access Control",
         login_email: "Email Address",
@@ -844,29 +851,15 @@ i18n.use(initReactI18next).init({
         login_error_credenciales: "Invalid credentials",
         login_error_servidor: "There was a problem connecting to the server.",
 
-        // ── APP ──────────────────────────────────────────
+        // ── APP ──────────────────────────────────────────────
         app_concierge: "SGEV Virtual Concierge",
         app_admin_tooltip: "Double-click for administrative access",
-        home_about_p1: "GRUPO TUMPERU was born from the initiative of a group of multidisciplinary professionals with extensive experience in the tourism sector, who decided to combine their knowledge and passion for Peru to offer a unique and exclusive proposal.",
-        home_about_p2: "Through exclusive itineraries, personalized service and a deep commitment to sustainable tourism, the agency has established itself as a reference for those seeking authentic and unforgettable experiences.",
-        home_acronimo_titulo: "What does GRUPO TUMPERU mean?",
-        home_acronimo_g: "Great experiences designed for you.",
-        home_acronimo_t1: "Your passion for travel is our inspiration.",
-        home_acronimo_p: "We promote sustainable and exclusive tourism.",
-        home_acronimo_t2: "We take you to explore extraordinary destinations.",
-        home_acronimo_r: "We support your dreams with unique itineraries.",
-        home_acronimo_a: "Adventures that connect with culture and nature.",
-        home_acronimo_v: "Journeys full of excellence and dedication.",
-        home_acronimo_e: "Emotions you will remember all your life.",
-        home_acronimo_l: "Loyalty and trust at every step of your journey.",
 
-        // ── CHATBOT EXTRA ─────────────────────────────────
-        chat_voz_no_soportada: "Your browser does not support voice recognition. Use Chrome.",
-        chat_error_servidor: "Could not connect to the server.",
-        chat_contexto_intro: "Tell me about {{lugar}}",
-        chat_cargando: "Loading...",
+        // ── WHATSAPP ─────────────────────────────────────────
+        whatsapp_contacto: "Contact us on WhatsApp",
+        whatsapp_mensaje_predeterminado: "Hello, I have a question about tours and packages",
 
-        // ── ADMIN DASHBOARD ──────────────────────────────
+        // ── ADMIN DASHBOARD ──────────────────────────────────
         admin_menu_reservas: "AI Plans Inbox",
         admin_menu_tours: "Register Attractions / AI",
         admin_menu_paquetes: "Design Packages",
@@ -880,7 +873,7 @@ i18n.use(initReactI18next).init({
         admin_operador: "SGEV Operator",
         admin_administrador: "Administrator",
 
-        // ── ADMIN TOURS ───────────────────────────────────
+        // ── ADMIN TOURS ───────────────────────────────────────
         admin_tours_titulo: "Tourist Attraction Indexing",
         admin_tours_desc: "Register operational nodes for the SGEV and automate visual descriptor training using AI.",
         admin_tours_nombre_label: "Tourist Spot Name",
@@ -903,14 +896,19 @@ i18n.use(initReactI18next).init({
         admin_tours_foto_drag: "Drag or select the structural photo",
         admin_tours_foto_formatos: "Optimal formats: High-quality JPG, PNG (Max 10MB)",
         admin_tours_extraccion: "Ready for Extraction",
+        admin_tours_preparado: "Ready for SIFT/ORB analysis with TensorFlow",
         admin_tours_btn_guardado: "Indexed and AI Pipeline Successful",
         admin_tours_btn_cargando: "Connecting to Hostinger and Injecting Data...",
         admin_tours_btn: "Confirm SGEV Registration",
+        admin_tours_btn_editar: "Edit Tour",
+        admin_tours_btn_guardar_cambios: "Save Changes",
+        admin_tours_confirmar_eliminar: "Confirm deletion of this tour?",
+        admin_tours_gestionar: "Manage Tours",
+        admin_tours_lista: "Tour List",
         admin_tours_validacion: "Please enter the name, description and select a pattern photo.",
         admin_tours_error_conexion: "Could not connect to the Python server. Make sure uvicorn is running.",
-        admin_tours_preparado: "Ready for SIFT/ORB analysis with TensorFlow",
 
-        // ── ADMIN PAQUETES ────────────────────────────────
+        // ── ADMIN PAQUETES ────────────────────────────────────
         admin_paquetes_titulo: "Package Designer",
         admin_paquetes_desc: "Structure the route templates that the AI Planner will use to personalize packages.",
         admin_paquetes_nombre_label: "Package Name / Title",
@@ -931,11 +929,13 @@ i18n.use(initReactI18next).init({
         admin_paquetes_itin_label: "Suggested Itinerary Description (Brief blocks)",
         admin_paquetes_itin_ph: "Day 1: Pick-up and acclimatization. Day 2: Guided tour and buffet lunch...",
         admin_paquetes_btn_guardado: "Package Linked and Indexed Successfully",
+        admin_paquetes_guardado: "Package saved successfully!",
         admin_paquetes_btn: "Register and Publish Package",
+        admin_paquetes_confirmar_eliminar: "Confirm deletion of this package?",
         admin_paquetes_validacion: "Please enter a title and select at least one tour.",
         admin_paquetes_error_servidor: "Could not establish connection with the Python backend.",
 
-        // ── ADMIN RESERVAS ────────────────────────────────
+        // ── ADMIN RESERVAS ────────────────────────────────────
         admin_reservas_titulo: "Reservations Inbox",
         admin_reservas_registradas: "{{count}} reservations registered",
         admin_reservas_pendientes: "{{count}} pending",
@@ -945,7 +945,10 @@ i18n.use(initReactI18next).init({
         admin_reservas_cargando: "Loading reservations...",
         admin_reservas_error: "Could not load reservations. Check connection.",
         admin_reservas_notificar: "Notify",
-        admin_reservas_notificada_msg: " Reservation #{{id}} notified to the manager.",
+        admin_reservas_enviando: "Sending notification...",
+        admin_reservas_notificado: "Reservation notified successfully.",
+        admin_reservas_error_notificacion: "Error sending the notification.",
+        admin_reservas_notificada_msg: "Reservation #{{id}} notified to the manager.",
         admin_reservas_sin_reservas: "No reservations in this filter",
         admin_reservas_datos_cliente: "Client Data",
         admin_reservas_detalles_paquete: "Package Details",
@@ -958,7 +961,7 @@ i18n.use(initReactI18next).init({
         admin_reservas_pendiente_badge: "Pending",
         admin_reservas_notificada_badge: "Notified",
 
-        // ── GESTIÓN USUARIOS ──────────────────────────────
+        // ── GESTIÓN USUARIOS ──────────────────────────────────
         gestion_titulo: "User Management - SGEV",
         gestion_tab_perfil: "My Profile & Password",
         gestion_tab_crear: "Assign / Create Users",
@@ -1001,7 +1004,7 @@ i18n.use(initReactI18next).init({
         gestion_password_exito: "Password changed successfully!",
         gestion_crear_exito: "User registered successfully (ID: {{id}})",
 
-        // ── RESUMEN ITINERARIO ────────────────────────────
+        // ── RESUMEN ITINERARIO ────────────────────────────────
         itinerario_ver: "View my itinerary",
         itinerario_titulo: "My itinerary",
         itinerario_destino: "destination",
@@ -1012,7 +1015,7 @@ i18n.use(initReactI18next).init({
         itinerario_stat_destinos: "Destinations",
         itinerario_stat_dias: "Total Days",
         itinerario_stat_nivel: "Level",
-        itinerario_cruce: " Crossed Dates",
+        itinerario_cruce: "Crossed Dates",
         itinerario_hueco: "Note! You have a gap of {{dias}} free days after your previous destination.",
         itinerario_nivel_suave: "Easy",
         itinerario_nivel_moderado: "Moderate",
@@ -1023,17 +1026,17 @@ i18n.use(initReactI18next).init({
         itinerario_email_ph: "Email address *",
         itinerario_telefono_ph: "Phone / WhatsApp *",
         itinerario_comentarios_ph: "Additional comments (optional)",
-        itinerario_limpiar: " Clear all",
-        itinerario_seguir: " Keep editing",
+        itinerario_limpiar: "Clear all",
+        itinerario_seguir: "Keep editing",
         itinerario_enviando: "Sending reservation...",
         itinerario_enviado: "Sent!",
         itinerario_enviar: "Send reservation",
         itinerario_aviso: "We only save your reservation. Payment is made directly with the providers.",
         itinerario_aviso_24h: "Providers will contact you within 24h.",
-        itinerario_exito: " Reservation sent successfully!\n\nProviders will contact you within the next 24 hours to coordinate payment and final details.",
-        itinerario_error: " Error sending the reservation. Please try again.",
+        itinerario_exito: "Reservation sent successfully!\n\nProviders will contact you within the next 24 hours to coordinate payment and final details.",
+        itinerario_error: "Error sending the reservation. Please try again.",
 
-        // ── MODAL DESTINATIONS ──────────────────────────────
+        // ── MODAL DESTINATIONS ────────────────────────────────
         modal_fecha_requerida: "Please select a start date",
         modal_tour_recomendado: "Recommended tour",
         modal_fecha_inicio: "Start date",
@@ -1042,17 +1045,7 @@ i18n.use(initReactI18next).init({
         modal_cancelar: "Cancel",
         modal_agregar: "Add to itinerary",
 
-        // ── TOURS EXTRAS ──────────────────────────────
-        tours_duracion_dia: "1 day",
-        tours_duracion_medio: "Half day",
-        tours_tag_dataset: "Active Dataset",
-        tours_tag_operativo: "SGEV Operational",
-        tours_grupo: "Up to 12",
-
-        // ── PAQUETES EXTRAS ───────────────────────────
-        paquetes_tag_circuito: "Full Circuit",
-
-        // ── DIFICULTAD / TIPO ─────────────────────────
+        // ── DIFICULTAD / TIPO ─────────────────────────────────
         dif_baja: "Low",
         dif_moderada: "Moderate",
         dif_alta: "High",
@@ -1061,7 +1054,7 @@ i18n.use(initReactI18next).init({
         tipo_templo: "Temple/Museum",
         tipo_destino: "Destination",
 
-        // ── DURACIONES ────────────────────────────────
+        // ── DURACIONES ────────────────────────────────────────
         dur_variable: "Variable",
         dur_1_dia: "1 day",
         dur_medio_dia: "Half day",
@@ -1069,17 +1062,17 @@ i18n.use(initReactI18next).init({
         dur_2_3_horas: "2-3 hours",
         dur_2_horas: "2 hours",
 
-        // ── MAPA ──────────────────────────────────────
+        // ── MAPA ──────────────────────────────────────────────
         mapa_titulo: "Destinations Map",
         mapa_clic: "Click on each marker for more information",
         mapa_recomendacion: "Recommendation",
         mapa_compatibilidad: "Compatibility",
-      }
-    }
+      },
+    },
   },
   lng: localStorage.getItem("lang") || "es",
   fallbackLng: "es",
-  interpolation: { escapeValue: false }
+  interpolation: { escapeValue: false },
 });
 
 export default i18n;

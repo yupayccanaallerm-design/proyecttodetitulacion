@@ -1,36 +1,44 @@
 # ============================================================
-# Travel Assistant — Backend (API + Chatbot + ML + Visión)
+# Travel Assistant — Requirements completos
 # Python 3.10 recomendado
+# Instalar con:  pip install -r requirements.txt
 # ============================================================
 
-# --- API y servidor ---
+# --- API y servidor web ---
 fastapi==0.110.0
-uvicorn==0.29.0
+uvicorn[standard]==0.29.0
 pydantic==2.6.4
+python-multipart==0.0.9
 
-# --- Vector store (RAG) ---
+# --- Base de datos MySQL (Hostinger) ---
+mysql-connector-python==8.3.0
+
+# --- Autenticación ---
+bcrypt==4.1.3
+
+# --- Vector store RAG (ChromaDB) ---
 chromadb==0.5.5
 
-# --- Embeddings multilingüe ---
+# --- Embeddings multilingüe (chatbot) ---
 sentence-transformers==2.7.0
 
-# --- Modelo de lenguaje local (llamadas a Ollama) ---
+# --- Llamadas al modelo de lenguaje local (Ollama) ---
 requests==2.32.3
 
-# --- PDFs (carga y extracción de texto) ---
+# --- PDFs: extracción de texto para la base de conocimiento ---
 pypdf==4.3.1
 
-# --- Machine Learning (recomendador de destinos) ---
+# --- Machine Learning: recomendador de destinos turísticos ---
 scikit-learn==1.4.2
 pandas==2.2.2
 joblib==1.4.2
 
-# --- Visión IA (reconocedor de imágenes) ---
+# --- Visión IA: reconocedor de imágenes de lugares turísticos ---
 tensorflow==2.15.1
 pillow==10.3.0
 
-# --- Utilitarios numéricos ---
+# --- Utilitarios numéricos (compatibilidad con TensorFlow 2.15) ---
 numpy==1.26.4
 
-# --- Generación de PDFs (itinerarios) ---
+# --- Generación de PDFs e itinerarios ---
 reportlab==4.1.0
