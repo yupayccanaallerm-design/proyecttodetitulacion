@@ -3,8 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   ArrowLeft,
-  Clock,
-  TrendingUp,
   ShieldCheck,
   Sparkles,
   CheckCircle,
@@ -44,7 +42,7 @@ export default function DetallePaquete() {
       try {
         setCargando(true);
 
-        const res = await fetch(`http://localhost:8000/api/paquetes/${id}`);
+        const res = await fetch(`/api/paquetes/${id}`);
 
         if (!res.ok) {
           throw new Error(t("paquete.errorFetch"));

@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import {
-  Plane, MapPin, Heart, Camera, Users, Mountain,
-  Utensils, Compass, Trees, Landmark, Loader2, Footprints, 
+  MapPin, Heart, Camera, Users, Mountain,
+  Utensils, Compass, Trees, Landmark, Loader2, Footprints,
   MessageCircle, Plus, Sparkles, ChevronDown, ChevronUp,
-  Clock, DollarSign, Award, Info, RefreshCw, X, Star,
-  TrendingUp, Check, Calendar, Sun, Cloud
+  Clock, DollarSign, Award, Info, RefreshCw,
+  TrendingUp, Check
 } from "lucide-react";
 import MapaDestinos from "../components/MapaDestinos";
 import { useItinerario } from "../contexts/ItinerarioContext";
@@ -91,7 +91,6 @@ export default function RecomendadorModerno({ onConsultarChat }: RecomendadorPro
   const [selectedDestino, setSelectedDestino] = useState<{nombre: string, tipo: string, tour: string} | null>(null);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(!resultado);
-  const [destinoSeleccionado, setDestinoSeleccionado] = useState<string | null>(null);
   const { t } = useTranslation();
   
   const { agregarDestino } = useItinerario();

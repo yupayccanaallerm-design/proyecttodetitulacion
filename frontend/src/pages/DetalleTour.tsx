@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { MapPin, CheckCircle, Clock, ChevronLeft } from "lucide-react";
+import { MapPin, CheckCircle, ChevronLeft } from "lucide-react";
 
 export default function DetalleTour() {
   const { t } = useTranslation();

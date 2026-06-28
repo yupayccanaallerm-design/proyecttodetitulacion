@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Users, Mail, Phone, MapPin, Calendar, FolderHeart, ChevronDown, ChevronUp, RefreshCw, AlertCircle, Globe } from "lucide-react";
+import { Users, Mail, Phone, Calendar, FolderHeart, ChevronDown, ChevronUp, RefreshCw, AlertCircle, Globe } from "lucide-react";
 import { API_BASE, authFetch } from "../../api";
 
 interface Cliente {

@@ -3,10 +3,6 @@ import { useTranslation } from "react-i18next";
 import { authFetch } from "../../api";
 import {
   FolderHeart,
-  Check,
-  X,
-  Sparkles,
-  Eye,
   Calendar,
   User,
   MapPin,
