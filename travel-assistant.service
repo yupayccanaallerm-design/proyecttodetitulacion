@@ -1,0 +1,43 @@
+# Systemd service para FastAPI Travel Assistant
+# Puerto 8000 — Hostinger VPS
+#
+# INSTALAR EN EL SERVIDOR:
+#   sudo cp /root/proyecttodetitulacion/travel-assistant.service \
+#           /etc/systemd/system/travel-assistant.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable travel-assistant
+#   sudo systemctl start travel-assistant
+#   sudo systemctl status travel-assistant
+
+[Unit]
+Description=Travel Assistant FastAPI (puerto 8000)
+After=network.target
+
+[Service]
+# Usuario que corre el servicio (cambiar si no es root)
+User=root
+WorkingDirectory=/root/proyecttodetitulacion
+
+# Activa el entorno virtual antes de lanzar uvicorn
+ExecStart=/root/proyecttodetitulacion/venv/bin/uvicorn \
+    backend.api.app.main:app \
+    --host 127.0.0.1 \
+    --port 8000 \
+    --workers 2
+
+# Reiniciar automáticamente si cae
+Restart=always
+RestartSec=5
+
+# Variables de entorno
+Environment=PYTHONPATH=/root/proyecttodetitulacion
+Environment=OLLAMA_URL=http://127.0.0.1:11434/api/generate
+Environment=OLLAMA_MODEL=llama3
+
+# Logs
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=travel-assistant
+
+[Install]
+WantedBy=multi-user.target
