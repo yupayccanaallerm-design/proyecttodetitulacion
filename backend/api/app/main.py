@@ -38,14 +38,18 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        # Desarrollo local
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:4173",
         "http://127.0.0.1:4173",
         "http://localhost:8000",
         "http://127.0.0.1:8000",
+        # Producción
+        "https://travel.tumperusoft.com",
+        "https://www.travel.tumperusoft.com",
     ],
-    allow_credentials=False,  # Si necesitas cookies/tokens, cámbialo a True
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
