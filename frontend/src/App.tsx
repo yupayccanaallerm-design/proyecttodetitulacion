@@ -149,23 +149,11 @@ function AppContent() {
 
       {/* CHATBOT PANEL */}
       {openChat && (
-        <div className="fixed bottom-20 left-4 right-4 md:left-auto md:right-6 md:w-[340px] h-[65vh] md:h-[480px] bg-white border border-slate-200 rounded-2xl shadow-2xl z-[200] overflow-hidden flex flex-col">
-          <div className="flex justify-between items-center px-4 py-3 bg-gradient-to-r from-slate-900 to-indigo-950 text-white">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-semibold tracking-wide">{i18n.t("app_concierge")}</span>
-            </div>
-            <button
-              onClick={() => setOpenChat(false)}
-              className="text-slate-400 hover:text-white cursor-pointer p-1 rounded-lg hover:bg-white/10 transition-colors"
-            >
-              <X size={14} />
-            </button>
-          </div>
-          <div className="flex-1 overflow-auto">
-            <ChatBot initialContext={openChat && chatContext ? chatContext : ""} />
-          </div>
-        </div>
+        <ChatBot
+          isFloating={true}
+          onClose={() => setOpenChat(false)}
+          initialContext={openChat && chatContext ? chatContext : ""}
+        />
       )}
 
       {/* MAIN CONTENT */}

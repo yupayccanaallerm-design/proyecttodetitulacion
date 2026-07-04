@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Send, Sparkles, AlertCircle, Mic, MicOff, Volume2, VolumeX } from "lucide-react";
+import { Send, Sparkles, AlertCircle, Mic, MicOff, Volume2, VolumeX, StopCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface Message {
@@ -32,14 +32,44 @@ export default function ChatBot({
   const [isTyping, setIsTyping] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [recording, setRecording] = useState(false);
-  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   const recognitionRef = useRef<any>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("chat_voice_enabled", String(voiceEnabled));
+    }
+  }, [voiceEnabled]);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
+
+  // Precarga de voces disponibles (algunos navegadores las cargan de forma asíncrona)
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    const loadVoices = () => {
+      voicesRef.current = window.speechSynthesis.getVoices();
+    };
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined") {
+        window.speechSynthesis?.cancel();
+        recognitionRef.current?.stop?.();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     setMessages([{ from: "bot", text: t("chat_bienvenida") }]);
@@ -71,17 +101,54 @@ export default function ChatBot({
   }, [initialContext]);
 
   const speakText = (text: string) => {
-    if (!voiceEnabled || !window.speechSynthesis) return;
+    if (!voiceEnabled) return;
+    if (typeof window === "undefined") return;
+    if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text.replace(/[\u{1F300}-\u{1FFFF}]/gu, ""));
-    utterance.lang = i18n.language === "en" ? "en-US" : "es-ES";
-    utterance.rate = 1;
-    utterance.pitch = 1;
+
+    const cleanText = text.replace(/[\u{1F300}-\u{1FFFF}]/gu, "");
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    const lang = i18n.language === "en" ? "en" : "es";
+    utterance.lang = lang === "en" ? "en-US" : "es-ES";
+
+    const voices = voicesRef.current.length
+  ? voicesRef.current
+  : window.speechSynthesis.getVoices();
+
+    // 1. Filtrar por idioma
+    const candidates = voices.filter((v) =>
+      v.lang.startsWith(lang === "en" ? "en" : "es")
+    );
+
+    // 2. Prioridad 1: voz femenina/neural
+    const femaleVoice = candidates.find((v) =>
+      /female|woman|google|microsoft|sabina|samantha/i.test(v.name)
+    );
+
+    // 3. Prioridad 2: voz "Google" (más natural en muchos sistemas)
+    const googleVoice = candidates.find((v) =>
+      v.name.toLowerCase().includes("google")
+    );
+
+    // 4. Fallback
+    const defaultVoice = candidates[0] || voices[0];
+
+    //  elegir en orden de prioridad
+    const selectedVoice = femaleVoice || googleVoice || defaultVoice;
+
+    utterance.voice = selectedVoice;
+
+    utterance.rate = 2;
+    utterance.pitch = 2;
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
     window.speechSynthesis.speak(utterance);
   };
 
   const startRecording = () => {
     if (!SpeechRecognitionAPI) {
+      setError(t("chat_error_microfono"));
       return;
     }
     const recognition = new SpeechRecognitionAPI();
@@ -121,8 +188,12 @@ export default function ChatBot({
       if (!response.ok) throw new Error(`Error ${response.status}`);
 
       const data = await response.json();
-      setMessages((prev) => [...prev, { from: "bot", text: data.answer }]);
-      speakText(data.answer);
+      const answer =
+        typeof data?.answer === "string" && data.answer.trim()
+          ? data.answer
+          : t("chat_error_conexion");
+      setMessages((prev) => [...prev, { from: "bot", text: answer }]);
+      speakText(answer);
 
       if (data.intent === "memorizar") await saveToMemory(userText);
     } catch {
@@ -197,12 +268,24 @@ export default function ChatBot({
             >
               {voiceEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
             </button>
+            {isSpeaking && (
+              <button
+                onClick={() => {
+                  window.speechSynthesis.cancel();
+                  setIsSpeaking(false);
+                }}
+                title={t("chat_detener") || "Detener"}
+                className="text-slate-400 hover:text-white transition-all p-1.5 rounded-lg hover:bg-white/10"
+              >
+                <StopCircle size={15} />
+              </button>
+            )}
             {onClose && (
               <button
                 onClick={onClose}
                 className="text-slate-400 hover:text-white transition-all p-1.5 rounded-lg hover:bg-white/10"
               >
-                <span className="sr-only">Cerrar</span>
+                <span className="sr-only">{t("chat_cerrar")}</span>
                 ×
               </button>
             )}
@@ -217,14 +300,25 @@ export default function ChatBot({
             key={i}
             className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"} animate-in fade-in slide-in-from-bottom-2 duration-200`}
           >
-            <div
-              className={`p-3 rounded-2xl max-w-[85%] shadow-sm text-sm leading-relaxed ${
-                msg.from === "user"
-                  ? "bg-indigo-600 text-white rounded-br-sm"
-                  : "bg-slate-50 text-slate-700 border border-slate-200 rounded-bl-sm"
-              }`}
-            >
-              {formatText(msg.text)}
+            <div className="flex flex-col gap-2">
+              <div
+                className={`p-3 rounded-2xl max-w-[85%] shadow-sm text-sm leading-relaxed ${
+                  msg.from === "user"
+                    ? "bg-indigo-600 text-white rounded-br-sm"
+                    : "bg-slate-50 text-slate-700 border border-slate-200 rounded-bl-sm"
+                }`}
+              >
+                {formatText(msg.text)}
+              </div>
+              {msg.from === "bot" && voiceEnabled && (
+                <button
+                  onClick={() => speakText(msg.text)}
+                  className="flex items-center gap-1 text-xs text-indigo-500 hover:text-indigo-700 text-left"
+                >
+                  <Volume2 size={12} />
+                  {t("chat_escuchar")}
+                </button>
+              )}
             </div>
           </div>
         ))}
@@ -237,6 +331,15 @@ export default function ChatBot({
               <span className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
               <span className="text-xs text-slate-400 ml-1">{t("chat_consultando")}</span>
             </div>
+          </div>
+        )}
+
+        {isSpeaking && (
+          <div className="flex justify-center">
+            <div className="flex items-center gap-1.5 text-xs text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full">
+              <Volume2 size={12} />
+              {t("chat_hablando")}
+          </div>
           </div>
         )}
 

@@ -7,7 +7,7 @@ import os
 router = APIRouter(
     prefix="/vision",
     tags=["Vision IA"]
-)
+ 	)
 
 # ==================================
 # PATHS (ROBUSTO)
@@ -49,7 +49,7 @@ def load_model_and_classes():
         return
 
     try:
-        model = tf.keras.models.load_model(MODEL_PATH)
+        model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 
         with open(CLASSES_PATH, "r", encoding="utf-8") as f:
             clases = [line.strip() for line in f if line.strip()]
@@ -130,3 +130,4 @@ async def predict(file: UploadFile = File(...)):
             "success": False,
             "error": str(e)
         }
+ 

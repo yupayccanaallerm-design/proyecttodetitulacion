@@ -57,3 +57,11 @@ memory/
 
 # PROYECTO DUPLICADO ANTIGUO
 PROYECTO-DE-TITULO/
+# DATABASES LOCALES
+*.sqlite
+*.sqlite3
+backend/api/data/
+backend/chatbot/kb_store/
+# DOCS PESADOS / GENERADOS
+backend/chatbot/docs/
+*.py[cod]

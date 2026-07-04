@@ -63,7 +63,7 @@ export default function AdminReservas() {
   // Función para enviar mensaje de WhatsApp
   const enviarWhatsApp = (reserva: Reserva) => {
     // Número fijo de destino
-    const numeroDestino = "984816613";
+    const numeroDestino = "907775337";
     
     // Formatear fecha de viaje
     const fechaViaje = new Date(reserva.fecha_viaje).toLocaleDateString('es-ES', {

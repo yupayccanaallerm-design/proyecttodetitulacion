@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import Optional, List
 import random
 import string
-from database import obtener_conexion
+from ...database import obtener_conexion
 
 router = APIRouter(prefix="/api/reservas", tags=["Reservas"])
 

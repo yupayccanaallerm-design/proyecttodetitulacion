@@ -2,6 +2,7 @@ import os
 import sqlite3
 import traceback
 from typing import List, Optional
+from functools import lru_cache
 
 import numpy as np
 import requests
@@ -9,17 +10,18 @@ import requests
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from pydantic import BaseModel
 
+
 try:
     import chromadb
     _chromadb_ok = True
-except Exception as _e:
+except Exception:
     chromadb = None  # type: ignore
     _chromadb_ok = False
 
 try:
     from sentence_transformers import SentenceTransformer
     _st_ok = True
-except Exception as _e:
+except Exception:
     SentenceTransformer = None  # type: ignore
     _st_ok = False
 
@@ -44,14 +46,14 @@ DOCS_PATH = os.path.join(PROJECT_ROOT, "chatbot", "docs")
 DATA_PATH = os.path.join(BASE_DIR, "data")
 DB_PATH = os.path.join(DATA_PATH, "memory.sqlite")
 
-import os
-
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434/api/generate")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "phi3:latest")
 TOP_K_DEFAULT = int(os.environ.get("TOP_K", "3"))
 LLM_TEMP = float(os.environ.get("LLM_TEMP", "0.2"))
-# Tamaño máximo de archivo para upload (5 MB)
-MAX_UPLOAD_BYTES = 5 * 1024 * 1024
+MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+
+# Session HTTP reutilizable — evita abrir una nueva conexión TCP en cada llamada a Ollama
+_http_session = requests.Session()
 
 # ==================================================
 # INFORMACIÓN INSTITUCIONAL DE TUMPERU
@@ -118,7 +120,7 @@ if _chromadb_ok and chromadb is not None:
             "turismo_cusco_kb",
             metadata={"hnsw:space": "cosine"}
         )
-    except Exception as _e:
+    except Exception:
         traceback.print_exc()
         client = None
         kb = None
@@ -134,7 +136,7 @@ if _st_ok and SentenceTransformer is not None:
         EMB = SentenceTransformer(
             "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
         )
-    except Exception as _e:
+    except Exception:
         traceback.print_exc()
         EMB = None
 
@@ -145,7 +147,9 @@ def embed_texts(texts: List[str]):
     embs = EMB.encode(
         texts,
         normalize_embeddings=True,
-        convert_to_numpy=True
+        convert_to_numpy=True,
+        batch_size=32,          # Procesa en lotes para mayor eficiencia
+        show_progress_bar=False,
     )
     return [e.astype(np.float32).tolist() for e in embs]
 
@@ -175,6 +179,9 @@ def init_db():
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
     """)
+    # Índice para acelerar consultas por user_id
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_facts_user ON mem_facts(user_id)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_episodes_user ON mem_episodes(user_id)")
     conn.commit()
     conn.close()
 
@@ -279,7 +286,7 @@ def detect_intent(query: str):
 
 def call_ollama(prompt: str) -> Optional[str]:
     try:
-        response = requests.post(
+        response = _http_session.post(
             OLLAMA_URL,
             json={
                 "model": OLLAMA_MODEL,
@@ -292,10 +299,14 @@ def call_ollama(prompt: str) -> Optional[str]:
             },
             timeout=240
         )
+
         if response.status_code != 200:
             return None
+
         return response.json().get("response", "")
+
     except Exception:
+        traceback.print_exc()
         return None
 
 # ==================================================
@@ -305,11 +316,27 @@ def call_ollama(prompt: str) -> Optional[str]:
 def query_kb(query: str, top_k: int):
     if kb is None:
         return [], []
-    vector = embed_texts([query])[0]
-    result = kb.query(query_embeddings=[vector], n_results=top_k)
-    docs = result.get("documents", [[]])[0]
-    metas = result.get("metadatas", [[]])[0]
-    return docs, metas
+
+    try:
+        count = kb.count()
+        if count == 0:
+            return [], []
+
+        vector = embed_texts([query])[0]
+
+        result = kb.query(
+            query_embeddings=[vector],
+            n_results=top_k
+        )
+
+        docs = result.get("documents", [[]])[0]
+        metas = result.get("metadatas", [[]])[0]
+
+        return docs, metas
+
+    except Exception:
+        traceback.print_exc()
+        return [], []
 
 # ==================================================
 # PROMPT
@@ -484,13 +511,25 @@ def ask(body: AskReq):
         return {"intent": "consulta", "answer": msgs["sin_docs"], "sources": []}
 
     user_facts = get_recent_facts(body.user_id, limit=5)
-    prompt = build_prompt(body.query, docs, metas, user_facts=user_facts, lang=lang)
+
+    prompt = build_prompt(
+        body.query,
+        docs,
+        metas,
+        user_facts,
+        lang
+    )
+
     answer = call_ollama(prompt)
 
     if not answer:
         answer = msgs["error"]
 
-    return {"intent": intent, "answer": answer, "sources": []}
+    return {
+        "intent": intent,
+        "answer": answer,
+        "sources": metas
+    }
 
 
 @router.post("/mem/fact")
@@ -572,17 +611,14 @@ async def recognize(file: UploadFile = File(...)):
 @router.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
     """Sube un PDF a la base de documentos"""
-    # Validar tipo de archivo
     allowed_types = {"application/pdf"}
     if file.content_type not in allowed_types:
         raise HTTPException(status_code=400, detail="Solo se permiten archivos PDF")
 
-    # Leer contenido y validar tamaño
     content = await file.read()
     if len(content) > MAX_UPLOAD_BYTES:
         raise HTTPException(status_code=413, detail="Archivo demasiado grande (máximo 5 MB)")
 
-    # Sanitizar nombre de archivo — previene path traversal
     safe_filename = os.path.basename(file.filename or "document.pdf")
     if not safe_filename.lower().endswith(".pdf"):
         safe_filename += ".pdf"

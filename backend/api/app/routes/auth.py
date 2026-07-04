@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import secrets
 import bcrypt
 
-from database import obtener_conexion
+from ...database import obtener_conexion
 from ..i18n import tr
 from ..security import store_token
 

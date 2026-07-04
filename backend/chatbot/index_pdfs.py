@@ -11,7 +11,7 @@ import numpy as np
 # ==========================================
 
 # Ruta exacta a tu carpeta docs
-DOCS_PATH = r"C:\Users\User\Documents\Githab\Titulacion\proyecttodetitulacion\backend\chatbot\docs"
+DOCS_PATH = "/var/www/proyecttodetitulacion/backend/chatbot/kb_store/raw_pdfs"
 
 # Ruta para la base de conocimiento (se creará automáticamente)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

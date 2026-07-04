@@ -118,7 +118,11 @@ i18n.use(initReactI18next).init({
         chat_contexto_intro: "Cuéntame sobre {{lugar}}",
         chat_cargando: "Cargando...",
         chat_disponible: "Disponible",
-
+        chat_escuchar: "Escuchar nuevamente",
+        chat_hablando: "El asistente está hablando...",
+        chat_error_microfono: "Tu navegador no soporta reconocimiento de voz.",
+        chat_title: "Travel Assistant",
+        chat_cerrar: "Cerrar",
         // ── RESERVAS (objeto anidado — usado con t("reservas.xxx")) ─
         reservas: {
           titulo: "Solicitar Información",
@@ -651,6 +655,11 @@ i18n.use(initReactI18next).init({
         chat_contexto_intro: "Tell me about {{lugar}}",
         chat_cargando: "Loading...",
         chat_disponible: "Available",
+        chat_escuchar: "Listen again",
+        chat_hablando: "The assistant is speaking...",
+        chat_error_microfono: "Your browser doesn't support speech recognition.",
+        chat_title: "Travel Assistant",
+        chat_cerrar: "Close",
 
         // ── RESERVAS (objeto anidado — usado con t("reservas.xxx")) ─
         reservas: {
