@@ -1,6 +1,8 @@
 import os
 import sqlite3
+import time
 import traceback
+from collections import OrderedDict
 from typing import List, Optional
 from functools import lru_cache
 
@@ -52,8 +54,24 @@ TOP_K_DEFAULT = int(os.environ.get("TOP_K", "3"))
 LLM_TEMP = float(os.environ.get("LLM_TEMP", "0.2"))
 MAX_UPLOAD_BYTES = 20 * 1024 * 1024
 
+# Caché para respuestas rápidas en consultas repetidas (TTL 3 minutos)
+CHATBOT_CACHE_TTL = int(os.environ.get("CHATBOT_CACHE_TTL", "180"))
+_kb_cache: OrderedDict = OrderedDict()
+_ollama_cache: OrderedDict = OrderedDict()
+
 # Session HTTP reutilizable — evita abrir una nueva conexión TCP en cada llamada a Ollama
 _http_session = requests.Session()
+
+
+def _normalize_cache_key(value: str) -> str:
+    """Normaliza texto para claves de caché (minúsculas, espacios simples)"""
+    return " ".join((value or "").strip().lower().split())
+
+
+def _trim_cache(cache: OrderedDict, max_size: int = 128):
+    """Elimina entradas antiguas si el caché supera el máximo"""
+    while len(cache) > max_size:
+        cache.popitem(last=False)
 
 # ==================================================
 # INFORMACIÓN INSTITUCIONAL DE TUMPERU
@@ -285,6 +303,13 @@ def detect_intent(query: str):
 # ==================================================
 
 def call_ollama(prompt: str) -> Optional[str]:
+    # Buscar en caché primero
+    cache_key = (_normalize_cache_key(prompt), OLLAMA_MODEL)
+    now = time.time()
+    cached = _ollama_cache.get(cache_key)
+    if cached is not None and now - cached[0] < CHATBOT_CACHE_TTL:
+        return cached[1]
+
     try:
         response = _http_session.post(
             OLLAMA_URL,
@@ -303,7 +328,11 @@ def call_ollama(prompt: str) -> Optional[str]:
         if response.status_code != 200:
             return None
 
-        return response.json().get("response", "")
+        answer = response.json().get("response", "")
+        # Guardar en caché
+        _ollama_cache[cache_key] = (now, answer)
+        _trim_cache(_ollama_cache)
+        return answer
 
     except Exception:
         traceback.print_exc()
@@ -316,6 +345,13 @@ def call_ollama(prompt: str) -> Optional[str]:
 def query_kb(query: str, top_k: int):
     if kb is None:
         return [], []
+
+    # Buscar en caché primero
+    cache_key = (_normalize_cache_key(query), int(top_k))
+    now = time.time()
+    cached = _kb_cache.get(cache_key)
+    if cached is not None and now - cached[0] < CHATBOT_CACHE_TTL:
+        return cached[1], cached[2]
 
     try:
         count = kb.count()
@@ -332,6 +368,9 @@ def query_kb(query: str, top_k: int):
         docs = result.get("documents", [[]])[0]
         metas = result.get("metadatas", [[]])[0]
 
+        # Guardar en caché
+        _kb_cache[cache_key] = (now, docs, metas)
+        _trim_cache(_kb_cache)
         return docs, metas
 
     except Exception:

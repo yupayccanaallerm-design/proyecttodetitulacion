@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { clearAuthToken, setAuthToken } from '../api';
 
 export default function Login() {
   const { t } = useTranslation();
@@ -9,6 +10,10 @@ export default function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
+
+  useEffect(() => {
+    clearAuthToken();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +36,8 @@ export default function Login() {
         throw new Error(data.detail || t('login_error_credenciales'));
       }
 
-      localStorage.setItem('admin_token', data.token);
+      const token = data.access_token || data.token;
+      setAuthToken(token);
       localStorage.setItem('user_id', data.usuario.id.toString());
       localStorage.setItem('admin_name', data.usuario.nombre);
       localStorage.setItem('user_email', data.usuario.email);

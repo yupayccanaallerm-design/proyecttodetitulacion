@@ -1,11 +1,10 @@
 from fastapi import APIRouter, HTTPException, Request, status
 from pydantic import BaseModel
-import secrets
 import bcrypt
 
 from ...database import obtener_conexion
 from ..i18n import tr
-from ..security import store_token
+from ..security import create_access_token
 
 router = APIRouter(prefix="/api", tags=["Auth"])
 
@@ -51,12 +50,13 @@ async def login(data: LoginRequest, request: Request):
                 detail=tr(request, "credenciales_invalidas"),
             )
 
-        token = secrets.token_hex(40)
-        store_token(token, usuario[0])
+        token = create_access_token({"sub": str(usuario[0]), "role": usuario[4]})
 
         return {
             "message": tr(request, "login_exitoso"),
+            "access_token": token,
             "token": token,
+            "token_type": "bearer",
             "usuario": {
                 "id": usuario[0],
                 "nombre": usuario[1],

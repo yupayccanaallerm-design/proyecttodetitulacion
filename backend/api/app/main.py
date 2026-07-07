@@ -1,6 +1,8 @@
 import os
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from jose import JWTError
 
 # ===== CONFIGURACIÓN DE ENTORNO (SIEMPRE AL INICIO) =====
 # Suprimir warnings de TensorFlow
@@ -21,6 +23,7 @@ from .routes.auth import router as auth_router
 from .routes.usuarios import router as usuarios_router
 from .routes.reservas import router as reservas_router
 from .routes.clientes import router as clientes_router
+from .security import decode_access_token
 
 # ===== CONFIGURACIÓN DE PATHS =====
 BASE_DIR = os.path.abspath(
@@ -53,6 +56,57 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def auth_middleware(request: Request, call_next):
+    public_paths = {
+        "/",
+        "/health",
+        "/api/login",
+    }
+    path = request.url.path
+
+    if path in public_paths:
+        return await call_next(request)
+
+    if path.startswith("/recomendar") or path.startswith("/chatbot") or path.startswith("/vision"):
+        return await call_next(request)
+
+    if path.startswith("/api/reservas/paquete") or path.startswith("/api/reservas/itinerario"):
+        return await call_next(request)
+
+    if path == "/api/tours" and request.method == "GET":
+        return await call_next(request)
+
+    if path.startswith("/api/tours/") and request.method == "GET" and path != "/api/tours/admin/todos":
+        return await call_next(request)
+
+    if path == "/api/paquetes" and request.method == "GET":
+        return await call_next(request)
+
+    if path.startswith("/api/paquetes/") and request.method == "GET":
+        return await call_next(request)
+
+    protected_prefixes = (
+        "/api/usuarios",
+        "/api/clientes",
+        "/api/reservas",
+        "/api/tours",
+        "/api/paquetes",
+    )
+    if any(path == prefix or path.startswith(prefix + "/") for prefix in protected_prefixes):
+        auth_header = request.headers.get("Authorization", "")
+        if not auth_header.startswith("Bearer "):
+            return JSONResponse(status_code=401, content={"detail": "Token inválido o ausente"})
+
+        token = auth_header.replace("Bearer ", "", 1).strip()
+        try:
+            decode_access_token(token)
+        except JWTError:
+            return JSONResponse(status_code=401, content={"detail": "Token inválido o expirado"})
+
+    return await call_next(request)
+
 
 # ===== ROUTERS =====
 app.include_router(recomendacion_router)

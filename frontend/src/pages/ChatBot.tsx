@@ -138,8 +138,8 @@ export default function ChatBot({
 
     utterance.voice = selectedVoice;
 
-    utterance.rate = 2;
-    utterance.pitch = 2;
+    utterance.rate = 1.2;
+    utterance.pitch = 1.2;
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = () => setIsSpeaking(false);

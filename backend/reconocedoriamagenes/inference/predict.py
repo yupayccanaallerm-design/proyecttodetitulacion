@@ -3,10 +3,15 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import os
 
-# Configuración
-model_path = r'E:\Modelo_imagenes\trained_models\mejor_modelo.keras'  # Cambia a modelo_final.keras si quieres
-clases_path = r'E:\Modelo_imagenes\trained_models\clases.txt'
-test_image = r'inference\tests.jpg'  # Cambia por tu imagen de test
+BASE_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..")
+)
+
+MODEL_DIR = os.path.join(BASE_DIR, "trained_models")
+
+model_path = os.path.join(MODEL_DIR, "mejor_modelo.keras")
+clases_path = os.path.join(MODEL_DIR, "clases.txt")
+test_image = os.path.join(os.path.dirname(__file__), "tests.jpg")
 
 # Cargar clases
 with open(clases_path, 'r', encoding='utf-8') as f:

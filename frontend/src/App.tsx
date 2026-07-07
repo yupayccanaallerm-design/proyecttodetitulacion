@@ -24,6 +24,7 @@ import AdminClientes from "./pages/admin/AdminClientes";
 import { ItinerarioProvider } from "./contexts/ItinerarioContext";
 import { ResumenItinerario } from "./components/ResumenItinerario";
 import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
@@ -182,7 +183,14 @@ function AppContent() {
           <Route path="/paquetes" element={<Paquetes />} />
           <Route path="/detalle-paquete/:id" element={<DetallePaquete />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<AdminDashboard />}>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<AdminReservas />} />
             <Route path="reservas" element={<AdminReservas />} />
             <Route path="tours" element={<AdminTours />} />

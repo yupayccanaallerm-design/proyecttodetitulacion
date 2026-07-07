@@ -19,14 +19,14 @@ echo ""
 echo "▶ [1/5] Bajando cambios de GitHub..."
 cd "$PROJECT_DIR"
 git pull origin main
-echo "✅ Git actualizado"
+echo " Git actualizado"
 
 # ── 2. Instalar dependencias Python (si cambiaron) ────────────────
 echo ""
 echo "▶ [2/5] Actualizando dependencias Python..."
 source "$VENV_DIR/bin/activate"
 pip install -r backend/requirements.txt --quiet
-echo "✅ Dependencias Python OK"
+echo " Dependencias Python OK"
 
 # ── 3. Build del frontend React ───────────────────────────────────
 echo ""
